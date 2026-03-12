@@ -1,0 +1,93 @@
+@use "../../variables" as variable;
+
+.btn {
+  font-size: variable.$font-sm;
+  border-radius: 7px;
+  padding: 7px 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.5s ease-in-out;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  flex-grow: 0;
+  align-self: flex-start;
+  background: none;
+
+  svg {
+    transition: all 0.5s ease-in-out;
+  }
+}
+
+.primary {
+  color: variable.$color-tennis;
+  border: 1px solid variable.$color-tennis;
+
+  svg {
+    fill: variable.$color-tennis;
+    height: 0.8em;
+    width: auto;
+  }
+
+  &:hover {
+    color: variable.$color-text;
+    border: 1px solid variable.$color-text;
+
+    svg {
+      fill: variable.$color-text;
+    }
+  }
+}
+
+.secondary {
+  color: variable.$color-purple;
+  border: 1px solid variable.$color-purple;
+
+  svg {
+    fill: variable.$color-purple;
+    height: 0.8em;
+    width: auto;
+  }
+
+  &:hover {
+    color: variable.$color-text;
+    border: 1px solid variable.$color-text;
+
+    svg {
+      fill: variable.$color-text;
+    }
+  }
+}
+
+.light {
+  color: variable.$color-text;
+  border: 1px solid variable.$color-text;
+
+  svg {
+    fill: variable.$color-text;
+    height: 0.8em;
+    width: auto;
+  }
+
+  &:hover {
+    color: #ddcefd;
+    border: 1px solid #ddcefd;
+
+    svg {
+      fill: #ddcefd;
+    }
+  }
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 2),
+  only screen and (min--moz-device-pixel-ratio: 2),
+  only screen and (-o-min-device-pixel-ratio: 2/1),
+  only screen and (min-device-pixel-ratio: 2),
+  only screen and (min-resolution: 192dpi),
+  only screen and (min-resolution: 2dppx) {
+  .btn {
+    font-size: variable.$font-xs;
+    padding: 5px 10px;
+    font-weight: 600;
+  }
+}

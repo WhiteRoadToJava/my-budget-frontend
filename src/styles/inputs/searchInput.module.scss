@@ -1,0 +1,121 @@
+@use "../../variables" as variable;
+
+.formInput {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 35rem;
+
+  input {
+    background-color: variable.$primaryBg;
+    border: 1px solid variable.$color-jet;
+    padding: 8px;
+    padding-left: 36px;
+    border-radius: 20px;
+    outline: none;
+    color: variable.$color-text;
+
+    &:focus {
+      outline: none;
+      border: 1px solid variable.$color-tennis;
+    }
+  }
+}
+.inputWrapper {
+    position: relative; 
+    display: flex;
+    align-items: center;
+}
+.iconInside {
+    position: absolute;
+    left: 12px; 
+    pointer-events: none; 
+    display: flex;
+    align-items: center;
+    z-index: 2;
+}
+.label {
+  color: variable.$color-text;
+  margin-bottom: 5px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.icon {
+  margin-bottom: 4px;
+  svg {
+    fill: variable.$color-text;
+  }
+}
+
+// ERROR STYLES
+.hasError {
+  input {
+    border-color: #e36b63;
+  }
+
+  input:focus {
+    border-color: #e36b63;
+  }
+}
+
+.inputError {
+  border-color: #e36b63;
+}
+
+.errorContainer {
+  display: flex;
+  align-items: center;
+  margin-top: 6px;
+}
+
+.errorIcon {
+  margin-right: 8px;
+  margin-top: 3px;
+
+  svg {
+    fill: variable.$color-error;
+  }
+}
+
+.errorMessage {
+  color: variable.$color-error;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+// SUCCESS STYLES
+.success {
+  input {
+    border-color: #b7dc99;
+  }
+
+  input:focus {
+    border-color: #b7dc99;
+  }
+}
+
+.inputSuccess {
+  border-color: #b7dc99;
+}
+
+.successContainer {
+  display: flex;
+  align-items: center;
+  margin-top: 6px;
+}
+
+.successIcon {
+  margin-right: 8px;
+  margin-top: 3px;
+
+  svg {
+    fill: variable.$color-success;
+  }
+}
+
+.successMessage {
+  color: variable.$color-success;
+  font-size: 14px;
+  font-weight: 400;
+}

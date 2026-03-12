@@ -1,0 +1,56 @@
+@use "../../variables" as variable;
+
+.btn {
+  font-size: variable.$font-xs;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  border-radius: 7px;
+  cursor: pointer;
+  transition: all 0.5s ease-in-out;
+  display: inline-flex;
+  align-items: center;
+  flex-grow: 0;
+  align-self: flex-start;
+  padding: 5px 15px;
+  background: none;
+}
+
+.primary {
+  color: variable.$color-tennis;
+  border: 1px solid variable.$color-tennis;
+
+  &:hover {
+    color: variable.$color-text;
+    border: 1px solid variable.$color-text;
+  }
+}
+
+.secondary {
+  color: variable.$color-purple;
+  border: 1px solid variable.$color-purple;
+
+  &:hover {
+    color: variable.$color-text;
+    border: 1px solid variable.$color-text;
+  }
+}
+
+.cancel {
+  color: variable.$color-fire;
+  border: 1px solid variable.$color-fire;
+
+  &:hover {
+    border: 1px solid #f44662;
+    color: #f44662;
+  }
+}
+
+.light {
+  color: variable.$color-text;
+  border: 1px solid variable.$color-text;
+
+  &:hover {
+    color: #ddcefd;
+    border: 1px solid #ddcefd;
+  }
+}

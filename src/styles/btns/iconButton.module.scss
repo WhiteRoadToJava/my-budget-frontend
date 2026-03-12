@@ -1,0 +1,83 @@
+@use "../../variables" as variable;
+
+.btn {
+  border-radius: 7px;
+  font-weight: 600;
+  cursor: pointer;
+  letter-spacing: 0.3px;
+  transition: all 0.5s ease-in-out;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  flex-grow: 0;
+  align-self: flex-start;
+  font-size: variable.$font-xs;
+  padding: 5px 10px;
+  background: none;
+
+  svg {
+    transition: all 0.5s ease-in-out;
+  }
+}
+
+.primary {
+  background-color: variable.$color-black;
+  color: variable.$color-tennis;
+  border: 1px solid variable.$color-tennis;
+
+  .icon {
+    fill: variable.$color-tennis;
+    height: 0.8em;
+    width: auto;
+  }
+
+  &:hover {
+    color: variable.$color-text;
+    border: 1px solid variable.$color-text;
+
+    svg {
+      fill: variable.$color-text;
+    }
+  }
+}
+
+.secondary {
+  background-color: variable.$color-black;
+  color: variable.$color-purple;
+  border: 1px solid variable.$color-purple;
+
+  .icon {
+    fill: variable.$color-purple;
+    height: 0.8em;
+    width: auto;
+  }
+
+  &:hover {
+    color: variable.$color-text;
+    border: 1px solid variable.$color-text;
+
+    svg {
+      fill: variable.$color-text;
+    }
+  }
+}
+
+.light {
+  color: variable.$color-text;
+  border: 1px solid variable.$color-text;
+
+  .icon {
+    fill: variable.$color-text;
+    height: 0.8em;
+    width: auto;
+  }
+
+  &:hover {
+    color: #ddcefd;
+    border: 1px solid #ddcefd;
+
+    svg {
+      fill: #ddcefd;
+    }
+  }
+}
