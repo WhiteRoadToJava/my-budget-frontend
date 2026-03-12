@@ -72,7 +72,9 @@ export default function LoginComponent() {
             name="password" 
             onChange={handleInputChange}
           />
-          <Link href="/auth/forgot" className={styles.forgotPassword}>Forgot password?</Link>
+          <Link to="/auth/forgot-password" className={styles.forgotPassword}>
+            Forgot password?
+          </Link>
           {errorMessage &&
             <p className={styles.errorMessage}>
               {errorMessage}
