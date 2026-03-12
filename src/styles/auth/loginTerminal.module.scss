@@ -1,0 +1,131 @@
+@use "../variables" as variable;
+$rules-w: 1.2em;
+$rules-h: 1.27em;
+
+.terminal {
+  min-height: 200px;
+}
+
+.rules {
+  width: 25em;
+  height: 10em;
+  margin-top: 1rem;
+  background: radial-gradient(circle, #555 50%, transparent 50.2%) 0.5em 0.4em /
+      0.8em 0.8em,
+    radial-gradient(circle, #555 50%, transparent 50.2%) 1.3em 0.4em / 0.8em
+      0.8em,
+    radial-gradient(circle, #555 50%, transparent 50.2%) 2.1em 0.4em / 0.8em
+      0.8em,
+    linear-gradient(#333, #333) 0 0 / 100% 1.5em, #1e1e1e;
+  background-repeat: no-repeat;
+  border-radius: 0.6em;
+  box-shadow: 0 0 0 0.1em rgba(255, 255, 255, 0.2),
+    0 1em 1.5em -0.6em rgba(0, 0, 0, 0.7),
+    0 0.6em 0.5em -0.6em rgba(0, 0, 0, 0.5);
+  padding: 7px 4px;
+}
+
+.typingDemo {
+  width: 17.5em;
+  animation: typing 2s steps(22);
+  white-space: nowrap;
+  overflow: hidden;
+  font-family: monospace;
+  font-size: 1.1em;
+  color: limegreen;
+  position: relative;
+  top: 2.4rem;
+  left: 0.7rem;
+  margin-bottom: 12px;
+}
+
+.typingDemoTwo {
+  width: 15.8em;
+  animation: typing 2s steps(22), fadeIn 0.1s forwards;
+  animation-delay: 2.5s, 2.5s, 2.5s; /* delays for all three animations */
+  white-space: nowrap;
+  overflow: hidden;
+  font-family: monospace;
+  font-size: 1.1em;
+  color: limegreen;
+  position: relative;
+  top: 2.2rem;
+  left: 0.7rem;
+  opacity: 0;
+  margin-bottom: 12px;
+}
+
+.typingDemoThree {
+  width: 14.5em;
+  animation: typing 2s steps(22), blink 0.5s step-end infinite alternate,
+    fadeIn 0.1s forwards;
+  animation-delay: 5s, 5s, 5s; /* delays for all three animations */
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 3px solid;
+  font-family: monospace;
+  font-size: 1.1em;
+  color: limegreen;
+  position: relative;
+  top: 2.2rem;
+  left: 0.7rem;
+  opacity: 0;
+}
+
+/* Add new fadeIn animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+}
+
+@keyframes blink {
+  50% {
+    border-color: transparent;
+  }
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 2),
+  only screen and (min--moz-device-pixel-ratio: 2),
+  only screen and (-o-min-device-pixel-ratio: 2/1),
+  only screen and (min-device-pixel-ratio: 2),
+  only screen and (min-resolution: 192dpi),
+  only screen and (min-resolution: 2dppx) {
+  .terminal {
+    min-height: 180px;
+  }
+
+  .rules {
+    width: 19em;
+    height: 8em;
+    margin-top: 0rem;
+    padding: 10px 2px;
+    position: relative;
+    right: 0.5rem;
+  }
+
+  .typingDemo {
+    font-size: 0.9em;
+
+    top: 2rem;
+    margin-bottom: 0px;
+  }
+
+  .typingDemoTwo {
+    font-size: 0.9em;
+    margin-bottom: 5px;
+  }
+
+  .typingDemoThree {
+    font-size: 0.9em;
+  }
+}

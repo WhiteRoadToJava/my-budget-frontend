@@ -1,0 +1,22 @@
+@use "../../variables" as variable;
+
+.iconInfoDisplay {
+  font-weight: 600;
+  font-size: 16px;
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+
+  svg {
+    fill: variable.$color-text-gray;
+  }
+}
+
+.info {
+  color: variable.$color-text-gray;
+}
+
+.text {
+  color: variable.$color-text;
+}

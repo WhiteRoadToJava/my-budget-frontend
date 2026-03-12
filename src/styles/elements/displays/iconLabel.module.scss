@@ -1,0 +1,15 @@
+@use "../../variables" as variable;
+
+.flex {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  p {
+    font-size: 16px;
+  }
+
+  svg {
+    fill: variable.$color-text-gray;
+  }
+}
