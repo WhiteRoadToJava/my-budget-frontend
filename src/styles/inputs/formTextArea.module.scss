@@ -1,0 +1,35 @@
+@use "../../variables" as variable;
+
+.formTextArea {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  textarea,
+  input {
+    border-radius: 7px;
+    padding: 7px 5px 7px 5px;
+    background-color: variable.$primaryBg;
+    border: 1px solid variable.$color-stroke;
+    color: variable.$color-text;
+    overflow-y: auto;
+    resize: none;
+
+    &::placeholder {
+      opacity: 1;
+      font-size: 12px;
+    }
+
+    &:focus {
+      outline: none;
+      border: 1px solid variable.$color-tennis;
+    }
+  }
+}
+
+.label {
+  color: variable.$color-text;
+  margin-bottom: 5px;
+  font-size: 13px;
+  font-weight: 600;
+}

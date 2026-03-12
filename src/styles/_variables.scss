@@ -1,0 +1,101 @@
+// colors
+$primaryBg: #101011; // dreamless sleep
+
+$color-tennis: #d6ff41; // golden fizz
+$color-purple: #dabdff; // mauve
+$color-fire: #f87931; // tango
+
+$color-gray-dark: #202023; // noble black
+$color-gray-caviar: #2b2b2e;
+$color-gray-medium: #37373b; // vulcan
+$color-gray-jet: #535358;
+$color-gray-light: #84858b; // heavy gray
+
+$color-text: #ffffff;
+$color-text-gray: #c2c3d0; // lavender dust
+$color-icy-lilac: #e9eaf8;
+$color-black: #000;
+
+$color-error: #f83f31;
+$color-success: #84dd3c;
+
+// hover colors, lighter shades
+$hover-primary: #e5ff87;
+$hover-secondary: #f0e3ff;
+$hover-light: #c2c3d0; // this is lavender dust
+$hover-dark: #202023; // this is noble black
+$hover-cancel: #f9935a;
+$hover-error: #e91000;
+
+// light shades success and hover
+$light-success: #b7dc99;
+$light-error: #e36b63;
+
+// gradients
+$gradient-bg: var(
+  --gradient_default,
+  linear-gradient(180deg, #2b2b2e 17%, #202023 59%, #101011 100%)
+);
+
+// border-radius
+$radius-large: 24px;
+$radius-small: 16px;
+$radius-xs: 6px;
+
+// only here to avoid error atm
+$color-stroke: #535358;
+$color-jet: #535358;
+$color-white: white;
+
+// NOT DONE YET
+$gradient-horizontal: var(
+  --gradient_horizontal,
+  linear-gradient(
+    90deg,
+    #232325 7%,
+    #45454b 25.5%,
+    #9c9c9c 50%,
+    #45454b 78%,
+    #232325 92.5%
+  )
+);
+$gradient-tennis: var(
+  --gradient_horizontal,
+  linear-gradient(90deg, #232325 7%, #e1ff17 50%, #232325 92.5%)
+);
+
+// padding
+$padding-base: 2rem;
+$padding-retina: 1rem;
+
+// font sizes
+$font-2xs: 0.625rem; // 10px
+$font-xs: 0.75rem; // 12px
+$font-sm: 0.875rem; // 14px
+$font-base: 1rem; // 16px
+$font-md: 1.125rem; // 18px
+$font-lg: 1.5rem; // 24px
+$font-xl: 1.75rem; // 28px
+$font-xxl: 2rem; // 32px
+$font-3xl: 2.5rem; // 40px
+
+// letter spacing
+$spacing-small: 0.5px;
+$spacing: 1px;
+
+// sidebar width
+$sidebar-open-width: 15.625rem; // 250px
+/* $sidebar-closed-width: 60px;
+$sidebar-open-width: 170px;
+$sidebar-padding: 2.5rem;
+$content-transition: 0.3s ease; */
+
+$breakpoints: (
+  xxs: 790px,
+  xs: 883px,
+  s: 969px,
+  sm: 1030px,
+  md: 1085px,
+  lg: 1200px,
+  xl: 1283px,
+);

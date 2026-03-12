@@ -1,0 +1,125 @@
+@use "../../variables" as variable;
+
+.btn {
+  font-size: variable.$font-xs;
+  border-radius: 7px;
+  font-weight: 600;
+  cursor: pointer;
+  letter-spacing: 0.3px;
+  transition: all 0.5s ease-in-out;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  flex-grow: 0;
+  align-self: flex-start;
+  padding: 5px 10px;
+
+  svg {
+    transition: all 0.5s ease-in-out;
+  }
+}
+
+.primary {
+  background-color: variable.$primaryBg;
+  color: variable.$color-tennis;
+  border: 1px solid variable.$color-tennis;
+
+  .arrowIcon {
+    fill: variable.$color-tennis;
+    height: 0.8em;
+    width: auto;
+  }
+
+  &:hover {
+    color: variable.$color-text;
+    border: 1px solid variable.$color-text;
+
+    svg {
+      fill: variable.$color-text;
+    }
+  }
+}
+
+.secondary {
+  background-color: variable.$color-black;
+  color: variable.$color-purple;
+  border: 1px solid variable.$color-purple;
+
+  .arrowIcon {
+    fill: variable.$color-purple;
+    height: 0.8em;
+    width: auto;
+  }
+
+  &:hover {
+    background-color: variable.$color-text;
+  }
+}
+
+.light {
+  background-color: variable.$color-icy-lilac;
+  color: variable.$color-black;
+  border: 1px solid variable.$color-black;
+
+  .arrowIcon {
+    fill: variable.$color-black;
+    height: 0.8em;
+    width: auto;
+  }
+
+  &:hover {
+    background-color: variable.$color-text-gray;
+  }
+}
+
+.dark {
+  background-color: variable.$primaryBg;
+  color: variable.$color-text;
+  border: 1px solid variable.$color-text;
+
+  .arrowIcon {
+    fill: variable.$color-text;
+    height: 0.8em;
+    width: auto;
+  }
+
+  &:hover {
+    color: variable.$color-text-gray;
+    border: 1px solid variable.$color-text-gray;
+
+    .arrowIcon {
+      fill: variable.$color-text-gray;
+    }
+  }
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 2),
+  only screen and (min--moz-device-pixel-ratio: 2),
+  only screen and (-o-min-device-pixel-ratio: 2/1),
+  only screen and (min-device-pixel-ratio: 2),
+  only screen and (min-resolution: 192dpi),
+  only screen and (min-resolution: 2dppx) {
+  .btn {
+    border-radius: 5px;
+    letter-spacing: 0.5px;
+  }
+
+  .white {
+    font-size: variable.$font-2xs;
+    background-color: variable.$color-text;
+    color: variable.$color-gray-dark;
+    order: 1px solid variable.$color-gray-dark;
+    padding: 5px;
+
+    .arrowIcon {
+      fill: variable.$color-gray-dark;
+      margin-left: 7px;
+      margin-top: 1px;
+      height: 8px;
+    }
+  }
+
+  .black {
+    padding: 4px 10px;
+  }
+}

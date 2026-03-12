@@ -1,0 +1,170 @@
+@use "../../variables" as variable;
+
+.btn {
+  font-size: variable.$font-sm;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  border-radius: 100px;
+  cursor: pointer;
+  transition: all 0.5s ease-in-out;
+  display: inline-flex;
+  align-items: center;
+  flex-grow: 0;
+  align-self: flex-start;
+  padding: 5px 25px;
+  border: none;
+  background: none;
+}
+
+.primary {
+  background-color: variable.$color-tennis;
+  color: variable.$color-black;
+
+  &:hover {
+    background-color: variable.$color-text;
+  }
+}
+
+.secondary {
+  background-color: variable.$color-purple;
+  color: variable.$color-black;
+
+  &:hover {
+    background-color: variable.$color-text;
+  }
+}
+
+.cancel {
+  background-color: variable.$color-fire;
+  color: variable.$color-black;
+
+  &:hover {
+    background-color: #f44662;
+  }
+}
+// fixed to new design system
+.light {
+  background-color: variable.$color-icy-lilac;
+  color: variable.$color-black;
+
+  &:hover {
+    background-color: variable.$color-text-gray;
+  }
+}
+
+.dark {
+  background-color: variable.$primaryBg;
+  color: variable.$color-text;
+
+  &:hover {
+    background-color: variable.$color-gray-medium;
+  }
+}
+
+.cancel-outlined {
+  background-color: variable.$color-black;
+  color: variable.$color-fire;
+  border: 1px solid variable.$color-fire;
+
+  &:hover {
+    color: #f44662;
+    border: 1px solid #f44662;
+  }
+}
+.cancel-outlined-transparent {
+  color: variable.$color-fire;
+  border: 1px solid variable.$color-fire;
+
+  &:hover {
+    color: #f44662;
+    border: 1px solid #f44662;
+  }
+}
+
+.yellow-outlined {
+  background-color: none;
+  border: 1px solid variable.$color-tennis;
+  color: variable.$color-tennis;
+  background: none;
+
+  &:hover {
+    border: 1px solid variable.$color-fire;
+    color: variable.$color-fire;
+  }
+}
+
+.yellow-outlined-success {
+    background-color: none;
+  border: 1px solid variable.$color-tennis;
+  color: variable.$color-tennis;
+  background: none;
+
+  &:hover {
+    border: 1px solid variable.$color-white;
+    color: variable.$color-white;
+  }
+}
+
+.purple-outlined {
+  background-color: none;
+  border: 1px solid variable.$color-purple;
+  color: variable.$color-purple;
+  background: none;
+
+  &:hover {
+    border: 1px solid variable.$color-fire;
+    color: variable.$color-fire;
+  }
+}
+
+.light-outlined {
+  background-color: variable.$color-black;
+  color: variable.$color-text;
+  border: 1px solid variable.$color-text;
+
+  &:hover {
+    color: #ddcefd;
+    border: 1px solid #ddcefd;
+  }
+}
+
+
+.light-outlined-transparent {
+  color: variable.$color-text;
+  border: 1px solid variable.$color-text;
+
+  &:hover {
+    color: #ddcefd;
+    border: 1px solid #ddcefd;
+  }
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 2),
+  only screen and (min--moz-device-pixel-ratio: 2),
+  only screen and (-o-min-device-pixel-ratio: 2/1),
+  only screen and (min-device-pixel-ratio: 2),
+  only screen and (min-resolution: 192dpi),
+  only screen and (min-resolution: 2dppx) {
+  .btn {
+    font-size: variable.$font-sm;
+  }
+
+  .primary {
+    padding: 0.438rem 1.875rem; // was 7px 30px;
+    font-size: variable.$font-sm;
+  }
+
+  .secondary {
+    font-size: variable.$font-sm;
+  }
+
+  .draft {
+    font-size: variable.$font-sm;
+    padding: 0.438rem 1.875rem; // was 7px 30px;
+  }
+
+  .next {
+    font-size: variable.$font-sm;
+    padding: 0.438rem 1.875rem; // was 7px 30px;
+  }
+}
