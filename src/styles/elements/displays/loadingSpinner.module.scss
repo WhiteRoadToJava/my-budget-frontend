@@ -1,0 +1,71 @@
+@use "../../variables" as variable;
+@import url("https://fonts.googleapis.com/css2?family=Special+Gothic+Expanded+One&display=swap");
+
+@mixin absolute-center {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+}
+
+.spinnerContainer {
+  width: 14rem;
+  height: 12rem;
+  @include absolute-center();
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.spinner {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  margin: 10px auto;
+
+  div {
+    transform-origin: 40px 40px;
+    animation: spin 1.2s linear infinite;
+
+    &::after {
+      content: "";
+      display: block;
+      position: absolute;
+      top: 3px;
+      left: 37px;
+      width: 4px;
+      height: 18px;
+      border-radius: 25%;
+      background: variable.$color-text;
+    }
+
+    // loop through 12 bars
+    @for $i from 1 through 12 {
+      // target each bar
+      &:nth-child(#{$i}) {
+        // evenly distributes 12 bars in a circular layout. (360 / 12 = 30)
+        transform: rotate(#{($i - 1) * 30}deg);
+        // delay start time for each bar with 0.1, bar1 start at -1.2s until 12 is at 0s
+        animation-delay: #{-1.2s + ($i * 0.1s)};
+      }
+    }
+  }
+}
+
+@keyframes spin {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.loadingText {
+  font-size: variable.$font-md;
+  font-weight: 500;
+  color: variable.$color-text;
+}

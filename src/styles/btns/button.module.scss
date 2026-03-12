@@ -1,4 +1,4 @@
-@use "../../variables" as variable;
+@use "../variables.scss" as variable;
 
 .btn {
   font-size: variable.$font-sm;

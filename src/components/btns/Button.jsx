@@ -1,4 +1,4 @@
-import styles from "src/styles/elements/btns/button.module.scss";
+import styles from "../../styles/btns/button.module.scss";
 import PropTypes from "prop-types";
 
 export default function Button({
