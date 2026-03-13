@@ -1,0 +1,205 @@
+@use "../../variables" as variable;
+@import url("https://fonts.googleapis.com/css2?family=Agdasima:wght@400;700&display=swap");
+
+.sidebarContainer {
+  background: variable.$gradient-bg;
+  color: variable.$color-text;
+  display: flex;
+  flex-direction: column;
+  transition: width 0.3s ease;
+  border-radius: 40px;
+  border: 2px solid variable.$color-stroke;
+  overflow: hidden;
+  height: 100%;
+  flex-shrink: 0;
+
+  &.open {
+    width: 190px;
+    max-width: 190px;
+    padding: 0px 15px 0px 15px;
+
+    .menuIcon {
+      margin-right: 15px;
+    }
+
+    .menuText {
+      display: inline;
+    }
+
+    .subMenu {
+      display: block;
+    }
+
+    .top {
+      align-items: center;
+      justify-content: center;
+      padding: 30px 15px 20px 15px;
+    }
+
+    .btn {
+      padding: 0px 0px 70px 0px;
+    }
+
+    .toggleButton {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      cursor: pointer;
+      width: 100%;
+      padding-right: 1.5rem;
+    }
+
+    .logout {
+      p {
+        font-weight: 600;
+        font-size: 14px;
+        letter-spacing: 0.3px;
+        padding-left: 10px;
+        color: variable.$color-text;
+      }
+
+      &:hover {
+        p {
+          color: variable.$color-tennis;
+        }
+
+        svg {
+          fill: variable.$color-tennis;
+          stroke: variable.$color-tennis;
+        }
+      }
+    }
+  }
+
+  &.closed {
+    width: 60px;
+    align-items: center;
+    padding: 5px;
+
+    .menuText {
+      display: none;
+    }
+
+    .subMenu {
+      display: none;
+    }
+
+    .top {
+      justify-content: center;
+      padding: 30px 0px 20px 0px;
+    }
+  }
+}
+
+.menu {
+  list-style-type: none;
+  padding: 0 12px 0 12px;
+  margin: 0;
+  flex-grow: 1;
+  width: 100%;
+}
+
+.subMenu {
+  list-style-type: none;
+  margin-left: 5px;
+  display: none;
+}
+
+.top {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.btn {
+  padding: 0px 0px 70px 0px;
+}
+
+.toggleButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  width: 100%;
+}
+
+.chevronRight {
+  fill: white;
+}
+
+.chevronLeft {
+  fill: white;
+}
+
+.bounceRight:hover {
+  animation: bounceToRight 0.4s infinite ease-in-out;
+}
+
+.bounceLeft:hover {
+  animation: bounceToLeft 0.4s infinite ease-in-out;
+}
+
+.logout {
+  padding: 0 12px 0 12px;
+  margin-bottom: 2.5rem;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+
+  svg {
+    fill: variable.$color-text-gray;
+    stroke: variable.$color-text-gray;
+    transition: all 0.3s ease-in-out;
+  }
+
+  &:hover {
+    p {
+      color: variable.$color-tennis;
+    }
+
+    svg {
+      fill: variable.$color-tennis;
+      stroke: variable.$color-tennis;
+    }
+  }
+}
+
+@keyframes bounceToRight {
+  0% {
+    transform: translateX(0);
+  }
+  30% {
+    transform: translateX(2px);
+  }
+  60% {
+    transform: translateX(-2px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes bounceToLeft {
+  0% {
+    transform: translateX(0);
+  }
+  30% {
+    transform: translateX(-2px);
+  }
+  60% {
+    transform: translateX(2px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+/*RETINA SCREEN*/
+@media only screen and (-webkit-min-device-pixel-ratio: 2),
+  only screen and (min--moz-device-pixel-ratio: 2),
+  only screen and (-o-min-device-pixel-ratio: 2/1),
+  only screen and (min-device-pixel-ratio: 2),
+  only screen and (min-resolution: 192dpi),
+  only screen and (min-resolution: 2dppx) {
+}

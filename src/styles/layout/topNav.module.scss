@@ -1,0 +1,22 @@
+@use "../variables" as variable;
+@import url("https://fonts.googleapis.com/css2?family=Special+Gothic+Expanded+One&display=swap");
+
+.topNav {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.name {
+  font-family: "Special Gothic Expanded One", sans-serif;
+  font-style: normal;
+}
+
+.settings {
+  fill: variable.$color-text-gray;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    fill: variable.$color-text;
+  }
+}

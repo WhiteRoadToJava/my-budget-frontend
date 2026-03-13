@@ -1,0 +1,57 @@
+@use "../variables" as variable;
+
+.layout {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  color: variable.$color-text;
+  overflow: hidden;
+}
+
+.sidebar {
+  margin: 2rem 0rem 2rem 2rem;
+  flex-shrink: 0;
+}
+
+.bodyLayout {
+  display: flex;
+  flex-grow: 1;
+  margin-bottom: 0.5rem;
+  padding: 0rem 2rem 2rem 2rem;
+  overflow-y: auto;
+  height: 100%;
+}
+
+.content {
+  flex-grow: 1;
+  width: 100%;
+  position: relative;
+}
+
+.topContent {
+  width: 100%;
+  background-color: variable.$primaryBg;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  height: 3.5rem;
+  flex-shrink: 0;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.mainContent {
+  margin-top: 2rem;
+  height: 100%;
+  width: 100%;
+  flex: 1;
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 2),
+  only screen and (min--moz-device-pixel-ratio: 2),
+  only screen and (-o-min-device-pixel-ratio: 2/1),
+  only screen and (min-device-pixel-ratio: 2),
+  only screen and (min-resolution: 192dpi),
+  only screen and (min-resolution: 2dppx) {
+}

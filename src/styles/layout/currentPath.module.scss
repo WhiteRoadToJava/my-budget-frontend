@@ -1,0 +1,27 @@
+@use "../variables" as variable;
+
+.pathContainer {
+  display: flex;
+  font-size: 18px;
+  letter-spacing: 0.7px;
+  font-weight: 600;
+}
+
+.darkGrey {
+  color: variable.$color-gray-light;
+}
+
+.lightGrey {
+  color: variable.$color-text-gray;
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 2),
+  only screen and (min--moz-device-pixel-ratio: 2),
+  only screen and (-o-min-device-pixel-ratio: 2/1),
+  only screen and (min-device-pixel-ratio: 2),
+  only screen and (min-resolution: 192dpi),
+  only screen and (min-resolution: 2dppx) {
+  .pathContainer {
+    font-size: 12px;
+  }
+}

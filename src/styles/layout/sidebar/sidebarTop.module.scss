@@ -1,0 +1,172 @@
+@use "../../variables" as variable;
+
+.sidebarTop {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.openStyle {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+
+  .logo {
+    width: 6.5rem;
+  }
+
+  svg {
+    width: 40px;
+    height: 40px;
+  }
+
+  .open {
+    padding: 0px 10px 0px 10px;
+    display: flex;
+    align-items: center;
+  }
+
+  .stroke {
+    background: variable.$gradient-horizontal;
+    height: 2px;
+    width: 100%;
+    margin-top: 0rem;
+  }
+}
+
+/* .openStyle {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+  font-family: Agdasima;
+  font-weight: 500;
+  font-size: 2.2rem;
+  letter-spacing: 2px;
+  color: variable.$color-purple;
+
+  .logo {
+    width: 6rem;
+  }
+
+  svg {
+    width: 40px;
+    height: 40px;
+  }
+
+  .open {
+    padding: 0px 10px 0px 10px;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .stroke {
+    background: variable.$gradient-horizontal;
+    height: 2px;
+    width: 190px;
+    margin-top: 0.5rem;
+  }
+}
+ */
+.closedStyle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 1rem;
+
+  svg {
+    margin-left: 0px;
+    width: 35px;
+    height: 35px;
+  }
+
+  .stroke {
+    background: variable.$gradient-horizontal;
+    height: 1.5px;
+    width: 100%;
+    margin-top: 0rem;
+  }
+}
+
+/* .closedStyle {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 2rem;
+
+  svg {
+    margin-left: 4px;
+    width: 40px;
+    height: 40px;
+  }
+
+  .stroke {
+    background: variable.$gradient-horizontal;
+    height: 2px;
+    width: 70px;
+    margin-top: 0.5rem;
+  }
+} */
+
+@media only screen and (-webkit-min-device-pixel-ratio: 2),
+  only screen and (min--moz-device-pixel-ratio: 2),
+  only screen and (-o-min-device-pixel-ratio: 2/1),
+  only screen and (min-device-pixel-ratio: 2),
+  only screen and (min-resolution: 192dpi),
+  only screen and (min-resolution: 2dppx) {
+  .sidebarTop {
+    justify-content: center;
+  }
+
+  .openStyle {
+    justify-content: center;
+
+    .logo {
+      width: 4rem;
+    }
+
+    svg {
+      width: 25px;
+      height: 25px;
+    }
+
+    .open {
+      gap: 1rem;
+    }
+
+    .stroke {
+      height: 1.5px;
+      width: 100%;
+      margin-top: 0rem;
+    }
+  }
+
+  .closedStyle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 2rem;
+
+    svg {
+      margin-left: 0px;
+      width: 25px;
+      height: 25px;
+    }
+
+    .stroke {
+      height: 1.5px;
+      width: 100%;
+      margin-top: 0rem;
+    }
+  }
+}

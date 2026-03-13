@@ -1,0 +1,107 @@
+@use "../../variables" as variable;
+
+.toggleButton {
+  background-color: pink;
+  position: relative;
+  left: 25px;
+  top: 230px;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  z-index: -10;
+}
+
+.openBtn {
+  cursor: pointer;
+  border-radius: 100%;
+  width: 50px;
+  height: 70px;
+  margin: 0;
+  padding: 0;
+  background: variable.$gradient-bg;
+  border: 2px solid variable.$color-stroke;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  &:hover {
+    transform: translateX(6px);
+    animation: bounceRight 0.6s ease infinite;
+    border: 2px solid variable.$color-gray-light;
+  }
+}
+
+.closeBtn {
+  cursor: pointer;
+  border-radius: 100%;
+  width: 50px;
+  height: 70px;
+  margin: 0;
+  padding: 0;
+  background: variable.$gradient-bg;
+  border: 2px solid variable.$color-stroke;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  &:hover {
+    transform: translateX(-8px);
+    border: 2px solid variable.$color-gray-light;
+  }
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 2),
+  only screen and (min--moz-device-pixel-ratio: 2),
+  only screen and (-o-min-device-pixel-ratio: 2/1),
+  only screen and (min-device-pixel-ratio: 2),
+  only screen and (min-resolution: 192dpi),
+  only screen and (min-resolution: 2dppx) {
+  .toggleButton {
+    right: 35px;
+    bottom: 100px;
+  }
+
+  .openBtn {
+    height: 60px;
+  }
+
+  .closeBtn {
+    height: 60px;
+  }
+}
+
+// open
+@keyframes bounceRight {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(6px);
+  }
+}
+
+// close, maybe use
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+// close, maybe use
+@keyframes wiggle {
+  0%,
+  100% {
+    transform: rotate(0);
+  }
+  25% {
+    transform: rotate(-5deg);
+  }
+  75% {
+    transform: rotate(5deg);
+  }
+}
