@@ -1,0 +1,25 @@
+@use "../../variables" as variable;
+
+.subMenuItem {
+  letter-spacing: 0.5px;
+  font-size: variable.$font-xs;
+  display: flex;
+  padding: 7px;
+  border-radius: 5px;
+  align-items: center;
+  cursor: pointer;
+  color: variable.$color-white;
+
+  &.active {
+    color: variable.$color-purple;
+  }
+
+  &:hover {
+    color: variable.$color-purple;
+  }
+}
+
+.menuText {
+  display: inline;
+  font-weight: 300;
+}
