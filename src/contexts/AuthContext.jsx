@@ -11,29 +11,29 @@ export const AuthProvider = ({ children }) => {
   // State to track loading status of authentication check, holla koll på loading state medans vi kollar auth satus.
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    checkAuthStatus();
-  }, []);
-
   const checkAuthStatus = async () => {
     try {
       const response = await api.get("/auth/check",{
         withCredentials: true
       });
       setCurrentUser(response.data);
-      console.log("Auth status checked:", response.data);
     } catch (error) {
-      console.error("Error checking auth status:", error);
+      setCurrentUser(null);
     } finally { 
       setLoading(false);
     }
   };
+  useEffect(() => {
+    checkAuthStatus();
+  }, []);
+
 
   const login = async (loginDData) => {
     try {
-      const response = await api.post("/auth/login", loginDData);
+      const response = await api.post("/auth/login", loginDData, {
+        withCredentials: true,
+      });
       setCurrentUser(response.data);
-      console.log("Response from login:", response.data);
       return response.data;
     } catch (error) {
       console.error(
@@ -45,7 +45,9 @@ export const AuthProvider = ({ children }) => {
 
   const register = async (registerData) => {
     try {
-      const resonse = await api.post("/auth/register", registerData);
+      const resonse = await api.post("/auth/register", registerData, {
+        withCredentials: true,
+      });
       setCurrentUser(resonse.data);
       console.log("Response from register:", resonse.data);
       return resonse.data;
@@ -75,6 +77,7 @@ export const AuthProvider = ({ children }) => {
     register,
     logout,
     checkAuthStatus,
+    loading,
   };
 
   return (

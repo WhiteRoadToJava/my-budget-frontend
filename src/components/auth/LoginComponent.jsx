@@ -6,18 +6,19 @@ import Button from "../../components/btns/Button";
 import {  useContext, useState } from "react";
 import { AuthContext } from "../../contexts/AuthContext.jsx";
 
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import LoadingSpinner from "../displays/LoadingSpinner.jsx";
 import api from "../../api/axios.js";
 import { UserContext } from "../../contexts/UserContext.jsx";
 
 export default function LoginComponent() {
   const [user, setUser] = useState({
-    username: "",
+    email: "",
     password: "",
   });
   const [errorMessage, setErrorMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const navigation = useNavigate();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -34,11 +35,13 @@ export default function LoginComponent() {
     setIsLoading(true);
 
     try {
-      // Simulate an API call
-      console.log("Submitting user data:", user);
       // Here you would typically handle the API response and update the UI accordingly
       const response = await api.post("/auth/login", user);
-      console.log("API response:", response);
+      if (response.status === 200) {        
+        navigation("/admin/dashboard");
+      } else {
+        setErrorMessage("Login failed. Please check your credentials.");
+      }
     } catch (error) {
       setErrorMessage("An error occurred. Please try again later. " + error.message);
     } finally {
@@ -71,10 +74,10 @@ export default function LoginComponent() {
           <input
             className={styles.input}
             type="text"
-            placeholder="Username"
-            value={user.username}
+            placeholder="email"
+            value={user.email}
             onChange={handleInputChange}
-            name="username"
+            name="email"
           />
           <input
             className={styles.input}
