@@ -3,14 +3,17 @@ import styles from "../../styles/auth/login.module.scss";
 import LoginTerminal from "./LoginTerminal";
 //import Eye from "src/components/icons/Eye";
 import Button from "../../components/btns/Button";
-import { useState } from "react";
+import {  useContext, useState } from "react";
+import { AuthContext } from "../../contexts/AuthContext.jsx";
 
 import {Link} from "react-router-dom";
 import LoadingSpinner from "../displays/LoadingSpinner.jsx";
+import api from "../../api/axios.js";
+import { UserContext } from "../../contexts/UserContext.jsx";
 
 export default function LoginComponent() {
   const [user, setUser] = useState({
-    email: "",
+    username: "",
     password: "",
   });
   const [errorMessage, setErrorMessage] = useState("");
@@ -23,6 +26,7 @@ export default function LoginComponent() {
       [name]: value,
     }));
   };
+  const userData = useContext(UserContext);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -33,6 +37,8 @@ export default function LoginComponent() {
       // Simulate an API call
       console.log("Submitting user data:", user);
       // Here you would typically handle the API response and update the UI accordingly
+      const response = await api.post("/auth/login", user);
+      console.log("API response:", response);
     } catch (error) {
       setErrorMessage("An error occurred. Please try again later. " + error.message);
     } finally {
@@ -40,6 +46,13 @@ export default function LoginComponent() {
     }
   };
 
+  useState(() => {
+    console.log("LoginComponent mounted", userData);
+    return () => {
+      console.log("LoginComponent unmounted", userData);
+    };
+  }, []);
+;
 
 
 
@@ -57,11 +70,11 @@ export default function LoginComponent() {
         <form className={styles.form} >
           <input
             className={styles.input}
-            type="email"
-            placeholder="Email"
-            value={user.email}
+            type="text"
+            placeholder="Username"
+            value={user.username}
             onChange={handleInputChange}
-            name="email"
+            name="username"
           />
           <input
             className={styles.input}
