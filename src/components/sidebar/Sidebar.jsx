@@ -8,6 +8,8 @@ import SubMenuItem from "./SubMenuItem";
 import SidebarTop from "./SidebarTop";
 import DoubleChevronLeft from "../icons/chevrons/DoubleChevronLeft.jsx";
 import DoubleChevronRight from "../icons/chevrons/DoubleChevronRight.jsx";
+import { useNavigate } from "react-router-dom";
+import api from "../../api/axios.js";
 
 
 export default function Sidebar({ menuItems }) {
@@ -40,13 +42,14 @@ export default function Sidebar({ menuItems }) {
     }
   }, [isLargeScreen]);
 
+  const navigate = useNavigate();
   const handleLogout = async () => {
     try {
       const result = await logout();
 
       if (result.success) {
         console.log("Logged out!");
-        router.push("/auth/login");
+        navigate("/auth/login");
       } else {
         console.error("Logout failed:", result.error);
       }
@@ -54,6 +57,24 @@ export default function Sidebar({ menuItems }) {
       console.error("Logout error:", error);
     }
   };
+  const logout = async () => {
+    try {
+      const response = await api.post("/auth/logout");
+      if (response.status === 200) {
+        navigate("/auth/login");
+      return { success: true };
+      } else {
+      return { success: false, error: "Logout failed" };
+      }
+    } catch (error) {
+      console.error(
+        "Error during logout:",
+        error.response?.data || error.message,
+      );
+      return { success: false, error: error.response?.data || error.message };
+    }
+  };
+
 
   const handleMenuItemClick = (index) => {
     setActiveItem(index);
