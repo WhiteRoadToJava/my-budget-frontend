@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import Login from "./pages/auth/Login.jsx";
+import Login from "./pages/auth/LoginTemp.jsx";
 import ForgotPassword from "./pages/auth/ForgotPassword.jsx";
 import Dashboard from "./styles/pages/Dashboard.jsx";
 import { AuthProvider } from "./contexts/AuthContext.jsx";
