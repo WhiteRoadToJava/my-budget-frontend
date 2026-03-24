@@ -13,7 +13,7 @@ import { UserContext } from "../../contexts/UserContext.jsx";
 
 export default function LoginComponent() {
   const [user, setUser] = useState({
-    email: "",
+    username: "",
     password: "",
   });
   const [errorMessage, setErrorMessage] = useState("");
@@ -74,10 +74,10 @@ export default function LoginComponent() {
           <input
             className={styles.input}
             type="text"
-            placeholder="email"
-            value={user.email}
+            placeholder="username"
+            value={user.username}
             onChange={handleInputChange}
-            name="email"
+            name="username"
           />
           <input
             className={styles.input}

@@ -24,7 +24,7 @@ import axios from 'axios';
 
 
 const api = axios.create({
-  baseURL: 'https://mybudget-production-0120.up.railway.app', // Ändra till din backend-URL
+  baseURL: 'http://localhost:8080', // Ändra till din backend-URL
   headers: {
     'Content-Type': 'application/json',
   },
