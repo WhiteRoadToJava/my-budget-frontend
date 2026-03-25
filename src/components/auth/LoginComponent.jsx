@@ -33,21 +33,11 @@ export default function LoginComponent() {
 
     try {
       // Here you would typically handle the API response and update the UI accordingly
-      const response = await login(user);
-      console.log("Login response:", response); // Debugging line to check the response from login
-      if (response) {
-        const role = response.roles[0]; // Assuming role is an array and you want the first role
-        console.log("User role:", role); // Debugging line to check the role value
-        switch (role) {
-          case "ADMIN":
-            navigation("/admin/dashboard");
-            break;
-          case "USER":
-            navigation("/user/dashboard");
-            break;
-          default:
-            navigation("/dashboard");
-        }
+      const response = await api.post("/auth/login", user);
+      if (response.status === 200) {        
+        navigation("/admin/dashboard");
+      } else {
+        setErrorMessage("Login failed. Please check your credentials.");
       }
     } catch (error) {
       setErrorMessage(

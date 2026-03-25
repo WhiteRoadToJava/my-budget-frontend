@@ -9,6 +9,8 @@ import Expense from "./pages/user/expenses/Expense.jsx";
 import Incomse from "./pages/user/imcomes/Incomse.jsx";
 import UserDashboard from "./pages/user/UserDashboard.jsx";
 import ProtectedRoute from "./components/protuctions/ProtectedRoule.jsx";
+import AdminLayout from "./components/admin/AdminLayout.jsx";
+import UserLyout from "./components/user/UserLyout.jsx";
 
 function App() {
   return (
@@ -25,15 +27,18 @@ function App() {
                 path="/auth/forgot-password"
                 element={<ForgotPassword />}
               />
-              <Route path="/admin/dashboard" element={<Dashboard />} />
-              <Route element={<ProtectedRoute requiredRoles={['admin']} />}>
-                <Route path="/admin/*" element={<AdminDashboard />} />
 
+              <Route element={<ProtectedRoute requiredRoles={["ADMIN"]} />}>
+                <Route element={<AdminLayout />}>
+                  <Route path="/admin/*" element={<Dashboard />} />
+                </Route>
               </Route>
-              <Route element={<ProtectedRoute requiredRoles={['USER']} />}>
-                <Route path="/user/*" element={<UserDashboard />} />
-                <Route path="/user/expenses" element={<Expense />} />
-                <Route path="/user/incomes" element={<Incomse />} />
+              <Route element={<ProtectedRoute requiredRoles={["USER"]} />}>
+                <Route element={<UserLyout />}>
+                  <Route path="/user/*" element={<UserDashboard />} />
+                  <Route path="/user/expenses" element={<Expense />} />
+                  <Route path="/user/incomes" element={<Incomse />} />
+                </Route>
               </Route>
             </Routes>
           </UserProvider>
