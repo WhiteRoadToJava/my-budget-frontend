@@ -11,6 +11,7 @@ import UserDashboard from "./pages/user/UserDashboard.jsx";
 import ProtectedRoute from "./components/protuctions/ProtectedRoule.jsx";
 import AdminLayout from "./components/admin/AdminLayout.jsx";
 import UserLyout from "./components/user/UserLyout.jsx";
+import AccountsPage from "./pages/user/AccountsPage.jsx";
 
 function App() {
   return (
@@ -27,19 +28,28 @@ function App() {
                 path="/auth/forgot-password"
                 element={<ForgotPassword />}
               />
-
               <Route element={<ProtectedRoute requiredRoles={["ADMIN"]} />}>
-                <Route element={<AdminLayout />}>
-                  <Route path="/admin/*" element={<Dashboard />} />
+                <Route path="/admin" element={<AdminLayout />}>
+                  <Route index element={<Dashboard />} />
                 </Route>
               </Route>
-              <Route element={<ProtectedRoute requiredRoles={["USER"]} />}>
-                <Route element={<UserLyout />}>
-                  <Route path="/user/*" element={<UserDashboard />} />
-                  <Route path="/user/expenses" element={<Expense />} />
-                  <Route path="/user/incomes" element={<Incomse />} />
-                </Route>
-              </Route>
+              
+{/* 1. الـ ProtectedRoute لا يحتاج لـ path هنا لأنه مجرد حارس */}
+<Route element={<ProtectedRoute requiredRoles={["USER"]} />}>
+    
+    {/* 2. الـ Layout هو من يأخذ المسار الأساسي /user */}
+    <Route path="/user" element={<UserLyout />}>
+        
+        {/* 3. المسارات الفرعية بدون سلاش في البداية لتكون تابعة لـ /user */}
+        <Route path="dashboard" element={<UserDashboard />} />
+        <Route path="expenses" element={<Expense />} />
+        <Route path="incomes" element={<Incomse />} />
+        <Route path="accounts" element={<AccountsPage />} />
+        
+        {/* 4. الـ index للتوجيه التلقائي */}
+        <Route index element={<Navigate to="dashboard" replace />} />
+    </Route>
+</Route>
             </Routes>
           </UserProvider>
         </AuthProvider>

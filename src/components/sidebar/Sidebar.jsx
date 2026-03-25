@@ -1,155 +1,63 @@
-"use client";
-
-import Logout from "../icons/interface/Logout";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../contexts/AuthContext.jsx";
 import styles from "../../styles/layout/sidebar/sidebar.module.scss";
-import React, { useState, useEffect, useRef } from "react";
+
+import LogoutIcon from "../icons/interface/Logout";
 import MenuItem from "./MenuItem";
-import SubMenuItem from "./SubMenuItem";
 import SidebarTop from "./SidebarTop";
 import DoubleChevronLeft from "../icons/chevrons/DoubleChevronLeft.jsx";
 import DoubleChevronRight from "../icons/chevrons/DoubleChevronRight.jsx";
-import { useNavigate } from "react-router-dom";
-import api from "../../api/axios.js";
-
 
 export default function Sidebar({ menuItems }) {
- const [isLargeScreen, setIsLargeScreen] = useState(typeof window !== "undefined" ? window.innerWidth >= 1024 : true);
-
-  const hasHydrated = useRef(false);
-
-  const [isOpen, setIsOpen] = useState(isLargeScreen);
+  const navigate = useNavigate();
+  const { logout } = useAuth();
+  const [isOpen, setIsOpen] = useState(window.innerWidth >= 1024);
   const [activeItem, setActiveItem] = useState(null);
-  const [activeSubItem, setActiveSubItem] = useState(null);
-  const [openSubMenu, setOpenSubMenu] = useState(null);
-
-  
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      hasHydrated.current = true;
-
-      if (!isLargeScreen) {
-        setIsOpen(false);
-      } else {
-        setIsOpen(true);
-      }
-    }
+    const handleResize = () => setIsOpen(window.innerWidth >= 1024);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  useEffect(() => {
-    if (hasHydrated.current) {
-      setIsOpen(isLargeScreen);
-    }
-  }, [isLargeScreen]);
+  const handleMenuItemClick = (index, link) => {
+    console.log("Menu item clicked:", index, link); // Debugging line to check the clicked item
+    setActiveItem(index);
+    if (link) navigate(link);
+  };
 
-  const navigate = useNavigate();
   const handleLogout = async () => {
     try {
-      const result = await logout();
-
-      if (result.success) {
-        console.log("Logged out!");
-        navigate("/auth/login");
-      } else {
-        console.error("Logout failed:", result.error);
-      }
-    } catch (error) {
-      console.error("Logout error:", error);
-    }
-  };
-  const logout = async () => {
-    try {
-      const response = await api.post("/auth/logout");
-      if (response.status === 200) {
-        navigate("/auth/login");
-      return { success: true };
-      } else {
-      return { success: false, error: "Logout failed" };
-      }
-    } catch (error) {
-      console.error(
-        "Error during logout:",
-        error.response?.data || error.message,
-      );
-      return { success: false, error: error.response?.data || error.message };
-    }
-  };
-
-
-  const handleMenuItemClick = (index) => {
-    setActiveItem(index);
-    if (menuItems[index].submenu) {
-      setOpenSubMenu(openSubMenu === index ? null : index);
-      setActiveSubItem(null);
-    } else {
-      setOpenSubMenu(null);
-    }
-  };
-
-  /* const handleSubMenuItemClick = (index) => {
-    setActiveSubItem(index);
-  }; */
-
-  const handleToggleSidebar = () => {
-    setIsOpen(!isOpen);
+      await logout();
+      navigate("/auth/login");
+    } catch (err) { console.error("Logout failed", err); }
   };
 
   return (
-      <div
-        className={`${styles.sidebarContainer} ${
-          isOpen ? styles.open : styles.closed
-        }`}
-      >
-        <div className={styles.top}>
-          <SidebarTop isOpen={isOpen} />
-        </div>
-
-        <div className={styles.btn}>
-          <div
-            className={`${styles.toggleButton} ${
-              isOpen ? styles.bounceLeft : styles.bounceRight
-            }`}
-            onClick={handleToggleSidebar}
-          >
-            {isOpen ? (
-              <DoubleChevronLeft className={styles.chevronLeft} />
-            ) : (
-              <DoubleChevronRight className={styles.chevronRight} />
-            )}
-          </div>
-        </div>
-
-        <ul className={styles.menu}>
-          {menuItems.map((item, index) => (
-            <React.Fragment key={index}>
-              <MenuItem
-                item={item}
-                index={index}
-                isOpen={isOpen}
-                activeItem={activeItem}
-                onClick={handleMenuItemClick}
-              />
-              {/*{item.submenu && openSubMenu === index && isOpen && (
-                <ul className={styles.subMenu}>
-                  {item.submenu.map((subItem, subIndex) => (
-                    <SubMenuItem
-                      key={subIndex}
-                      subItem={subItem}
-                      index={subIndex}
-                      activeSubItem={activeSubItem}
-                      onClick={handleSubMenuItemClick}
-                    />
-                  ))}
-                </ul>
-              )} */}
-            </React.Fragment>
-          ))}
-        </ul>
-
-        <div className={styles.logout} onClick={handleLogout}>
-          <Logout />
-          {isOpen && <p>Log out</p>}
-        </div>
+    <div className={`${styles.sidebarContainer} ${isOpen ? styles.open : styles.closed}`}>
+      <div className={styles.top}><SidebarTop isOpen={isOpen} /></div>
+      
+      <div className={styles.btn} onClick={() => setIsOpen(!isOpen)}>
+        {isOpen ? <DoubleChevronLeft /> : <DoubleChevronRight />}
       </div>
+
+      <ul className={styles.menu}>
+        {menuItems.map((item, index) => (
+          <MenuItem
+            key={index}
+            item={item}
+            isOpen={isOpen}
+            isActive={activeItem === index}
+            onClick={() => handleMenuItemClick(index, item.link)}
+          />
+        ))}
+      </ul>
+
+      <div className={styles.logout} onClick={handleLogout}>
+        <LogoutIcon />
+        {isOpen && <p>Log out</p>}
+      </div>
+    </div>
   );
 }
