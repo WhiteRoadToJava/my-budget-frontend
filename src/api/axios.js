@@ -31,6 +31,20 @@ const api = axios.create({
   },
 });
 
+api.interceptors.request.use(
+  (response ) => response,
+  (error) => {
+    if (error.response && error.response.status === 401) {
+      // 1. clear any local authentication state (e.g., tokens, user info)
+      localStorage.removeItem('user'); // Exempel på att ta bort en token
+      // 2. redirect to login page
+      window.location.href = '/login'; // Ändra till din login-sida
+    }
+    return Promise.reject(error);
+  }
+);
+
+
 
 
 export default api;
