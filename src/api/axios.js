@@ -25,6 +25,7 @@ import axios from 'axios';
 
 const api = axios.create({
   baseURL: 'http://localhost:8080', // Ändra till din backend-URL
+  withCredentials: true, // Inkludera cookies i varje request
   headers: {
     'Content-Type': 'application/json',
   },

@@ -1,0 +1,33 @@
+@use "../../variables" as variable;
+
+.rowContainer {
+  display: flex;
+  justify-content: s flex-start;
+  align-items: center;
+  max-width: 800px;
+  border: 1px solid variable.$color-text;
+  padding: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  margin-bottom: 5px;
+}
+.rowContainer:hover {
+  border: 1px solid variable.$color-tennis;
+  padding: 20px;
+}
+span {
+  min-width: 200px;
+}
+// account.module.scss
+.balance {
+  font-weight: bold;
+
+  // Use & to create .balance.plus-value
+  &.plusValue { 
+    color: variable.$color-success;
+  }
+
+  &.minusValue {
+    color: variable.$color-error;
+  }
+}
