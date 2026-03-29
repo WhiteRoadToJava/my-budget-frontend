@@ -2,10 +2,34 @@ import api from './axios';
 
 export const getAccounts = async () => {
   try {
-    const response = await api.get('/user/accounts');
+    const response = await api.get('/user/accounts/all-accounts');
     return response.data;
   } catch (error) {
     console.error("Error fetching accounts:", error);
     throw error;
   }
 };
+
+
+  export const getAccountById = async (accountId) => {
+    try {
+      const response = await api.get(`/user/accounts/${accountId}`);
+      return response.data;
+    } catch (error) {
+      console.error(`Error fetching account with ID ${accountId}:`, error);
+      throw error;
+    }
+  }
+
+      export const getAllTransactions = async (account) => {
+      try {
+        const response = await api.post('/user/accounts/all-transactions',
+          account
+        );
+        return response.data;
+      } catch (error) {
+        console.error("Error fetching transactions:", error);
+        throw error;
+      }
+      };
+  

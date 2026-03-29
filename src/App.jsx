@@ -11,6 +11,7 @@ import ProtectedRoute from "./components/protuctions/ProtectedRoule.jsx";
 import AdminLayout from "./components/admin/AdminLayout.jsx";
 import UserLyout from "./components/user/UserLyout.jsx";
 import Account from "./pages/user/accounts/Account.jsx";
+import AccountsPage from "./pages/user/AccountsPage.jsx";
 
 function App() {
   return (
@@ -39,6 +40,8 @@ function App() {
                   <Route path="/user/accounts" element={<Account />} />
                   <Route path="/user/expenses" element={<Expense />} />
                   <Route path="/user/incomes" element={<Incomse />} />
+
+                  <Route path="/user/accounts/:accountId" element={<AccountsPage />} />
                 </Route>
               </Route>
             </Routes>

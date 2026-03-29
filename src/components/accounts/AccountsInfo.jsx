@@ -2,16 +2,16 @@ import styles from '../../styles/components/accounts/accountsinfo.module.scss';
 
 import React from 'react'
 
-const AccountsInfo = ({AccountsInfo}) => {
+const AccountsInfo = ({accounts}) => {
   return (
     <div className={styles.infoContainer}>
       <div className={styles.infoItem}>
         <span>Total Balance:</span>
-        <span>$10,000.00</span>
+        <span>${accounts?.totalBalance}</span>
       </div>
       <div className={styles.infoItem}>
         <span>Number of Accounts:</span>
-        <span>5</span>
+        <span>{accounts?.accounts?.length || 0}</span>
       </div>
       <div className={styles.infoItem}>
         <span>Last Updated:</span>
