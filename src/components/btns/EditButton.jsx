@@ -1,6 +1,6 @@
 import styles from "src/styles/elements/btns/editButton.module.scss";
 import PropTypes from "prop-types";
-import EditIcon from "src/components/icons/btns/EditIcon";
+import EditIcon from "../icons/btns/EditIcon";
 
 export default function EditButton({
   text,

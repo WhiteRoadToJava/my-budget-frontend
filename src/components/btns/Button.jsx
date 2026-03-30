@@ -38,6 +38,7 @@ Button.propTypes = {
     "cancel-outlined",
     "cancel",
     "light",
+    "blue",
     "dark",
     "yellow-outlined",
     "purple-outlined",

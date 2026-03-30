@@ -1,0 +1,33 @@
+@use "../../variables" as variable;
+
+.createIncomseContainer {
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.formContainer {
+  background-color: variable.$color-gray-medium;
+  padding: variable.$padding-base;
+  border-radius: variable.$radius-small;
+  width: 100%;
+  max-width: 400px;
+}
+.inputContainer {
+  margin-bottom: 20px;
+}
+.inputContainer label {
+  display: block;
+  margin-bottom: 5px;
+}
+.inputContainer input {
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+}
+.buttonContainer {
+  margin-top: 20px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
