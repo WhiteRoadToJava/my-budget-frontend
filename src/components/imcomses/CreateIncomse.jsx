@@ -4,8 +4,10 @@ import FormInput from "../../components/inputs/FormInput";
 import styles from "..//../styles/components/incomes/createIncomse.module.scss";
 import Button from "../../components/btns/Button";
 import { addIncomse } from "../../api/incomseService";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 const CreateIncomse = ({ isOpen, isClose, account }) => {
+  const queryClient = useQueryClient();
   const [incomseData, setIncomseData] = useState({
     account: { id: "" },
     category: "",
@@ -13,25 +15,30 @@ const CreateIncomse = ({ isOpen, isClose, account }) => {
   });
   const [error, setError] = useState({ hasError: false, message: "" });
 
-  const handleCreateIncomse = async (e) => {
-    e.preventDefault(); // avoid form submission causing page reload
-    if (!handleValidation()) return; // Stop if validation fails;
-    // Implement the logic to create an incomse using the API
-    try {
-      // Call the API to create the incomse
-      const response = await addIncomse(incomseData);
-      // Handle the response as needed (e.g., show a success message, close the modal, etc.)
-      console.log("Incomse created successfully:", response);
+  const nutation = useMutation({
+    mutationFn: addIncomse,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["transactions"] });
+      queryClient.invalidateQueries({ queryKey: ["accounts"] });
 
-      isClose(); // Close the modal after successful creation
-    } catch (error) {
-      console.error("Error creating incomse:", error);
-      // Handle the error as needed (e.g., show an error message)
+      isClose();
+      setIncomseData({ account: { id: account?.id || "" }, category: "", amount: "" });
+    },
+    onError: () => {
       setError({
         hasError: true,
         message: "Failed to create incomse. Please try again.",
       });
     }
+
+  });
+
+
+  const handleCreateIncomse = async (e) => {
+    e.preventDefault(); // avoid form submission causing page reload
+    if (!handleValidation()) return; // Stop if validation fails;
+    // Implement the logic to create an incomse using the API
+    nutation.mutate(incomseData);
   };
   useEffect(() => {
     const fetchAccount = async () => {
