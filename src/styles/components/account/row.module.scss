@@ -3,12 +3,27 @@
 
 .rowContainer {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
   padding: 10px;
   border: variable.$color-text solid 1px;
   transition: all 0.3s ease-in-out;
   cursor: pointer;
+
+  &[data-type="incomse"] {
+    border-left: 10px solid variable.$color-success;
+  }
+  &[data-type="expense"] {
+    background-color: variable.$color-error;
+  }
+  &[data-type="transfer"] {
+    background-color: variable.$color-blue;
+  }
+  p{
+    margin: 0;
+    padding: 0 10px;
+    width: 50%;
+  }
 }
 
 .rowContainer:hover {

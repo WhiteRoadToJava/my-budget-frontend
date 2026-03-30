@@ -51,6 +51,14 @@
     background-color: variable.$color-text-gray;
   }
 }
+.blue {
+  background-color: variable.$color-blue;
+  color: variable.$color-black;
+
+  &:hover {
+    background-color: #4dabf7;
+  }
+}
 
 .dark {
   background-color: variable.$primaryBg;

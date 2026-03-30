@@ -1,5 +1,5 @@
 import styles from "src/styles/elements/btns/plusButton.module.scss";
-import PlusIcon from "../../icons/btns/PlusIcon";
+import PlusIcon from "../../components/icons/btns/PlusIcon";
 import PropTypes from "prop-types";
 
 export default function PlusButton({
