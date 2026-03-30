@@ -1,5 +1,17 @@
 import api from './axios';
 
+export const addAccouunt = async (accountData) => {
+  try {
+    const response = await api.post('/user/accounts/add-account',
+      accountData
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error adding account:", error);
+    throw error;
+  }
+};
+
 export const getAccounts = async () => {
   try {
     const response = await api.get('/user/accounts/all-accounts');

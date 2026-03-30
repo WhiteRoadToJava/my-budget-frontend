@@ -14,10 +14,10 @@
     border-left: 10px solid variable.$color-success;
   }
   &[data-type="expense"] {
-    background-color: variable.$color-error;
+    border-left: 10px solid variable.$color-error;
   }
   &[data-type="transfer"] {
-    background-color: variable.$color-blue;
+    border-left: 10px solid variable.$color-blue;
   }
   p{
     margin: 0;
