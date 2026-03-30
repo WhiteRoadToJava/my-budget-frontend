@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { getAccounts } from '../../../api/accountService';
-import AccountComponent from '../../../components/accounts/AccountComponent';
-
+import React, { useEffect, useState } from "react";
+import { getAccounts } from "../../../api/accountService";
+import AccountComponent from "../../../components/accounts/AccountComponent";
 const Account = () => {
   const [accounts, setAccounts] = useState([]);
   const [loading, setLoading] = useState(true);
+
 
   useEffect(() => {
     const fetchAccounts = async () => {
@@ -25,7 +25,7 @@ const Account = () => {
 
   return (
     <div>
-      <AccountComponent accounts={accounts}/>
+      <AccountComponent accounts={accounts} />
     </div>
   );
 };
