@@ -4,10 +4,13 @@ import Row from "./Row";
 import { getAllTransactions } from "../../api/accountService";
 import Button from "../btns/Button";
 import CreateIncomse from "../imcomses/CreateIncomse";
+import CreateExpense from "../expenses/CreateExpense";
 
 const Account = ({ account }) => {
   const [transactions, setTransactions] = useState([]);
   const [isCreateIncomseOpen, setIsCreateIncomseOpen] = useState(false);
+  const [isCreateExpenseOpen, setIsCreateExpenseOpen] = useState(false);
+
   useEffect(() => {
     const fetchTransactions = async () => {
       try {
@@ -42,7 +45,7 @@ const Account = ({ account }) => {
           <Button
             variant="cancel"
             text="Create Expense"
-            onClick={() => setIsCreateIncomseOpen(false)}
+            onClick={() => setIsCreateExpenseOpen(true)}
           />
           <Button
             variant="blue"
@@ -54,6 +57,11 @@ const Account = ({ account }) => {
         <CreateIncomse
           isOpen={isCreateIncomseOpen}
           isClose={() => setIsCreateIncomseOpen(false)}
+          account={account}
+        />
+        <CreateExpense 
+          isOpen={isCreateExpenseOpen}
+          isClose={() => setIsCreateExpenseOpen(false)}
           account={account}
         />
         </div>
