@@ -1,4 +1,4 @@
-import styles from "src/styles/elements/btns/plusButton.module.scss";
+import styles from "../../styles/btns/plusButton.module.scss";
 import PlusIcon from "../../components/icons/btns/PlusIcon";
 import PropTypes from "prop-types";
 

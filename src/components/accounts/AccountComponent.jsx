@@ -2,9 +2,12 @@ import React, { useEffect, useState } from "react";
 import Row from "./Row";
 import styles from "../../styles/components/accounts/accounts.module.scss";
 import AccountsInfo from "./AccountsInfo";
+import PlusButton from "../btns/PlusButton";
+import CreateAccount from "../account/CreateAccount";
 
 const AccountComponent = ({ accounts }) => {
   const [accountsList, setAccountsList] = useState([]);
+  const [openCreateAccount, setOpenCreateAccount] = useState(false);
 
   useEffect(() => {
     const fetchAccounts = () => {
@@ -20,13 +23,25 @@ const AccountComponent = ({ accounts }) => {
     <div className={styles.accountContainer}>
       <h2 className={styles.accountTitle}>Accounts</h2>
       <AccountsInfo accounts={accounts} />
+      <div className={styles.divider}></div>
+      <div className={styles.accountHeader}>
+        <PlusButton
+          label="Create Account"
+          type="button"
+          onClick={() => setOpenCreateAccount(true)}
+        />
+      </div>
       <div>
+        <CreateAccount
+          isOpen={openCreateAccount}
+          isClose={() => setOpenCreateAccount(false)}
+        />
+      </div>
+      <div className={styles.accountBody}>
         {accountsList.map((account) => (
           <Row key={account.id} account={account} />
         ))}
       </div>
-
-     
     </div>
   );
 };

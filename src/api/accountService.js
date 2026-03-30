@@ -1,6 +1,6 @@
 import api from './axios';
 
-export const addAccouunt = async (accountData) => {
+export const addAccount = async (accountData) => {
   try {
     const response = await api.post('/user/accounts/add-account',
       accountData

@@ -1,27 +1,26 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { getAccounts } from "../../../api/accountService";
 import AccountComponent from "../../../components/accounts/AccountComponent";
+// 1. استيراد useQuery
+import { useQuery } from "@tanstack/react-query";
+
 const Account = () => {
-  const [accounts, setAccounts] = useState([]);
-  const [loading, setLoading] = useState(true);
+  // 2. استبدال useEffect و useState بـ useQuery
+  const { 
+    data: accounts = [], 
+    isLoading, 
+    isError, 
+    error 
+  } = useQuery({
+    queryKey: ["accounts"], 
+    queryFn: getAccounts, 
+  });
 
+  if (isLoading) return <div>Loading accounts...</div>;
 
-  useEffect(() => {
-    const fetchAccounts = async () => {
-      try {
-        const data = await getAccounts();
-        setAccounts(data);
-      } catch (error) {
-        console.error("Failed to load accounts", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchAccounts();
-  }, []);
-
-  if (loading) return <div>Loading...</div>;
+  if (isError) {
+    return <div>Error loading accounts: {error.message}</div>;
+  }
 
   return (
     <div>
