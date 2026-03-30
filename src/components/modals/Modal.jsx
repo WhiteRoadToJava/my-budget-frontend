@@ -1,4 +1,4 @@
-import styles from "src/styles/elements/modal.module.scss";
+import styles from "../../styles/modals/modal.module.scss";
 
 export default function Modal({ children, isOpen, onClose, className }) {
   if (!isOpen) return null;

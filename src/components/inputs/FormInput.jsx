@@ -1,8 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
-import styles from "src/styles/elements/inputs/formInput.module.scss";
-import Error from "src/components/icons/states/Error";
-import Success from "src/components/icons/states/Success";
+import styles from "../../styles/inputs/formInput.module.scss";
+import Error from "../../components/icons/states/Error.jsx";
+import Success from "../../components/icons/states/Success.jsx";
 
 export default function FormInput({
   label,

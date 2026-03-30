@@ -5,6 +5,7 @@ import AccountsInfo from "./AccountsInfo";
 
 const AccountComponent = ({ accounts }) => {
   const [accountsList, setAccountsList] = useState([]);
+
   useEffect(() => {
     const fetchAccounts = () => {
       if (accounts) {
@@ -24,6 +25,8 @@ const AccountComponent = ({ accounts }) => {
           <Row key={account.id} account={account} />
         ))}
       </div>
+
+     
     </div>
   );
 };

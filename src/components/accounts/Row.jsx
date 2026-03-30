@@ -14,11 +14,11 @@ const Row = ({ account }) => {
       <span>{account.name}</span>
       <span
         className={`
-    ${styles.balance} 
-    ${account.balance >= 0 ? styles.plusValue : styles.minusValue}
+    ${styles.totalBalance} 
+    ${account.totalBalance >= 0 ? styles.plusValue : styles.minusValue}
   `}
       >
-        {account.balance}
+        {account.totalBalance}
       </span>
       <span>{account.currency}</span>
       <span>{account.type}</span>
