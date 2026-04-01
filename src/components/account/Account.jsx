@@ -4,8 +4,8 @@ import Row from "./Row";
 import { getAllTransactions } from "../../api/accountService";
 import Button from "../btns/Button";
 import CreateIncomse from "../imcomses/CreateIncomse";
-import CreateExpense from "../expenses/CreateExpense";
-
+    import CreateExpense from "../expenses/CreateExpense";
+    import ToogleMenu from "../elements/ToggleMenu";
 import { useQuery } from "@tanstack/react-query"
 import TransactionInfo from "../transactions/TransactionInfo";
 
@@ -41,6 +41,25 @@ const Account = ({ account }) => {
     setSelectedTransaction(transaction);
   };
 
+
+  const buttonMenuItems = [ 
+           <Button
+          variant="primary"
+          text="Create Incomse"
+          onClick={() => setIsCreateIncomseOpen(true)}
+        />,
+        <Button
+          variant="cancel"
+          text="Create Expense"
+          onClick={() => setIsCreateExpenseOpen(true)}
+        />,
+        <Button
+          variant="blue"
+          text="Create Transfer"
+          onClick={() => setIsCreateIncomseOpen(false)}
+        />
+  ];
+
   return (
     <div className={styles.accountContainer}>
       <h2 className={styles.accountTitle}>{account.name}</h2>
@@ -57,21 +76,7 @@ const Account = ({ account }) => {
         )}
       </div>
       <div className={styles.buttonContainer}>
-        <Button
-          variant="primary"
-          text="Create Incomse"
-          onClick={() => setIsCreateIncomseOpen(true)}
-        />
-        <Button
-          variant="cancel"
-          text="Create Expense"
-          onClick={() => setIsCreateExpenseOpen(true)}
-        />
-        <Button
-          variant="blue"
-          text="Create Transfer"
-          onClick={() => setIsCreateIncomseOpen(false)}
-        />
+          <ToogleMenu menuList={buttonMenuItems} position="bottom" /> 
       </div>
       <div>
         <CreateIncomse

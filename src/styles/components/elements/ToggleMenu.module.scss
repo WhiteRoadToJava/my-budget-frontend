@@ -1,0 +1,59 @@
+@use "../../variables" as variable;
+.toggleMenuContainer {
+  position: relative; // ضروري لكي تظهر القائمة بالنسبة للنقاط
+  display: inline-block;
+
+  .dotsTrigger {
+    display: flex;
+    min-width: 40px; // لضبط حجم المنطقة القابلة للنقر
+    min-height: 40px;
+    max-width: 50px;
+    max-height: 50px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px; // المسافة بين النقاط
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 50%;
+    background-color: variable.$color-blue;
+    transition: background 0.2s;
+
+    &:hover {
+      background-color: variable.$color-blue-hover;
+    }
+
+    .dot {
+      width: 4px;
+      height: 4px;
+      background-color: #333; // لون النقاط
+      border-radius: 50%;
+    }
+  }
+
+  .menu {
+    position: absolute;
+    right: 0; // تظهر محاذية لليمين
+
+    border-radius: 8px;
+    &[data-position="top"] {
+      top: 100%;
+    }
+    &[data-position="bottom"] {
+      top: auto;
+      bottom: 100%;
+    }
+
+    z-index: 1000; // لضمان ظهورها فوق أي عنصر آخر
+    min-width: 120px;
+    overflow: hidden;
+
+    .menuItem {
+      padding: 10px 15px;
+      font-size: 14px;
+      color: #333;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+  }
+}

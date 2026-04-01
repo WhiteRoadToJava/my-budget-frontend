@@ -4,6 +4,8 @@ import styles from "../../styles/components/accounts/accounts.module.scss";
 import AccountsInfo from "./AccountsInfo";
 import PlusButton from "../btns/PlusButton";
 import CreateAccount from "../account/CreateAccount";
+import ToggleMenu from "../elements/ToggleMenu";
+import Button from "../btns/Button";
 
 const AccountComponent = ({ accounts }) => {
   const [accountsList, setAccountsList] = useState([]);
@@ -19,6 +21,8 @@ const AccountComponent = ({ accounts }) => {
     fetchAccounts();
   }, [accounts]);
   // Assuming fetchAccounts is a function that retrieves accounts data
+
+ 
   return (
     <div className={styles.accountContainer}>
       <h2 className={styles.accountTitle}>Accounts</h2>
@@ -30,6 +34,7 @@ const AccountComponent = ({ accounts }) => {
           type="button"
           onClick={() => setOpenCreateAccount(true)}
         />
+        
       </div>
       <div>
         <CreateAccount
@@ -42,8 +47,12 @@ const AccountComponent = ({ accounts }) => {
           <Row key={account.id} account={account} />
         ))}
       </div>
+
     </div>
   );
 };
 
 export default AccountComponent;
+
+
+// Example menu items, you can customize this as needed
