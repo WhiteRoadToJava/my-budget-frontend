@@ -1,0 +1,58 @@
+@use "../../variables" as variable;
+
+.transactionContainer {
+  display: flex;
+  flex-direction: column;
+  gap: variable.$padding-base;
+  background-color: variable.$color-gray-medium;
+  padding: variable.$padding-base;
+  border-radius: variable.$radius-small;
+  width: 400px;
+}
+.transactionTitle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 50px;
+  border-radius: variable.$radius-small;
+    &[data-type="incomse"] {
+    background-color: variable.$color-success;
+  }
+  &[data-type="expense"] {
+    background-color: variable.$color-error;
+  }
+  &[data-type="transfer"] .transactionTitleText {
+    color: variable.$color-blue;
+  }
+}
+.transactionTitleText {
+  color: variable.$color-white;
+  font-size: variable.$font-lg;
+  font-weight: bold;
+  padding: 10px;
+  
+}
+.transactionDetail {
+  margin-bottom: variable.$padding-base;
+  display: flex;
+
+  align-items: center;
+  &p {
+    margin: 0;
+    width: 300px;
+  }
+  strong {
+    font-weight: bold;
+    margin-right: 5px;
+    width: 100px;
+  }
+}
+.divider {
+  height: 1px;
+  background-color: variable.$color-gray-light;
+}
+.buttonContainer {
+  display: flex;
+  justify-content: flex-end;
+}
