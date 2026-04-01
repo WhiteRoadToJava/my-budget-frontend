@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext.jsx";
 import styles from "../../styles/layout/sidebar/sidebar.module.scss";
-
 import LogoutIcon from "../icons/interface/Logout";
 import MenuItem from "./MenuItem";
 import SidebarTop from "./SidebarTop";
@@ -39,11 +38,9 @@ export default function Sidebar({ menuItems }) {
       <div className={styles.top}><SidebarTop isOpen={isOpen} /></div>
       
       <div className={styles.btn} onClick={() => setIsOpen(!isOpen)}>
-        {isOpen ? <DoubleChevronLeft /> : <DoubleChevronRight />}
+        {isOpen ? <DoubleChevronLeft  /> : <DoubleChevronRight />}
       </div>
-        <Link to="/user/incomses" className={styles.logo}>
-          {isOpen ? "MyBudget" : "MB"}
-        </Link>
+      <div className={styles.menuContainer}>
       <ul className={styles.menu}>
         {menuItems.map((item, index) => (
           <MenuItem
@@ -55,6 +52,7 @@ export default function Sidebar({ menuItems }) {
           />
         ))}
       </ul>
+      </div>
 
       <div className={styles.logout} onClick={handleLogout}>
         <LogoutIcon />

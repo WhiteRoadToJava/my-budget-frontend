@@ -1,0 +1,23 @@
+@use "../variables" as variable;
+.deleteConfirmationContainer {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: variable.$color-gray-medium;
+  padding: 20px;
+  z-index: 1000;
+  width: 300px;
+  text-align: center;
+ h2 {
+  margin-bottom: 20px;
+}
+ p {
+  margin-bottom: 10px;
+}
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: space-around;
+}

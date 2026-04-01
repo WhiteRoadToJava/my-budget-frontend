@@ -1,0 +1,21 @@
+@use "../variables" as variable;
+.successConfirmationContainer {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: variable.$color-gray-medium;
+  padding: 20px;
+  text-align: left;
+  border-radius: variable.$radius-small;
+  p {
+    margin-bottom: 10px;
+  }
+  h2 {
+    margin-bottom: 20px;
+  }
+}
+.buttonContainer {
+  display: flex;
+  justify-content: flex-end;
+}

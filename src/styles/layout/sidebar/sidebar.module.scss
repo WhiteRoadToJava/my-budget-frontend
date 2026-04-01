@@ -37,17 +37,11 @@
     }
 
     .btn {
+      min-height: 20px;
       padding: 0px 0px 70px 0px;
+      cursor: pointer;
     }
 
-    .toggleButton {
-      display: flex;
-      justify-content: flex-end;
-      align-items: center;
-      cursor: pointer;
-      width: 100%;
-      padding-right: 1.5rem;
-    }
 
     .logout {
       p {
@@ -69,6 +63,9 @@
         }
       }
     }
+  }
+  .menuContainer {
+    min-height: 400px;
   }
 
   &.closed {
