@@ -1,10 +1,16 @@
 @use "../../variables" as variable;
+.rowDetails {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
 
+}
 .rowContainer {
   display: flex;
   justify-content: s flex-start;
   align-items: center;
-  max-width: 800px;
+      max-width: 800px;
   border: 1px solid variable.$color-text;
   padding: 10px;
   cursor: pointer;
@@ -13,10 +19,9 @@
 }
 .rowContainer:hover {
   border: 1px solid variable.$color-tennis;
-  padding: 20px;
 }
 span {
-  min-width: 200px;
+  min-width: 100px;
 }
 // account.module.scss
 .totalBalance {

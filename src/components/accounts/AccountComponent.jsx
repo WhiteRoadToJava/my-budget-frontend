@@ -34,7 +34,6 @@ const AccountComponent = ({ accounts }) => {
           type="button"
           onClick={() => setOpenCreateAccount(true)}
         />
-        
       </div>
       <div>
         <CreateAccount
@@ -44,7 +43,7 @@ const AccountComponent = ({ accounts }) => {
       </div>
       <div className={styles.accountBody}>
         {accountsList.map((account) => (
-          <Row key={account.id} account={account} />
+          <Row key={account.id} account={account}  />
         ))}
       </div>
 

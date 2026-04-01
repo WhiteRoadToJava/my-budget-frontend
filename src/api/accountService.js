@@ -11,6 +11,16 @@ export const addAccount = async (accountData) => {
     throw error;
   }
 };
+export const deleteAccount = async (accountId) => {
+  try {
+    const response = await api.delete(`/user/accounts/delete-account/${accountId}`); 
+    return response.data;
+  } catch (error) {
+    console.error(`Error deleting account with ID ${accountId}:`, error);
+    throw error;
+  }
+};
+
 
 export const getAccounts = async () => {
   try {
