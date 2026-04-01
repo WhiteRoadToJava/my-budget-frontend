@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styles from "../../styles/components/account/account.module.scss";
 import Row from "./Row";
 import { getAllTransactions } from "../../api/accountService";
@@ -7,10 +7,13 @@ import CreateIncomse from "../imcomses/CreateIncomse";
 import CreateExpense from "../expenses/CreateExpense";
 
 import { useQuery } from "@tanstack/react-query"
+import TransactionInfo from "../transactions/TransactionInfo";
 
 const Account = ({ account }) => {
   const [isCreateIncomseOpen, setIsCreateIncomseOpen] = useState(false);
   const [isCreateExpenseOpen, setIsCreateExpenseOpen] = useState(false);
+  const [selectedTransaction, setSelectedTransaction] = useState(false);
+
 
   const {
     data: transactions = [],
@@ -20,6 +23,12 @@ const Account = ({ account }) => {
   } = useQuery({
     queryKey: ["transactions", account.id],
     queryFn: () => getAllTransactions(account),
+    select: (data) => {
+      // Assuming data is an array of transactions, you can filter or transform it as needed
+      return [...data.sort((a, b)  =>{
+        return new Date(b.createdAt) - new Date(a.createdAt);
+      })];   // Return the transactions list directly or apply any necessary transformations
+    }
   }); 
 
   if (isLoading) return <div>Loading transactions...</div>;
@@ -27,6 +36,11 @@ const Account = ({ account }) => {
     return <div>Error loading transactions: {error.message}</div>;
   }
   console.log(transactions);
+
+  const handleTransactionClick = (transaction) => {
+    setSelectedTransaction(transaction);
+  };
+
   return (
     <div className={styles.accountContainer}>
       <h2 className={styles.accountTitle}>{account.name}</h2>
@@ -36,7 +50,7 @@ const Account = ({ account }) => {
       <div className={styles.transactionsContainer}>
         {transactions.length > 0 ? (
           transactions.map((transaction) => (
-            <Row key={transaction.id} transaction={transaction} />
+            <Row key={transaction.id} transaction={transaction} onClick={() => handleTransactionClick(transaction)}/>
           ))
         ) : (
           <p>No transactions found.</p>
@@ -69,6 +83,11 @@ const Account = ({ account }) => {
           isOpen={isCreateExpenseOpen}
           isClose={() => setIsCreateExpenseOpen(false)}
           account={account}
+        />
+        <TransactionInfo
+          isOpen={selectedTransaction} // You can manage this state as needed
+          onClose= {() => setSelectedTransaction(false) } // You can implement this function to close the modal
+          transaction={selectedTransaction || {}} // Pass the selected transaction data here
         />
       </div>
     </div>
