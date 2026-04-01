@@ -3,7 +3,7 @@ import { Outlet } from "react-router-dom";
 import Sidebar from "../sidebar/Sidebar";
 import { getUserMenuItems } from "../../utils/user/getUserMenuItem.jsx"
 
-const UserLyout = () => {
+const   UserLyout = () => {
   return (
     <div style={{ display: "flex" }}>
       <Sidebar menuItems={getUserMenuItems} />

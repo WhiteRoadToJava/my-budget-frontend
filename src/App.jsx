@@ -39,9 +39,21 @@ function App() {
                   <Route path="/user" element={<UserDashboard />} />
                   <Route path="/user/accounts" element={<Account />} />
                   <Route path="/user/expenses" element={<Expense />} />
-                  <Route path="/user/incomes" element={<Incomse />} />
+                  <Route path="/user/incomses" element={<Incomse />} />
 
-                  <Route path="/user/accounts/:accountId" element={<AccountsPage />} />
+                  <Route
+                    path="/user/calendar"
+                    element={<div>Calendar Page</div>}
+                  />
+                  <Route
+                    path="/user/settings"
+                    element={<div>Settings Page</div>}
+                  />
+
+                  <Route
+                    path="/user/accounts/:accountId"
+                    element={<AccountsPage />}
+                  />
                 </Route>
               </Route>
             </Routes>

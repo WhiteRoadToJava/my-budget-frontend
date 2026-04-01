@@ -1,56 +1,37 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import styles from "../../styles/layout/sidebar/menuItem.module.scss";
-//import NotificationBell from "src/components/notifications/NotificationBell";
 
-export default function MenuItem({ item, index, isOpen, activeItem, onClick }) {
-  const handleClick = (e) => {
-    e.stopPropagation();
-    onClick(index);
-  };
+export default function MenuItem({ item, isOpen }) {
+  const location = useLocation();
+  
+  // التحقق مما إذا كان هذا الرابط هو النشط حالياً بناءً على المسار في المتصفح
+  const isActive = location.pathname === item.link;
+
+  const menuItemClasses = `${styles.menuItem} ${
+    isActive ? styles.active : ""
+  } ${isOpen ? styles.open : styles.closed}`;
 
   const menuContent = (
     <div className={styles.item}>
-      <div
-        className={
-          item.icon
-            ? `${styles.menuIcon}`
-            : item.component != undefined
-            ? `${styles.menuIcon}`
-            : null
-        }
-      >
+      <div className={styles.menuIcon}>
         {item.icon
           ? React.cloneElement(item.icon, {
-              fill: activeItem === index ? "#000" : "#e7e7e7",
+              // تغيير اللون بناءً على حالة النشاط
+              fill: isActive ? "#000" : "#e7e7e7",
             })
-          : item.component != undefined
-          ? item.component
-          : null}
+          : item.component || null}
       </div>
-      {isOpen && <span className={`${styles.menuText}`}>{item.label}</span>}
+      {isOpen && <span className={styles.menuText}>{item.label}</span>}
     </div>
   );
 
-  const menuItemClasses = `${styles.menuItem} ${
-    activeItem === index ? styles.active : ""
-  } ${isOpen ? styles.open : styles.closed}`;
-
-  if (item.link && !item.submenu) {
-    return (
-      <Link
-        href={item.link}
-        className={`${menuItemClasses} link`}
-        onClick={handleClick}
-      >
+  // الحل الجذري: استخدام "to" بدلاً من "href"
+  return (
+    <li className={menuItemClasses}>
+      <Link to={item.link} className={styles.linkWrapper} style={{ textDecoration: 'none', color: 'inherit', width: '100%' }}>
         {menuContent}
       </Link>
-    );
-  }
-
-  return (
-    <li className={menuItemClasses} onClick={handleClick}>
-      {menuContent}
     </li>
   );
 }

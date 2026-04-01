@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext.jsx";
 import styles from "../../styles/layout/sidebar/sidebar.module.scss";
 
@@ -41,7 +41,9 @@ export default function Sidebar({ menuItems }) {
       <div className={styles.btn} onClick={() => setIsOpen(!isOpen)}>
         {isOpen ? <DoubleChevronLeft /> : <DoubleChevronRight />}
       </div>
-
+        <Link to="/user/incomses" className={styles.logo}>
+          {isOpen ? "MyBudget" : "MB"}
+        </Link>
       <ul className={styles.menu}>
         {menuItems.map((item, index) => (
           <MenuItem
