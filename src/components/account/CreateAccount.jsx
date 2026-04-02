@@ -33,7 +33,7 @@ const CreateAccount = ({ isOpen, isClose }) => {
     onError: (err) => {
       setError({
         hasError: true,
-        message: "Failed to create account. Please try again.",
+        message: "Failed to create account. Please try again."+ err.message,
       });
     }
   });

@@ -4,8 +4,7 @@ import styles from "../../styles/components/accounts/accounts.module.scss";
 import AccountsInfo from "./AccountsInfo";
 import PlusButton from "../btns/PlusButton";
 import CreateAccount from "../account/CreateAccount";
-import ToggleMenu from "../elements/ToggleMenu";
-import Button from "../btns/Button";
+
 
 const AccountComponent = ({ accounts }) => {
   const [accountsList, setAccountsList] = useState([]);
