@@ -1,0 +1,28 @@
+@use "../../variables" as variable;
+.dropDownContainer {
+  position: relative; // ضروري لكي تلتصق القائمة بالمدخل
+  width: 100%;
+  margin-bottom: 1rem;
+
+}
+.dropDownList{
+  position: absolute;
+  width: 100%;
+  margin-bottom: 1rem;
+  top: 58px;
+  left: 0px;
+  z-index: 100;
+  display: block;
+  background-color: variable.$color-gray-dark;
+ border-bottom-left-radius: variable.$radius-small  ;
+ border-bottom-right-radius: variable.$radius-small  ;
+}
+.dropDownItem{
+  padding: 10px ;
+  cursor: pointer;
+  color: variable.$color-text;
+  &:hover{
+    background-color: variable.$color-gray-medium;
+  
+  }
+}
