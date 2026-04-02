@@ -1,6 +1,6 @@
 import React from "react";
 import Modal from "../modals/Modal";
-import styles from "../../styles/components/transactions/TransactionInfo.module.scss";
+import styles from "../../styles/components/transactions/transactionInfo.module.scss";
 import Button from "../btns/Button";
 import ToggleMenu from "../elements/ToggleMenu";
 
