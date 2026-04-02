@@ -20,6 +20,15 @@ export const deleteAccount = async (accountId) => {
     throw error;
   }
 };
+export const updateAccount = async (accountData) => {
+  try {
+    const response = await api.patch('/user/accounts/update-account', accountData);
+    return response.data;
+  } catch (error) {
+    console.error("Error updating account:", error);
+    throw error;
+  }
+};
 
 
 export const getAccounts = async () => {

@@ -8,9 +8,13 @@ import SuccessConfirmaton from "../modals/SuccessConfirmaton";
 import { deleteAccount } from "../../api/accountService";
 
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import CreateAccount from "../account/CreateAccount";
+import UpdateAccount from "../account/UpdateAccount";
 const Row = ({ account }) => {
   const [openDeleteConfirmation, setOpenDeleteConfirmation] = useState(false);
   const [successConfirmation, setSuccessConfirmation] = useState(false);
+  const [openEditAccount, setOpenEditAccount] = useState(false);
+
   const navigate = useNavigate();
 
   const handleClick = () => {
@@ -48,7 +52,7 @@ const Row = ({ account }) => {
       text="Edit"
       variant="primary"
       type="button"
-      onClick={() => console.log("Edit account")}
+      onClick={() => setOpenEditAccount(true)}
     />,
     <Button
       key="delete"
@@ -69,7 +73,7 @@ const Row = ({ account }) => {
     ${account.totalBalance >= 0 ? styles.plusValue : styles.minusValue}
   `}
         >
-          {account.totalBalance}
+          {account.totalBalance.toFixed(2)}
         </span>
         <span>{account.currency}</span>
         <span>{account.type}</span>
@@ -86,6 +90,12 @@ const Row = ({ account }) => {
         <SuccessConfirmaton
           isOpen={successConfirmation}
           onClose={() => setSuccessConfirmation(false)}
+        />
+        <CreateAccount isOpen={false} isClose={() => {}} />
+          <UpdateAccount
+          isOpen={openEditAccount}
+          isClose={() => setOpenEditAccount(false)}
+          account={account}
         />
       </div>
     </div>

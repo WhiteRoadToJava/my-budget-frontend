@@ -35,7 +35,7 @@ const TransactionInfo = ({ isOpen, onClose, transaction }) => {
           <ToggleMenu menuList={buttonMenuItems} />
         </div>
         <p className={styles.transactionDetail}>
-          <strong>Amount:</strong> {transaction.amount}
+          <strong>Amount:</strong> {transaction?.amount ? Number(transaction.amount).toFixed(2) : "0.00"} {transaction.currency}
         </p>
         <p className={styles.transactionDetail}>
           <strong>Date:</strong>{" "}
