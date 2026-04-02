@@ -1,6 +1,5 @@
 @use "../../variables" as variable;
 
-
 .rowContainer {
   display: flex;
   justify-content: flex-start;
@@ -19,7 +18,14 @@
   &[data-type="transfer"] {
     border-left: 10px solid variable.$color-blue;
   }
-  p{
+  &[data-type="in-transfer"] {
+    border-left: 10px solid variable.$color-blue;
+  }
+  &[data-type="out-transfer"] {
+    border-left: 10px solid variable.$color-blue;
+  }
+
+  p {
     margin: 0;
     padding: 0 10px;
     width: 50%;
@@ -28,4 +34,12 @@
 
 .rowContainer:hover {
   background-color: variable.$color-gray-caviar;
+}
+.transactionType {
+  &[data-type="in-transfer"] {
+    color:variable.$color-success;
+  }
+  &[data-type="out-transfer"] {
+    color: variable.$hover-cancel;
+  }
 }
