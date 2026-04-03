@@ -24,7 +24,7 @@ import axios from 'axios';
 
 
 const api = axios.create({
-  baseURL: 'https://my-budget-frontend-production.up.railway.app', // Ändra till din backend-URL
+  baseURL: 'https://mybudget-production-0120.up.railway.app', // Ändra till din backend-URL
   withCredentials: true, // Inkludera cookies i varje request
   headers: {
     'Content-Type': 'application/json',
