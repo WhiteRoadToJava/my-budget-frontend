@@ -1,52 +1,37 @@
 import axios from 'axios';
 
-/**
- * Konfigurerad Axios-instans för API requests
- *
- * Den här modulen exporterar en förkonfigurerad Axios-instans för att göra HTTP-requests
- * till vårt backend-API. Konfigurationen ser till att:
- *
- * 1. Alla requests riktas till korrekt API-bas-URL
- * 2. Inloggningsuppgifter (cookies) ingår i varje request
- * 3. Korrekt headers är inställda
- *
- * Att använda denna förkonfigurerade instans hjälper till att upprätthålla konsistens överallt
- * alla API-förfrågningar i applikationen och centraliserar konfigurationen.
- */
-
-/**
- * Configured Axios instance
- *
- * @property {string} baseURL - Base URL for all API requests
- * @property {boolean} withCredentials - Ensures cookies are sent with requests
- * @property {Object} headers - Default headers for all requests
- */
-
-
 const api = axios.create({
-  baseURL: 'https://mybudget-production-0120.up.railway.app', // Ändra till din backend-URL
-  withCredentials: true, // Inkludera cookies i varje request
+  baseURL: 'https://mybudget-production-0120.up.railway.app', 
+  withCredentials: true,
   headers: {
     'Content-Type': 'application/json',
   },
 });
 
+// 1. Request Interceptor: لإضافة التوكن قبل إرسال الطلب
 api.interceptors.request.use(
-  (response ) => response,
+  (config) => {
+    const token = localStorage.getItem('token'); 
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+  },
+  (error) => Promise.reject(error)
+);
+
+// 2. Response Interceptor: للتعامل مع ردود السيرفر (مثل 401 أو 403)
+api.interceptors.response.use(
+  (response) => response, // إذا نجح الطلب مرره كما هو
   (error) => {
-    if (error.response && error.response.status === 401) {
-      // 1. clear any local authentication state (e.g., tokens, user info)
-      localStorage.removeItem('user'); // Exempel på att ta bort en token
-      // 2. redirect to login page
-      window.location.href = '/login'; // Ändra till din login-sida
+    if (error.response && (error.response.status === 401 || error.response.status === 403)) {
+      console.warn("Auth error or Forbidden, redirecting to login...");
+      localStorage.removeItem('token');
+      localStorage.removeItem('user');
+      window.location.href = '/login';
     }
     return Promise.reject(error);
   }
 );
 
-
-
-
 export default api;
-
-//

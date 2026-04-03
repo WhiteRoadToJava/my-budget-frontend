@@ -28,21 +28,25 @@ export const AuthProvider = ({ children }) => {
     checkAuthStatus();
   }, []);
 
-
-  const login = async (loginDData) => {
-    try {
-      const response = await api.post("/auth/login", loginDData, {
-        withCredentials: true,
-      });
+const login = async (loginData) => {
+  try {
+    const response = await api.post("/auth/login", loginData);
+    
+    // تأكد أن السيرفر يرسل التوكن في حقل jwtToken (أو الاسم الذي اخترته في AuthResponse)
+    const token = response.data.jwtToken; 
+    
+    if (token && token !== "Login successful") {
+      localStorage.setItem('token', token); // تخزين التوكن الحقيقي
       setCurrentUser(response.data);
       return response.data;
-    } catch (error) {
-      console.error(
-        "Error during login:",
-        error.response?.data || error.message,
-      );
+    } else {
+      console.error("The server sent a success message but no real JWT token!");
     }
-  };
+  } catch (error) {
+    console.error("Error during login:", error.response?.data || error.message);
+    throw error;
+  }
+};
 
   const register = async (registerData) => {
     try {
