@@ -5,10 +5,11 @@ import Button from "../btns/Button";
 import ToggleMenu from "../elements/ToggleMenu";
 import UpdateTransfer from "../transfers/updateTransfer";
 import UpdateIncomse from "../imcomses/UpdateIncomse";
+import UpdateExpense from "../expenses/UpdateExpense";
 import DeleteConfimation from "../modals/DeleteConfirmation";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { deleteIncomse } from "../../api/incomseService";
-import { deleteExpense } from "../../api/expemseService";
+import { deleteExpense } from "../../api/expenseService";
 
 const TransactionInfo = ({ isOpen, onClose, accounts, transaction }) => {
   const queryClient = useQueryClient();
@@ -47,6 +48,7 @@ const TransactionInfo = ({ isOpen, onClose, accounts, transaction }) => {
       });
     },
   });
+
 
   const handleDelete = async () => {
     const incomseId = transaction && transaction?.id;
@@ -147,11 +149,21 @@ const TransactionInfo = ({ isOpen, onClose, accounts, transaction }) => {
           accounts={accounts}
           transfer={transaction}
         />
+      ) : transaction.type === "expense" ? (
+        <UpdateExpense
+          isOpen={openUpdateIncomse}
+          isClose={() => {
+            setOpenUpdateIncomse(false);
+            onClose(false);
+          }}
+          expense={transaction}
+        />
       ) : (
         <UpdateIncomse
           isOpen={openUpdateIncomse}
           isClose={() => {
             setOpenUpdateIncomse(false);
+            onClose(false);
           }}
           incomse={transaction}
         />

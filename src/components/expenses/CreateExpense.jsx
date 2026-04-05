@@ -3,7 +3,7 @@ import Modal from "../modals/Modal";
 import FormInput from "../../components/inputs/FormInput";
 import styles from "..//../styles/components/ecpenses/createExpense.module.scss";
 import Button from "../../components/btns/Button";
-import { addExpense } from "../../api/expemseService";
+import { addExpense } from "../../api/expenseService";
 // 1. استيراد React Query
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
