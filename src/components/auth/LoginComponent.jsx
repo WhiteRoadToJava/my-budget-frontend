@@ -32,7 +32,12 @@ export default function LoginComponent() {
     setIsLoading(true);
 
     try {
+<<<<<<< Updated upstream
         const response = await login(user);
+=======
+      // Here you would typically handle the API response and update the UI accordingly
+      const response = await login(user);
+>>>>>>> Stashed changes
       console.log("Login response:", response); // Debugging line to check the response from login
       if (response) {
         const role = response.roles[0]; // Assuming role is an array and you want the first role
@@ -47,8 +52,11 @@ export default function LoginComponent() {
           default:
             navigation("/");
         }
+<<<<<<< Updated upstream
       } else {
         setErrorMessage("Invalid username or password");
+=======
+>>>>>>> Stashed changes
       }
     } catch (error) {
       setErrorMessage(
