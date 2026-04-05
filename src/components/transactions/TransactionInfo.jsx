@@ -5,30 +5,73 @@ import Button from "../btns/Button";
 import ToggleMenu from "../elements/ToggleMenu";
 import UpdateTransfer from "../transfers/updateTransfer";
 import UpdateIncomse from "../imcomses/UpdateIncomse";
-
+import DeleteConfimation from "../modals/DeleteConfirmation";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { deleteIncomse } from "../../api/incomseService";
 
 const TransactionInfo = ({ isOpen, onClose, accounts, transaction }) => {
+  const queryClient = useQueryClient();
   const [openUpdateTransfer, setOpenUpdateTransfer] = useState(false);
   const [openUpdateIncomse, setOpenUpdateIncomse] = useState(false);
+  const [openDeleteIncomse, setOpenDeleteIncomse] = useState(false);
+  const [openDeleteTransfer, setOpenDeleteTransfer] = useState(false);
+  const [error, setError] = useState({ hasError: false, message: "" });
 
+  const deleteMutation = useMutation({
+    mutationFn: (incomseId) =>  deleteIncomse(incomseId),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["transactions"] });
+      queryClient.invalidateQueries({ queryKey: ["accounts"] });
+      onClose();
+      setOpenDeleteIncomse(false);
+    },
+    onError: () => {
+      setError({
+        hasError: true,
+        message: "Failed to delete incomse. Please try again.",
+      });
+    },
+  });
+
+  const handleDeleteIncomse = async () => {
+    const incomseId = transaction && transaction?.id;
+    const data = deleteMutation.mutate(incomseId);
+    console.log(data);
+    if (data) {
+      setOpenDeleteIncomse(false);
+      onClose();
+    }
+  };
 
   const buttonMenuItems = [
     <Button
       key="edit"
       text="Edit"
       type="button"
-      onClick={transaction.type === "in-transfer" || transaction.type === "out-transfer" ? () => {
-        setOpenUpdateTransfer(true);
-      } : () => {
-        setOpenUpdateIncomse(true);
-      }}
+      onClick={
+        transaction.type === "in-transfer" ||
+        transaction.type === "out-transfer"
+          ? () => {
+              setOpenUpdateTransfer(true);
+            }
+          : () => {
+              setOpenUpdateIncomse(true);
+            }
+      }
     />,
     <Button
       key="delete"
       variant="cancel"
       text="Delete"
       type="button"
-      onClick={() => console.log("Delete account")}
+      onClick={() => setOpenDeleteIncomse(true)}
+    />,
+    <Button
+      key="close"
+      variant="cancel"
+      text="Close"
+      type="button"
+      onClick={onClose}
     />,
   ];
   return (
@@ -66,17 +109,32 @@ const TransactionInfo = ({ isOpen, onClose, accounts, transaction }) => {
           </div>
         </div>
       </Modal>
-     {transaction && (transaction.type === "in-transfer" || transaction.type === "out-transfer") ? (
-  <UpdateTransfer
-    isOpen={openUpdateTransfer}
-    isClose={() => {
-      setOpenUpdateTransfer(false);
-      onClose(false);
-    }}
-    accounts={accounts}
-    transfer={transaction}
-  />
-) : <UpdateIncomse isOpen={openUpdateIncomse} isClose={() => {setOpenUpdateIncomse(false)}} incomse={transaction}/>}
+      {transaction &&
+      (transaction.type === "in-transfer" ||
+        transaction.type === "out-transfer") ? (
+        <UpdateTransfer
+          isOpen={openUpdateTransfer}
+          isClose={() => {
+            setOpenUpdateTransfer(false);
+            onClose(false);
+          }}
+          accounts={accounts}
+          transfer={transaction}
+        />
+      ) : (
+        <UpdateIncomse
+          isOpen={openUpdateIncomse}
+          isClose={() => {
+            setOpenUpdateIncomse(false);
+          }}
+          incomse={transaction}
+        />
+      )}
+      <DeleteConfimation
+        isOpen={openDeleteIncomse}
+        isClose={() => setOpenDeleteIncomse(false)}
+        onDelete={handleDeleteIncomse}
+      />
     </>
   );
 };
