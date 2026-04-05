@@ -10,12 +10,14 @@ import DeleteConfimation from "../modals/DeleteConfirmation";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { deleteIncomse } from "../../api/incomseService";
 import { deleteExpense } from "../../api/expenseService";
+import { deleteTransfer } from "../../api/transferServce";
 
 const TransactionInfo = ({ isOpen, onClose, accounts, transaction }) => {
   const queryClient = useQueryClient();
   const [openUpdateTransfer, setOpenUpdateTransfer] = useState(false);
   const [openUpdateIncomse, setOpenUpdateIncomse] = useState(false);
-  const [openDeleteIncomse, setOpenDeleteIncomse] = useState(false);
+  const [openConfirmDelete, setOpenConfirmDelete] = useState(false);
+  const [updateExpense, setUpdateExpense] = useState(false);
   const [error, setError] = useState({ hasError: false, message: "" });
 
   const deleteMutation = useMutation({
@@ -24,7 +26,7 @@ const TransactionInfo = ({ isOpen, onClose, accounts, transaction }) => {
       queryClient.invalidateQueries({ queryKey: ["transactions"] });
       queryClient.invalidateQueries({ queryKey: ["accounts"] });
       onClose();
-      setOpenDeleteIncomse(false);
+      setOpenConfirmDelete(false);
     },
     onError: () => {
       setError({
@@ -39,7 +41,7 @@ const TransactionInfo = ({ isOpen, onClose, accounts, transaction }) => {
       queryClient.invalidateQueries({ queryKey: ["transactions"] });
       queryClient.invalidateQueries({ queryKey: ["accounts"] });
       onClose();
-      setOpenDeleteIncomse(false);
+      setOpenConfirmDelete(false);
     },
     onError: () => {
       setError({
@@ -48,6 +50,41 @@ const TransactionInfo = ({ isOpen, onClose, accounts, transaction }) => {
       });
     },
   });
+  const deleteTransferMutation = useMutation({
+    mutationFn: (transferId) => deleteTransfer(transferId),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["transactions"] });
+      queryClient.invalidateQueries({ queryKey: ["accounts"] });
+      onClose();
+      setOpenConfirmDelete(false);
+    },
+onError: () => {
+      setError({
+        hasError: true,
+        message: "Failed to delete transfer. Please try again.",
+      });
+    },
+  });
+  const handleUpdate = () => {
+    const type = transaction && transaction?.type;
+    switch (type) {
+      case "incomse":
+        setOpenUpdateIncomse(true);
+        break;
+        case "expense":
+        setUpdateExpense(true);
+        break;
+      case "in-transfer":
+        setOpenUpdateTransfer(true);
+        break;
+      case "out-transfer":
+        setOpenUpdateTransfer(true);
+        break;
+      default:
+        break;
+    }
+
+  };
 
 
   const handleDelete = async () => {
@@ -61,10 +98,10 @@ const TransactionInfo = ({ isOpen, onClose, accounts, transaction }) => {
         deleteExpenseMutation.mutate(incomseId);
         break;
       case "in-transfer":
-        console.log("in-transfer");
+        deleteTransferMutation.mutate(incomseId);
         break;
       case "out-transfer":
-        console.log("out-transfer");
+        deleteTransferMutation.mutate(incomseId);
         break;
       default:
         break;
@@ -76,23 +113,14 @@ const TransactionInfo = ({ isOpen, onClose, accounts, transaction }) => {
       key="edit"
       text="Edit"
       type="button"
-      onClick={
-        transaction.type === "in-transfer" ||
-        transaction.type === "out-transfer"
-          ? () => {
-              setOpenUpdateTransfer(true);
-            }
-          : () => {
-              setOpenUpdateIncomse(true);
-            }
-      }
+      onClick={handleUpdate}
     />,
     <Button
       key="delete"
       variant="cancel"
       text="Delete"
       type="button"
-      onClick={() => setOpenDeleteIncomse(true)}
+      onClick={() => setOpenConfirmDelete(true)}
     />,
     <Button
       key="close"
@@ -151,7 +179,7 @@ const TransactionInfo = ({ isOpen, onClose, accounts, transaction }) => {
         />
       ) : transaction.type === "expense" ? (
         <UpdateExpense
-          isOpen={openUpdateIncomse}
+          isOpen={updateExpense}
           isClose={() => {
             setOpenUpdateIncomse(false);
             onClose(false);
@@ -169,8 +197,8 @@ const TransactionInfo = ({ isOpen, onClose, accounts, transaction }) => {
         />
       )}
       <DeleteConfimation
-        isOpen={openDeleteIncomse}
-        isClose={() => setOpenDeleteIncomse(false)}
+        isOpen={openConfirmDelete}
+        isClose={() => setOpenConfirmDelete(false)}
         onDelete={handleDelete}
       />
     </>

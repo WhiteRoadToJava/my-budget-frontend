@@ -126,21 +126,25 @@ const UpdateTransfer = ({ isOpen, isClose, accounts, transfer }) => {
       <div className={styles.formContainer}>
         <h2>Update Transfer</h2>
         <form onSubmit={handleSubmit}>
-          <DropDown
+          <FormInput
             label="Source Account"
-            list={filteredSourceList}
             name="sourceAccount"
+            type="text"
             value={currentSourceLabel}
             onChange={handleInputChange}
+            disabled={true}
           />
 
-          <DropDown
+
+          <FormInput
             label="Destination Account"
-            list={filteredDestinationList}
             name="destinationAccount"
+            type="text"
             value={currentDestLabel}
             onChange={handleInputChange}
+            disabled={true}
           />
+
 
           <div className={styles.row}>
             <FormInput
