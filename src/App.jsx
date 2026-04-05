@@ -24,6 +24,7 @@ function App() {
               <Route path="/" element={<Navigate to="/home" />} />
               <Route path="/home" element={<Login />} />
               <Route path="/auth/login" element={<Login />} />
+              <Route path="/login" element={<Login />} />
               <Route
                 path="/auth/forgot-password"
                 element={<ForgotPassword />}
@@ -49,7 +50,6 @@ function App() {
                     path="/user/settings"
                     element={<div>Settings Page</div>}
                   />
-
                   <Route
                     path="/user/accounts/:accountId"
                     element={<AccountsPage />}
