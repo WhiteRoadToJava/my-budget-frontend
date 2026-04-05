@@ -8,17 +8,32 @@ import UpdateIncomse from "../imcomses/UpdateIncomse";
 import DeleteConfimation from "../modals/DeleteConfirmation";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { deleteIncomse } from "../../api/incomseService";
+import { deleteExpense } from "../../api/expemseService";
 
 const TransactionInfo = ({ isOpen, onClose, accounts, transaction }) => {
   const queryClient = useQueryClient();
   const [openUpdateTransfer, setOpenUpdateTransfer] = useState(false);
   const [openUpdateIncomse, setOpenUpdateIncomse] = useState(false);
   const [openDeleteIncomse, setOpenDeleteIncomse] = useState(false);
-  const [openDeleteTransfer, setOpenDeleteTransfer] = useState(false);
   const [error, setError] = useState({ hasError: false, message: "" });
 
   const deleteMutation = useMutation({
-    mutationFn: (incomseId) =>  deleteIncomse(incomseId),
+    mutationFn: (incomseId) => deleteIncomse(incomseId),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["transactions"] });
+      queryClient.invalidateQueries({ queryKey: ["accounts"] });
+      onClose();
+      setOpenDeleteIncomse(false);
+    },
+    onError: () => {
+      setError({
+        hasError: true,
+        message: "Failed to delete incomse. Please try again.",
+      });
+    },
+  });
+  const deleteExpenseMutation = useMutation({
+    mutationFn: (expenseId) => deleteExpense(expenseId),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["transactions"] });
       queryClient.invalidateQueries({ queryKey: ["accounts"] });
@@ -33,13 +48,24 @@ const TransactionInfo = ({ isOpen, onClose, accounts, transaction }) => {
     },
   });
 
-  const handleDeleteIncomse = async () => {
+  const handleDelete = async () => {
     const incomseId = transaction && transaction?.id;
-    const data = deleteMutation.mutate(incomseId);
-    console.log(data);
-    if (data) {
-      setOpenDeleteIncomse(false);
-      onClose();
+    const type = transaction && transaction?.type;
+    switch (type) {
+      case "incomse":
+        deleteMutation.mutate(incomseId);
+        break;
+      case "expense":
+        deleteExpenseMutation.mutate(incomseId);
+        break;
+      case "in-transfer":
+        console.log("in-transfer");
+        break;
+      case "out-transfer":
+        console.log("out-transfer");
+        break;
+      default:
+        break;
     }
   };
 
@@ -133,7 +159,7 @@ const TransactionInfo = ({ isOpen, onClose, accounts, transaction }) => {
       <DeleteConfimation
         isOpen={openDeleteIncomse}
         isClose={() => setOpenDeleteIncomse(false)}
-        onDelete={handleDeleteIncomse}
+        onDelete={handleDelete}
       />
     </>
   );
