@@ -55,8 +55,7 @@ const UpdateAccount = ({ isOpen, isClose, account }) => {
       return false;
     }
     if (!accountData.balance) {
-      setError({ hasError: true, message: "Balance is required." });
-      return false;
+      ({ ...accountData, balance: 0 })
     }
     if (!accountData.currency?.trim()) {
       setError({ hasError: true, message: "Currency is required." });

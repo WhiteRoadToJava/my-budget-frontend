@@ -29,7 +29,7 @@ const AccountComponent = ({ accounts }) => {
       <div className={styles.divider}></div>
       <div className={styles.accountHeader}>
         <PlusButton
-          label="Create Account"
+          text="Create Account"
           type="button"
           onClick={() => setOpenCreateAccount(true)}
         />
@@ -45,7 +45,6 @@ const AccountComponent = ({ accounts }) => {
           <Row key={account.id} account={account}  />
         ))}
       </div>
-
     </div>
   );
 };
