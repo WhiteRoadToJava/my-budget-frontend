@@ -4,8 +4,20 @@ import FormInput from "../../components/inputs/FormInput";
 import styles from "..//../styles/components/ecpenses/createExpense.module.scss";
 import Button from "../../components/btns/Button";
 import { addAccount } from "../../api/accountService";
-// 1. استيراد React Query
+import DropDown from "../elements/DropDown";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+const currencies = [
+  "USD", // DOLLAR
+  "EUR", // EURO
+  "SEK",
+  "AED", 
+  "TRY",
+  "SAR",
+  "AED",
+  "GBP",
+  "JPY",
+];
+const type = ["NORMAL", "COMPANY"];
 
 const CreateAccount = ({ isOpen, isClose }) => {
   const queryClient = useQueryClient();
@@ -23,19 +35,17 @@ const CreateAccount = ({ isOpen, isClose }) => {
   const mutation = useMutation({
     mutationFn: addAccount,
     onSuccess: () => {
-      // ✅ تحديث قائمة الحسابات فور نجاح الإضافة
       queryClient.invalidateQueries({ queryKey: ["accounts"] });
-      
-      // تصغير وإغلاق
+
       setAccountData({ name: "", balance: 0, currency: "", type: "" });
       isClose();
     },
     onError: (err) => {
       setError({
         hasError: true,
-        message: "Failed to create account. Please try again."+ err.message,
+        message: "Failed to create account. Please try again." + err.message,
       });
-    }
+    },
   });
 
   const handleInputChange = (e) => {
@@ -48,7 +58,6 @@ const CreateAccount = ({ isOpen, isClose }) => {
     e.preventDefault();
     if (!handleValidation()) return;
 
-    // 3. تنفيذ الـ Mutation بدلاً من الـ API المباشر
     mutation.mutate(accountData);
   };
 
@@ -59,6 +68,10 @@ const CreateAccount = ({ isOpen, isClose }) => {
     }
     if (!accountData.currency?.trim()) {
       setError({ hasError: true, message: "Currency is required." });
+      return false;
+    }
+    if (!accountData.type.trim) {
+      setError({ hasError: true, message: "Type is required." });
       return false;
     }
     return true;
@@ -89,23 +102,27 @@ const CreateAccount = ({ isOpen, isClose }) => {
               />
             </div>
             <div className={styles.inputContainer}>
-              <FormInput
+              <DropDown
                 label="Currency"
                 name="currency"
                 value={accountData.currency}
                 onChange={handleInputChange}
+                list={currencies}
               />
             </div>
             <div>
-              <FormInput
+              <DropDown
                 label="Type"
                 name="type"
                 value={accountData.type}
                 onChange={handleInputChange}
+                list={type}
               />
             </div>
             <div>
-              {error.hasError && <p style={{ color: "red" }}>{error.message}</p>}
+              {error.hasError && (
+                <p style={{ color: "red" }}>{error.message}</p>
+              )}
             </div>
             <div className={styles.buttonContainer}>
               <Button
@@ -114,7 +131,12 @@ const CreateAccount = ({ isOpen, isClose }) => {
                 type="submit"
                 disabled={mutation.isPending}
               />
-              <Button variant="cancel" text="Cancel" onClick={isClose} type="button" />
+              <Button
+                variant="cancel"
+                text="Cancel"
+                onClick={isClose}
+                type="button"
+              />
             </div>
           </form>
         </div>
