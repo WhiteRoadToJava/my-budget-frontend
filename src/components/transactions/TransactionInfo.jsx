@@ -198,7 +198,7 @@ onError: () => {
       )}
       <DeleteConfimation
         isOpen={openConfirmDelete}
-        isClose={() => setOpenConfirmDelete(false)}
+        onClose={() => setOpenConfirmDelete(false)}
         onDelete={handleDelete}
       />
     </>
