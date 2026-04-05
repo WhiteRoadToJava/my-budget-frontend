@@ -3,7 +3,7 @@ import Modal from "../modals/Modal";
 import styles from "../../styles/components/transactions/TransactionInfo.module.scss";
 import Button from "../btns/Button";
 import ToggleMenu from "../elements/ToggleMenu";
-import UpdateTransfer from "../transfers/updateTransfer";
+import UpdateTransfer from "../transfers/UpdateTransfer";
 import UpdateIncomse from "../imcomses/UpdateIncomse";
 import UpdateExpense from "../expenses/UpdateExpense";
 import DeleteConfimation from "../modals/DeleteConfirmation";
