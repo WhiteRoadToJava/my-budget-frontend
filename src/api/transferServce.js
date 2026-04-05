@@ -29,5 +29,14 @@ export const updateTransfer = async (transferId, transferData) => {
     throw error;
   }
 };
+export const deleteTransfer= async(transferId) => {
+  try {
+    const response = await api.delete(`/user/transfer/delete-transfer/${transferId}`);
+    return response.data;
+  } catch (error) {
+    console.error('Error deleting transfer:', error);
+    throw error;
+  }
+};
 
 
