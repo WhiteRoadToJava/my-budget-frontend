@@ -113,6 +113,8 @@ const Account = ({ account }) => {
         onClose={() => setSelectedTransaction(null)}
         transaction={selectedTransaction || {}}
         currentAccount={account}
+        accounts={accounts}
+        transactions={transactions}
       />
       <CreateTransfer
         isOpen={isCreateTransfer}
