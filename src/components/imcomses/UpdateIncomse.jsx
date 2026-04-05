@@ -98,7 +98,7 @@ const UpdateIncomse = ({ isOpen, isClose, incomse }) => {
               <div className={styles.buttonContainer}>
                 <Button
                   variant="primary"
-                  text="Create Incomse"
+                  text="Update Incomse"
                   type="submit"
                   onClick={handleUpdateIncomse}
                 />
