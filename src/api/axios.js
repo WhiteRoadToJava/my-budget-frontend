@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'https://mybudget-production-0120.up.railway.app', 
+  baseURL: 'http://localhost:8080', 
   withCredentials: true,
   headers: {
     'Content-Type': 'application/json',

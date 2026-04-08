@@ -15,6 +15,6 @@ const Row = ({ transaction, onClick }) => {
       </p>
     </div>
   );
-};
+}; 
 
 export default Row;
