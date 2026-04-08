@@ -19,6 +19,7 @@ const TransactionInfo = ({ isOpen, onClose, accounts, transaction }) => {
   const [openConfirmDelete, setOpenConfirmDelete] = useState(false);
   const [updateExpense, setUpdateExpense] = useState(false);
   const [error, setError] = useState({ hasError: false, message: "" });
+  const accountName = transaction?.account?.name;
 
   const deleteMutation = useMutation({
     mutationFn: (incomseId) => deleteIncomse(incomseId),
@@ -58,7 +59,7 @@ const TransactionInfo = ({ isOpen, onClose, accounts, transaction }) => {
       onClose();
       setOpenConfirmDelete(false);
     },
-onError: () => {
+    onError: () => {
       setError({
         hasError: true,
         message: "Failed to delete transfer. Please try again.",
@@ -71,7 +72,7 @@ onError: () => {
       case "incomse":
         setOpenUpdateIncomse(true);
         break;
-        case "expense":
+      case "expense":
         setUpdateExpense(true);
         break;
       case "in-transfer":
@@ -83,9 +84,7 @@ onError: () => {
       default:
         break;
     }
-
   };
-
 
   const handleDelete = async () => {
     const incomseId = transaction && transaction?.id;
@@ -109,12 +108,7 @@ onError: () => {
   };
 
   const buttonMenuItems = [
-    <Button
-      key="edit"
-      text="Edit"
-      type="button"
-      onClick={handleUpdate}
-    />,
+    <Button key="edit" text="Edit" type="button" onClick={handleUpdate} />,
     <Button
       key="delete"
       variant="cancel"
@@ -153,13 +147,18 @@ onError: () => {
             {transaction.currency}
           </p>
           <p className={styles.transactionDetail}>
+            <strong>Account:</strong> {accountName}
+          </p>
+          <p className={styles.transactionDetail}>
             <strong>Date:</strong>{" "}
             {new Date(transaction.createdAt).toLocaleDateString()}
           </p>
           <p className={styles.transactionDetail}>
             <strong>Description:</strong> {transaction.description}
           </p>
-
+          <div>
+            {error.hasError && <p style={{ color: "red" }}>{error.message}</p>}
+          </div>
           <div className={styles.buttonContainer}>
             <Button text="Close" variant="cancel" onClick={onClose} />
           </div>

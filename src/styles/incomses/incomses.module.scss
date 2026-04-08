@@ -1,0 +1,85 @@
+@use '../variables.scss' as variable;
+.container{
+  height: 100vh;
+  width: 100%;
+}
+
+.content{
+  height: 100%;
+  width: 100%;
+  display: flex;
+  gap: 25%;
+  align-items: flex-start
+
+}
+
+.divider {
+  height: 1px;
+  background-color: variable.$color-text;
+  margin: 10px 0;
+  margin: 20px 0px 30px 3px;
+}
+
+
+
+
+.incomsesContainer{
+  height: 800px;
+  width: 650px;
+  border: 1px solid variable.$color-text;
+  overflow:auto;
+
+}
+
+.rowsCountainer{
+  width: 600px;
+  padding: 10px;
+  overflow: auto;
+}
+
+
+
+
+
+
+
+.accountsContainer{
+  width: 300px;
+  height: 800px;
+  border: 1px solid variable.$color-text;
+  overflow: auto
+
+}
+.accountsTitle{
+  padding: 20px;
+}
+.accounts{
+}
+
+.account{
+  width: 260px;
+  height: 100px;
+  
+  margin: 10px;
+  padding: 10px;
+  font-style: italic;
+  border: 1px solid variable.$color-text;
+  cursor: pointer;
+ 
+}
+ .totalBalance{
+    display: flex;
+    justify-content: space-between;
+    align-items: center
+  }
+  .totalBalanceValue{
+    &[data-type="positive"]{
+      color:variable.$color-success;
+    }
+    &[data-type="negative"]{
+      color: variable.$color-error;
+    }
+  }
+
+
+

@@ -1,10 +1,8 @@
-import api from './axios';
+import api from "./axios";
 
 export const addAccount = async (accountData) => {
   try {
-    const response = await api.post('/user/accounts/add-account',
-      accountData
-    );
+    const response = await api.post("/user/accounts/add-account", accountData);
     return response.data;
   } catch (error) {
     console.error("Error adding account:", error);
@@ -13,7 +11,9 @@ export const addAccount = async (accountData) => {
 };
 export const deleteAccount = async (accountId) => {
   try {
-    const response = await api.delete(`/user/accounts/delete-account/${accountId}`); 
+    const response = await api.delete(
+      `/user/accounts/delete-account/${accountId}`,
+    );
     return response.data;
   } catch (error) {
     console.error(`Error deleting account with ID ${accountId}:`, error);
@@ -22,7 +22,10 @@ export const deleteAccount = async (accountId) => {
 };
 export const updateAccount = async (accountData) => {
   try {
-    const response = await api.patch('/user/accounts/update-account', accountData);
+    const response = await api.patch(
+      "/user/accounts/update-account",
+      accountData,
+    );
     return response.data;
   } catch (error) {
     console.error("Error updating account:", error);
@@ -30,10 +33,9 @@ export const updateAccount = async (accountData) => {
   }
 };
 
-
 export const getAccounts = async () => {
   try {
-    const response = await api.get('/user/accounts/all-accounts');
+    const response = await api.get("/user/accounts/all-accounts");
     return response.data;
   } catch (error) {
     console.error("Error fetching accounts:", error);
@@ -41,26 +43,32 @@ export const getAccounts = async () => {
   }
 };
 
-
-  export const getAccountById = async (accountId) => {
-    try {
-      const response = await api.get(`/user/accounts/${accountId}`);
-      return response.data;
-    } catch (error) {
-      console.error(`Error fetching account with ID ${accountId}:`, error);
-      throw error;
-    }
+export const getAccountById = async (accountId) => {
+  try {
+    const response = await api.get(`/user/accounts/${accountId}`);
+    return response.data;
+  } catch (error) {
+    console.error(`Error fetching account with ID ${accountId}:`, error);
+    throw error;
   }
+};
 
-      export const getAllTransactions = async (account) => {
-      try {
-        const response = await api.post('/user/accounts/all-transactions',
-          account
-        );
-        return response.data;
-      } catch (error) {
-        console.error("Error fetching transactions:", error);
-        throw error;
-      }
-      };
-  
+export const getAllAccountTransactions = async (account) => {
+  try {
+    const response = await api.post("/user/accounts/allaccount-transactions", account);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching transactions:", error);
+    throw error;
+  }
+};
+
+export const getAllIncomseAndExpensesTransactions = async () => {
+  try {
+    const response = await api.get("/user/accounts/all-transactions");
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching transactions:", error);
+    throw error;
+  }
+};
