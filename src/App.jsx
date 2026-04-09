@@ -12,6 +12,7 @@ import AdminLayout from "./components/admin/AdminLayout.jsx";
 import UserLyout from "./components/user/UserLyout.jsx";
 import Account from "./pages/user/accounts/Account.jsx";
 import AccountsPage from "./pages/user/AccountsPage.jsx";
+import SettingPage from "./pages/user/setting/SettingPage.jsx";
 
 function App() {
   return (
@@ -48,7 +49,7 @@ function App() {
                   />
                   <Route
                     path="/user/settings"
-                    element={<div>Settings Page</div>}
+                    element={<SettingPage />}
                   />
                   <Route
                     path="/user/accounts/:accountId"

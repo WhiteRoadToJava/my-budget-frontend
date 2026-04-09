@@ -10,7 +10,7 @@
   cursor: pointer;
 
   &[data-type="incomse"] {
-    border-left: 10px solid variable.$color-success;
+    border-left: 10px solid variable.$color-tennis;
   }
   &[data-type="expense"] {
     border-left: 10px solid variable.$color-error;
@@ -37,7 +37,7 @@
 }
 .transactionType {
   &[data-type="in-transfer"] {
-    color:variable.$color-success;
+    color:variable.$color-tennis;
   }
   &[data-type="out-transfer"] {
     color: variable.$hover-cancel;

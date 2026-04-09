@@ -56,13 +56,17 @@ const Row = ({ account }) => {
     />,
     <Button
       key="delete"
-      text="Delete"
-      variant="cancel"
+      text="delete"
+      variant="delete"
       type="button"
       onClick={() => setOpenDeleteConfirmation(true)}
     />,
   ];
 
+  const formatNumber = (number) => {
+    const formated = number.toLocaleString("fr-FR");
+    return formated;
+  };
   return (
     <div className={styles.rowContainer}>
       <div className={styles.rowDetails} onClick={handleClick}>
@@ -73,7 +77,7 @@ const Row = ({ account }) => {
     ${account.totalBalance >= 0 ? styles.plusValue : styles.minusValue}
   `}
         >
-          {account.totalBalance.toFixed(2)}
+          {formatNumber(account.totalBalance)}
         </span>
         <span>{account.currency}</span>
         <span>{account.type}</span>
@@ -92,7 +96,7 @@ const Row = ({ account }) => {
           onClose={() => setSuccessConfirmation(false)}
         />
         <CreateAccount isOpen={false} isClose={() => {}} />
-          <UpdateAccount
+        <UpdateAccount
           isOpen={openEditAccount}
           isClose={() => setOpenEditAccount(false)}
           account={account}
