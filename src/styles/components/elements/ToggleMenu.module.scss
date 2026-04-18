@@ -43,8 +43,7 @@
       top: auto;
       bottom: 100%;
     }
-    background-color: variable.$color-gray-dark;
-    border: 1px solid #333;
+
     z-index: 1000; // لضمان ظهورها فوق أي عنصر آخر
     min-width: 120px;
     overflow: hidden;
