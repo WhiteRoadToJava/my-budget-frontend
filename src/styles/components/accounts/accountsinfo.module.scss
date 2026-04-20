@@ -1,0 +1,25 @@
+@use "../../variables" as variable;
+
+.infoContainer{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.infoItem{
+  background-color: variable.$color-gray-caviar;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 40px;
+  padding:10px 20px 10px 20px;
+  border-radius: 10px;
+
+  .title{
+    color: variable.$color-text;
+  }
+  .value{
+    color: variable.$color-tennis;
+  }
+}
+
