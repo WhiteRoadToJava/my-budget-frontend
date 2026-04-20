@@ -1,18 +1,19 @@
-import React, {useState }from "react";
-import Row from "../../../components/account/Row";
+import React from "react";
+import { getAllTransations } from "../../../api/accountService";
 import { useQuery } from "@tanstack/react-query";
-import TransactionInfo from "../../../components/transactions/TransactionInfo"
-import {
-  getAccounts,
-  getAllIncomseAndExpensesTransactions,
-} from "../../../api/accountService";
 import { useNavigate } from "react-router-dom";
 import styles from "../../../styles/incomses/incomses.module.scss";
+import Row from "../../../components/account/Row";
+import TransactionInfo from "../../../components/transactions/TransactionInfo";
+import {
+  getAccounts,
+} from "../../../api/accountService";
+import { useState } from "react";
 
 
-const Incomse = () => {
+const AllTransactions = () => {
   const navigate = useNavigate();
-const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const [selectedTransaction, setSelectedTransaction] = useState(null);
   const {
     data: data = [],
@@ -21,7 +22,7 @@ const [isOpen, setIsOpen] = useState(false);
     error: accountsError,
   } = useQuery({
     queryKey: ["transactions"],
-    queryFn: () => getAllIncomseAndExpensesTransactions(),
+    queryFn: () => getAllTransations(),
     select: (data) =>
       [...data].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)),
   });
@@ -43,9 +44,6 @@ const [isOpen, setIsOpen] = useState(false);
     navigate(`/user/accounts/${account.id}`);
   };
 
-
-
-  console.log(data);
   return (
     <div className={styles.container}>
       <div className={styles.header}></div>
@@ -57,10 +55,11 @@ const [isOpen, setIsOpen] = useState(false);
             (transaction) =>
               transaction.type === "incomse" && (
                 <div className={styles.rowsCountainer} key={transaction.id}>
-                  <Row key={transaction.id} transaction={transaction}
-                  onClick={
-                    () => handleIncomseClick(transaction)
-                  }/>
+                  <Row
+                    key={transaction.id}
+                    transaction={transaction}
+                    onClick={() => handleIncomseClick(transaction)}
+                  />
                 </div>
               ),
           )}
@@ -71,8 +70,10 @@ const [isOpen, setIsOpen] = useState(false);
             {accountsData.accounts.map((account) => (
               <div className={styles.account} key={account.id}>
                 <p>{account.name}</p>
-                <div className={styles.totalBalance}
-                onClick={() => handleAccountClick(account)}>
+                <div
+                  className={styles.totalBalance}
+                  onClick={() => handleAccountClick(account)}
+                >
                   TotalBalance:{" "}
                   <p
                     className={styles.totalBalanceValue}
@@ -101,4 +102,4 @@ const [isOpen, setIsOpen] = useState(false);
   );
 };
 
-export default Incomse;
+export default AllTransactions;

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from "prop-types";
-import styles from "src/styles/elements/inputs/searchInput.module.scss";
-import Search from 'src/components/icons/btns/Search'; 
+import styles from "../../styles/inputs/searchInput.module.scss";
+import Search from '../../components/icons/btns/Search.jsx'; 
 
 export default function SearchInput({ 
     label,

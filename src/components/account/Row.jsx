@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "../../styles/components/account/row.module.scss";
+import { formatNumber } from "../../utils/formating";
 const Row = ({ transaction, onClick }) => {
   return (
     <div
@@ -7,7 +8,7 @@ const Row = ({ transaction, onClick }) => {
       data-type={transaction.type}
       onClick={onClick}
     >
-      <p>{transaction.amount.toFixed(2)}</p>
+      <p>{formatNumber(transaction.amount)}</p>
       <p>{transaction.category}</p>
       <p>{new Date(transaction.createdAt).toLocaleDateString()}</p>
       <p className={styles.transactionType} data-type={transaction.type}>
