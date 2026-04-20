@@ -8,6 +8,7 @@ export const getUserMenuItems = [
   { label: "Accounts", icon: <FileCode />, link: "/user/accounts" },
   { label: "Expenses", icon: <FileCode />, link: "/user/expenses" },
   { label: "Incomes", icon: <FileCode />, link: "/user/incomses" },
+  { label: "Transactions", icon: <FileCode />, link: "/user/transactions" },
   { label: "Calendar", icon: <Calendar />, link: "/user/calendar" },
   { label: "Settings", icon: <SettingsIcon />, link: "/user/settings" },
 ];

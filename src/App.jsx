@@ -13,6 +13,7 @@ import UserLyout from "./components/user/UserLyout.jsx";
 import Account from "./pages/user/accounts/Account.jsx";
 import AccountsPage from "./pages/user/AccountsPage.jsx";
 import SettingPage from "./pages/user/setting/SettingPage.jsx";
+import AllTransactions from "./pages/user/transactions/AllTransactions.jsx";
 
 function App() {
   return (
@@ -54,6 +55,10 @@ function App() {
                   <Route
                     path="/user/accounts/:accountId"
                     element={<AccountsPage />}
+                  />
+                  <Route 
+                  path="/user/transactions"
+                  element={<AllTransactions />}
                   />
                 </Route>
               </Route>

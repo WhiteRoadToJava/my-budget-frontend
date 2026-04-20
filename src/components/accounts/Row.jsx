@@ -6,6 +6,7 @@ import Button from "../btns/Button";
 import DeleteConfirmation from "../modals/DeleteConfirmation";
 import SuccessConfirmaton from "../modals/SuccessConfirmaton";
 import { deleteAccount } from "../../api/accountService";
+import { formatNumber } from "../../utils/formating";
 
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import CreateAccount from "../account/CreateAccount";
@@ -63,10 +64,7 @@ const Row = ({ account }) => {
     />,
   ];
 
-  const formatNumber = (number) => {
-    const formated = number.toLocaleString("fr-FR");
-    return formated;
-  };
+  
   return (
     <div className={styles.rowContainer}>
       <div className={styles.rowDetails} onClick={handleClick}>
