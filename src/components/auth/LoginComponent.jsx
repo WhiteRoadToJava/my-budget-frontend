@@ -7,6 +7,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import LoadingSpinner from "../displays/LoadingSpinner.jsx";
 import { useAuth } from "../../contexts/AuthContext.jsx";
+import i18n from "../../configuration/i18n.js";
 
 export default function LoginComponent() {
   const [user, setUser] = useState({
@@ -67,14 +68,14 @@ export default function LoginComponent() {
       </div>
 
       <div className={styles.header}>
-        <p>Please enter your details</p>
+        <p>{i18n.t("login.header")}</p>
       </div>
       <div className={styles.lForm}>
         <form className={styles.form}>
           <input
             className={styles.input}
             type="text"
-            placeholder="username"
+            placeholder={i18n.t("login.username")}
             value={user.username}
             onChange={handleInputChange}
             name="username"
@@ -83,13 +84,13 @@ export default function LoginComponent() {
             className={styles.input}
             type="password"
             autoComplete="new-password"
-            placeholder="Password"
+            placeholder={i18n.t("login.password")}
             value={user.password}
             name="password"
             onChange={handleInputChange}
           />
           <Link to="/auth/forgot-password" className={styles.forgotPassword}>
-            Forgot password?
+            {i18n.t("login.forgotPassword")}
           </Link>
           {errorMessage && (
             <p className={styles.errorMessage}>{errorMessage}</p>
@@ -102,7 +103,7 @@ export default function LoginComponent() {
             <div className={styles.btnGroup}>
               <Button
                 variant="primary"
-                text="Log in"
+                text={i18n.t("login.submit")}
                 type="submit"
                 paddingSize="7px 145px"
                 fontSize="16px"

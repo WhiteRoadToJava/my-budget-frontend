@@ -1,0 +1,33 @@
+{
+  "menu": {
+    "overview": "Översikt",
+    "accounts": "Konton",
+    "expenses": "Utgifter",
+    "incomes": "Inkomster",
+    "transactions": "Transaktioner",
+    "calendar": "Kalender",
+    "settings": "Inställningar"
+  },
+  "sidebar": {
+    "logout": "Logga ut"
+  },
+  "forgotPassword": {
+    "header": "Återställ ditt lösenord",
+    "success": "Ett återställningslänk har skickats till",
+    "email": "E-postadress",
+    "submit": "Skicka återställningslänken"
+  },
+  "login": {
+    "header": "Vänligen ange dina inloggningsuppgifter",
+    "username": "Användarnamn",
+    "email": "E-postadress",
+    "password": "Lösenord",
+    "forgotPassword": "Glömt ditt lösenord?",
+    "submit": "Logga in"
+  },
+  "terminal": {
+    "terminal": "Välkommen resenär, till det stora",
+    "terminlaTow": "och ibland förvirrande",
+    "terminalThree": "universum av programmering."
+  }
+}
