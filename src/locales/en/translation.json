@@ -31,12 +31,18 @@
     "terminalThree":"universe of programming."
   },
   "accountsPage":{
-    "pluseButton":"Add Account",
+    "buttonText":"Add Account",
     "searchInput":"Search"
   },
   "accountInfo":{
-    "TotaBalance":"Total balance",
+    "totaBalance":"Total balancel",
     "NumberOFAccounts":"Number of accounts",
     "lastUpdate":"Last update"
+  },
+  "massages":{
+    "success":"A password reset link has been sent to"
   }
 }
+
+
+

@@ -32,11 +32,11 @@
   },
 
   "accountsPage": {
-    "pluseButton": "إضافة حساب",
+    "buttonText": "إضافة حساب",
     "searchInput": "بحث"
   },
   "accountInfo": {
-    "TotaBalance": "الرصيد الكلي",
+    "totaBalance": "الرصيد الكلي",
     "NumberOFAccounts": "عدد الحسابات",
     "lastUpdate": "آخر تحديث"
   }

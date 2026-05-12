@@ -31,11 +31,11 @@
     "terminalThree": "universum av programmering."
   },
   "accountsPage": {
-    "pluseButton": "Lägg till konto",
+    "buttonText": "Lägg till konto",
     "searchInput": "Sök"
   },
   "accountInfo": {
-    "TotaBalance": "Total balance",
+    "totaBalance": "Total balance",
     "NumberOFAccounts": "Number of accounts",
     "lastUpdate": "Last update"
   }

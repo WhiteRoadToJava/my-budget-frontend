@@ -5,6 +5,7 @@ import AccountsInfo from "./AccountsInfo";
 import PlusButton from "../btns/PlusButton";
 import CreateAccount from "../account/CreateAccount";
 import SearchInput from "../inputs/SearchInput";
+import i18n from "../../configuration/i18n";
 
 const AccountComponent = ({ accounts }) => {
   const [accountsList, setAccountsList] = useState([]);
@@ -36,13 +37,14 @@ const AccountComponent = ({ accounts }) => {
       <div className={styles.accountHeader}>
         <div>
           <PlusButton
-            text="Create Account"
+            text={i18n.t("accountsPage.buttonText")}
             type="button"
             onClick={() => setOpenCreateAccount(true)}
           />
         </div>
         <div>
-          <SearchInput onChange={(e) => handleOnSearch(e.target.value)} />
+          <SearchInput onChange={(e) => handleOnSearch(e.target.value)}
+          placeholder={i18n.t("accountsPage.searchInput")}/>
         </div>
       </div>
       <div className={styles.accountBody}>
