@@ -26,7 +26,7 @@ export default function SearchInput({
             )}
 
             <div className={styles.inputWrapper}>
-                {icon && <span className={styles.iconInside}>{icon}</span>}
+                {icon && <div className={styles.iconInside}>{icon}</div>}
                 
                 <input
                     id={name}
