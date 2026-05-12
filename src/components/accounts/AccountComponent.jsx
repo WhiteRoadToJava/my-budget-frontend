@@ -22,13 +22,11 @@ const AccountComponent = ({ accounts }) => {
   // Assuming fetchAccounts is a function that retrieves accounts data
 
   const handleOnSearch = (value) => {
-    const filteredAccounts = accounts.accounts.filter((account) =>
-      account.name.toLowerCase().includes(value.toLowerCase())
+    const filteredAccounts = accounts?.accounts?.filter((account) =>
+      account.name.toLowerCase().includes(value.toLowerCase()),
     );
-    setAccountsList(filteredAccounts);
+    setAccountsList(filteredAccounts || []);
   };
-
-
 
   return (
     <div className={styles.accountContainer}>
@@ -36,25 +34,22 @@ const AccountComponent = ({ accounts }) => {
       <AccountsInfo accounts={accounts} />
       <div className={styles.divider}></div>
       <div className={styles.accountHeader}>
-        <PlusButton
-          text="Create Account"
-          type="button"
-          onClick={() => setOpenCreateAccount(true)}
-        />
-        <SearchInput
-          onChange={(e) => handleOnSearch(e.target.value)}
-        />
+        <div>
+          <PlusButton
+            text="Create Account"
+            type="button"
+            onClick={() => setOpenCreateAccount(true)}
+          />
+        </div>
+        <div>
+          <SearchInput onChange={(e) => handleOnSearch(e.target.value)} />
+        </div>
       </div>
       <div className={styles.accountBody}>
         {accountsList.map((account) => (
           <Row key={account.id} account={account} />
         ))}
       </div>
-
-
-
-
-
 
       <div className={styles.accountSearch}>
         <CreateAccount
