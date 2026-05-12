@@ -14,7 +14,7 @@ import Account from "./pages/user/accounts/Account.jsx";
 import AccountsPage from "./pages/user/AccountsPage.jsx";
 import SettingPage from "./pages/user/setting/SettingPage.jsx";
 import AllTransactions from "./pages/user/transactions/AllTransactions.jsx";
-import NavBar from "./components/NavBar.jsx";
+
 import i18n from "./configuration/i18n.js";
 import { useEffect } from "react";
 
@@ -32,7 +32,7 @@ function App() {
   
   return (
     <div className="App">
-      <NavBar />
+
       <BrowserRouter>
         <AuthProvider>
           <UserProvider>

@@ -29,5 +29,14 @@
     "terminal": "Välkommen resenär, till det stora",
     "terminlaTow": "och ibland förvirrande",
     "terminalThree": "universum av programmering."
+  },
+  "accountsPage": {
+    "pluseButton": "Lägg till konto",
+    "searchInput": "Sök"
+  },
+  "accountInfo": {
+    "TotaBalance": "Total balance",
+    "NumberOFAccounts": "Number of accounts",
+    "lastUpdate": "Last update"
   }
 }

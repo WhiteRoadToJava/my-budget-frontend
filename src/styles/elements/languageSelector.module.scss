@@ -1,3 +1,6 @@
+@use "../../variables" as variable;
+
+
 .languageSelectorContainer {
   position: relative;
 }
@@ -6,7 +9,7 @@
   align-items: center;
   gap: 6px;
   padding: 6px 12px;
-  border: 1px solid #e0e0e0;
+  border: 1px solid variable.$color-white;
   border-radius: 8px;
   background: transparent;
   font-size: 13px;
@@ -16,25 +19,26 @@
 }
 
 .lang-btn:hover {
-  background: #f5f5f5;
+  background: variable.$color-gray-dark;
 }
 
 .langArrow {
   font-size: 12px;
-  color: #888;
   transition: transform 0.2s;
 }
 .languageSelectorButton .langArrow {
   transform: rotate(0deg);
+  padding: 5px;
 }
 
 .languageOptions {
   position: absolute;
   top: calc(100% + 6px);
-  right: 0;
+  left: -0;
+  color: variable.$color-white;
   min-width: 160px;
-  background: #fff;
-  border: 1px solid #e0e0e0;
+  background: variable.$color-gray-caviar;
+  border: 1px solid variable.$color-white;
   border-radius: 12px;
   padding: 4px;
   z-index: 100;
@@ -48,6 +52,7 @@
   width: 100%;
   padding: 8px 10px;
   border: none;
+  color: variable.$color-white;
   border-radius: 8px;
   background: transparent;
   font-size: 13px;
@@ -57,7 +62,7 @@
 }
 
 .langOption:hover {
-  background: #f0f0f0;
+  background: variable.$color-gray-dark;
   font-weight: 500;
 }
 .langLabel{
@@ -66,10 +71,6 @@
 
 .LangNative{
   font-size: 12px;
-  color:#999;
+  color:variable.$color-white;
 }
-.LngCheck{
-  color:#3b82f6;
-  font-size: 12px;
-  font-weight: 500;
-}
+

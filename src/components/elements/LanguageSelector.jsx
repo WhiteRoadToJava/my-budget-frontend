@@ -1,19 +1,34 @@
 import React, { useState } from "react";
-import { useTransition } from "react";
 import i18n from "../../configuration/i18n";
 import styles from "../../styles/elements/languageSelector.module.scss";
-
+import { flags } from "../../assiets/assiits";
 
 const languages = [
-  { code: "en", label: "English", native: "English", flag: "GB", dir: "ltr" },
-  { code: "ar", label: "Arabic", native: "العربية", flag: "SA", dir: "rtl" },
-  { code: "fr", label: "French", native: "Français", flag: "FR", dir: "ltr" },
+    {
+    code: "ar",
+    label: "Arabic",
+    native: "العربية",
+    flag: flags.saudiAribian_flag,
+    dir: "rtl",
+  },
+  {
+    code: "en",
+    label: "English",
+    native: "English",
+    flag: flags.england_flag,
+    dir: "ltr",
+  },
+
+  {
+    code: "sw",
+    label: "swedish",
+    native: "svenska",
+    flag: flags.swedish_flag,
+    dir: "ltr",
+  },
 ];
 const LanguageSelector = () => {
   const [open, setOpen] = useState(false);
-
-
-
 
   const current =
     languages.find((l) => l.code === i18n.language) ?? languages[0];
@@ -22,32 +37,33 @@ const LanguageSelector = () => {
     i18n.changeLanguage(lang.code);
     document.documentElement.dir = lang.dir;
     document.documentElement.lang = lang.code;
-      localStorage.setItem("language", lang.code);
+    localStorage.setItem("language", lang.code);
     setOpen(false);
+    console.log(flags)
   };
 
   return (
     <div className={styles.languageSelectorContainer}>
-      <button className={styles.languageSelectorButton} onClick={() => setOpen(!open)}>
-        <span className={styles.langLabel}>{current.label}</span>
-        <span className={styles.langCode}>{current.code}</span>
-        <span className={styles.langArrow}>▾</span>
+      <button
+        className={styles.languageSelectorButton}
+        onClick={() => setOpen(!open)}
+      >
+        <img src={current.flag} width={15} />
       </button>
 
       {open && (
-        <div className={styles.languageOptions}
-        >
+        <div className={styles.languageOptions}>
           {languages.map((lang) => (
             <button
-              className={styles.langOption }
+              className={styles.langOption}
               key={lang.code}
               onClick={() => handleSelect(lang)}
             >
-              <span className={styles.langLabel}>{lang.label}</span>
-              <span className={styles.langNative}>{lang.native}</span>
-              {lang.code === current.code && (
-                <span className={styles.checkIcon}>✓</span>
-              )}
+              <span className={styles.langLabel}>
+                {current.code === lang.code ? "   ✓    " : "   "}
+                {lang.label}
+              </span>
+              <img src={lang.flag} width={15} />
             </button>
           ))}
         </div>

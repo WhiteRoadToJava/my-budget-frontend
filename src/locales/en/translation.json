@@ -29,5 +29,14 @@
     "terminal":"Welcome traveler, to the vast",
     "terminalTow":"and occasionally confusing",
     "terminalThree":"universe of programming."
+  },
+  "accountsPage":{
+    "pluseButton":"Add Account",
+    "searchInput":"Search"
+  },
+  "accountInfo":{
+    "TotaBalance":"Total balance",
+    "NumberOFAccounts":"Number of accounts",
+    "lastUpdate":"Last update"
   }
 }
