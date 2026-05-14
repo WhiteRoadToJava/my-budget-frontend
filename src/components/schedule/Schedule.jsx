@@ -6,11 +6,20 @@ import Button from "../../components/btns/Button";
 import ToogleMenu from "../../components/elements/ToggleMenu";
 import { useQuery } from "@tanstack/react-query";
 import { getAccounts } from "../../api/accountService";
+import CreateScheduledExpense from "./CreateSchedualedExpense ";
+
+
+import SchedualeInfo from "../schedule/SchedualeInfo";
+import { set } from "date-fns";
+
+
+
 const Schedule = ({ schedules }) => {
   const [createSchedualedIncomse, setCreateSchedualedIncomse] = useState(false);
   const [createSchedualedExpense, setCreateSchedualedExpense] = useState(false);
   const [createSchedualedTransfer, setCreateSchedualedTransfer] =
     useState(false);
+    const [selectedScheduale, setSelectedScheduale] = useState(null);
   const [scheduleList, setSchedulesList] = useState([]);
   useEffect(() => {
     if (schedules) {
@@ -54,11 +63,15 @@ const Schedule = ({ schedules }) => {
     />,
   ];
 
+   const handleTransactionClick = (scheduale) => {
+    setSelectedScheduale(scheduale);
+  };
+
   return (
     <div className={styles.scheduleContainer}>
       <div>
         {scheduleList.map((schedule) => (
-          <Row key={schedule.id} schedule={schedule} />
+          <Row key={schedule.id} schedule={schedule} onClick={() => handleTransactionClick(schedule)} />
         ))}
       </div>
 
@@ -68,6 +81,22 @@ const Schedule = ({ schedules }) => {
         transactionType="INCOMSE"
         accounts={accounts}
       />
+
+      <CreateScheduledExpense
+        isOpen={createSchedualedExpense}
+        isClose={() => setCreateSchedualedExpense(false)}
+        transactionType="EXPENSE"
+        accounts={accounts}
+      />
+
+      <SchedualeInfo
+        isOpen={!!selectedScheduale}
+        onClose={() => setSelectedScheduale(null)}
+        scheduale={selectedScheduale || {}}
+        accounts={accounts}
+      />
+
+
 
       <div className={styles.buttonContainer}>
         <ToogleMenu menuList={buttonMenuItems} position="bottom" />

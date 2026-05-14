@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import Modal from "../modals/Modal";
-import FormInput from "../../components/inputs/FormInput";
-import DropDown from "../../components/elements/DropDown";
-import Button from "../../components/btns/Button";
-import styles from "../../styles/components/schedule/createdSchedualedIncomse.module.scss";
+import FormInput from "../inputs/FormInput";
+import DropDown from "../elements/DropDown";
+import Button from "../btns/Button";
+import styles from "../../styles/components/schedule/createdSchedualedExpense.module.scss";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { addSchedule } from "../../api/scheduleService";
-import Datepicker from "../../components/inputs/Datepicker";
+import Datepicker from "../inputs/Datepicker";
+
 
 const interval = [
   "DAILY",
@@ -15,13 +16,13 @@ const interval = [
   "YEARLY"
 ]
 
-const CreateScheduledIncome = ({
+const CreateScheduledExpense = ({
   isOpen,
   isClose,
   transactionType,
   accounts,
 }) => {
-  const [incomeData, setIncomeData] = useState({
+  const [expenseData, setExpenseData] = useState({
     name: "",
     description: "",
     sourceAccountId:"",
@@ -62,11 +63,11 @@ const CreateScheduledIncome = ({
 
 
   // Fix 3: Use correct state field 'sourceAccountId'
-  const selectedSourceName = getAccountNameById(incomeData.sourceAccountId);
+  const selectedSourceName = getAccountNameById(expenseData.sourceAccountId);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setIncomeData((prev) => ({ ...prev, [name]: value }));
+    setExpenseData((prev) => ({ ...prev, [name]: value }));
     setError({ hasError: false, message: "" });
   };
 
@@ -75,7 +76,7 @@ const CreateScheduledIncome = ({
     const selectedAccount = accountsList.find(
       (acc) => acc.name === selectedName,
     );
-    setIncomeData((prev) => ({
+    setExpenseData((prev) => ({
       ...prev,
       sourceAccountId:  selectedAccount?.id || "" ,
     }));
@@ -84,14 +85,14 @@ const CreateScheduledIncome = ({
 
   const handleValidation = () => {
     // Fix 4: Validate against correct field 'amountSend'
-    if (!incomeData.amountSend || parseFloat(incomeData.amountSend) <= 0) {
+    if (!expenseData.amountSend || parseFloat(expenseData.amountSend) <= 0) {
       setError({
         hasError: true,
         message: "Amount must be greater than zero.",
       });
       return false;
     }
-    if (!incomeData.category) {
+    if (!expenseData.category) {
       setError({ hasError: true, message: "Category is required." });
       return false;
     }
@@ -101,7 +102,7 @@ const CreateScheduledIncome = ({
   const handleCreateIncome = (e) => {
     e.preventDefault();
     if (!handleValidation()) return;
-    mutation.mutate(incomeData);
+    mutation.mutate(expenseData);
   };
 
   // Fix 5: cleanData now correctly calls isClose()
@@ -112,19 +113,18 @@ const CreateScheduledIncome = ({
 
  
 
-  console.log(incomeData);
 
   return (
     <Modal isOpen={isOpen}>
       <div className={styles.formContainer}>
-        <h2>Create Income</h2>
+        <h2 className={styles.title}>Create Schedualed Expense</h2>
         <form onSubmit={handleCreateIncome}>
           <div className={styles.inputContainer}>
             <FormInput
               label="Name"
               name="name"
               type="text"
-              value={incomeData.name}
+              value={expenseData.name}
               onChange={handleInputChange}
             />
           </div>
@@ -146,10 +146,10 @@ const CreateScheduledIncome = ({
               placeholder="Select a schedule interval"
               list={interval}
               name="scheduleIntervals"
-              value={incomeData.scheduleIntervals || ""}
+              value={expenseData.scheduleIntervals || ""}
               onChange={(e) =>{
                 const selectedValue = e.target.value;
-                setIncomeData((prev) => ({
+                setExpenseData((prev) => ({
                   ...prev,
                   scheduleIntervals: [selectedValue],
                 }));
@@ -163,7 +163,7 @@ const CreateScheduledIncome = ({
               label="Amount"
               name="amountSend"
               type="number"
-              value={incomeData.amountSend}
+              value={expenseData.amountSend}
               onChange={handleInputChange}
             />
           </div>
@@ -171,10 +171,10 @@ const CreateScheduledIncome = ({
             <Datepicker
               label="Next Execution Date"
               name="nextExecutionDate"
-              value={incomeData.nextExecutionDate}
+              value={expenseData.nextExecutionDate}
               onChange={(date) => {
                 const localDateTime = `${date}T00:00:00.000Z`
-                setIncomeData((prev) => ({
+                setExpenseData((prev) => ({
                   ...prev,
                   nextExecutionDate: localDateTime,
                 }));
@@ -188,7 +188,7 @@ const CreateScheduledIncome = ({
               label="Category"
               name="category"
               type="text"
-              value={incomeData.category}
+              value={expenseData.category}
               onChange={handleInputChange}
             />
           </div>
@@ -198,7 +198,7 @@ const CreateScheduledIncome = ({
               label="Description"
               name="description"
               type="textarea"
-              value={incomeData.description}
+              value={expenseData.description}
               onChange={handleInputChange}
             />
           </div>
@@ -226,4 +226,4 @@ const CreateScheduledIncome = ({
   );
 };
 
-export default CreateScheduledIncome;
+export default CreateScheduledExpense;

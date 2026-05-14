@@ -9,6 +9,7 @@ const Row = ({ schedule, onClick }) => {
       onClick={onClick}
     >
       <p>{formatNumber(schedule.amountSend)}</p>
+      <p>{schedule.name}</p>
       <p>{schedule.category}</p>
       <p>{new Date(schedule.executionDate).toLocaleDateString()}</p>
       <p className={styles.transactionType} data-type={schedule.transactionType}>

@@ -117,7 +117,7 @@ const CreateScheduledIncome = ({
   return (
     <Modal isOpen={isOpen}>
       <div className={styles.formContainer}>
-        <h2>Create Income</h2>
+        <h2 className={styles.title}>Create schedualed Income</h2>
         <form onSubmit={handleCreateIncome}>
           <div className={styles.inputContainer}>
             <FormInput
