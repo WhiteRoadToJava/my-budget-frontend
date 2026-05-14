@@ -9,13 +9,13 @@
   transition: all 0.3s ease-in-out;
   cursor: pointer;
 
-  &[data-type="incomse"] {
+  &[data-type="INCOMSE"] {
     border-left: 10px solid variable.$color-tennis;
   }
   &[data-type="EXPENSE"] {
     border-left: 10px solid variable.$color-error;
   }
-  &[data-type="transfer"] {
+  &[data-type="TRANSFER"] {
     border-left: 10px solid variable.$color-blue;
   }
   &[data-type="in-transfer"] {
