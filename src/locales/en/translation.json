@@ -5,6 +5,7 @@
     "expenses": "Expenses",
     "incomes": "Incomes",
     "transactions": "Transactions",
+    "schedule":"Schedule",
     "calendar": "Calendar",
     "settings": "Settings"
   },
