@@ -14,6 +14,7 @@ import Account from "./pages/user/accounts/Account.jsx";
 import AccountsPage from "./pages/user/AccountsPage.jsx";
 import SettingPage from "./pages/user/setting/SettingPage.jsx";
 import AllTransactions from "./pages/user/transactions/AllTransactions.jsx";
+import SchedulePage from "./pages/user/SchedulePage.jsx";
 
 import i18n from "./configuration/i18n.js";
 import { useEffect } from "react";
@@ -74,6 +75,10 @@ function App() {
                   <Route 
                   path="/user/transactions"
                   element={<AllTransactions />}
+                  />
+                  <Route 
+                  path="/user/schedule"
+                  element={<SchedulePage />}
                   />
                 </Route>
               </Route>
