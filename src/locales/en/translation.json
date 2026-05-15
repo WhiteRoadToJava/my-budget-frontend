@@ -1,0 +1,49 @@
+{
+  "menu": {
+    "overview": "Overview",
+    "accounts": "Accounts",
+    "expenses": "Expenses",
+    "incomes": "Incomes",
+    "transactions": "Transactions",
+    "schedule":"Schedule",
+    "calendar": "Calendar",
+    "settings": "Settings"
+  },
+  "sidebar":{
+    "logout":"Logout"
+  },
+    "forgotPassword":{
+    "header":"Reset your password",
+    "success":"A password reset link has been sent to",
+    "email":"Email",
+    "submit":"Send Reset Link "
+  },
+  "login":{
+    "header":"Please enter your details",
+    "username":"Username",
+    "email":"Email",
+    "password":"Password",
+    "forgotPassword":"Forgot Password?",
+    "submit":"Login"
+  },
+  "terminal":{
+    "terminal":"Welcome traveler, to the vast",
+    "terminalTow":"and occasionally confusing",
+    "terminalThree":"universe of programming."
+  },
+  "accountsPage":{
+    "buttonText":"Add Account",
+    "searchInput":"Search"
+  },
+  "accountInfo":{
+    "totaBalance":"Total balancel",
+    "NumberOFAccounts":"Number of accounts",
+    "lastUpdate":"Last update"
+  },
+  "massages":{
+    "success":"A password reset link has been sent to"
+  }
+}
+
+
+

@@ -18,11 +18,9 @@ const CreateExpense = ({ isOpen, isClose, account }) => {
 
   const [error, setError] = useState({ hasError: false, message: "" });
 
-  // 2. إعداد الـ Mutation لإضافة المصروف
   const mutation = useMutation({
     mutationFn: addExpense,
     onSuccess: () => {
-      // ✅ تحديث قائمة العمليات وقائمة الحسابات (لأن الرصيد نقص)
       queryClient.invalidateQueries({ queryKey: ["transactions"] });
       queryClient.invalidateQueries({ queryKey: ["accounts"] });
       

@@ -70,7 +70,6 @@ const Account = ({ account }) => {
     />,
   ];
 
-  // 6. العرض النهائي (JSX)
   return (
     <div className={styles.accountContainer}>
       <h2 className={styles.accountTitle}>{account.name}</h2>

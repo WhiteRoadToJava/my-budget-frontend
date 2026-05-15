@@ -111,7 +111,7 @@ const TransactionInfo = ({ isOpen, onClose, accounts, transaction }) => {
     <Button key="edit" text="Edit" type="button" onClick={handleUpdate} />,
     <Button
       key="delete"
-      variant="cancel"
+      variant="delete"
       text="Delete"
       type="button"
       onClick={() => setOpenConfirmDelete(true)}

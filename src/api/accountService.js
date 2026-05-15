@@ -55,7 +55,10 @@ export const getAccountById = async (accountId) => {
 
 export const getAllAccountTransactions = async (account) => {
   try {
-    const response = await api.post("/user/accounts/allaccount-transactions", account);
+    const response = await api.post(
+      "/user/accounts/allaccount-transactions",
+      account,
+    );
     return response.data;
   } catch (error) {
     console.error("Error fetching transactions:", error);
@@ -64,6 +67,16 @@ export const getAllAccountTransactions = async (account) => {
 };
 
 export const getAllIncomseAndExpensesTransactions = async () => {
+  try {
+    const response = await api.get("/user/accounts/all-incomse-and-expense-transactions");
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching transactions:", error);
+    throw error;
+  }
+};
+
+export const getAllTransations = async () => {
   try {
     const response = await api.get("/user/accounts/all-transactions");
     return response.data;

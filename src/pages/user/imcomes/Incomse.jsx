@@ -1,5 +1,4 @@
-import React, { use, useState }from "react";
-import styles from "../../../styles/incomses/incomses.module.scss";
+import React, {useState }from "react";
 import Row from "../../../components/account/Row";
 import { useQuery } from "@tanstack/react-query";
 import TransactionInfo from "../../../components/transactions/TransactionInfo"
@@ -8,6 +7,8 @@ import {
   getAllIncomseAndExpensesTransactions,
 } from "../../../api/accountService";
 import { useNavigate } from "react-router-dom";
+import styles from "../../../styles/incomses/incomses.module.scss";
+
 
 const Incomse = () => {
   const navigate = useNavigate();

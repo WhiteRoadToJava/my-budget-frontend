@@ -88,6 +88,25 @@
     border: 1px solid #f44662;
   }
 }
+.delete{
+  background-color: variable.$color-error;
+  color: variable.$color-black;
+
+  &:hover {
+    background-color: #f44662;
+  }
+}
+.delete-outlined {
+  background-color: variable.$color-black;
+  color: variable.$color-fire;
+  border: 1px solid variable.$color-error ;
+
+  &:hover {
+    color: #f44662;
+    border: 1px solid #f44662;
+  }
+}
+
 
 .yellow-outlined {
   background-color: none;
