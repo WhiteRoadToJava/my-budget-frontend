@@ -70,10 +70,18 @@ const Schedule = ({ schedules }) => {
   return (
     <div className={styles.scheduleContainer}>
       <div>
-        {scheduleList.map((schedule) => (
-          <Row key={schedule.id} schedule={schedule} onClick={() => handleTransactionClick(schedule)} />
-        ))}
-      </div>
+  {scheduleList.length > 0 ? (
+    scheduleList.map((schedule) => (
+      <Row
+        key={schedule.id}
+        schedule={schedule}
+        onClick={() => handleTransactionClick(schedule)}
+      />
+    ))
+  ) : (
+    <p>No schedules found.</p>
+  )}
+</div>
 
       <CreateSchedualedIncomse
         isOpen={createSchedualedIncomse}
