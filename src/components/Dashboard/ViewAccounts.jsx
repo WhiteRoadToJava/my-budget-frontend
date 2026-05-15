@@ -6,31 +6,21 @@ import Row from '../accounts/Row'
 
 
 
-const ViewAccounts = () => {
+const ViewAccounts = ({data = [], isError, error, isLoading }) => {
 
 
-  const {
-    data: data = [],
-    isLoading: isAccountsLoading,
-    isError: isAccountsError,
-    error: accountsError,
-  } = useQuery({
-    queryKey: ["accounts"],
-    queryFn: () => getAccounts(),
-  });
-  const accounts = data?.data?.accounts || data?.accounts || [];
 
 
-  if (isAccountsLoading) {
+  if (isLoading) {
     return <div>Loading accounts...</div>;
   }
-  if (isAccountsError) {
-    return <div>Error loading accounts: {accountsError.message}</div>;
+  if (error) {
+    return <div>Error loading accounts: {error.message}</div>;
   }
   return (
-    <div>
+    <div className={styles.accountContainer}>
       <h2>Accounts</h2>
-      {accounts.slice(0, 3).map((account) => (
+      {data.slice(0, 3).map((account) => (
         <div key={account.id} className={styles.accountContainer}>
           <Row key={account.id} account={account}  />
         </div>

@@ -20,6 +20,7 @@
     "react-dom": "^19.2.4",
     "react-i18next": "^17.0.6",
     "react-router-dom": "^7.13.1",
+    "recharts": "^3.8.1",
     "sass": "^1.98.0",
     "serve": "^14.2.6"
   },
