@@ -8,9 +8,8 @@ import UpdateIncomse from "../imcomses/UpdateIncomse";
 import UpdateExpense from "../expenses/UpdateExpense";
 import DeleteConfimation from "../modals/DeleteConfirmation";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { deleteIncomse } from "../../api/incomseService";
-import { deleteExpense } from "../../api/expenseService";
-import { deleteTransfer } from "../../api/transferServce";
+
+import { deleteSchedule } from "../../api/scheduleService";
 
 const SchedualeInfo = ({ isOpen, onClose, accounts, scheduale }) => {
   const queryClient = useQueryClient();
@@ -21,90 +20,26 @@ const SchedualeInfo = ({ isOpen, onClose, accounts, scheduale }) => {
   const [error, setError] = useState({ hasError: false, message: "" });
   const accountName = scheduale?.sourceAccount?.name;
 
-  const deleteMutation = useMutation({
-    mutationFn: (incomseId) => deleteIncomse(incomseId),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["transactions"] });
-      queryClient.invalidateQueries({ queryKey: ["accounts"] });
-      onClose();
-      setOpenConfirmDelete(false);
-    },
-    onError: () => {
-      setError({
-        hasError: true,
-        message: "Failed to delete incomse. Please try again.",
-      });
-    },
-  });
-  const deleteExpenseMutation = useMutation({
-    mutationFn: (expenseId) => deleteExpense(expenseId),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["transactions"] });
-      queryClient.invalidateQueries({ queryKey: ["accounts"] });
-      onClose();
-      setOpenConfirmDelete(false);
-    },
-    onError: () => {
-      setError({
-        hasError: true,
-        message: "Failed to delete incomse. Please try again.",
-      });
-    },
-  });
-  const deleteTransferMutation = useMutation({
-    mutationFn: (transferId) => deleteTransfer(transferId),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["transactions"] });
-      queryClient.invalidateQueries({ queryKey: ["accounts"] });
-      onClose();
-      setOpenConfirmDelete(false);
-    },
-    onError: () => {
-      setError({
-        hasError: true,
-        message: "Failed to delete transfer. Please try again.",
-      });
-    },
-  });
-  const handleUpdate = () => {
-    const type = scheduale && scheduale?.type;
-    switch (type) {
-      case "incomse":
-        setOpenUpdateIncomse(true);
-        break;
-      case "expense":
-        setUpdateExpense(true);
-        break;
-      case "in-transfer":
-        setOpenUpdateTransfer(true);
-        break;
-      case "out-transfer":
-        setOpenUpdateTransfer(true);
-        break;
-      default:
-        break;
-    }
-  };
+  const deleteSchdule = useMutation({
+      mutationFn: (scheduleId) => deleteSchedule(scheduleId),
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: ["schedules"] });
+        onClose();
+        setOpenConfirmDelete(false);
+      },
+      onError: () => {
+        setError({
+          hasError: true,
+          message: "Failed to delete schedule. Please try again.",
+        });
+      },
+    });
+
+  const handleUpdate = () => {};
 
   const handleDelete = async () => {
-    const incomseId = scheduale && scheduale?.id;
-    const type = scheduale && scheduale?.type;
-    switch (type) {
-      case "incomse":
-        deleteMutation.mutate(incomseId);
-        break;
-      case "expense":
-        deleteExpenseMutation.mutate(incomseId);
-        break;
-      case "in-transfer":
-        deleteTransferMutation.mutate(incomseId);
-        break;
-      case "out-transfer":
-        deleteTransferMutation.mutate(incomseId);
-        break;
-      default:
-        break;
-    }
+    deleteSchdule.mutate(scheduale.id);
+    
   };
 
   const buttonMenuItems = [
@@ -128,8 +63,12 @@ const SchedualeInfo = ({ isOpen, onClose, accounts, scheduale }) => {
     <>
       <Modal isOpen={isOpen} onClose={onClose}>
         <div className={styles.transactionContainer}>
-          <div className={styles.transactionTitle} data-type={scheduale.transactionType}>
-            <h2 className={styles.transactionTitleText}>Scheduale 
+          <div
+            className={styles.transactionTitle}
+            data-type={scheduale.transactionType}
+          >
+            <h2 className={styles.transactionTitleText}>
+              Scheduale
               {" " + scheduale.transactionType} Details
             </h2>
           </div>
