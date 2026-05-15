@@ -30,7 +30,7 @@ const UpdateAccount = ({ isOpen, isClose, account }) => {
     onError: (err) => {
       setError({
         hasError: true,
-        message: "Failed to create account. Please try again" + err.message,
+        message: "Failed to Update account. Please try again" + err.message,
       });
     }
   });
@@ -55,8 +55,7 @@ const UpdateAccount = ({ isOpen, isClose, account }) => {
       return false;
     }
     if (!accountData.balance) {
-      setError({ hasError: true, message: "Balance is required." });
-      return false;
+      ({ ...accountData, balance: 0 })
     }
     if (!accountData.currency?.trim()) {
       setError({ hasError: true, message: "Currency is required." });
@@ -111,7 +110,7 @@ const UpdateAccount = ({ isOpen, isClose, account }) => {
             <div className={styles.buttonContainer}>
               <Button
                 variant="primary"
-                text={mutation.isPending ? "Creating..." : "Create Account"}
+                text={mutation.isPending ? "Creating..." : "Update Account"}
                 type="submit"
                 disabled={mutation.isPending}
               />

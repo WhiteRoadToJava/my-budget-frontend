@@ -13,6 +13,8 @@
   left: 0px;
   z-index: 100;
   display: block;
+  max-height: 250px;
+  overflow-y: auto;
   background-color: variable.$color-gray-dark;
  border-bottom-left-radius: variable.$radius-small  ;
  border-bottom-right-radius: variable.$radius-small  ;

@@ -1,0 +1,76 @@
+@use "../../variables" as variable;
+
+
+.languageSelectorContainer {
+  position: relative;
+}
+.languageSelectorButton {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border: 1px solid variable.$color-white;
+  border-radius: 8px;
+  background: transparent;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.lang-btn:hover {
+  background: variable.$color-gray-dark;
+}
+
+.langArrow {
+  font-size: 12px;
+  transition: transform 0.2s;
+}
+.languageSelectorButton .langArrow {
+  transform: rotate(0deg);
+  padding: 5px;
+}
+
+.languageOptions {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: -0;
+  color: variable.$color-white;
+  min-width: 160px;
+  background: variable.$color-gray-caviar;
+  border: 1px solid variable.$color-white;
+  border-radius: 12px;
+  padding: 4px;
+  z-index: 100;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+.langOption{
+   display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 8px 10px;
+  border: none;
+  color: variable.$color-white;
+  border-radius: 8px;
+  background: transparent;
+  font-size: 13px;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.12s;
+}
+
+.langOption:hover {
+  background: variable.$color-gray-dark;
+  font-weight: 500;
+}
+.langLabel{
+  flex:1;
+}
+
+.LangNative{
+  font-size: 12px;
+  color:variable.$color-white;
+}
+

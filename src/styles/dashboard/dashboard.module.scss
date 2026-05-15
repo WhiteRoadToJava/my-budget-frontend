@@ -1,0 +1,23 @@
+.dashboardContainer{
+  margin-bottom: 50px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  justify-content: center;
+  gap: 10px;
+
+}
+.accountContainer{
+  height: auto;
+  width: 600px;
+}
+.transactionContainer{
+  height: auto;
+  width: 600px;
+}
+.rightSide{
+  width: 500px;
+}
+.leftSide{
+  max-width: 500px;
+}

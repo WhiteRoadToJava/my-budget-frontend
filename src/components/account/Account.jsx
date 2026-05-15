@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styles from "../../styles/components/account/account.module.scss";
 import Row from "./Row";
-import { getAccounts, getAllTransactions } from "../../api/accountService";
+import { getAccounts, getAllAccountTransactions } from "../../api/accountService";
 import Button from "../btns/Button";
 import CreateIncomse from "../imcomses/CreateIncomse";
 import CreateExpense from "../expenses/CreateExpense";
@@ -25,7 +25,7 @@ const Account = ({ account }) => {
     error: txError,
   } = useQuery({
     queryKey: ["transactions", account.id],
-    queryFn: () => getAllTransactions(account),
+    queryFn: () => getAllAccountTransactions(account),
     select: (data) => [...data].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)),
   });
   const { 
@@ -70,7 +70,6 @@ const Account = ({ account }) => {
     />,
   ];
 
-  // 6. العرض النهائي (JSX)
   return (
     <div className={styles.accountContainer}>
       <h2 className={styles.accountTitle}>{account.name}</h2>
@@ -113,6 +112,8 @@ const Account = ({ account }) => {
         onClose={() => setSelectedTransaction(null)}
         transaction={selectedTransaction || {}}
         currentAccount={account}
+        accounts={accounts}
+        transactions={transactions}
       />
       <CreateTransfer
         isOpen={isCreateTransfer}

@@ -12,10 +12,28 @@ import AdminLayout from "./components/admin/AdminLayout.jsx";
 import UserLyout from "./components/user/UserLyout.jsx";
 import Account from "./pages/user/accounts/Account.jsx";
 import AccountsPage from "./pages/user/AccountsPage.jsx";
+import SettingPage from "./pages/user/setting/SettingPage.jsx";
+import AllTransactions from "./pages/user/transactions/AllTransactions.jsx";
+import SchedulePage from "./pages/user/SchedulePage.jsx";
+
+import i18n from "./configuration/i18n.js";
+import { useEffect } from "react";
+
+
+
 
 function App() {
+
+  useEffect(() => {
+    const language = localStorage.getItem("language") || "en";
+    i18n.changeLanguage(language);
+    document.documentElement.dir = language === "ar" ? "rtl" : "ltr";
+    document.documentElement.lang = language;
+  }, []);
+  
   return (
     <div className="App">
+
       <BrowserRouter>
         <AuthProvider>
           <UserProvider>
@@ -24,6 +42,7 @@ function App() {
               <Route path="/" element={<Navigate to="/home" />} />
               <Route path="/home" element={<Login />} />
               <Route path="/auth/login" element={<Login />} />
+              <Route path="/login" element={<Login />} />
               <Route
                 path="/auth/forgot-password"
                 element={<ForgotPassword />}
@@ -47,12 +66,19 @@ function App() {
                   />
                   <Route
                     path="/user/settings"
-                    element={<div>Settings Page</div>}
+                    element={<SettingPage />}
                   />
-
                   <Route
                     path="/user/accounts/:accountId"
                     element={<AccountsPage />}
+                  />
+                  <Route 
+                  path="/user/transactions"
+                  element={<AllTransactions />}
+                  />
+                  <Route 
+                  path="/user/schedule"
+                  element={<SchedulePage />}
                   />
                 </Route>
               </Route>

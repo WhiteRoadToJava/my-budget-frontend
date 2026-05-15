@@ -3,7 +3,7 @@ import Modal from "../modals/Modal";
 import FormInput from "../../components/inputs/FormInput";
 import styles from "..//../styles/components/ecpenses/createExpense.module.scss";
 import Button from "../../components/btns/Button";
-import { addExpense } from "../../api/expemseService";
+import { addExpense } from "../../api/expenseService";
 // 1. استيراد React Query
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
@@ -18,11 +18,9 @@ const CreateExpense = ({ isOpen, isClose, account }) => {
 
   const [error, setError] = useState({ hasError: false, message: "" });
 
-  // 2. إعداد الـ Mutation لإضافة المصروف
   const mutation = useMutation({
     mutationFn: addExpense,
     onSuccess: () => {
-      // ✅ تحديث قائمة العمليات وقائمة الحسابات (لأن الرصيد نقص)
       queryClient.invalidateQueries({ queryKey: ["transactions"] });
       queryClient.invalidateQueries({ queryKey: ["accounts"] });
       

@@ -2,6 +2,9 @@
 import { useState } from "react";
 import styles from "../../styles/auth/forgotPassword.module.scss";  // using login styles for now
 import Button from "../../components/btns/Button";
+import { Link } from "react-router-dom";
+import i18n from "../../configuration/i18n.js";
+
 
 
 export default function ForgotPasswordComponent() {
@@ -18,10 +21,10 @@ export default function ForgotPasswordComponent() {
     return (
       <div className={styles.formContainer}>
         <div className={styles.header}>
-          <p>Check your email</p>
+          <p>{i18n.t("forgotPassword.header")}</p>
         </div>
         <div className={styles.lForm}>
-          <p>A password reset link has been sent to {email}</p>
+          <p>{i18n.t("forgotPassword.success")} {email}</p>
         </div>
       </div>
     );
@@ -30,14 +33,14 @@ export default function ForgotPasswordComponent() {
   return (
     <div className={styles.formContainer}>
       <div className={styles.header}>
-        <p>Reset your password</p>
+        <p>{i18n.t("forgotPassword.header")}</p>
       </div>
       <div className={styles.lForm}>
         <form className={styles.form} >
           <input
             className={styles.input}
             type="email"
-            placeholder="Email"
+            placeholder={i18n.t("forgotPassword.email")}
             value={email}
             onChange={handleChange}
             name="email"
@@ -46,7 +49,7 @@ export default function ForgotPasswordComponent() {
           <div className={styles.btnGroup}>
             <Button
               variant="primary"
-              text="Send Reset Link"
+              text={i18n.t("forgotPassword.submit")}
               type="submit"
               paddingSize="5px 50px"
               fontSize="16px"

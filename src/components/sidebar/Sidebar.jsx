@@ -7,6 +7,7 @@ import MenuItem from "./MenuItem";
 import SidebarTop from "./SidebarTop";
 import DoubleChevronLeft from "../icons/chevrons/DoubleChevronLeft.jsx";
 import DoubleChevronRight from "../icons/chevrons/DoubleChevronRight.jsx";
+import i18n from "../../configuration/i18n.js";
 
 export default function Sidebar({ menuItems }) {
   const navigate = useNavigate();
@@ -56,7 +57,7 @@ export default function Sidebar({ menuItems }) {
 
       <div className={styles.logout} onClick={handleLogout}>
         <LogoutIcon />
-        {isOpen && <p>Log out</p>}
+        {isOpen && <p>{i18n.t("sidebar.logout")}</p>}
       </div>
     </div>
   );
