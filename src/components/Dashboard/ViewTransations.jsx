@@ -1,31 +1,20 @@
 import React from "react";
-import { getAllIncomseAndExpensesTransactions } from "../../api/accountService";
-import { useQuery } from "@tanstack/react-query";
+
 import styles from "../../styles/dashboard/dashboard.module.scss";
 import Row from "../account/Row";
 import sortingTransactions from "../../utils/sorting";
 
-const ViewTransations = () => {
-  const {
-    data: data = [],
-    isLoading: isAccountsLoading,
-    isError: isAccountsError,
-    error: accountsError,
-  } = useQuery({
-    queryKey: ["transactions"],
-    queryFn: () => getAllIncomseAndExpensesTransactions(),
-    select: (data) =>
-      [...data].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)),
-  });
-  const transactions = sortingTransactions(data);
-  console.log(transactions);
+const ViewTransations = ({data = [], isError, error, isLoading }) => {
 
-  if (isAccountsLoading) {
+  const transactions = sortingTransactions(data);
+
+  if (isLoading) {
     return <div>Loading accounts...</div>;
   }
-  if (isAccountsError) {
-    return <div>Error loading accounts: {accountsError.message}</div>;
+  if (isError) {
+    return <div>Error loading accounts: {error.message}</div>;
   }
+  console.log(transactions);
   return (
     <div className={styles.transactionContainer}>
       <h2>Transactions</h2>
