@@ -17,5 +17,5 @@ RUN npm install -g serve
 COPY --from=build /app/dist ./dist
 
 EXPOSE 3000
-# Change this line — shell form so $PORT expands
-CMD serve -s dist -l ${PORT:-3000}
+
+CMD serve -s dist -l tcp://0.0.0.0:${PORT:-3000}
