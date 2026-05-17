@@ -28,28 +28,40 @@ const MONTH_NAMES = [
 ];
 
 function DoughnutChart({ transactions = [] }) {
-  // Group by month → { 0: { income: 5000, expense: 2000 }, 4: { ... } }
-  const monthlyTotals = transactions.reduce(
-    (acc, { type, amount, createdAt }) => {
-      const month = new Date(createdAt).getMonth();
-      if (!acc[month]) acc[month] = { incomse: 0, expense: 0 };
-      if (type === "incomse" || type === "expense") {
-        acc[month][type] += amount;
-      }
-      return acc;
-    },
-    {},
-  );
+  // Group transactions by "month-year" key
+const monthlyTotals = transactions.reduce((acc, item) => {
+  const date = new Date(item.createdAt);
+  const month = date.getMonth();
+  const year = date.getFullYear();
+  const key = `${month}-${year}`;
 
-  // Sort by month number (0 = Jan, 11 = Dec)
-  const sortedMonths = Object.entries(monthlyTotals).sort(
-    ([a], [b]) => Number(a) - Number(b),
-  );
+  if (!acc[key]) {
+    acc[key] = { incomse: 0, expense: 0 };
+  }
 
-  if (sortedMonths.length === 0) return <p>No transactions found.</p>;
+  if (item.type === "incomse") {
+    acc[key].incomse += item.amount;
+  } else {
+    acc[key].expense += item.amount;
+  }
 
-  console.log("monthlyTotals", monthlyTotals);
-  console.log("sortedMonths", sortedMonths);
+  return acc;
+
+
+
+}, {});
+  const sortedMonths = Object.entries(monthlyTotals).sort((a, b) => {
+    const [monthA, yearA] = a[0].split("-");
+    const [monthB, yearB] = b[0].split("-");
+    if (yearA === yearB) {
+      return monthB - monthA;
+    }
+    return yearA - yearB  
+  }
+)
+
+console.log(sortedMonths)
+
 
   return (
     <div className={styles.doughnutContainer}>
@@ -74,9 +86,9 @@ function DoughnutChart({ transactions = [] }) {
                   innerRadius={20}
                   outerRadius={30}
                   paddingAngle={4}
-                  label={({ name, value }) => `${name}: ${value}`}
+
                 >
-                  <Cell key={"incomse"} fill={COLORS[0]} />
+                  <Cell key={"incomse"} fill={totals.incomse ? COLORS[0] : COLORS[1]}  />
                   <Cell key={"expense"} fill={COLORS[1]} />
                 </Pie>
                 <Tooltip formatter={(value, name) => [value, name]} />
