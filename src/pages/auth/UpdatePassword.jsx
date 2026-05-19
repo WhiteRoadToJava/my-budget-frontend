@@ -6,7 +6,7 @@ import { updatePassword } from "../../api/authService";
 import Button from "../../components/btns/Button";
 import SuccessConfirmaton from "../../components/modals/SuccessConfirmaton";
 
-const UpdatePassword = ({ display }) => {
+const UpdatePassword = ({ display, setDisplay }) => {
   const [request, setRequest] = useState({
     currentPassword: "",
     newPassword: "",
@@ -77,6 +77,7 @@ const UpdatePassword = ({ display }) => {
       newPassword: "",
       confirmPassword: "",
     });
+    setDisplay(false);
   };
 
   return (

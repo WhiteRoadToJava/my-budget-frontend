@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import UpdatePassword from "../../auth/UpdatePassword";
+import UpdateUser from "../../../components/user/setting/UpdateUser";
 import styles from "../../../styles/pages/setting/settingPage.module.scss";
 
 const SettingPage = () => {
@@ -36,7 +37,8 @@ const SettingPage = () => {
             <p>Update Profile</p>
           </div>
         </div>
-        <UpdatePassword display={upadatePassword} />
+        <UpdatePassword display={upadatePassword} setDisplay={setUpadatePassword} />
+        <UpdateUser display={updateProfile} setDisplay={setUpdateProfile} />
       </div>
     </div>
   );

@@ -9,6 +9,7 @@ export default function Button({
   fontSize,
   paddingSize,
   borderSize,
+  type = "button",
 }) {
   const classNames = `${styles.btn} ${styles[variant] || styles.primary}`;
 
@@ -20,6 +21,7 @@ export default function Button({
 
   return (
     <button
+      type={type}
       className={classNames}
       onClick={onClick}
       disabled={disabled}

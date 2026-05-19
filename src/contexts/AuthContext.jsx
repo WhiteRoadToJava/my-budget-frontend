@@ -15,13 +15,13 @@ export const AuthProvider = ({ children }) => {
 
   const checkAuthStatus = async () => {
     try {
-      const response = await api.get("/auth/check",{
-        withCredentials: true
+      const response = await api.get("/auth/check", {
+        withCredentials: true,
       });
       setCurrentUser(response.data);
     } catch (error) {
       setCurrentUser(null);
-    } finally { 
+    } finally {
       setLoading(false);
     }
   };
@@ -29,27 +29,32 @@ export const AuthProvider = ({ children }) => {
     checkAuthStatus();
   }, []);
 
-const login = async (loginData) => {
-  try {
-    const response = await api.post("/auth/login", loginData);
-    
-    // تأكد أن السيرفر يرسل التوكن في حقل jwtToken (أو الاسم الذي اخترته في AuthResponse)
-    const token = response.data.jwtToken; 
-    
-    if (token && token !== "Login successful") {
-      localStorage.setItem('token', token); // تخزين التوكن الحقيقي
-      const userDetails = await getUser();
-      localStorage.setItem("userDetails", JSON.stringify(userDetails));
-      setCurrentUser(response.data);
-      return response.data;
-    } else {
-      console.error("The server sent a success message but no real JWT token!");
+  const login = async (loginData) => {
+    try {
+      const response = await api.post("/auth/login", loginData);
+
+      // تأكد أن السيرفر يرسل التوكن في حقل jwtToken (أو الاسم الذي اخترته في AuthResponse)
+      const token = response.data.jwtToken;
+
+      if (token && token !== "Login successful") {
+        localStorage.setItem("token", token); // تخزين التوكن الحقيقي
+        const profiles = await getUser();
+        localStorage.setItem("profiles", JSON.stringify(profiles));
+        setCurrentUser(response.data);
+        return response.data;
+      } else {
+        console.error(
+          "The server sent a success message but no real JWT token!",
+        );
+      }
+    } catch (error) {
+      console.error(
+        "Error during login:",
+        error.response?.data || error.message,
+      );
+      throw error;
     }
-  } catch (error) {
-    console.error("Error during login:", error.response?.data || error.message);
-    throw error;
-  }
-};
+  };
 
   const register = async (registerData) => {
     try {
