@@ -5,12 +5,13 @@ import { UserContext } from "../contexts/UserContext";
 
 const NavBar = () => {
   const profiles = JSON.parse(localStorage.getItem("profiles"));
+  console.log("profiles is", profiles.data);
 
   return (
     <div className={styles.navbarContainer}>
       <div className={styles.userContainer}>
         <p>Wecome Back:</p>
-        <h2>{profiles?.fullname || "Guest"}</h2>
+        <h2>{profiles?.data.fullname || "Guest"}</h2>
       </div>
       <LanguageSelector />
     </div>
