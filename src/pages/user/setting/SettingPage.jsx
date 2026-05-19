@@ -1,9 +1,25 @@
 import React, { useState } from "react";
 import UpdatePassword from "../../auth/UpdatePassword";
+import UpdateUser from "../../../components/user/setting/UpdateUser";
 import styles from "../../../styles/pages/setting/settingPage.module.scss";
 
 const SettingPage = () => {
   const [upadatePassword, setUpadatePassword] = useState(false);
+  const [updateProfile, setUpdateProfile] = useState(false);
+  const handleSwitchOnClick = (seitchName) => {
+    switch (seitchName) {
+      case "updatePassword":
+        setUpadatePassword(true);
+        setUpdateProfile(false);
+        break;
+      case "updateProfile":
+        setUpadatePassword(false);
+        setUpdateProfile(true);
+        break;
+      default:
+        break;
+    }
+  };
 
   return (
     <div className={styles.settingContainer}>
@@ -13,12 +29,16 @@ const SettingPage = () => {
         <div className={styles.switchContainer}>
           <div
             className={styles.switch}
-            onClick={() => setUpadatePassword(true)}
+            onClick={()=>handleSwitchOnClick("updatePassword")}
           >
             <p>Update Password</p>
           </div>
+          <div className={styles.switch} onClick={()=>handleSwitchOnClick("updateProfile")}>
+            <p>Update Profile</p>
+          </div>
         </div>
-        <UpdatePassword display={upadatePassword} />
+        <UpdatePassword display={upadatePassword} setDisplay={setUpadatePassword} />
+        <UpdateUser display={updateProfile} setDisplay={setUpdateProfile} />
       </div>
     </div>
   );

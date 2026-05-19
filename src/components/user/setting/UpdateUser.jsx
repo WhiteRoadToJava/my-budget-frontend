@@ -1,0 +1,137 @@
+import React, { useState } from "react";
+import styles from "../../../styles/components/user/setting/updateUser.module.scss";
+import Modal from "../../modals/Modal";
+import FormInput from "../../inputs/FormInput";
+import Button from "../../btns/Button";
+import { updateUser, getUser } from "../../../api/userService";
+import SuccessConfirmaton from "../../modals/SuccessConfirmaton";
+import validteUpdateUser from "../../../validators/validteUpdateUser";
+
+const UpdateUser = ({ display, setDisplay }) => {
+  const initializedProfile = localStorage.getItem("profiles")
+    ? JSON.parse(localStorage.getItem("profiles"))
+    : getUser();
+  console.log(initializedProfile);
+
+  const [profile, setProfile] = useState(initializedProfile);
+  const [error, setError] = useState({
+    hasError: false,
+    message: "",
+    position: "",
+  });
+  const [success, setSuccess] = useState({
+    hasSuccess: false,
+    message: "",
+  });
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setProfile({ ...profile, [name]: value });
+    setError({ hasError: false, message: "", position: "" });
+  };
+
+  const handleClearError = () => {
+    setError({ hasError: false, message: "", position: "" });
+    setSuccess({ hasSuccess: false, message: "" });
+    setProfile(getUser());
+    setDisplay(false);
+  };
+  const handleUpdateProfile = async (e) => {
+    e.preventDefault();
+    setError({ hasError: false, message: "", position: "" });
+
+    try {
+      validteUpdateUser(profile);
+      console.log(validteUpdateUser(profile));
+      const response = await updateUser(profile);
+      console.log(response);
+      if (
+        response.status === 200 ||
+        response === "Profile updated successfully"
+      ) {
+        localStorage.setItem("profiles", JSON.stringify(profile));
+        const successMsg =
+          typeof response === "string"
+            ? response
+            : response.message || "Updated successfully";
+
+        setError({ hasError: false, message: "", position: "" });
+        setSuccess({ hasSuccess: true, message: successMsg });
+      }
+    } catch (error) {
+      setError({
+        hasError: true,
+        message:
+          error.response?.data?.message ||
+          error.message ||
+          "Failed to update profile",
+        position: error.position || "firstname",
+      });
+    }
+  };
+  return (
+    <div
+      className={styles.updateContainer}
+      style={{ display: display ? "block" : "none" }}
+    >
+      <form className={styles.formContainer} >
+        <h2>Update Profile</h2>
+        <div className={styles.inputContainer}>
+          <FormInput
+            label="First Name"
+            name="firstname"
+            error={error.position === "firstname" ? error.message : ""}
+            value={profile.firstname}
+            onChange={handleInputChange}
+            type="text"
+            placeholder="First Name"
+          />
+        </div>
+        <div className={styles.inputContainer}>
+          <FormInput
+            label="Last Name"
+            name="lastname"
+            error={error.position === "lastname" ? error.message : ""}
+            value={profile.lastname}
+            onChange={handleInputChange}
+            type="text"
+            placeholder="Last Name"
+          />
+        </div>
+        <div className={styles.inputContainer}>
+          <FormInput
+            label="Phone"
+            name="phone"
+            error={error.position === "phone" ? error.message : ""}
+            value={profile.phone}
+            onChange={handleInputChange}
+            type="text"
+            placeholder="Phone"
+          />
+        </div>
+        <div className={styles.buttonContainer}>
+          <Button variant="primary" text="Update Profile" type="button" onClick={handleUpdateProfile} />
+          <Button
+            variant="cancel"
+            text="Cancel"
+            type="button"
+            onClick={() => {
+              handleClearError();
+              setDisplay(false);
+            }}
+          />
+        </div>
+      </form>
+
+      <SuccessConfirmaton
+        isOpen={success.hasSuccess}
+        message={success.message}
+        onClose={() => {
+          setSuccess({ hasSuccess: false, message: "" })
+          setDisplay(false);
+        }}
+      />
+    </div>
+  );
+};
+
+export default UpdateUser;
