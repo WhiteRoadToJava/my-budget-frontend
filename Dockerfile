@@ -9,12 +9,19 @@ COPY . .
 RUN npm run build
 
 # Stage 2: Production
-FROM node:18-alpine
-WORKDIR /app
+FROM nginx:alpine
 
-RUN npm install -g serve
+COPY --from=build /app/dist /usr/share/nginx/html
 
-COPY --from=build /app/dist ./dist
+RUN mkdir -p /etc/nginx/templates && \
+    echo 'server { \
+    listen ${PORT}; \
+    location / { \
+        root /usr/share/nginx/html; \
+        index index.html; \
+        try_files $uri $uri/ /index.html; \
+    } \
+}' > /etc/nginx/templates/default.conf.template
 
-EXPOSE 3000
-CMD ["serve", "-s", "dist", "-l", "3000"]
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]

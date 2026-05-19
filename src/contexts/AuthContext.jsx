@@ -1,6 +1,7 @@
 import { createContext, useState, useEffect } from "react";
 import api from "../api/axios";
 import { useContext } from "react";
+import { getUser } from "../api/userService";
 
 export const AuthContext = createContext();
 
@@ -37,6 +38,8 @@ const login = async (loginData) => {
     
     if (token && token !== "Login successful") {
       localStorage.setItem('token', token); // تخزين التوكن الحقيقي
+      const userDetails = await getUser();
+      localStorage.setItem("userDetails", JSON.stringify(userDetails));
       setCurrentUser(response.data);
       return response.data;
     } else {
