@@ -37,7 +37,6 @@ export default function LoginComponent() {
       console.log("Login response:", response); // Debugging line to check the response from login
       if (response) {
         const role = response.roles[0]; // Assuming role is an array and you want the first role
-        console.log("User role:", role); // Debugging line to check the role value
         switch (role) {
           case "ADMIN":
             navigation("/admin");

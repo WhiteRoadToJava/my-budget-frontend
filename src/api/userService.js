@@ -9,3 +9,13 @@ export const getUser = async () => {
     throw error;
   }
 };
+
+export const updateUser = async (userData) => {
+  try {
+    const response = await api.patch("/user/update-user", userData);
+    return response.data;
+  } catch (error) {
+    console.error("Error updating user:", error);
+    throw error;
+  }
+};
