@@ -43,7 +43,27 @@
   "messages": {
     "success": "Ett återställningslänk har skickats till",
     "loadingError": "Error loading transactions: ",
-    "loading":"Laddar transaktioner..."
+    "loading":"Laddar transaktioner...",
+    "errorLoadingIncomse":"Failed to loading incomse. Please try again.",
+    "errorLoadingExpenses":"Failed to loading expenses. Please try again.",
+    "errorLoadingSchedule":"Failed to loading schedule. Please try again.", 
+    "errorLoadingTransactions":"Failed to loading transactions. Please try again.",
+    "errorLoadingTransfers":"Failed to loading transfers. Please try again.",
+
+    "errorDeleteAccount":"Failed to delete account. Please try again.",
+    "errorDeleteIncomse":"Failed to delete incomse. Please try again.",
+    "errorDeleteExpenses":"Failed to delete expenses. Please try again.",
+    "errorDeleteSchedule":"Failed to delete schedule. Please try again.",
+    "errorDeleteTransactions":"Failed to delete transactions. Please try again.",
+    "errorDeleteTransfers":"Failed to delete transfers. Please try again",
+    "errorUpdateAccount":"Failed to update account. Please try again.",
+    "errorUpdateIncomse":"Failed to update incomse. Please try again.",
+    "errorUpdateExpenses":"Failed to update expenses. Please try again.",
+    "errorUpdateSchedule":"Failed to update schedule. Please try again.",
+    "errorUpdateTransactions":"Failed to update transactions. Please try again.",
+    "errorUpdateTransfers":"Failed to update transfers. Please try again."
+
+
   },
   "account":{
     "totalBalance":"Total balance:",
@@ -84,11 +104,14 @@
     "createSchedule":"Skapa planering",
     "createTransaction":"Skapa transaktion",
     "createTransfer":"Skapa överföring",
+    "updateTransfer":"Uppdatera överföring",
+    "updating":"Uppdaterar",
     "loading":"Laddar",
     "edit":"Ändra",
     "delete":"Ta bort",
     "cancel":"Avbryt",
-    "save":"Spara"
+    "save":"Spara",
+    "close":"Stäng"
   },
   "currency":{
     "usd":"USD",
@@ -99,5 +122,30 @@
     "sar":"SAR",
     "gbp":"GBP",
     "jpy":"JPY"
+  },
+  "transactionDetails":
+  {
+    "amount":"Belopp",
+    "account":"Konto",
+    "sourceAccount":"Källakonto",
+    "destinationAccount":"Destinationkonto",
+    "date":"Datum",
+    "description":"Beskrivning",
+    "type":"Typ",
+    "category":"Kategori",
+    "status":"Status",
+    "actions":"Handlar"
+  },
+  "updateTransfer":
+  {
+    "title":"Uppdatera överföring",
+    "sourceAccount":"Källakonto",
+    "destinationAccount":"Destinationkonto",
+    "amountSent":"Summa skickad",
+    "exchangeRate":"Växelkurs",
+    "amountReceived":"Summa mottagen",
+    "description":"Beskrivning",
+    "date":"Datum"
+
   }
 }

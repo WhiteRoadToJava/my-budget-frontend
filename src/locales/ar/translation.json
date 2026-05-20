@@ -41,10 +41,29 @@
     "NumberOFAccounts": "عدد الحسابات",
     "lastUpdate": "آخر تحديث"
   },
-  "messages": {
+  "massages": {
     "success": "تم ارسال رابط تغيير كلمة السر",
     "loadingError": "خطأ في تحميل المعاملات: ",
-    "loading":"يتم تحميل المعاملات..."
+    "loading":"يتم تحميل المعاملات...",
+    "errorLoadingIncomse":"فشل تحميل الإيرادات. يرجى المحاولة مرة أخرى.",
+    "errorLoadingExpenses":"فشل تحميل المصروفات. يرجى المحاولة مرة أخرى.",
+    "errorLoadingSchedule":"فشل تحميل الجدول. يرجى المحاولة مرة أخرى.",
+    "errorLoadingTransactions":"فشل تحميل المعاملات. يرجى المحاولة مرة أخرى.",  
+    "errorLoadingTransfers":"فشل تحميل التحويلات. يرجى المحاولة مرة أخرى.",
+    
+    "errorDeleteAccount":"فشل حذف الحساب. يرجى المحاولة مرة أخرى.",
+    "errorDeleteIncomse":"فشل حذف الإيراد. يرجى المحاولة مرة أخرى.",
+    "errorDeleteExpenses":"فشل حذف المصروف. يرجى المحاولة مرة أخرى.",
+    "errorDeleteSchedule":"فشل حذف الجدول. يرجى المحاولة مرة أخرى.",
+    "errorDeleteTransactions":"فشل حذف المعاملات. يرجى المحاولة مرة أخرى.",
+    "errorDeleteTransfers":"فشل حذف التحويلات. يرجى المحاولة مرة أخرى.",  
+    "errorUpdateAccount":"فشل تحديث الحساب. يرجى المحاولة مرة أخرى.",
+    "errorUpdateIncomse":"فشل تحديث الإيراد. يرجى المحاولة مرة أخرى.",
+    "errorUpdateExpenses":"فشل تحديث المصروف. يرجى المحاولة مرة أخرى.",
+    "errorUpdateSchedule":"فشل تحديث الجدول. يرجى المحاولة مرة أخرى.",
+    "errorUpdateTransactions":"فشل تحديث المعاملات. يرجى المحاولة مرة أخرى.",
+    "errorUpdateTransfers":"فشل تحديث التحويلات. يرجى المحاولة مرة أخرى."
+
   },
   "account":{
     "totalBalance":"الرصيد الكلي:",
@@ -84,12 +103,15 @@
     "createSchedule":"جدولة التحويلات",
     "createTransaction":"عملية جديدة",
     "createTransfer":"تحويل جديد",
+    "updateTransfer":"تحديث التحويل",
+    "updating":"يتم تحديث",
     "loading":"جار التحميل",
     "add":"إضافة",
     "cancel":"الغاء",
     "edit":"تعديل",
     "delete":"حذف",
-    "save":"حفظ"
+    "save":"حفظ",
+    "close":"اغلاق"
   },
 
 
@@ -102,5 +124,30 @@
     "sar":"SAR",
     "gbp":"GBP",
     "jpy":"JPY"
+  },
+  "transactionDetails":
+  {
+    "amount":"المبلغ",
+    "account":"الحساب",
+    "sourceAccount":"الحساب المصدر",
+    "destinationAccount":"الحساب المستهدف",
+    "date":"التاريخ",
+    "description":"الوصف",
+    "type":"النوع",
+    "category":"الفئة",
+    "status":"الحالة",
+    "actions":"الإجراءات"
+  },
+  "updateTransfer":
+  {
+    "title":"تحديث التحويل",
+    "sourceAccount":"الحساب المصدر",
+    "destinationAccount":"الحساب المستهدف",
+    "amountSent":"المبلغ المرسل",
+    "exchangeRate":"نسبة exc",
+    "amountReceived":"المبلغ المستلم",
+    "description":"الوصف",
+    "date":"التاريخ"
+
   }
 }
