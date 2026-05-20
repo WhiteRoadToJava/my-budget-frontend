@@ -22,7 +22,6 @@ export default function Sidebar({ menuItems }) {
   }, []);
 
   const handleMenuItemClick = (index, link) => {
-    console.log("Menu item clicked:", index, link); // Debugging line to check the clicked item
     setActiveItem(index);
     if (link) navigate(link);
   };

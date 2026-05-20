@@ -57,7 +57,6 @@ const UpdateExpense = ({ isOpen, isClose, expense }) => {
 
   const handleUpdateIncomse = async (e) => {
     e.preventDefault(); // avoid form submission causing page reload
-    console.log(expense.id);
     nutation.mutate(expwnseData);
   };
   const handleInputChange = (e) => {

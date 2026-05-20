@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "../styles/layout/navbar.module.scss";
 import LanguageSelector from "./elements/LanguageSelector";
 import { UserContext } from "../contexts/UserContext";

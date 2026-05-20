@@ -45,7 +45,6 @@ const [isOpen, setIsOpen] = useState(false);
 
 
 
-  console.log(data);
   return (
     <div className={styles.container}>
       <div className={styles.header}></div>

@@ -60,7 +60,6 @@ const UpdateIncomse = ({ isOpen, isClose, incomse }) => {
 
   const handleUpdateIncomse = async (e) => {
     e.preventDefault(); // avoid form submission causing page reload
-    console.log(incomse.id)
     nutation.mutate(incomseData);
     };
   const handleInputChange = (e) => {

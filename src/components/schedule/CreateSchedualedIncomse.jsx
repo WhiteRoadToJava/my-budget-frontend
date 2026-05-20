@@ -112,7 +112,6 @@ const CreateScheduledIncome = ({
 
  
 
-  console.log(incomeData);
 
   return (
     <Modal isOpen={isOpen}>
