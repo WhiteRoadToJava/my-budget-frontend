@@ -47,6 +47,13 @@ const AccountComponent = ({ accounts }) => {
           placeholder={i18n.t("accountsPage.searchInput")}/>
         </div>
       </div>
+      <div className={styles.rowtitle}>
+        <p className={styles.headerItem}>{i18n.t("accounts.name")}</p>
+        <p className={styles.headerItem}>{i18n.t("accounts.amount")}</p>
+        <p className={styles.headerItem}>{i18n.t("accounts.currency")}</p>
+        <p className={styles.headerItem}>{i18n.t("accounts.type")}</p>
+        <p className={styles.headerItem}>{i18n.t("accounts.actions")}</p>
+      </div>
       <div className={styles.accountBody}>
         {accountsList.map((account) => (
           <Row key={account.id} account={account} />

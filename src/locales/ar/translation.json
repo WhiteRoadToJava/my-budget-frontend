@@ -40,5 +40,67 @@
     "totaBalance": "الرصيد الكلي",
     "NumberOFAccounts": "عدد الحسابات",
     "lastUpdate": "آخر تحديث"
+  },
+  "messages": {
+    "success": "تم ارسال رابط تغيير كلمة السر",
+    "loadingError": "خطأ في تحميل المعاملات: ",
+    "loading":"يتم تحميل المعاملات..."
+  },
+  "account":{
+    "totalBalance":"الرصيد الكلي:",
+    "date":"التاريخ",
+    "category":"الفئة",
+    "type":"النوع",
+    "amount":"المبلغ",
+    "noTransactions":"لا يوجد بيانات لعرضها."
+  },
+  "accounts":{
+    "name":"الاسم",
+    "amount":"المبلغ",
+    "currency":"العملة",
+    "type":"النوع",
+    "actions":"الإجراءات"
+  },
+  "createAccount":{
+    "title":"إنشاء حساب",
+    "name":"الاسم",
+    "balance":"الرصيد",
+    "currency":"العملة",
+    "description":"الوصف",
+    "type":"النوع"
+  },
+  "updateAccount":{
+    "title":"تحديث الحساب",
+    "name":"الاسم",
+    "balance":"الرصيد",
+    "currency":"العملة",
+    "type":"النوع"
+  },
+  "buttons":{
+    "addAccount":"إنشاء حساب",
+    "createIncomse":"دخل حديد",
+    "updateAccount":"تحديث الحساب",
+        "createExpenses":"مصروف جديدد",
+    "createSchedule":"جدولة التحويلات",
+    "createTransaction":"عملية جديدة",
+    "createTransfer":"تحويل جديد",
+    "loading":"جار التحميل",
+    "add":"إضافة",
+    "cancel":"الغاء",
+    "edit":"تعديل",
+    "delete":"حذف",
+    "save":"حفظ"
+  },
+
+
+  "currency":{
+    "usd":"USD",
+    "eur":"EUR",
+    "sek":"SEK",
+    "aed":"AED",
+    "trt":"TRY",
+    "sar":"SAR",
+    "gbp":"GBP",
+    "jpy":"JPY"
   }
 }

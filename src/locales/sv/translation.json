@@ -39,5 +39,65 @@
     "totaBalance": "Total balance",
     "NumberOFAccounts": "Number of accounts",
     "lastUpdate": "Last update"
+  },
+  "messages": {
+    "success": "Ett återställningslänk har skickats till",
+    "loadingError": "Error loading transactions: ",
+    "loading":"Laddar transaktioner..."
+  },
+  "account":{
+    "totalBalance":"Total balance:",
+    "date":"Datum",
+    "category":"",
+    "type":"Type",
+    "amount":"Summa",
+    "noTransactions":"Ingen transaktion hittad."
+  },
+  "accounts":{
+    "name":"Namn",
+    "amount":"Belopp",
+    "currency":"Valuta",
+    "type":"Typ",
+    "actions":"Handlar"
+  },
+  "createAccount":{
+    "title":"Skapa konto",
+    "name":"Namn",
+    "balance":"Saldo",
+    "currency":"Valuta",
+    "description":"Beskrivning",
+    "type":"Typ"
+  },
+  "updateAccount":{
+    "title":"Uppdatera konto",
+    "name":"Namn",
+    "balance":"Saldo",
+    "currency":"Valuta",
+    "type":"Typ"
+  },
+  "buttons":{
+    "add":"Lägg till",
+    "addAccount":"Skapa konto",
+    "updateAccount":"Uppdatera konto",
+    "createIncomse":"Skapa inkomst",
+    "createExpenses":"Skapa utgift",
+    "createSchedule":"Skapa planering",
+    "createTransaction":"Skapa transaktion",
+    "createTransfer":"Skapa överföring",
+    "loading":"Laddar",
+    "edit":"Ändra",
+    "delete":"Ta bort",
+    "cancel":"Avbryt",
+    "save":"Spara"
+  },
+  "currency":{
+    "usd":"USD",
+    "eur":"EUR",
+    "sek":"SEK",
+    "aed":"AED",
+    "trt":"TRY",
+    "sar":"SAR",
+    "gbp":"GBP",
+    "jpy":"JPY"
   }
 }

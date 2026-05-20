@@ -5,6 +5,7 @@ import styles from "..//../styles/components/ecpenses/createExpense.module.scss"
 import Button from "../../components/btns/Button";
 import { updateAccount } from "../../api/accountService";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import i18n from "../../configuration/i18n";
 
 const UpdateAccount = ({ isOpen, isClose, account }) => {
   const queryClient = useQueryClient();
@@ -72,7 +73,7 @@ const UpdateAccount = ({ isOpen, isClose, account }) => {
           <form onSubmit={handleCreateAccount}>
             <div className={styles.inputContainer}>
               <FormInput
-                label="Name"
+                label={i18n.t("updateAccount.name")}
                 name="name"
                 type="text"
                 value={accountData.name}
@@ -81,7 +82,7 @@ const UpdateAccount = ({ isOpen, isClose, account }) => {
             </div>
             <div className={styles.inputContainer}>
               <FormInput
-                label="Balance"
+                label={i18n.t("updateAccount.balance")}
                 name="balance"
                 type="number"
                 value={accountData.balance}
@@ -90,7 +91,7 @@ const UpdateAccount = ({ isOpen, isClose, account }) => {
             </div>
             <div className={styles.inputContainer}>
               <FormInput
-                label="Currency"
+                label={i18n.t("updateAccount.currency")}
                 name="currency"
                 value={accountData.currency}
                 onChange={handleInputChange}
@@ -98,7 +99,7 @@ const UpdateAccount = ({ isOpen, isClose, account }) => {
             </div>
             <div>
               <FormInput
-                label="Type"
+                label={i18n.t("updateAccount.type")}
                 name="type"
                 value={accountData.type}
                 onChange={handleInputChange}
@@ -110,11 +111,11 @@ const UpdateAccount = ({ isOpen, isClose, account }) => {
             <div className={styles.buttonContainer}>
               <Button
                 variant="primary"
-                text={mutation.isPending ? "Creating..." : "Update Account"}
+                text={mutation.isPending ? i18n.t("buttons.loading") : i18n.t("buttons.updateAccount")}
                 type="submit"
                 disabled={mutation.isPending}
               />
-              <Button variant="cancel" text="Cancel" onClick={isClose} type="button" />
+              <Button variant="cancel" text={i18n.t("buttons.cancel")} onClick={isClose} type="button" />
             </div>
           </form>
         </div>

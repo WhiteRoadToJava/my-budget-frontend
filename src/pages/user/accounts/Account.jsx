@@ -24,6 +24,7 @@ const Account = () => {
 
   return (
     <div>
+      
       <AccountComponent accounts={accounts} />
     </div>
   );

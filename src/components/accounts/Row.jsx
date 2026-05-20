@@ -11,6 +11,7 @@ import { formatNumber } from "../../utils/formating";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import CreateAccount from "../account/CreateAccount";
 import UpdateAccount from "../account/UpdateAccount";
+import i18n from "../../configuration/i18n";
 const Row = ({ account }) => {
   const [openDeleteConfirmation, setOpenDeleteConfirmation] = useState(false);
   const [successConfirmation, setSuccessConfirmation] = useState(false);
@@ -50,21 +51,20 @@ const Row = ({ account }) => {
   const menuItems = [
     <Button
       key="edit"
-      text="Edit"
+      text={i18n.t("buttons.edit")}
       variant="primary"
       type="button"
       onClick={() => setOpenEditAccount(true)}
     />,
     <Button
       key="delete"
-      text="delete"
+      text={i18n.t("buttons.delete")}
       variant="delete"
       type="button"
       onClick={() => setOpenDeleteConfirmation(true)}
     />,
   ];
 
-  
   return (
     <div className={styles.rowContainer}>
       <div className={styles.rowDetails} onClick={handleClick}>

@@ -5,45 +5,99 @@
     "expenses": "Expenses",
     "incomes": "Incomes",
     "transactions": "Transactions",
-    "schedule":"Schedule",
+    "schedule": "Schedule",
     "calendar": "Calendar",
     "settings": "Settings"
   },
-  "sidebar":{
-    "logout":"Logout"
+  "sidebar": {
+    "logout": "Logout"
   },
-    "forgotPassword":{
-    "header":"Reset your password",
-    "success":"A password reset link has been sent to",
-    "email":"Email",
-    "submit":"Send Reset Link "
+  "forgotPassword": {
+    "header": "Reset your password",
+    "success": "A password reset link has been sent to",
+    "email": "Email",
+    "submit": "Send Reset Link "
   },
-  "login":{
-    "header":"Please enter your details",
-    "username":"Username",
-    "email":"Email",
-    "password":"Password",
-    "forgotPassword":"Forgot Password?",
-    "submit":"Login"
+  "login": {
+    "header": "Please enter your details",
+    "username": "Username",
+    "email": "Email",
+    "password": "Password",
+    "forgotPassword": "Forgot Password?",
+    "submit": "Login"
   },
-  "terminal":{
-    "terminal":"Welcome traveler, to the vast",
-    "terminalTow":"and occasionally confusing",
-    "terminalThree":"universe of programming."
+  "terminal": {
+    "terminal": "Welcome traveler, to the vast",
+    "terminalTow": "and occasionally confusing",
+    "terminalThree": "universe of programming."
   },
-  "accountsPage":{
-    "buttonText":"Add Account",
-    "searchInput":"Search"
+  "accountsPage": {
+    "buttonText": "Add Account",
+    "searchInput": "Search"
   },
-  "accountInfo":{
-    "totaBalance":"Total balancel",
-    "NumberOFAccounts":"Number of accounts",
-    "lastUpdate":"Last update"
+  "accountInfo": {
+    "totaBalance": "Total balance",
+    "NumberOFAccounts": "Number of accounts",
+    "lastUpdate": "Last update"
   },
-  "massages":{
-    "success":"A password reset link has been sent to"
+  "massages": {
+    "success": "A password reset link has been sent to",
+    "loadingError": "Error loading transactions: ",
+    "loading":"Loading transactions..."
+  },
+  "accounts":{
+    "name":"Name",
+    "amount":"Amount",
+    "currency":"Currency",
+    "type":"Type",
+    "actions":"Actions"
+  },
+  "account": {
+    "totalBalance": "Total balance:",
+    "date":"Date",
+    "category":"Category",
+    "type":"Type",
+    "amount":"Amount",
+    "noTransactions":"No transactions found."
+  },
+    "createAccount":{
+      "title":"Create Account",
+      "name":"Name",
+      "balance":"Balance",
+      "currency":"Currency",
+      "description":"Description",
+      "type":"Type"
+  },
+  "updateAccount":{
+    "title":"Update Account",
+    "name":"Name",
+    "balance":"Balance",
+    "currency":"Currency",
+    "type":"Type"
+  },
+  "buttons": {
+    "add": "Add",
+    "addAccount": "Add Account",
+    "updateAccount": "Update Account",
+    "createIncomse": "Create Incomse",
+    "createExpenses": "Create Expenses",
+    "createSchedule": "Create Schedule",
+    "createTransaction": "Create Transaction",
+    "createTransfer": "Create Transfer",
+    "loading": "Loading",
+    "edit": "Edit",
+    "delete": "Delete",
+    "cancel": "Cancel",
+    "save": "Save"
+  },
+  "currency": {
+    "usd": "USD",
+    "eur": "EUR",
+        "sek": "SEK",
+        "aed": "AED",
+        "trt": "TRY",
+        "sar": "SAR",
+        "gbp": "GBP",
+        "jpy": "JPY"
   }
 }
-
-
-
