@@ -6,6 +6,7 @@ import Button from "../../btns/Button";
 import { updateUser, getUser } from "../../../api/userService";
 import SuccessConfirmaton from "../../modals/SuccessConfirmaton";
 import validteUpdateUser from "../../../validators/validteUpdateUser";
+import NavBar from "../../NavBar";
 
 const UpdateUser = ({ display, setDisplay }) => {
   const initializedProfile = localStorage.getItem("profiles")
@@ -32,7 +33,11 @@ const UpdateUser = ({ display, setDisplay }) => {
   const handleClearError = () => {
     setError({ hasError: false, message: "", position: "" });
     setSuccess({ hasSuccess: false, message: "" });
-    setProfile(getUser());
+    setProfile(
+      profile?.data?.firstname
+        ? profile.data
+        : JSON.parse(localStorage.getItem("profiles"))
+    );
     setDisplay(false);
   };
   const handleUpdateProfile = async (e) => {
@@ -57,6 +62,7 @@ const UpdateUser = ({ display, setDisplay }) => {
         setError({ hasError: false, message: "", position: "" });
         setSuccess({ hasSuccess: true, message: successMsg });
       }
+      <NavBar profile={profile} />;
     } catch (error) {
       setError({
         hasError: true,
@@ -73,7 +79,7 @@ const UpdateUser = ({ display, setDisplay }) => {
       className={styles.updateContainer}
       style={{ display: display ? "block" : "none" }}
     >
-      <form className={styles.formContainer} >
+      <form className={styles.formContainer}>
         <h2>Update Profile</h2>
         <div className={styles.inputContainer}>
           <FormInput
@@ -109,7 +115,12 @@ const UpdateUser = ({ display, setDisplay }) => {
           />
         </div>
         <div className={styles.buttonContainer}>
-          <Button variant="primary" text="Update Profile" type="button" onClick={handleUpdateProfile} />
+          <Button
+            variant="primary"
+            text="Update Profile"
+            type="button"
+            onClick={handleUpdateProfile}
+          />
           <Button
             variant="cancel"
             text="Cancel"
@@ -126,7 +137,7 @@ const UpdateUser = ({ display, setDisplay }) => {
         isOpen={success.hasSuccess}
         message={success.message}
         onClose={() => {
-          setSuccess({ hasSuccess: false, message: "" })
+          setSuccess({ hasSuccess: false, message: "" });
           setDisplay(false);
         }}
       />
