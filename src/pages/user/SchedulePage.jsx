@@ -23,7 +23,6 @@ if (isError) {
   return <div>Error loading schedules: {error.message}</div>;
 }
 
-console.log(schedules);
 
   return (
     <div>

@@ -45,7 +45,6 @@ const {
   if (isAccountsError) {
     return <div>Error loading accounts: {accountsError.message}</div>;
   }
-  console.log(accounts);
   return (
     <div className={styles.dashboardContainer}>
       <div className={styles.leftSide}>

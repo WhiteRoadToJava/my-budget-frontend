@@ -60,7 +60,6 @@ const monthlyTotals = transactions.reduce((acc, item) => {
   }
 )
 
-console.log(sortedMonths)
 
 
   return (

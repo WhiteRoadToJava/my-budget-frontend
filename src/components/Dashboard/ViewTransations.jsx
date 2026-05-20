@@ -14,7 +14,6 @@ const ViewTransations = ({data = [], isError, error, isLoading }) => {
   if (isError) {
     return <div>Error loading accounts: {error.message}</div>;
   }
-  console.log(transactions);
   return (
     <div className={styles.transactionContainer}>
       <h2>Transactions</h2>

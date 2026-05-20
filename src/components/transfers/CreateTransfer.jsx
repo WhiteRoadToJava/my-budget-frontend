@@ -80,7 +80,6 @@ const CreateTransfer = ({ isOpen, isClose, accounts, currentAccount }) => {
       }
     };
     selectCurrentAccount();
-    console.log(currentAccount);
   }, [isOpen, currentAccount]);
 
   const mutation = useMutation({
@@ -123,7 +122,6 @@ const CreateTransfer = ({ isOpen, isClose, accounts, currentAccount }) => {
       exChangeRate: Number(transferData.exChangeRate),
     };
     mutation.mutate(finalPayload);
-    console.log(finalPayload);
   };
 
   const selectedSourceName = getAccountNameById(transferData.sourceAccount.id);

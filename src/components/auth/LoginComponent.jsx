@@ -34,7 +34,6 @@ export default function LoginComponent() {
 
     try {
         const response = await login(user);
-      console.log("Login response:", response); // Debugging line to check the response from login
       if (response) {
         const role = response.roles[0]; // Assuming role is an array and you want the first role
         switch (role) {

@@ -23,7 +23,7 @@ export const getExpenseById = async (expenseId) => {
     const response = await api.get(`/user/expense/find-expense/${expenseId}`);
     return response.data;
   } catch (error) { 
-    console.log(error);
+    console.error(error);
     throw error;
   }
 };
