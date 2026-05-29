@@ -25,3 +25,18 @@
   overflow-y: auto;
 }
 
+
+.rowtitle{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  border: 2px solid white;
+  border-radius: 10px
+
+}

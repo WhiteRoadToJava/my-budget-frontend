@@ -6,6 +6,7 @@ import Button from "../../components/btns/Button";
 import { addAccount } from "../../api/accountService";
 import DropDown from "../elements/DropDown";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import i18n from "../../configuration/i18n";
 const currencies = [
   "USD", // DOLLAR
   "EUR", // EURO
@@ -43,7 +44,7 @@ const CreateAccount = ({ isOpen, isClose }) => {
     onError: (err) => {
       setError({
         hasError: true,
-        message: "Failed to create account. Please try again." + err.message,
+        message: i18n.t("messages.errorAddAccount") + err.message,
       });
     },
   });
@@ -81,11 +82,12 @@ const CreateAccount = ({ isOpen, isClose }) => {
     <div className={styles.createExpenseContainer}>
       <Modal isOpen={isOpen} onRequestClose={isClose}>
         <div className={styles.formContainer}>
-          <h2>Create Account</h2>
+          <h2>{i18n.t("createAccount.title")}</h2>
           <form onSubmit={handleCreateAccount}>
             <div className={styles.inputContainer}>
               <FormInput
-                label="Name"
+                label={i18n.t("createAccount.name")}
+                placeholder={i18n.t("placeholder.name")}
                 name="name"
                 type="text"
                 value={accountData.name}
@@ -94,7 +96,8 @@ const CreateAccount = ({ isOpen, isClose }) => {
             </div>
             <div className={styles.inputContainer}>
               <FormInput
-                label="Balance"
+                label={i18n.t("createAccount.balance")}
+                placeholder={i18n.t("placeholder.balance")}
                 name="balance"
                 type="number"
                 value={accountData.balance}
@@ -103,7 +106,8 @@ const CreateAccount = ({ isOpen, isClose }) => {
             </div>
             <div className={styles.inputContainer}>
               <DropDown
-                label="Currency"
+                label={i18n.t("createAccount.currency")}
+                placeholder={i18n.t("placeholder.currency")}
                 name="currency"
                 value={accountData.currency}
                 onChange={handleInputChange}
@@ -112,7 +116,8 @@ const CreateAccount = ({ isOpen, isClose }) => {
             </div>
             <div>
               <DropDown
-                label="Type"
+                label={i18n.t("createAccount.type")}
+                placeholder={i18n.t("placeholder.type")}
                 name="type"
                 value={accountData.type}
                 onChange={handleInputChange}
@@ -127,13 +132,13 @@ const CreateAccount = ({ isOpen, isClose }) => {
             <div className={styles.buttonContainer}>
               <Button
                 variant="primary"
-                text={mutation.isPending ? "Creating..." : "Create Account"}
+                text={mutation.isPending ? i18n.t("buttons.loading") : i18n.t("buttons.addAccount")}
                 type="submit"
                 disabled={mutation.isPending}
               />
               <Button
                 variant="cancel"
-                text="Cancel"
+                text={i18n.t("buttons.cancel")}
                 onClick={isClose}
                 type="button"
               />

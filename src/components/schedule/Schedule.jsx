@@ -7,11 +7,8 @@ import ToogleMenu from "../../components/elements/ToggleMenu";
 import { useQuery } from "@tanstack/react-query";
 import { getAccounts } from "../../api/accountService";
 import CreateScheduledExpense from "./CreateSchedualedExpense ";
-
-
 import SchedualeInfo from "../schedule/SchedualeInfo";
-import { set } from "date-fns";
-
+import i18n from "../../configuration/i18n";
 
 
 const Schedule = ({ schedules }) => {
@@ -36,29 +33,29 @@ const Schedule = ({ schedules }) => {
     queryFn: getAccounts,
   });
   if (isAccountsLoading) {
-    return <div>Loading accounts...</div>;
+    return <div>{i18n.t("loading")}</div>;
   }
   if (isAccountsError) {
-    return <div>Error loading accounts: {accountsError.message}</div>;
+    return <div>{i18n.t("errorLoadingAccounts")}: {accountsError.message}</div>;
   }
 
   const buttonMenuItems = [
     <Button
       key="inc"
       variant="primary"
-      text="Create Income"
+      text={i18n.t("buttons.createIncomse")}
       onClick={() => setCreateSchedualedIncomse(true)}
     />,
     <Button
       key="exp"
       variant="cancel"
-      text="Create Expense"
+      text={i18n.t("buttons.createExpense")}
       onClick={() => setCreateSchedualedExpense(true)}
     />,
     <Button
       key="tra"
       variant="blue"
-      text="Create Transfer"
+      text={i18n.t("buttons.createTransfer")}
       onClick={() => setCreateSchedualedTransfer(true)}
     />,
   ];
@@ -79,7 +76,7 @@ const Schedule = ({ schedules }) => {
       />
     ))
   ) : (
-    <p>No schedules found.</p>
+    <p>{i18n.t("noSchedules")}</p>
   )}
 </div>
 

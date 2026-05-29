@@ -10,6 +10,7 @@ import { getAccounts } from '../../api/accountService'
 
 import { useQuery } from "@tanstack/react-query";
 import sortingTransactions from "../../utils/sorting";
+import i18n from "../../configuration/i18n";
 
 
 
@@ -40,10 +41,10 @@ const {
   const transactions = sortingTransactions(transactionData);
 
   if (isAccountsLoading) {
-    return <div>Loading accounts...</div>;
+    return <div>{i18n.t("messages.loadingAccounts")}</div>;
   }
   if (isAccountsError) {
-    return <div>Error loading accounts: {accountsError.message}</div>;
+    return <div>{i18n.t("messages.errorLoadingAccounts")} {accountsError.message}</div>;
   }
   return (
     <div className={styles.dashboardContainer}>
