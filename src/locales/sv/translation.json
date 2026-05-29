@@ -179,7 +179,8 @@
     "currency":"Välj valuta",
     "description":"Ange beskrivning",
     "date":"Välj datum",
-    "balance":"Ange saldo"
+    "balance":"Ange saldo",
+    "nextExecutionDate":"Välj nästa körning"
   },
   "CreateScheduledIncome":{
     "title":"Skapa planerad inkomst",

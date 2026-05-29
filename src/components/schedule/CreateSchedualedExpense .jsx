@@ -124,6 +124,7 @@ const CreateScheduledExpense = ({
           <div className={styles.inputContainer}>
             <FormInput
               label={i18n.t("createSchedule.name")}
+              placeholder={i18n.t("placeholder.name")}
               name="name"
               type="text"
               value={expenseData.name}
@@ -163,6 +164,7 @@ const CreateScheduledExpense = ({
           <div className={styles.inputContainer}>
             <FormInput
               label={i18n.t("createSchedule.amount")}
+              placeholder={i18n.t("placeholder.amount")}
               name="amountSend"
               type="number"
               value={expenseData.amountSend}
@@ -172,6 +174,7 @@ const CreateScheduledExpense = ({
           <div className={styles.inputContainer}>
             <Datepicker
               label={i18n.t("createSchedule.nextExecutionDate")}
+              placeholder={i18n.t("placeholder.nextExecutionDate")}
               name="nextExecutionDate"
               value={expenseData.nextExecutionDate}
               onChange={(date) => {

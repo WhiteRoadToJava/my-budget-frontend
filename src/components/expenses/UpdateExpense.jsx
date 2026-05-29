@@ -29,7 +29,7 @@ const UpdateExpense = ({ isOpen, isClose, expense }) => {
     onError: () => {
       setError({
         hasError: true,
-        message: "Failed to update expense. Please try again.",
+        message: i18n.t("message.errorUpdateExpense"),
       });
     },
   });
@@ -77,6 +77,7 @@ const UpdateExpense = ({ isOpen, isClose, expense }) => {
             <div className={styles.inputContainer}>
               <FormInput
                 label={i18n.t("updateExpense.amount")}
+                placeholder={i18n.t("placeholder.amount")}
                 name="amount"
                 type="number"
                 value={expwnseData.amount}
@@ -86,6 +87,7 @@ const UpdateExpense = ({ isOpen, isClose, expense }) => {
             <div>
               <FormInput
                 label={i18n.t("updateExpense.category")}
+                placeholder={i18n.t("placeholder.category")}
                 name="category"
                 value={expwnseData.category}
                 onChange={handleInputChange}

@@ -177,7 +177,8 @@
     "currency":"حدد العملة",
     "description":"ادخل الوصف",
     "date":"حدد التاريخ",
-    "balance":"ادخل الرصيد"
+    "balance":"ادخل الرصيد",
+    "nextExecutionDate":"حدد التاريخ التنفيذ القادم"
   },
   "CreateScheduledIncome":{
     "title":"جدولة الدخل",

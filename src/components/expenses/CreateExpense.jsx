@@ -74,6 +74,7 @@ const CreateExpense = ({ isOpen, isClose, account }) => {
             <div className={styles.inputContainer}>
               <FormInput
                 label={i18n.t("createExpense.amount")}
+                placeholder={i18n.t("placeholder.amount")}
                 name="amount"
                 type="number"
                 value={expenseData.amount}
@@ -83,6 +84,7 @@ const CreateExpense = ({ isOpen, isClose, account }) => {
             <div>
               <FormInput
                 label={i18n.t("createExpense.category")}
+                placeholder={i18n.t("placeholder.category")}
                 name="category"
                 value={expenseData.category}
                 onChange={handleInputChange}

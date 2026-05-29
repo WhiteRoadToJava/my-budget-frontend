@@ -47,14 +47,14 @@ const SchedualeInfo = ({ isOpen, onClose, accounts, scheduale }) => {
     <Button
       key="delete"
       variant="delete"
-      text="Delete"
+      text={i18n.t("buttons.delete")}
       type="button"
       onClick={() => setOpenConfirmDelete(true)}
     />,
     <Button
       key="close"
       variant="cancel"
-      text="Close"
+      text={i18n.t("buttons.close")}
       type="button"
       onClick={onClose}
     />,

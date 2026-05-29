@@ -76,6 +76,7 @@ const UpdateIncomse = ({ isOpen, isClose, incomse }) => {
             <div className={styles.inputContainer}>
               <FormInput
                 label={i18n.t("createIncomse.amount")}
+                placeholder={i18n.t("placeholder.amount")}
                 name="amount"
                 type="number"
                 value={incomseData.amount}
@@ -85,6 +86,7 @@ const UpdateIncomse = ({ isOpen, isClose, incomse }) => {
             <div>
               <FormInput
                 label={i18n.t("createIncomse.category")}
+                placeholder={i18n.t("placeholder.category")}
                 name="category"
                 value={incomseData.category}
                 onChange={handleInputChange}

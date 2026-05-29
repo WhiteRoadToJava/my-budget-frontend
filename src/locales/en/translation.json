@@ -185,7 +185,8 @@
     "currency":"Select currency",
     "description":"Enter description",
     "date":"Select date",
-    "balance":"Enter balance"
+    "balance":"Enter balance",
+    "nextExecutionDate":"Select next execution date"
   },
   "CreateScheduledIncome":{
     "title":"Create Scheduled Income",
