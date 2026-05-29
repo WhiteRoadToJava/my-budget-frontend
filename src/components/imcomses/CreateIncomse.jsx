@@ -5,6 +5,8 @@ import styles from "..//../styles/components/incomes/createIncomse.module.scss";
 import Button from "../../components/btns/Button";
 import { addIncomse } from "../../api/incomseService";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import i18n from "../../configuration/i18n";
+
 
 const CreateIncomse = ({ isOpen, isClose, account }) => {
   const queryClient = useQueryClient();
@@ -27,7 +29,7 @@ const CreateIncomse = ({ isOpen, isClose, account }) => {
     onError: () => {
       setError({
         hasError: true,
-        message: "Failed to create incomse. Please try again.",
+        message: i18n.t("message.errorCreateIncomse"),
       });
     }
 
@@ -58,12 +60,12 @@ const CreateIncomse = ({ isOpen, isClose, account }) => {
     if (!incomseData.amount || parseFloat(incomseData.amount) <= 0) {
       setError({
         hasError: true,
-        message: "Amount must be greater than zero.",
+        message: i18n.t("message.amountless"),
       });
       return false;
     }
     if (!incomseData.category) {
-      setError({ hasError: true, message: "Category is required." });
+      setError({ hasError: true, message: i18n.t("message.categoryRequired") });
       return false;
     }
     return true;
@@ -72,11 +74,11 @@ const CreateIncomse = ({ isOpen, isClose, account }) => {
     <div className={styles.createIncomseContainer}>
       <Modal isOpen={isOpen} onRequestClose={isClose}>
         <div className={styles.formContainer}>
-        <h2>Create Incomse</h2>
+        <h2>{i18n.t("createIncomse.title")}</h2>
         <form>
           <div className={styles.inputContainer}>
             <FormInput
-              label="Amount"
+              label={i18n.t("createIncomse.amount")}
               name="amount"
               type="number"
               value={incomseData.amount}
@@ -85,7 +87,7 @@ const CreateIncomse = ({ isOpen, isClose, account }) => {
           </div>
           <div>
             <FormInput
-              label="CCategory"
+              label={i18n.t("createIncomse.category")}
               name="category"
               value={incomseData.category}
               onChange={handleInputChange}
@@ -97,11 +99,11 @@ const CreateIncomse = ({ isOpen, isClose, account }) => {
           <div className={styles.buttonContainer}>
             <Button
               variant="primary"
-              text="Create Incomse"
+              text={nutation.isPending ? i18n.t("message.loading") : i18n.t("buttons.createIncomse")}
               type="submit"
               onClick={handleCreateIncomse}
             />
-            <Button variant="cancel" text="Cancel" onClick={isClose} />
+            <Button variant="cancel" text={i18n.t("buttons.cancel")} onClick={isClose} />
           </div>
         </form>
         </div>

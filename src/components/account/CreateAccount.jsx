@@ -44,7 +44,7 @@ const CreateAccount = ({ isOpen, isClose }) => {
     onError: (err) => {
       setError({
         hasError: true,
-        message: "Failed to create account. Please try again." + err.message,
+        message: i18n.t("messages.errorAddAccount") + err.message,
       });
     },
   });
@@ -87,6 +87,7 @@ const CreateAccount = ({ isOpen, isClose }) => {
             <div className={styles.inputContainer}>
               <FormInput
                 label={i18n.t("createAccount.name")}
+                placeholder={i18n.t("placeholder.name")}
                 name="name"
                 type="text"
                 value={accountData.name}
@@ -96,6 +97,7 @@ const CreateAccount = ({ isOpen, isClose }) => {
             <div className={styles.inputContainer}>
               <FormInput
                 label={i18n.t("createAccount.balance")}
+                placeholder={i18n.t("placeholder.balance")}
                 name="balance"
                 type="number"
                 value={accountData.balance}
@@ -105,6 +107,7 @@ const CreateAccount = ({ isOpen, isClose }) => {
             <div className={styles.inputContainer}>
               <DropDown
                 label={i18n.t("createAccount.currency")}
+                placeholder={i18n.t("placeholder.currency")}
                 name="currency"
                 value={accountData.currency}
                 onChange={handleInputChange}
@@ -114,6 +117,7 @@ const CreateAccount = ({ isOpen, isClose }) => {
             <div>
               <DropDown
                 label={i18n.t("createAccount.type")}
+                placeholder={i18n.t("placeholder.type")}
                 name="type"
                 value={accountData.type}
                 onChange={handleInputChange}

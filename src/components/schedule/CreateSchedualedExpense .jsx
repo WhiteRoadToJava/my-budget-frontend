@@ -7,6 +7,8 @@ import styles from "../../styles/components/schedule/createdSchedualedExpense.mo
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { addSchedule } from "../../api/scheduleService";
 import Datepicker from "../inputs/Datepicker";
+import i18n from "../../configuration/i18n";
+
 
 
 const interval = [
@@ -45,7 +47,7 @@ const CreateScheduledExpense = ({
     onError: () => {
       setError({
         hasError: true,
-        message: "Failed to create income. Please try again.",
+        message: i18n.t("message.errorCreateExpense"),
       });
     },
   });
@@ -88,12 +90,12 @@ const CreateScheduledExpense = ({
     if (!expenseData.amountSend || parseFloat(expenseData.amountSend) <= 0) {
       setError({
         hasError: true,
-        message: "Amount must be greater than zero.",
+        message: i18n.t("message.amountless"),
       });
       return false;
     }
     if (!expenseData.category) {
-      setError({ hasError: true, message: "Category is required." });
+      setError({ hasError: true, message: i18n.t("message.categoryRequired") });
       return false;
     }
     return true;
@@ -121,7 +123,7 @@ const CreateScheduledExpense = ({
         <form onSubmit={handleCreateIncome}>
           <div className={styles.inputContainer}>
             <FormInput
-              label="Name"
+              label={i18n.t("createSchedule.name")}
               name="name"
               type="text"
               value={expenseData.name}
@@ -131,8 +133,8 @@ const CreateScheduledExpense = ({
 
           <div>
             <DropDown
-              label="Source Account"
-              placeholder="Select a source account"
+              label={i18n.t("createSchedule.sourceAccount")}
+              placeholder={i18n.t("placeholder.sourceAccount")}
               list={filteredSourceList}
               name="sourceAccountId"
               value={selectedSourceName || ""}
@@ -142,8 +144,8 @@ const CreateScheduledExpense = ({
 
                     <div>
             <DropDown
-              label="Schedule Interval"
-              placeholder="Select a schedule interval"
+              label={i18n.t("createSchedule.interval")}
+              placeholder={i18n.t("placeholder.interval")}
               list={interval}
               name="scheduleIntervals"
               value={expenseData.scheduleIntervals || ""}
@@ -160,7 +162,7 @@ const CreateScheduledExpense = ({
 
           <div className={styles.inputContainer}>
             <FormInput
-              label="Amount"
+              label={i18n.t("createSchedule.amount")}
               name="amountSend"
               type="number"
               value={expenseData.amountSend}
@@ -169,7 +171,7 @@ const CreateScheduledExpense = ({
           </div>
           <div className={styles.inputContainer}>
             <Datepicker
-              label="Next Execution Date"
+              label={i18n.t("createSchedule.nextExecutionDate")}
               name="nextExecutionDate"
               value={expenseData.nextExecutionDate}
               onChange={(date) => {
@@ -185,7 +187,7 @@ const CreateScheduledExpense = ({
           
           <div className={styles.inputContainer}>
             <FormInput
-              label="Category"
+              label={i18n.t("createSchedule.category")}
               name="category"
               type="text"
               value={expenseData.category}
@@ -195,7 +197,7 @@ const CreateScheduledExpense = ({
 
           <div className={styles.inputContainer}>
             <FormInput
-              label="Description"
+              label={i18n.t("createSchedule.description")}
               name="description"
               type="textarea"
               value={expenseData.description}
@@ -208,14 +210,14 @@ const CreateScheduledExpense = ({
           <div className={styles.buttonContainer}>
             <Button
               variant="primary"
-              text={mutation.isPending ? "Saving..." : "Create Income"}
+              text={mutation.isPending ? i18n.t("buttons.loading") : i18n.t("buttons.createExpense")}
               type="submit"
               disabled={mutation.isPending}
             />
             {/* Fix 8: Cancel now calls cleanData to also reset errors */}
             <Button
               variant="cancel"
-              text="Cancel"
+              text={i18n.t("buttons.cancel")}
               onClick={cleanData}
               type="button"
             />

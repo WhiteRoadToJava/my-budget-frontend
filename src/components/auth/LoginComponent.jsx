@@ -47,7 +47,7 @@ export default function LoginComponent() {
             navigation("/");
         }
       } else {
-        setErrorMessage("Invalid username or password");
+        setErrorMessage(i18n.t("login.invalidCredentials"));
       }
     } catch (error) {
       setErrorMessage(

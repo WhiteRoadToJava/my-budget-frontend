@@ -5,6 +5,9 @@ import styles from "..//../styles/components/incomes/createIncomse.module.scss";
 import Button from "../../components/btns/Button";
 import { updateExpense, getExpenseById } from "../../api/expenseService";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import i18n from "../../configuration/i18n";
+
+
 
 const UpdateExpense = ({ isOpen, isClose, expense }) => {
   const [expwnseData, setExpenseData] = useState({
@@ -69,11 +72,11 @@ const UpdateExpense = ({ isOpen, isClose, expense }) => {
     <div className={styles.createIncomseContainer}>
       <Modal isOpen={isOpen} onRequestClose={isClose}>
         <div className={styles.formContainer}>
-          <h2>Update Expensse</h2>
+          <h2>{i18n.t("updateExpense.title")}</h2>
           <form>
             <div className={styles.inputContainer}>
               <FormInput
-                label="Amount"
+                label={i18n.t("updateExpense.amount")}
                 name="amount"
                 type="number"
                 value={expwnseData.amount}
@@ -82,7 +85,7 @@ const UpdateExpense = ({ isOpen, isClose, expense }) => {
             </div>
             <div>
               <FormInput
-                label="CCategory"
+                label={i18n.t("updateExpense.category")}
                 name="category"
                 value={expwnseData.category}
                 onChange={handleInputChange}
@@ -96,11 +99,11 @@ const UpdateExpense = ({ isOpen, isClose, expense }) => {
             <div className={styles.buttonContainer}>
               <Button
                 variant="primary"
-                text="Update Expense"
+                text={nutation.isPending ? i18n.t("message.loading") : i18n.t("buttons.updateExpense")}
                 type="submit"
                 onClick={handleUpdateIncomse}
               />
-              <Button variant="cancel" text="Cancel" onClick={isClose} />
+              <Button variant="cancel" text={i18n.t("buttons.cancel")} onClick={isClose} />
             </div>
           </form>
         </div>

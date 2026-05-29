@@ -8,6 +8,7 @@ import {
 } from "../../../api/accountService";
 import { useNavigate } from "react-router-dom";
 import styles from "../../../styles/incomses/incomses.module.scss";
+import i18n from "../../../configuration/i18n";
 
 
 const Incomse = () => {
@@ -30,10 +31,10 @@ const [isOpen, setIsOpen] = useState(false);
     queryFn: () => getAccounts(),
   });
   if (isAccountsLoading) {
-    return <div>Loading accounts...</div>;
+    return <div>{i18n.t("messages.loadingAccounts")}</div>;
   }
   if (isAccountsError) {
-    return <div>Error loading accounts: {accountsError.message}</div>;
+    return <div>{i18n.t("messages.errorLoadingAccounts")} {accountsError.message}</div>;
   }
   const handleIncomseClick = (transaction) => {
     setSelectedTransaction(transaction);
@@ -48,7 +49,7 @@ const [isOpen, setIsOpen] = useState(false);
   return (
     <div className={styles.container}>
       <div className={styles.header}></div>
-      <h1>Incomse</h1>
+      <h1>{i18n.t("incomses.title")}</h1>
       <div className={styles.divider}></div>
       <div className={styles.content}>
         <div className={styles.incomsesContainer}>
@@ -72,14 +73,14 @@ const [isOpen, setIsOpen] = useState(false);
                 <p>{account.name}</p>
                 <div className={styles.totalBalance}
                 onClick={() => handleAccountClick(account)}>
-                  TotalBalance:{" "}
+                  {i18n.t("incomses.totolBalance")}:{" "}
                   <p
                     className={styles.totalBalanceValue}
                     data-type={
-                      account.totalBalance > 0 ? "positive" : "negative"
+                      Number(account.totalBalance).toFixed(2) > 0 ? "positive" : "negative"
                     }
                   >
-                    {account.totalBalance}
+                    {Number(account.totalBalance).toFixed(2)}
                   </p>
                 </div>
               </div>

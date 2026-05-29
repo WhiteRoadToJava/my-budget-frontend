@@ -35,7 +35,7 @@ const Account = ({ account }) => {
     queryKey: ["accounts"],
     queryFn: getAccounts,
   });
-  if (isTxLoading) return <div>{i18n.t("massages.loading")}</div>;
+  if (isTxLoading) return <div>{i18n.t("messages.loading")}</div>;
   if (isTxError) {
     return <div>{i18n.t("messages.loadingError")} {txError.message}</div>;
   }

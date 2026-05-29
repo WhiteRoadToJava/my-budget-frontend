@@ -31,7 +31,7 @@ const UpdateAccount = ({ isOpen, isClose, account }) => {
     onError: (err) => {
       setError({
         hasError: true,
-        message: "Failed to Update account. Please try again" + err.message,
+        message: i18n.t("messages.errorUpdateAccount") + err.message,
       });
     }
   });
@@ -52,14 +52,14 @@ const UpdateAccount = ({ isOpen, isClose, account }) => {
 
   const handleValidation = () => {
     if (!accountData.name?.trim()) {
-      setError({ hasError: true, message: "Name is required." });
+      setError({ hasError: true, message: i18n.t("messages.nameRequired") });
       return false;
     }
     if (!accountData.balance) {
       ({ ...accountData, balance: 0 })
     }
     if (!accountData.currency?.trim()) {
-      setError({ hasError: true, message: "Currency is required." });
+      setError({ hasError: true, message: i18n });
       return false;
     }
     return true;
@@ -69,11 +69,12 @@ const UpdateAccount = ({ isOpen, isClose, account }) => {
     <div className={styles.createExpenseContainer}>
       <Modal isOpen={isOpen} onRequestClose={isClose}>
         <div className={styles.formContainer}>
-          <h2>Create Account</h2>
+          <h2>{i18n.t("updateAccount.title")}</h2>
           <form onSubmit={handleCreateAccount}>
             <div className={styles.inputContainer}>
               <FormInput
                 label={i18n.t("updateAccount.name")}
+                placeholder={i18n.t("placeholder.name")}
                 name="name"
                 type="text"
                 value={accountData.name}
@@ -83,6 +84,7 @@ const UpdateAccount = ({ isOpen, isClose, account }) => {
             <div className={styles.inputContainer}>
               <FormInput
                 label={i18n.t("updateAccount.balance")}
+                placeholder={i18n.t("placeholder.balance")}
                 name="balance"
                 type="number"
                 value={accountData.balance}
@@ -92,6 +94,7 @@ const UpdateAccount = ({ isOpen, isClose, account }) => {
             <div className={styles.inputContainer}>
               <FormInput
                 label={i18n.t("updateAccount.currency")}
+                placeholder={i18n.t("placeholder.currency")}
                 name="currency"
                 value={accountData.currency}
                 onChange={handleInputChange}
@@ -100,6 +103,7 @@ const UpdateAccount = ({ isOpen, isClose, account }) => {
             <div>
               <FormInput
                 label={i18n.t("updateAccount.type")}
+                placeholder={i18n.t("placeholder.type")}
                 name="type"
                 value={accountData.type}
                 onChange={handleInputChange}

@@ -6,6 +6,7 @@ import FormInput from "../../components/inputs/FormInput";
 import DropDown from "../elements/DropDown";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { createTransfer } from "../../api/transferServce.js";
+import i18n from "../../configuration/i18n.js";
 
 const CreateTransfer = ({ isOpen, isClose, accounts, currentAccount }) => {
   const queryClient = useQueryClient();
@@ -113,7 +114,7 @@ const CreateTransfer = ({ isOpen, isClose, accounts, currentAccount }) => {
     if (transferData.sourceAccount.id === transferData.destinationAccount.id) {
       return setError({
         hasError: true,
-        message: "Source and Destination accounts must be different.",
+        message: i18n.t("masseges.transferSameAccount"),
       });
     }
     const finalPayload = {
@@ -131,11 +132,11 @@ const CreateTransfer = ({ isOpen, isClose, accounts, currentAccount }) => {
   return (
     <Modal isOpen={isOpen} onRequestClose={isClose}>
       <div className={styles.formContainer}>
-        <h2>Create Transfer</h2>
+        <h2>{i18n.t("createTransfer.title")}</h2>
         <form onSubmit={handleSubmit}>
           <DropDown
-            label="Source Account"
-            placeholder="Select a source account"
+            label={i18n.t("createTransfer.sourceAccount")}
+            placeholder={i18n.t("placeholder.sourceAccount")}
             list={filteredSourceList}
             name="sourceAccount"
             value={selectedSourceName} // هذا هو المهم للعرض
@@ -143,7 +144,8 @@ const CreateTransfer = ({ isOpen, isClose, accounts, currentAccount }) => {
           />
 
           <DropDown
-            label="Destination Account"
+            label={i18n.t("createTransfer.destinationAccount")}
+            placeholder={i18n.t("placeholder.destinationAccount")}
             list={filteredDestinationList}
             name="destinationAccount"
             value={selectedDestName}
@@ -152,14 +154,14 @@ const CreateTransfer = ({ isOpen, isClose, accounts, currentAccount }) => {
 
           <div className={styles.row}>
             <FormInput
-              label="Amount Sent"
+              label={i18n.t("createTransfer.amountSent")}
               name="amountSent"
               type="number"
               value={transferData.amountSent}
               onChange={handleInputChange}
             />
             <FormInput
-              label="Exchange Rate"
+              label={i18n.t("createTransfer.exchangeRate")}
               name="exChangeRate"
               type="number"
               value={transferData.exChangeRate}
@@ -168,7 +170,7 @@ const CreateTransfer = ({ isOpen, isClose, accounts, currentAccount }) => {
           </div>
 
           <FormInput
-            label="Amount To Receive"
+            label={i18n.t("createTransfer.amountReceived")}
             name="amountReceived"
             type="number"
             value={transferData.amountReceived}
@@ -176,7 +178,7 @@ const CreateTransfer = ({ isOpen, isClose, accounts, currentAccount }) => {
           />
 
           <FormInput
-            label="Description"
+            label={i18n.t("createTransfer.description")}
             name="description"
             type="text"
             value={transferData.description || ""}
@@ -190,13 +192,13 @@ const CreateTransfer = ({ isOpen, isClose, accounts, currentAccount }) => {
           <div className={styles.buttonContainer}>
             <Button
               variant="primary"
-              text={mutation.isPending ? "Processing..." : "Confirm Transfer"}
+              text={mutation.isPending ? i18n.t("buttons.processing") : i18n.t("buttons.createTransfer")}
               type="submit"
               disabled={mutation.isPending}
             />
             <Button
               variant="cancel"
-              text="Cancel"
+              text={i18n.t("buttons.cancel")}
               onClick={isClose}
               type="button"
             />

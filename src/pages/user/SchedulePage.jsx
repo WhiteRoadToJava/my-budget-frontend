@@ -3,6 +3,7 @@ import React from 'react'
 import { getAllSchedule } from '../../api/scheduleService'
 import { useQuery } from '@tanstack/react-query'
 import Schedule from '../../components/schedule/Schedule';
+import i18n from '../../configuration/i18n';
 
 function SchedulePage() {
 const {
@@ -16,11 +17,11 @@ const {
 });
 
 if (isLoading) {
-  return <div>Loading schedules...</div>;
+  return <div>{i18n.t("messages.loadingSchedule")}</div>;
 }
 
 if (isError) {
-  return <div>Error loading schedules: {error.message}</div>;
+  return <div>{i18n.t("messages.errorLoadingSchedule")} {error.message}</div>;
 }
 
 

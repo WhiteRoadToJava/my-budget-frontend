@@ -109,7 +109,7 @@ const UpdateTransfer = ({ isOpen, isClose, accounts, transfer }) => {
     if (transferData.sourceAccount.id === transferData.destinationAccount.id) {
       return setError({
         hasError: true,
-        message: "Source and Destination accounts must be different.",
+        message: i18n.t("masseges.errorSameAccountTransfer"),
       });
     }
 
@@ -125,7 +125,7 @@ const UpdateTransfer = ({ isOpen, isClose, accounts, transfer }) => {
   return (
     <Modal isOpen={isOpen} onRequestClose={isClose}>
       <div className={styles.formContainer}>
-        <h2>{i18n.t("modals.updateTransfer")}</h2>
+        <h2>{i18n.t("updateTransfer.title")}</h2>
         <form onSubmit={handleSubmit}>
           <FormInput
             label={i18n.t("updateTransfer.sourceAccount")}

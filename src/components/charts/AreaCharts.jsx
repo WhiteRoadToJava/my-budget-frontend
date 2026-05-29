@@ -2,6 +2,7 @@ import React from 'react'
 import { getTotalBalance } from '../../api/totalBalance';
 import { useQuery } from '@tanstack/react-query';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import i18n from '../../configuration/i18n';
 
 const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
 
@@ -16,9 +17,9 @@ function AreaCharts() {
     queryFn: getTotalBalance,
   });
 
-  if (isLoading) return <div>Loading balance...</div>;
+  if (isLoading) return <div>{i18n.t("dashboard.loading")}</div>;
   if (isError) return <div>Error loading balance: {error.message}</div>;
-  if (!totalBalance.length) return <div>No data available.</div>;
+  if (!totalBalance.length) return <div>{i18n.t("dashboard.noData")}</div>;
 
   const chartData = totalBalance.map((entry) => ({
     name: new Date(entry.createdAt).toLocaleDateString("sv-SE", {

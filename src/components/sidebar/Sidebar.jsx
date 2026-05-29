@@ -30,7 +30,7 @@ export default function Sidebar({ menuItems }) {
     try {
       await logout();
       navigate("/auth/login");
-    } catch (err) { console.error("Logout failed", err); }
+    } catch (err) { console.error(i18n.t("logoutError"), err); }
   };
 
   return (

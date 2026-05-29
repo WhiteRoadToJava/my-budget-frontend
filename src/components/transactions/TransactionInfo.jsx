@@ -66,7 +66,7 @@ const TransactionInfo = ({ isOpen, onClose, accounts, transaction }) => {
     onError: () => {
       setError({
         hasError: true,
-        message: i18n.t("masseges.errorDeleteTransfer"),
+        message: i18n.t("masseges.errorDeleteTransfers"),
         defaultMessage: "Failed to delete transfer. Please try again.",
       });
     },
@@ -141,7 +141,7 @@ const TransactionInfo = ({ isOpen, onClose, accounts, transaction }) => {
         <div className={styles.transactionContainer}>
           <div className={styles.transactionTitle} data-type={transaction.type}>
             <h2 className={styles.transactionTitleText}>
-              {transaction.type} Details
+              {transaction.type} {i18n.t("transactionDetails.transaction")}
             </h2>
           </div>
 
