@@ -20,7 +20,9 @@ const TransactionInfo = ({ isOpen, onClose, accounts, transaction }) => {
   const [openConfirmDelete, setOpenConfirmDelete] = useState(false);
   const [updateExpense, setUpdateExpense] = useState(false);
   const [error, setError] = useState({ hasError: false, message: "" });
-  const accountName = transaction?.account?.name;
+  const sourceAccountName = transaction?.sourceAccount?.name;
+  const destinationAccountName = transaction?.destinationAccount?.name;
+  console.log("transaction ", transaction);
 
   const deleteMutation = useMutation({
     mutationFn: (incomseId) => deleteIncomse(incomseId),
@@ -160,12 +162,17 @@ const TransactionInfo = ({ isOpen, onClose, accounts, transaction }) => {
 
           {transaction.type === "in-transfer" ||
           transaction.type === "out-transfer" ? (
+            <>
             <p className={styles.transactionDetail}>
-              <strong>{i18n.t("transactionDetails.sourceAccount")}:</strong> {accountName}
+              <strong>{i18n.t("transactionDetails.sourceAccount")}:</strong> {sourceAccountName}
             </p>
+            <p className={styles.transactionDetail}>
+              <strong>{i18n.t("transactionDetails.destinationAccount")}:</strong> {destinationAccountName}
+            </p>
+            </>
           ) : (
             <p className={styles.transactionDetail}>
-              <strong>{i18n.t("transactionDetails.account")}:</strong> {accountName}
+              <strong>{i18n.t("transactionDetails.account")}:</strong> {sourceAccountName}
             </p>
           )}
           <p className={styles.transactionDetail}>
