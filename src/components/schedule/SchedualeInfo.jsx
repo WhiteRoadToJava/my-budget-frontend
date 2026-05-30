@@ -8,8 +8,8 @@ import UpdateIncomse from "../imcomses/UpdateIncomse";
 import UpdateExpense from "../expenses/UpdateExpense";
 import DeleteConfimation from "../modals/DeleteConfirmation";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-
 import { deleteSchedule } from "../../api/scheduleService";
+import i18n from "../../configuration/i18n";
 
 const SchedualeInfo = ({ isOpen, onClose, accounts, scheduale }) => {
   const queryClient = useQueryClient();
@@ -30,7 +30,7 @@ const SchedualeInfo = ({ isOpen, onClose, accounts, scheduale }) => {
       onError: () => {
         setError({
           hasError: true,
-          message: "Failed to delete schedule. Please try again.",
+          message: i18n.t("errorDeleteSchedule"),
         });
       },
     });
@@ -47,14 +47,14 @@ const SchedualeInfo = ({ isOpen, onClose, accounts, scheduale }) => {
     <Button
       key="delete"
       variant="delete"
-      text="Delete"
+      text={i18n.t("buttons.delete")}
       type="button"
       onClick={() => setOpenConfirmDelete(true)}
     />,
     <Button
       key="close"
       variant="cancel"
-      text="Close"
+      text={i18n.t("buttons.close")}
       type="button"
       onClick={onClose}
     />,
@@ -68,7 +68,7 @@ const SchedualeInfo = ({ isOpen, onClose, accounts, scheduale }) => {
             data-type={scheduale.transactionType}
           >
             <h2 className={styles.transactionTitleText}>
-              Scheduale
+              {i18n.t("schedualeInfo.title")}
               {" " + scheduale.transactionType} Details
             </h2>
           </div>
@@ -80,33 +80,33 @@ const SchedualeInfo = ({ isOpen, onClose, accounts, scheduale }) => {
           </div>
 
           <p className={styles.transactionDetail}>
-            <strong>Name:</strong> {scheduale.name}
+            <strong>{i18n.t("schedualeInfo.name")}:</strong> {scheduale.name}
           </p>
           <p className={styles.transactionDetail}>
-            <strong>Category:</strong> {scheduale.category}
+            <strong>{i18n.t("schedualeInfo.category")}:</strong> {scheduale.category}
           </p>
           <p className={styles.transactionDetail}>
-            <strong>Amount:</strong>{" "}
+            <strong>{i18n.t("schedualeInfo.amount")}:</strong>{" "}
             {scheduale?.amountSend
               ? Number(scheduale.amountSend).toFixed(2)
               : "0.00"}{" "}
             {scheduale.currency}
           </p>
           <p className={styles.transactionDetail}>
-            <strong>Account:</strong> {accountName}
+            <strong>{i18n.t("schedualeInfo.account")}:</strong> {accountName}
           </p>
           <p className={styles.transactionDetail}>
-            <strong>Excutation Date:</strong>{" "}
+            <strong>{i18n.t("schedualeInfo.nextExecutionDate")}:</strong>{" "}
             {new Date(scheduale.executionDate).toLocaleDateString()}
           </p>
           <p className={styles.transactionDetail}>
-            <strong>Description:</strong> {scheduale.description}
+            <strong>{i18n.t("schedualeInfo.description")}:</strong> {scheduale.description}
           </p>
           <div>
             {error.hasError && <p style={{ color: "red" }}>{error.message}</p>}
           </div>
           <div className={styles.buttonContainer}>
-            <Button text="Close" variant="cancel" onClick={onClose} />
+            <Button text={i18n.t("buttons.close")} variant="cancel" onClick={onClose} />
           </div>
         </div>
       </Modal>

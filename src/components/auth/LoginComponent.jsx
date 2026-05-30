@@ -34,7 +34,6 @@ export default function LoginComponent() {
 
     try {
         const response = await login(user);
-      console.log("Login response:", response); // Debugging line to check the response from login
       if (response) {
         const role = response.roles[0]; // Assuming role is an array and you want the first role
         switch (role) {
@@ -48,7 +47,7 @@ export default function LoginComponent() {
             navigation("/");
         }
       } else {
-        setErrorMessage("Invalid username or password");
+        setErrorMessage(i18n.t("login.invalidCredentials"));
       }
     } catch (error) {
       setErrorMessage(

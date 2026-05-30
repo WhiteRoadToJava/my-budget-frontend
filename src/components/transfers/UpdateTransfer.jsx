@@ -6,6 +6,7 @@ import FormInput from "../inputs/FormInput.jsx";
 import DropDown from "../elements/DropDown.jsx";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { getTransferById, updateTransfer } from "../../api/transferServce.js";
+import i18n from "../../configuration/i18n.js";
 
 const UpdateTransfer = ({ isOpen, isClose, accounts, transfer }) => {
   const queryClient = useQueryClient();
@@ -97,7 +98,7 @@ const UpdateTransfer = ({ isOpen, isClose, accounts, transfer }) => {
     onError: (err) => {
       setError({
         hasError: true,
-        message: "Update failed: " + (err.response?.data?.message || err.message),
+        message: i18n.t("masseges.errorUpdateTransfer")
       });
     },
   });
@@ -108,7 +109,7 @@ const UpdateTransfer = ({ isOpen, isClose, accounts, transfer }) => {
     if (transferData.sourceAccount.id === transferData.destinationAccount.id) {
       return setError({
         hasError: true,
-        message: "Source and Destination accounts must be different.",
+        message: i18n.t("masseges.errorSameAccountTransfer"),
       });
     }
 
@@ -124,10 +125,10 @@ const UpdateTransfer = ({ isOpen, isClose, accounts, transfer }) => {
   return (
     <Modal isOpen={isOpen} onRequestClose={isClose}>
       <div className={styles.formContainer}>
-        <h2>Update Transfer</h2>
+        <h2>{i18n.t("updateTransfer.title")}</h2>
         <form onSubmit={handleSubmit}>
           <FormInput
-            label="Source Account"
+            label={i18n.t("updateTransfer.sourceAccount")}
             name="sourceAccount"
             type="text"
             value={currentSourceLabel}
@@ -137,7 +138,7 @@ const UpdateTransfer = ({ isOpen, isClose, accounts, transfer }) => {
 
 
           <FormInput
-            label="Destination Account"
+            label={i18n.t("updateTransfer.destinationAccount")}
             name="destinationAccount"
             type="text"
             value={currentDestLabel}
@@ -148,14 +149,14 @@ const UpdateTransfer = ({ isOpen, isClose, accounts, transfer }) => {
 
           <div className={styles.row}>
             <FormInput
-              label="Amount Sent"
+              label={i18n.t("updateTransfer.amountSent")}
               name="amountSent"
               type="number"
               value={transferData.amountSent}
               onChange={handleInputChange}
             />
             <FormInput
-              label="Exchange Rate"
+              label={i18n.t("updateTransfer.exchangeRate")}
               name="exChangeRate"
               type="number"
               value={transferData.exChangeRate}
@@ -164,7 +165,7 @@ const UpdateTransfer = ({ isOpen, isClose, accounts, transfer }) => {
           </div>
 
           <FormInput
-            label="Amount Received"
+            label={i18n.t("updateTransfer.amountReceived")}
             name="amountReceived"
             type="number"
             value={transferData.amountReceived}
@@ -172,7 +173,7 @@ const UpdateTransfer = ({ isOpen, isClose, accounts, transfer }) => {
           />
 
           <FormInput
-            label="Description"
+            label={i18n.t("updateTransfer.description")}
             name="description"
             type="text"
             value={transferData.description}
@@ -186,13 +187,13 @@ const UpdateTransfer = ({ isOpen, isClose, accounts, transfer }) => {
           <div className={styles.buttonContainer}>
             <Button
               variant="primary"
-              text={mutation.isPending ? "Updating..." : "Update Transfer"}
+              text={mutation.isPending ? i18n.t("buttons.updating") : i18n.t("buttons.updateTransfer")}
               type="submit"
               disabled={mutation.isPending}
             />
             <Button
               variant="cancel"
-              text="Cancel"
+              text={i18n.t("buttons.cancel")}
               onClick={isClose}
               type="button"
             />

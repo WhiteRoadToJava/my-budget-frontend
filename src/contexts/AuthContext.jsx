@@ -62,7 +62,6 @@ export const AuthProvider = ({ children }) => {
         withCredentials: true,
       });
       setCurrentUser(resonse.data);
-      console.log("Response from register:", resonse.data);
       return resonse.data;
     } catch (error) {
       console.error(

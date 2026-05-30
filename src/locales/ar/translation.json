@@ -40,5 +40,276 @@
     "totaBalance": "الرصيد الكلي",
     "NumberOFAccounts": "عدد الحسابات",
     "lastUpdate": "آخر تحديث"
+  },
+  "messages": {
+    "success": "تم ارسال رابط تغيير كلمة السر",
+    "loadingError": "خطأ في تحميل المعاملات: ",
+    "loading":"يتم تحميل المعاملات...",
+    "loadingSchedule":"يتم تحميل الجدول...",
+    "loadingAccounts":"يتم تحميل الحسابات...",
+    "errorCreateAccount":"فشل إنشاء الحساب. يرجى المحاولة مرة أخرى.",
+    "errorCreateIncomse":"فشل إنشاء الإيراد. يرجى المحاولة مرة أخرى.",
+    "errorCreateExpense":"فشل إنشاء المصروف. يرجى المحاولة مرة أخرى.",
+    "errorCreateSchedule":"فشل إنشاء الجدول. يرجى المحاولة مرة أخرى.",
+    "errorCreateTransaction":"فشل إنشاء المعامله. يرجى المحاولة مرة أخرى.",
+    "errorCreateTransfer":"فشل إنشاء التحويل. يرجى المحاولة مرة أخرى.",
+    "errorLoadingIncomse":"فشل تحميل الإيرادات. يرجى المحاولة مرة أخرى.",
+    "errorLoadingExpenses":"فشل تحميل المصروفات. يرجى المحاولة مرة أخرى.",
+    "errorLoadingSchedule":"فشل تحميل الجدول. يرجى المحاولة مرة أخرى.",
+    "errorLoadingTransactions":"فشل تحميل المعاملات. يرجى المحاولة مرة أخرى.",  
+    "errorLoadingTransfers":"فشل تحميل التحويلات. يرجى المحاولة مرة أخرى.",
+    "errorDeleteAccount":"فشل حذف الحساب. يرجى المحاولة مرة أخرى.",
+    "errorDeleteIncomse":"فشل حذف الإيراد. يرجى المحاولة مرة أخرى.",
+    "errorDeleteExpenses":"فشل حذف المصروف. يرجى المحاولة مرة أخرى.",
+    "errorDeleteSchedule":"فشل حذف الجدول. يرجى المحاولة مرة أخرى.",
+    "errorDeleteTransactions":"فشل حذف المعاملات. يرجى المحاولة مرة أخرى.",
+    "errorDeleteTransfers":"فشل حذف التحويلات. يرجى المحاولة مرة أخرى.",  
+    "errorUpdateAccount":"فشل تحديث الحساب. يرجى المحاولة مرة أخرى.",
+    "errorUpdateIncomse":"فشل تحديث الإيراد. يرجى المحاولة مرة أخرى.",
+    "errorUpdateExpenses":"فشل تحديث المصروف. يرجى المحاولة مرة أخرى.",
+    "errorUpdateSchedule":"فشل تحديث الجدول. يرجى المحاولة مرة أخرى.",
+    "errorUpdateTransactions":"فشل تحديث المعاملات. يرجى المحاولة مرة أخرى.",
+    "errorUpdateTransfers":"فشل تحديث التحويلات. يرجى المحاولة مرة أخرى.",
+    "invalidCredentials": "خطأ في تسجيل الدخول. يرجى المحاولة مرة أخرى.",
+    "noData": "لا توجد بيانات لعرضها.",
+    "noOption":"لم يتم اختيار خيار.",
+
+    "amoutRequired":"المبلغ مطلوب",
+    "amountless":"المبلغ يجب ان يكون اكبر من الصفر",
+    "nameRequired": "الاسم مطلوب",
+    "balanceRequired": "الرصيد مطلوب",
+    "currencyRequired": "العملة مطلوبة",
+    "typeRequired": "النوع مطلوب",
+    "descriptionRequired": "الوصف مطلوب",
+    "categoryRequired": "الفئة مطلوبة",
+    "dateRequired": "التاريخ مطلوب"
+  },
+  "incomses": {
+    "title": "الإيرادات",
+    "totolBalance": "الرصيد الكلي:",
+    "numberOfIncomses": "عدد الإيرادات:",
+    "lastUpdate": "آخر تحديث"
+  },
+  "expenses": {
+    "title": "المصاريف",
+    "totolBalance": "الرصيد الكلي:",
+    "numberOfExpenses": "عدد المصروفات:",
+    "lastUpdate": "آخر تحديث"
+  },
+  "userDashboard":{
+    "title":"الحسابات"
+  },
+  "viewTransations":{
+    "title":"المعاملات"
+  },
+  "account":{
+    "totalBalance":"الرصيد الكلي:",
+    "date":"التاريخ",
+    "category":"الفئة",
+    "type":"النوع",
+    "amount":"المبلغ",
+    "noTransactions":"لا يوجد بيانات لعرضها."
+  },
+  "accounts":{
+    "name":"الاسم",
+    "amount":"المبلغ",
+    "currency":"العملة",
+    "type":"النوع",
+    "actions":"الإجراءات"
+  },
+  "createAccount":{
+    "title":"إنشاء حساب",
+    "name":"الاسم",
+    "balance":"الرصيد",
+    "currency":"العملة",
+    "description":"الوصف",
+    "type":"النوع"
+  },
+  "createExpense":{
+    "title":"مصروف جديد",
+    "name":"الاسم",
+    "amount":"المبلغ",
+    "currency":"العملة",
+    "description":"الوصف",
+    "category":"الفئة"
+  },
+  "updateAccount":{
+    "title":"تحديث الحساب",
+    "name":"الاسم",
+    "balance":"الرصيد",
+    "currency":"العملة",
+    "type":"النوع"
+  },
+  "createIncomse":{
+    "title":"دخل حديد",
+    "amount":"المبلغ",
+    "description":"الوصف",
+    "date":"التاريخ",
+    "category":"الفئة",
+    "name":"الاسم"
+  },
+  "createSchedule":{
+    "title":"",
+    "sourceAmount":"المبلغ",
+    "destinationAmount":"المبلغ",
+    "sourceAccount":"الحساب",
+    "destinationAccount":"الحساب",
+    "date":"التاريخ",
+    "category":"الفئة",
+    "description":"الوصف",
+    "name":"الاسم",
+    "amount":"المبلغ",
+    "currency":"العملة",
+    "type":"النوع",
+    "status":"الحالة",
+    "nextExecutionDate":"التاريخ القادم"
+    },
+    "placeholder":{
+    "search":"بحث...",
+    "sourceAccount":"حدد الحساب",
+    "destinationAccount":"حدد الحساب",
+    "category":"حدد الفئة",
+    "type":"حدد نوع",
+    "interval":"حدد interval",
+    "status":"حدد الحالة",
+    "name":"ادخل اسم",
+    "amount":"ادخل المبلغ",
+    "currency":"حدد العملة",
+    "description":"ادخل الوصف",
+    "date":"حدد التاريخ",
+    "balance":"ادخل الرصيد",
+    "nextExecutionDate":"حدد التاريخ التنفيذ القادم"
+  },
+  "CreateScheduledIncome":{
+    "title":"جدولة الدخل",
+    "sourceAmount":"المبلغ",
+    "destinationAmount":"المبلغ",
+    "sourceAccount":"الحساب",
+    "destinationAccount":"الحساب",
+    "date":"التاريخ",
+    "category":"الفئة",
+    "description":"الوصف",
+    "interval":"الinterval",
+    "name":"الاسم",
+    "amount":"المبلغ",
+    "currency":"العملة",
+    "type":"النوع",
+    "status":"الحالة",
+    "nextExecutionDate":"التاريخ القادم"
+  },
+  "Schedule":{
+
+  },
+  "createTransfer":{
+    "title":"تحويل جديد",
+    "sourceAccount":"الحساب المصدر",
+    "destinationAccount":"الحساب المستهدف",
+    "amountSent":"المبلغ المرسل",
+    "exchangeRate":"نسبة exc",
+    "amountReceived":"المبلغ المستلم",
+    "description":"الوصف",
+    "date":"التاريخ"
+  },
+  "updateExpense":{
+    "title":"تحديث المصروف",
+    "category":"الفئة",
+    "description":"الوصف",
+    "amount":"المبلغ",
+    "currency":"العملة",
+    "name":"الاسم"
+  },
+
+  "updateIncomse":{
+    "title":"تحديث الدخل",
+    "amount":"المبلغ",
+    "description":"الوصف",
+    "date":"التاريخ",
+    "category":"الفئة",
+    "name":"الاسم"
+  },
+  "schedualeInfo":{
+    "title":"تفاصيل الجدول",
+    "account":"الحساب",
+    "sourceAmount":"المبلغ المصدر",
+    "destinationAmount":"المبلغ المستهدف",
+    "sourceAccount":"الحساب المصدر",
+    "destinationAccount":"الحساب المستهدف",
+    "date":"التاريخ",
+    "category":"الفئة",
+    "description":"الوصف",
+    "interval":"الinterval",
+    "name":"الاسم",
+    "amount":"المبلغ",
+    "currency":"العملة",
+    "type":"النوع",
+    "status":"الحالة",
+    "nextExecutionDate":"التاريخ القادم",
+    "actions":"الإجراءات"
+  },
+  "updateSchedule":{
+
+  },
+  "updateTransaction":{
+
+  },
+
+  "buttons":{
+    "addAccount":"إنشاء حساب",
+    "createIncomse":"دخل حديد",
+    "updateAccount":"تحديث الحساب",
+    "createExpense":"مصروف جديدد",
+    "createSchedule":"جدولة التحويلات",
+    "createTransaction":"عملية جديدة",
+    "createTransfer":"تحويل جديد",
+    "updateExpense":"تحديث المصروف",
+    "updateIncomse":"تحديث الدخل",
+    "updateSchedule":"تحديث الجدول",
+    "updateTransaction":"تحديث المعامله",
+    "updateTransfer":"تحديث التحويل",
+    "updating":"يتم تحديث",
+    "loading":"جار التحميل",
+    "add":"إضافة",
+    "cancel":"الغاء",
+    "edit":"تعديل",
+    "delete":"حذف",
+    "save":"حفظ",
+    "close":"اغلاق"
+  },
+
+
+  "currency":{
+    "usd":"USD",
+    "eur":"EUR",
+    "sek":"SEK",
+    "aed":"AED",
+    "trt":"TRY",
+    "sar":"SAR",
+    "gbp":"GBP",
+    "jpy":"JPY"
+  },
+  "transactionDetails":
+  {
+    "amount":"المبلغ",
+    "account":"الحساب",
+    "sourceAccount":"الحساب المصدر",
+    "destinationAccount":"الحساب المستهدف",
+    "date":"التاريخ",
+    "description":"الوصف",
+    "type":"النوع",
+    "category":"الفئة",
+    "status":"الحالة",
+    "actions":"الإجراءات"
+  },
+  "updateTransfer":
+  {
+    "title":"تحديث التحويل",
+    "sourceAccount":"الحساب المصدر",
+    "destinationAccount":"الحساب المستهدف",
+    "amountSent":"المبلغ المرسل",
+    "exchangeRate":"نسبة exc",
+    "amountReceived":"المبلغ المستلم",
+    "description":"الوصف",
+    "date":"التاريخ"
+
   }
 }

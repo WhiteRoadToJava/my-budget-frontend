@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
 import styles from "../../styles/components/account/account.module.scss";
 import Row from "./Row";
-import { getAccounts, getAllAccountTransactions } from "../../api/accountService";
+import {
+  getAccounts,
+  getAllAccountTransactions,
+} from "../../api/accountService";
 import Button from "../btns/Button";
 import CreateIncomse from "../imcomses/CreateIncomse";
 import CreateExpense from "../expenses/CreateExpense";
@@ -9,14 +12,13 @@ import ToogleMenu from "../elements/ToggleMenu";
 import { useQuery } from "@tanstack/react-query";
 import TransactionInfo from "../transactions/TransactionInfo";
 import CreateTransfer from "../transfers/CreateTransfer";
+import i18n from "../../configuration/i18n";
 
 const Account = ({ account }) => {
   const [isCreateIncomseOpen, setIsCreateIncomseOpen] = useState(false);
   const [isCreateExpenseOpen, setIsCreateExpenseOpen] = useState(false);
   const [selectedTransaction, setSelectedTransaction] = useState(null);
-  const [isCreateTransfer, setIsCreateTransfer] = useState(false); 
-
-
+  const [isCreateTransfer, setIsCreateTransfer] = useState(false);
 
   const {
     data: transactions = [],
@@ -26,46 +28,39 @@ const Account = ({ account }) => {
   } = useQuery({
     queryKey: ["transactions", account.id],
     queryFn: () => getAllAccountTransactions(account),
-    select: (data) => [...data].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)),
+    select: (data) =>
+      [...data].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)),
   });
-  const { 
-    data: accounts = [], 
-  } = useQuery({
-    queryKey: ["accounts"], 
-    queryFn: getAccounts, 
+  const { data: accounts = [] } = useQuery({
+    queryKey: ["accounts"],
+    queryFn: getAccounts,
   });
-  if (isTxLoading) return <div>Loading transactions...</div>;
+  if (isTxLoading) return <div>{i18n.t("messages.loading")}</div>;
   if (isTxError) {
-    return <div>Error loading transactions: {txError.message}</div>;
+    return <div>{i18n.t("messages.loadingError")} {txError.message}</div>;
   }
 
   const handleTransactionClick = (transaction) => {
     setSelectedTransaction(transaction);
   };
 
-
-
-
-
-
-
   const buttonMenuItems = [
     <Button
       key="inc"
       variant="primary"
-      text="Create Income"
+      text={i18n.t("buttons.createIncomse")}
       onClick={() => setIsCreateIncomseOpen(true)}
     />,
     <Button
       key="exp"
       variant="cancel"
-      text="Create Expense"
+      text={i18n.t("buttons.createExpense")}
       onClick={() => setIsCreateExpenseOpen(true)}
     />,
     <Button
       key="tra"
       variant="blue"
-      text="Create Transfer"
+      text={i18n.t("buttons.createTransfer")}
       onClick={() => setIsCreateTransfer(true)}
     />,
   ];
@@ -75,10 +70,21 @@ const Account = ({ account }) => {
       <h2 className={styles.accountTitle}>{account.name}</h2>
       <div className={styles.divider}></div>
       <div className={styles.totalBalanceContainer}>
-        Total Balance: <span className={styles.totalBalance}>{Number(account.totalBalance).toFixed(2)}</span>
+        {i18n.t("account.totalBalance")}{" "}
+        <span className={styles.totalBalance}>
+          {Number(account.totalBalance).toFixed(2)}
+        </span>
       </div>
-      
+
+
       <div className={styles.transactionsContainer}>
+              <div className={styles.rowTitle}>
+        <p>{i18n.t("account.amount")}</p>
+        <p>{i18n.t("account.category")}</p>
+        <p>{i18n.t("account.date")}</p>
+        <p>{i18n.t("account.type")}</p>
+      </div>
+
         {transactions.length > 0 ? (
           transactions.map((transaction) => (
             <Row
@@ -88,7 +94,7 @@ const Account = ({ account }) => {
             />
           ))
         ) : (
-          <p>No transactions found.</p>
+          <p>{i18n.t("account.noTransactions")}</p>
         )}
       </div>
 

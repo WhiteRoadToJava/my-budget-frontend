@@ -4,6 +4,6 @@ export const updatePassword = async (requestBody) => {
     const response = await api.post("/auth/update-password", requestBody);
     return response;
   } catch (error) {
-    console.log("Update password error:", error);
+    console.error("Update password error:", error);
   }
 };

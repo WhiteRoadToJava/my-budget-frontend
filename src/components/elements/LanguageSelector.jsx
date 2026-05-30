@@ -39,7 +39,6 @@ const LanguageSelector = () => {
     document.documentElement.lang = lang.code;
     localStorage.setItem("language", lang.code);
     setOpen(false);
-    console.log(flags)
   };
 
   return (

@@ -22,7 +22,6 @@ export default function Sidebar({ menuItems }) {
   }, []);
 
   const handleMenuItemClick = (index, link) => {
-    console.log("Menu item clicked:", index, link); // Debugging line to check the clicked item
     setActiveItem(index);
     if (link) navigate(link);
   };
@@ -31,7 +30,7 @@ export default function Sidebar({ menuItems }) {
     try {
       await logout();
       navigate("/auth/login");
-    } catch (err) { console.error("Logout failed", err); }
+    } catch (err) { console.error(i18n.t("logoutError"), err); }
   };
 
   return (

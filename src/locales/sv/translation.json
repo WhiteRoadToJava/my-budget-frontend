@@ -39,5 +39,265 @@
     "totaBalance": "Total balance",
     "NumberOFAccounts": "Number of accounts",
     "lastUpdate": "Last update"
+  },
+  "messages": {
+    "success": "Ett återställningslänk har skickats till",
+    "loadingError": "Error loading transactions: ",
+    "loading":"Laddar transaktioner...",
+    "loadingSchedule":"Laddar planering...",
+    "loadingAccounts":"Laddar konton...",
+    "errorLoadingIncomse":"Failed to loading incomse. Please try again.",
+    "errorLoadingExpenses":"Failed to loading expenses. Please try again.",
+    "errorLoadingSchedule":"Failed to loading schedule. Please try again.", 
+    "errorLoadingTransactions":"Failed to loading transactions. Please try again.",
+    "errorLoadingTransfers":"Failed to loading transfers. Please try again.",
+    "errorCreateAccount":"Failed to create account. Please try again.",
+    "errorCreateIncomse":"Failed to create incomse. Please try again.",
+    "errorCreateExpense":"Failed to create expense. Please try again.",
+    "errorCreateSchedule":"Failed to create schedule. Please try again.",
+    "errorCreateTransaction":"Failed to create transaction. Please try again.",
+    "errorCreateTransfer":"Failed to create transfer. Please try again.",
+
+    "errorDeleteAccount":"Failed to delete account. Please try again.",
+    "errorDeleteIncomse":"Failed to delete incomse. Please try again.",
+    "errorDeleteExpenses":"Failed to delete expenses. Please try again.",
+    "errorDeleteSchedule":"Failed to delete schedule. Please try again.",
+    "errorDeleteTransactions":"Failed to delete transactions. Please try again.",
+    "errorDeleteTransfers":"Failed to delete transfers. Please try again",
+    "errorUpdateAccount":"Failed to update account. Please try again.",
+    "errorUpdateIncomse":"Failed to update incomse. Please try again.",
+    "errorUpdateExpenses":"Failed to update expenses. Please try again.",
+    "errorUpdateSchedule":"Failed to update schedule. Please try again.",
+    "errorUpdateTransactions":"Failed to update transactions. Please try again.",
+    "errorUpdateTransfers":"Failed to update transfers. Please try again.",
+    "invalidCredentials": "Login failed. Please try again.",
+    "noData": "No data found.",
+    "noOption":"No option selected.",
+
+    "amoutRequired":"Amount is required",
+    "amountless":"Amount must be greater than zero.",
+
+    "nameRequired": "Name is required",
+    "balanceRequired": "Balance is required",
+    "currencyRequired": "Currency is required",
+    "typeRequired": "Type is required",
+    "descriptionRequired": "Description is required",
+    "categoryRequired": "Category is required",
+    "dateRequired": "Date is required"
+  },
+  "incomses": {
+    "title": "Incomses",
+    "totolBalance": "Total balance:",
+    "numberOfIncomses": "Number of incomses:",
+    "lastUpdate": "Last update"
+  },
+  "expenses": {
+    "title": "Expenses",
+    "totolBalance": "Total balance:",
+    "numberOfExpenses": "Number of expenses:",
+    "lastUpdate": "Last update"
+  },
+  "userDashboard":{
+    "title":"konton"
+  },
+  "viewTransations":{
+    "title":"Transaktioner"
+  },
+  "account":{
+    "totalBalance":"Total balance:",
+    "date":"Datum",
+    "category":"",
+    "type":"Type",
+    "amount":"Summa",
+    "noTransactions":"Ingen transaktion hittad."
+  },
+  "accounts":{
+    "name":"Namn",
+    "amount":"Belopp",
+    "currency":"Valuta",
+    "type":"Typ",
+    "actions":"Handlar"
+  },
+  "createAccount":{
+    "title":"Skapa konto",
+    "name":"Namn",
+    "balance":"Saldo",
+    "currency":"Valuta",
+    "description":"Beskrivning",
+    "type":"Typ"
+  },
+  "createExpense":{
+    "title":"Skapa utgift",
+    "name":"Namn",
+    "amount":"Belopp",
+    "currency":"Valuta",
+    "description":"Beskrivning",
+    "category":"Kategori"
+  },
+  "updateAccount":{
+    "title":"Uppdatera konto",
+    "name":"Namn",
+    "balance":"Saldo",
+    "currency":"Valuta",
+    "type":"Typ"
+  },
+  "createIncomse":{
+    "title":"Skapa inkomst",
+    "amount":"Belopp",
+    "description":"Beskrivning",
+    "date":"Datum",
+    "category":"Kategori",
+    "name":"Namn"
+  },
+  "createSchedule":{
+    "title":"Skapa planering",
+    "sourceAmount":"Källabelopp",
+    "destinationAmount":"Destinationbelopp",
+    "sourceAccount":"Källakonto",
+    "destinationAccount":"Destinationkonto",
+    "date":"Datum",
+    "category":"Kategori",
+    "description":"Beskrivning",
+    "interval":"Interval",
+    "name":"Namn",
+    "amount":"Belopp",
+    "currency":"Valuta",
+    "type":"Typ",
+    "status":"Status",
+    "nextExecutionDate":"Nästa körning"
+  },
+  "placeholder":{
+    "search":"Sök...",
+    "sourceAccount":"Välj källkonto",
+    "destinationAccount":"Välj destinationkonto",
+    "interval":"Välj interval",
+    "category":"Välj kategori",
+    "type":"Välj typ",
+    "status":"Välj status",
+    "name":"Ange namn",
+    "amount":"Ange belopp",
+    "currency":"Välj valuta",
+    "description":"Ange beskrivning",
+    "date":"Välj datum",
+    "balance":"Ange saldo",
+    "nextExecutionDate":"Välj nästa körning"
+  },
+  "CreateScheduledIncome":{
+    "title":"Skapa planerad inkomst",
+    "sourceAccount":"Källakonto",
+    "amountSend":"Belopp att skicka",
+    "interval":"Interval",
+    "nextExecutionDate":"Nästa körning",
+    "category":"Kategori",
+    "description":"Beskrivning",
+    "name":"Namn"
+  },
+  "schedualeInfo":{
+    "title":"Planering",
+    "amount":"Belopp",
+    "account":"Konto",
+    "sourceAccount":"Källakonto",
+    "destinationAccount":"Destinationkonto",
+    "date":"Datum",
+    "description":"Beskrivning",
+    "type":"Typ",
+    "category":"Kategori",
+    "status":"Status",
+    "nextExecutionDate":"Nästa körning",
+    "actions":"Handlar"
+  },
+  "createTransaction":{
+
+  },
+  "createTransfer":{
+    "title":"Skapa överföring",
+    "sourceAccount":"Källakonto",
+    "destinationAccount":"Destinationkonto",
+    "amountSent":"Belopp att skicka",
+    "exchangeRate":"Växelkurs",
+    "amountReceived":"Belopp att mottaga",
+    "description":"Beskrivning",
+    "date":"Datum"
+  },
+  "updateExpense":{
+    "title":"Uppdatera utgift",
+    "category":"Kategori",
+    "description":"Beskrivning",
+    "amount":"Belopp",
+    "currency":"Valuta",
+    "name":"Namn"
+  },
+  "updateIncomse":{
+    "title":"Uppdatera inkomst",
+    "amount":"Belopp",
+    "description":"Beskrivning",
+    "date":"Datum",
+    "category":"Kategori",
+    "name":"Namn"
+  },
+  "updateSchedule":{
+
+  },
+  "updateTransaction":{
+
+  },
+
+  "buttons":{
+    "add":"Lägg till",
+    "addAccount":"Skapa konto",
+    "updateAccount":"Uppdatera konto",
+    "createIncomse":"Skapa inkomst",
+    "createExpense":"Skapa utgift",
+    "loadingSchdule":"Laddar planering...",
+    "createSchedule":"Skapa planering",
+    "createTransaction":"Skapa transaktion",
+    "createTransfer":"Skapa överföring",
+    "updateExpense":"Uppdatera utgift",
+    "updateIncomse":"Uppdatera inkomst",
+    "updateSchedule":"Uppdatera planering",
+    "updateTransaction":"Uppdatera transaktion",
+    "updateTransfer":"Uppdatera överföring",
+    "updating":"Uppdaterar",
+    "loading":"Laddar",
+    "edit":"Ändra",
+    "delete":"Ta bort",
+    "cancel":"Avbryt",
+    "save":"Spara",
+    "close":"Stäng"
+  },
+  "currency":{
+    "usd":"USD",
+    "eur":"EUR",
+    "sek":"SEK",
+    "aed":"AED",
+    "trt":"TRY",
+    "sar":"SAR",
+    "gbp":"GBP",
+    "jpy":"JPY"
+  },
+  "transactionDetails":
+  {
+    "amount":"Belopp",
+    "account":"Konto",
+    "sourceAccount":"Källakonto",
+    "destinationAccount":"Destinationkonto",
+    "date":"Datum",
+    "description":"Beskrivning",
+    "type":"Typ",
+    "category":"Kategori",
+    "status":"Status",
+    "actions":"Handlar"
+  },
+  "updateTransfer":
+  {
+    "title":"Uppdatera överföring",
+    "sourceAccount":"Källakonto",
+    "destinationAccount":"Destinationkonto",
+    "amountSent":"Summa skickad",
+    "exchangeRate":"Växelkurs",
+    "amountReceived":"Summa mottagen",
+    "description":"Beskrivning",
+    "date":"Datum"
+
   }
 }

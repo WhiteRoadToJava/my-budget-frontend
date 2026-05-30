@@ -11,6 +11,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { deleteIncomse } from "../../api/incomseService";
 import { deleteExpense } from "../../api/expenseService";
 import { deleteTransfer } from "../../api/transferServce";
+import i18n from "../../configuration/i18n";
 
 const TransactionInfo = ({ isOpen, onClose, accounts, transaction }) => {
   const queryClient = useQueryClient();
@@ -32,7 +33,9 @@ const TransactionInfo = ({ isOpen, onClose, accounts, transaction }) => {
     onError: () => {
       setError({
         hasError: true,
-        message: "Failed to delete incomse. Please try again.",
+        message: i18n.t("masseges.errorDeleteIncomse", {
+          defaultMessage: "Failed to delete incomse. Please try again.",
+        }),
       });
     },
   });
@@ -47,7 +50,8 @@ const TransactionInfo = ({ isOpen, onClose, accounts, transaction }) => {
     onError: () => {
       setError({
         hasError: true,
-        message: "Failed to delete incomse. Please try again.",
+        message: i18n.t("masseges.errorDeleteExpense"),
+        defaultMessage: "Failed to delete expense. Please try again.",
       });
     },
   });
@@ -62,7 +66,8 @@ const TransactionInfo = ({ isOpen, onClose, accounts, transaction }) => {
     onError: () => {
       setError({
         hasError: true,
-        message: "Failed to delete transfer. Please try again.",
+        message: i18n.t("masseges.errorDeleteTransfers"),
+        defaultMessage: "Failed to delete transfer. Please try again.",
       });
     },
   });
@@ -108,18 +113,24 @@ const TransactionInfo = ({ isOpen, onClose, accounts, transaction }) => {
   };
 
   const buttonMenuItems = [
-    <Button key="edit" text="Edit" type="button" onClick={handleUpdate} />,
+    <Button key="edit" text={i18n.t("buttons.edit", {
+        defaultMessage: "Edit",
+      })} type="button" onClick={handleUpdate} />,
     <Button
       key="delete"
       variant="delete"
-      text="Delete"
+      text={i18n.t("buttons.delete", {
+        defaultMessage: "Delete",
+      })}
       type="button"
       onClick={() => setOpenConfirmDelete(true)}
     />,
     <Button
       key="close"
       variant="cancel"
-      text="Close"
+      text={i18n.t("buttons.close", {
+        defaultMessage: "Close",
+      })}
       type="button"
       onClick={onClose}
     />,
@@ -130,7 +141,7 @@ const TransactionInfo = ({ isOpen, onClose, accounts, transaction }) => {
         <div className={styles.transactionContainer}>
           <div className={styles.transactionTitle} data-type={transaction.type}>
             <h2 className={styles.transactionTitleText}>
-              {transaction.type} Details
+              {transaction.type} {i18n.t("transactionDetails.transaction")}
             </h2>
           </div>
 
@@ -140,27 +151,35 @@ const TransactionInfo = ({ isOpen, onClose, accounts, transaction }) => {
             <ToggleMenu menuList={buttonMenuItems} />
           </div>
           <p className={styles.transactionDetail}>
-            <strong>Amount:</strong>{" "}
+            <strong>{i18n.t("transactionDetails.amount")}:</strong>{" "}
             {transaction?.amount
               ? Number(transaction.amount).toFixed(2)
               : "0.00"}{" "}
             {transaction.currency}
           </p>
+
+          {transaction.type === "in-transfer" ||
+          transaction.type === "out-transfer" ? (
+            <p className={styles.transactionDetail}>
+              <strong>{i18n.t("transactionDetails.sourceAccount")}:</strong> {accountName}
+            </p>
+          ) : (
+            <p className={styles.transactionDetail}>
+              <strong>{i18n.t("transactionDetails.account")}:</strong> {accountName}
+            </p>
+          )}
           <p className={styles.transactionDetail}>
-            <strong>Account:</strong> {accountName}
-          </p>
-          <p className={styles.transactionDetail}>
-            <strong>Date:</strong>{" "}
+            <strong>{i18n.t("transactionDetails.date")}:</strong>{" "}
             {new Date(transaction.createdAt).toLocaleDateString()}
           </p>
           <p className={styles.transactionDetail}>
-            <strong>Description:</strong> {transaction.description}
+            <strong>{i18n.t("transactionDetails.description")}:</strong> {transaction.description}
           </p>
           <div>
             {error.hasError && <p style={{ color: "red" }}>{error.message}</p>}
           </div>
           <div className={styles.buttonContainer}>
-            <Button text="Close" variant="cancel" onClick={onClose} />
+            <Button text={i18n.t("buttons.close")} variant="cancel" onClick={onClose} />
           </div>
         </div>
       </Modal>

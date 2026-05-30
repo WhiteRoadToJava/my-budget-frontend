@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "../../../styles/components/user/setting/updateUser.module.scss";
 import Modal from "../../modals/Modal";
 import FormInput from "../../inputs/FormInput";
@@ -6,14 +6,17 @@ import Button from "../../btns/Button";
 import { updateUser, getUser } from "../../../api/userService";
 import SuccessConfirmaton from "../../modals/SuccessConfirmaton";
 import validteUpdateUser from "../../../validators/validteUpdateUser";
+import NavBar from "../../NavBar";
 
-const UpdateUser = ({ display, setDisplay }) => {
-  const initializedProfile = localStorage.getItem("profiles")
-    ? JSON.parse(localStorage.getItem("profiles"))
-    : getUser();
-  console.log(initializedProfile);
+const UpdateUser = ({ display, setDisplay, user }) => {
 
-  const [profile, setProfile] = useState(initializedProfile);
+
+
+    const [profile, setProfile] = useState({
+    firstname: user?.firstname || "",
+    lastname: user?.lastname || "",
+    phone: user?.phone || "",
+  });
   const [error, setError] = useState({
     hasError: false,
     message: "",
@@ -23,16 +26,25 @@ const UpdateUser = ({ display, setDisplay }) => {
     hasSuccess: false,
     message: "",
   });
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setProfile({ ...profile, [name]: value });
-    setError({ hasError: false, message: "", position: "" });
-  };
+
+  useEffect(() => {
+    setProfile({
+      firstname:user?.firstname || "", 
+      lastname:user?.lastname || "", 
+      phone:user?.phone || "",
+    });
+  }, [user]);
+
+
 
   const handleClearError = () => {
     setError({ hasError: false, message: "", position: "" });
     setSuccess({ hasSuccess: false, message: "" });
-    setProfile(getUser());
+    setProfile(
+      profile?.data?.firstname
+        ? profile.data
+        : JSON.parse(localStorage.getItem("profiles"))
+    );
     setDisplay(false);
   };
   const handleUpdateProfile = async (e) => {
@@ -41,9 +53,7 @@ const UpdateUser = ({ display, setDisplay }) => {
 
     try {
       validteUpdateUser(profile);
-      console.log(validteUpdateUser(profile));
       const response = await updateUser(profile);
-      console.log(response);
       if (
         response.status === 200 ||
         response === "Profile updated successfully"
@@ -57,6 +67,7 @@ const UpdateUser = ({ display, setDisplay }) => {
         setError({ hasError: false, message: "", position: "" });
         setSuccess({ hasSuccess: true, message: successMsg });
       }
+      <NavBar profile={profile} />;
     } catch (error) {
       setError({
         hasError: true,
@@ -73,7 +84,7 @@ const UpdateUser = ({ display, setDisplay }) => {
       className={styles.updateContainer}
       style={{ display: display ? "block" : "none" }}
     >
-      <form className={styles.formContainer} >
+      <form className={styles.formContainer}>
         <h2>Update Profile</h2>
         <div className={styles.inputContainer}>
           <FormInput
@@ -81,7 +92,7 @@ const UpdateUser = ({ display, setDisplay }) => {
             name="firstname"
             error={error.position === "firstname" ? error.message : ""}
             value={profile.firstname}
-            onChange={handleInputChange}
+            onChange={(e) => setProfile({ ...profile, firstname: e.target.value })}
             type="text"
             placeholder="First Name"
           />
@@ -92,7 +103,7 @@ const UpdateUser = ({ display, setDisplay }) => {
             name="lastname"
             error={error.position === "lastname" ? error.message : ""}
             value={profile.lastname}
-            onChange={handleInputChange}
+            onChange={(e) => setProfile({ ...profile, lastname: e.target.value })}
             type="text"
             placeholder="Last Name"
           />
@@ -103,13 +114,18 @@ const UpdateUser = ({ display, setDisplay }) => {
             name="phone"
             error={error.position === "phone" ? error.message : ""}
             value={profile.phone}
-            onChange={handleInputChange}
+            onChange={(e) => setProfile({ ...profile, phone: e.target.value })}
             type="text"
             placeholder="Phone"
           />
         </div>
         <div className={styles.buttonContainer}>
-          <Button variant="primary" text="Update Profile" type="button" onClick={handleUpdateProfile} />
+          <Button
+            variant="primary"
+            text="Update Profile"
+            type="button"
+            onClick={handleUpdateProfile}
+          />
           <Button
             variant="cancel"
             text="Cancel"
@@ -126,7 +142,7 @@ const UpdateUser = ({ display, setDisplay }) => {
         isOpen={success.hasSuccess}
         message={success.message}
         onClose={() => {
-          setSuccess({ hasSuccess: false, message: "" })
+          setSuccess({ hasSuccess: false, message: "" });
           setDisplay(false);
         }}
       />

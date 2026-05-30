@@ -7,6 +7,7 @@ import styles from "../../styles/components/schedule/createdSchedualedIncomse.mo
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { addSchedule } from "../../api/scheduleService";
 import Datepicker from "../../components/inputs/Datepicker";
+import i18n from "../../configuration/i18n";
 
 const interval = [
   "DAILY",
@@ -44,7 +45,7 @@ const CreateScheduledIncome = ({
     onError: () => {
       setError({
         hasError: true,
-        message: "Failed to create income. Please try again.",
+        message: i18n.t("errorCreateIncomse"),
       });
     },
   });
@@ -87,12 +88,12 @@ const CreateScheduledIncome = ({
     if (!incomeData.amountSend || parseFloat(incomeData.amountSend) <= 0) {
       setError({
         hasError: true,
-        message: "Amount must be greater than zero.",
+        message: i18n.t("errorCreateIncomse"),
       });
       return false;
     }
     if (!incomeData.category) {
-      setError({ hasError: true, message: "Category is required." });
+      setError({ hasError: true, message: i18n.t("categoryRequired") });
       return false;
     }
     return true;
@@ -112,7 +113,6 @@ const CreateScheduledIncome = ({
 
  
 
-  console.log(incomeData);
 
   return (
     <Modal isOpen={isOpen}>
@@ -121,7 +121,7 @@ const CreateScheduledIncome = ({
         <form onSubmit={handleCreateIncome}>
           <div className={styles.inputContainer}>
             <FormInput
-              label="Name"
+              label={i18n.t("CreateScheduledIncome.name")}
               name="name"
               type="text"
               value={incomeData.name}
@@ -131,8 +131,8 @@ const CreateScheduledIncome = ({
 
           <div>
             <DropDown
-              label="Source Account"
-              placeholder="Select a source account"
+              label={i18n.t("CreateScheduledIncome.sourceAccount")}
+              placeholder={i18n.t("placeholder.sourceAccount")}
               list={filteredSourceList}
               name="sourceAccountId"
               value={selectedSourceName || ""}
@@ -142,8 +142,8 @@ const CreateScheduledIncome = ({
 
                     <div>
             <DropDown
-              label="Schedule Interval"
-              placeholder="Select a schedule interval"
+              label={i18n.t("CreateScheduledIncome.interval")}
+              placeholder={i18n.t("placeholder.interval")}
               list={interval}
               name="scheduleIntervals"
               value={incomeData.scheduleIntervals || ""}
@@ -160,7 +160,7 @@ const CreateScheduledIncome = ({
 
           <div className={styles.inputContainer}>
             <FormInput
-              label="Amount"
+              label={i18n.t("CreateScheduledIncome.amountSend")}
               name="amountSend"
               type="number"
               value={incomeData.amountSend}
@@ -169,7 +169,7 @@ const CreateScheduledIncome = ({
           </div>
           <div className={styles.inputContainer}>
             <Datepicker
-              label="Next Execution Date"
+              label={i18n.t("CreateScheduledIncome.nextExecutionDate")}
               name="nextExecutionDate"
               value={incomeData.nextExecutionDate}
               onChange={(date) => {
@@ -185,7 +185,7 @@ const CreateScheduledIncome = ({
           
           <div className={styles.inputContainer}>
             <FormInput
-              label="Category"
+              label={i18n.t("CreateScheduledIncome.category")}
               name="category"
               type="text"
               value={incomeData.category}
@@ -195,7 +195,7 @@ const CreateScheduledIncome = ({
 
           <div className={styles.inputContainer}>
             <FormInput
-              label="Description"
+              label={i18n.t("CreateScheduledIncome.description")}
               name="description"
               type="textarea"
               value={incomeData.description}
@@ -215,7 +215,7 @@ const CreateScheduledIncome = ({
             {/* Fix 8: Cancel now calls cleanData to also reset errors */}
             <Button
               variant="cancel"
-              text="Cancel"
+              text={i18n.t("buttons.cancel")}
               onClick={cleanData}
               type="button"
             />

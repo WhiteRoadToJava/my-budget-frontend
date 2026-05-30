@@ -1,0 +1,36 @@
+@use "../../../variables" as variable;
+
+.userDetailsContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+.userDetails {
+  background: variable.$gradient-bg;
+  width: 540px;
+  height: 530px;
+  padding: 2rem 4rem;
+  border: 2px solid variable.$color-stroke;
+  border-radius: 25px;
+}
+.details {
+  padding: 30px;
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  &span{
+    font-size: 1.5rem;
+    font-style: bo;
+
+  }
+}
+
+.buttonContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 20px;
+}

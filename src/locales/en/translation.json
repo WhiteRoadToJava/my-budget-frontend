@@ -5,45 +5,329 @@
     "expenses": "Expenses",
     "incomes": "Incomes",
     "transactions": "Transactions",
-    "schedule":"Schedule",
+    "schedule": "Schedule",
     "calendar": "Calendar",
     "settings": "Settings"
   },
-  "sidebar":{
-    "logout":"Logout"
+  "sidebar": {
+    "logout": "Logout"
   },
-    "forgotPassword":{
-    "header":"Reset your password",
-    "success":"A password reset link has been sent to",
-    "email":"Email",
-    "submit":"Send Reset Link "
+  "forgotPassword": {
+    "header": "Reset your password",
+    "success": "A password reset link has been sent to",
+    "email": "Email",
+    "submit": "Send Reset Link "
   },
-  "login":{
-    "header":"Please enter your details",
-    "username":"Username",
-    "email":"Email",
-    "password":"Password",
-    "forgotPassword":"Forgot Password?",
-    "submit":"Login"
+  "login": {
+    "header": "Please enter your details",
+    "username": "Username",
+    "email": "Email",
+    "password": "Password",
+    "forgotPassword": "Forgot Password?",
+    "submit": "Login"
   },
-  "terminal":{
-    "terminal":"Welcome traveler, to the vast",
-    "terminalTow":"and occasionally confusing",
-    "terminalThree":"universe of programming."
+  "terminal": {
+    "terminal": "Welcome traveler, to the vast",
+    "terminalTow": "and occasionally confusing",
+    "terminalThree": "universe of programming."
   },
-  "accountsPage":{
-    "buttonText":"Add Account",
-    "searchInput":"Search"
+  "accountsPage": {
+    "buttonText": "Add Account",
+    "searchInput": "Search"
   },
-  "accountInfo":{
-    "totaBalance":"Total balancel",
-    "NumberOFAccounts":"Number of accounts",
-    "lastUpdate":"Last update"
+  "accountInfo": {
+    "totaBalance": "Total balance",
+    "NumberOFAccounts": "Number of accounts",
+    "lastUpdate": "Last update"
   },
-  "massages":{
-    "success":"A password reset link has been sent to"
+  "messages": {
+    "success": "A password reset link has been sent to",
+    "loadingError": "Error loading transactions: ",
+    "loading":"Loading transactions...",
+    "loadingSchedule":"Loading schedule...",
+    "loadingAccounts":"Loading accounts...",
+    "errorCreateAccount":"Failed to create account. Please try again.",
+    "errorCreateIncomse":"Failed to create incomse. Please try again.",
+    "errorCreateExpense":"Failed to create expense. Please try again.",
+    "errorCreateSchedule":"Failed to create schedule. Please try again.",
+    "errorCreateTransaction":"Failed to create transaction. Please try again.",
+    "errorCreateTransfer":"Failed to create transfer. Please try again.",
+    "errorLoadingIncomse":"Failed to loading incomse. Please try again.",
+    "errorLoadingExpenses":"Failed to loading expenses. Please try again.",
+    "errorLoadingSchedule":"Failed to loading schedule. Please try again.",
+    "errorLoadingTransactions":"Failed to loading transactions. Please try again.",
+    "errorLoadingTransfers":"Failed to loading transfers. Please try again.",
+    "errorDeleteAccount":"Failed to delete account. Please try again.",
+    "errorDeleteIncomse":"Failed to delete incomse. Please try again.",
+    "errorDeleteExpenses":"Failed to delete expenses. Please try again.",
+    "errorDeleteSchedule":"Failed to delete schedule. Please try again.",
+    "errorDeleteTransactions":"Failed to delete transactions. Please try again.",
+    "errorDeleteTransfers":"Failed to delete transfers. Please try again.",
+    "errorUpdateAccount":"Failed to update account. Please try again.",
+    "errorUpdateIncomse":"Failed to update incomse. Please try again.",
+    "errorUpdateExpenses":"Failed to update expenses. Please try again.", 
+    "errorUpdateSchedule":"Failed to update schedule. Please try again.",
+    "errorUpdateTransactions":"Failed to update transactions. Please try again.",
+    "errorUpdateTransfers":"Failed to update transfers. Please try again.",
+    "invalidCredentials": "Login failed. Please try again.",
+    "noData": "No data found.",
+    "noOption":"No option selected.",
+    "errorSameAccountTransfer":"Source and Destination accounts must be different.",
+
+    "amoutRequired":"Amount is required",
+    "amountless":"Amount must be greater than zero.",
+    "logoutError":"Failed to logout. Please try again.",
+
+
+    "nameRequired": "Name is required",
+    "balanceRequired": "Balance is required",
+    "currencyRequired": "Currency is required",
+    "typeRequired": "Type is required",
+    "descriptionRequired": "Description is required",
+    "categoryRequired": "Category is required",
+    "dateRequired": "Date is required"
+  },
+  "incomses": {
+    "title": "Incomses",
+    "totolBalance": "Total balance:",
+    "numberOfIncomses": "Number of incomses:",
+    "lastUpdate": "Last update"
+  },
+  "expenses": {
+    "title": "Expenses"
+  },
+  "userDashboard":{
+    "title":"accounts"
+  },
+  "viewTransations":{
+    "title":"Transactions"
+  },
+  "greeting": {
+    "morning": "Good morning",
+    "afternoon": "Good afternoon",
+    "evening": "Good evening",
+    "welcome": "Welcome back"
+  },
+  "accounts":{
+    "name":"Name",
+    "amount":"Amount",
+    "currency":"Currency",
+    "type":"Type",
+    "actions":"Actions"
+  },
+  "account": {
+    "totalBalance": "Total balance:",
+    "date":"Date",
+    "category":"Category",
+    "type":"Type",
+    "amount":"Amount",
+    "noTransactions":"No transactions found."
+  },
+    "createAccount":{
+      "title":"Create Account",
+      "name":"Name",
+      "balance":"Balance",
+      "currency":"Currency",
+      "description":"Description",
+      "type":"Type"
+  },
+  "createExpense":{
+    "title":"Create Expense",
+    "name":"Name",
+    "amount":"Amount",
+    "currency":"Currency",
+    "description":"Description",
+    "category":"Category"
+  },
+  "updateAccount":{
+    "title":"Update Account",
+    "name":"Name",
+    "balance":"Balance",
+    "currency":"Currency",
+    "type":"Type"
+  },
+  "createIncomse":{
+    "title":"Create Incomse",
+    "amount":"Amount",
+    "description":"Description",
+    "date":"Date",
+    "category":"Category",
+    "name":"Name"
+  },
+  "createSchedule":{
+    "title":"Create Schedule",
+    "sourceAmount":"Source Amount",
+    "destinationAmount":"Destination Amount",
+    "sourceAccount":"Source Account",
+    "destinationAccount":"Destination Account",
+    "date":"Date",
+    "category":"Category",
+    "description":"Description",
+    "interval":"Interval",
+    "executationDate":"Executatation Date",
+    "name":"Name",
+    "amount":"Amount",
+    "currency":"Currency",
+    "type":"Type",
+    "status":"Status",
+    "nextExecutionDate":"Next Execution Date"
+  },
+  "placeholder":{
+    "search":"Search...",
+    "sourceAccount":"Select source account",
+    "destinationAccount":"Select destination account",
+    "category":"Select category",
+    "type":"Select type",
+    "interval":"Select interval",
+    "status":"Select status",
+    "name":"Enter name",
+    "amount":"Enter amount",
+    "currency":"Select currency",
+    "description":"Enter description",
+    "date":"Select date",
+    "balance":"Enter balance",
+    "nextExecutionDate":"Select next execution date"
+  },
+  "CreateScheduledIncome":{
+    "title":"Create Scheduled Income",
+    "sourceAmount":"Source Amount",
+    "destinationAmount":"Destination Amount",
+    "sourceAccount":"Source Account",
+    "destinationAccount":"Destination Account",
+    "date":"Date",
+    "category":"Category",
+    "description":"Description",
+    "interval":"Interval",
+    "executationDate":"Executatation Date",
+    "name":"Name",
+    "amount":"Amount",
+    "currency":"Currency",
+    "type":"Type",
+    "status":"Status",
+    "nextExecutionDate":"Next Execution Date"
+  },
+  "schedualeInfo":{
+    "title":"Schedule Details",
+    "account":"Account",
+    "sourceAmount":"Source Amount",
+    "destinationAmount":"Destination Amount",
+    "sourceAccount":"Source Account",
+    "destinationAccount":"Destination Account",
+    "date":"Date",
+    "category":"Category",
+    "description":"Description",
+    "interval":"Interval",
+    "executationDate":"Executatation Date",
+    "name":"Name",
+    "amount":"Amount",
+    "currency":"Currency",
+    "type":"Type",
+    "status":"Status",
+    "nextExecutionDate":"Next Execution Date",
+    "actions":"Actions"
+  },
+  "TransactionInfo":{
+    "title":"Transaction Details",
+    "amount":"Amount",
+    "account":"Account",
+    "sourceAccount":"Source Account",
+    "destinationAccount":"Destination Account",
+    "date":"Date",
+    "description":"Description"
+    },
+
+  "createTransaction":{
+
+  },
+  "createTransfer":{
+    "title":"Create Transfer",
+    "sourceAccount":"Source Account",
+    "destinationAccount":"Destination Account",
+    "amountSent":"Amount Sent",
+    "exchangeRate":"Exchange Rate",
+    "amountReceived":"Amount Received",
+    "description":"Description",
+    "date":"Date"
+
+  },
+  "updateExpense":{
+    "title":"Update Expense",
+    "category":"Category",
+    "description":"Description",
+    "amount":"Amount",
+    "currency":"Currency",
+    "name":"Name"
+  },
+  "updateIncomse":{
+    "title":"Update Incomse",
+    "amount":"Amount",
+    "description":"Description",
+    "date":"Date",
+    "category":"Category",
+    "name":"Name"
+  },
+  "updateSchedule":{
+
+  },
+  "updateTransaction":{
+
+  },
+
+  "buttons": {
+    "add": "Add",
+    "addAccount": "Add Account",
+    "updateAccount": "Update Account",
+    "createIncomse": "Create Incomse",
+    "createExpense": "Create Expense",
+    "createSchedule": "Create Schedule",
+    "createTransaction": "Create Transaction",
+    "createTransfer": "Create Transfer",
+    "updateExpense": "Update Expense",
+    "updateIncomse": "Update Incomse",
+    "updateSchedule": "Update Schedule",
+    "updateTransaction": "Update Transaction",
+    "updateTransfer": "Update Transfer",
+    "updating": "Updating",
+    "loading": "Loading",
+    "edit": "Edit",
+    "delete": "Delete",
+    "cancel": "Cancel",
+    "save": "Save",
+    "close": "Close"
+  },
+  "currency": {
+    "usd": "USD",
+    "eur": "EUR",
+        "sek": "SEK",
+        "aed": "AED",
+        "trt": "TRY",
+        "sar": "SAR",
+        "gbp": "GBP",
+        "jpy": "JPY"
+  },
+
+    "transactionDetails":
+  {
+    "amount":"Amount",
+    "account":"Account",
+    "sourceAccount":"Source Account",
+    "destinationAccount":"Destination Account",
+    "date":"Date",
+    "description":"Description",
+    "type":"Type",
+    "category":"Category",
+    "status":"Status",
+    "actions":"Actions"
+  },
+  "updateTransfer":{
+    "title":"Update Transfer",
+    "sourceAccount":"Source Account",
+    "destinationAccount":"Destination Account",
+    "amountSent":"Amount Sent",
+    "exchangeRate":"Exchange Rate",
+    "amountReceived":"Amount Received",
+    "description":"Description",
+    "date":"Date"
+
   }
 }
-
-
-

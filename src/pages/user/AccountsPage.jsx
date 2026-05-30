@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Account from '../../components/account/Account'
 import { useParams } from 'react-router-dom';
 import { getAccountById } from '../../api/accountService';
+import i18n from '../../configuration/i18n';
 
 const AccountsPage = () => {
   const {accountId} = useParams();
@@ -17,7 +18,7 @@ const AccountsPage = () => {
     };
     fetchAccount();
   }, [accountId]);
-  if (!account) return <div>Loading...</div>;
+  if (!account) return <div>{i18n.t("masseges.loading")}</div>;
   return (
     <div>
       <Account account={account} />
