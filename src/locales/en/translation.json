@@ -77,6 +77,8 @@
     "amoutRequired":"Amount is required",
     "amountless":"Amount must be greater than zero.",
     "logoutError":"Failed to logout. Please try again.",
+    "no_data_available":"No data available.",
+    "search_error":"Failed to search. Please try again.",
 
 
     "nameRequired": "Name is required",
@@ -317,7 +319,13 @@
     "type":"Type",
     "category":"Category",
     "status":"Status",
-    "actions":"Actions"
+    "actions":"Actions",
+    "transaction":"Transaction",
+    "incomse":"Incomse",
+    "expense":"Expense",
+    "inTransfer":"Incomming Transfer",
+    "outTransfer":"Outgoing Transfer",
+    "details":"details"
   },
   "updateTransfer":{
     "title":"Update Transfer",

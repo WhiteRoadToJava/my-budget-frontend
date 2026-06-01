@@ -76,6 +76,10 @@
 
     "amoutRequired":"Amount is required",
     "amountless":"Amount must be greater than zero.",
+    "logoutError":"Failed to logout. Please try again.",
+    "no_data_available":"No data available.",
+    "search_error":"Failed to search. Please try again.",
+
 
     "nameRequired": "Name is required",
     "balanceRequired": "Balance is required",
@@ -286,7 +290,13 @@
     "type":"Typ",
     "category":"Kategori",
     "status":"Status",
-    "actions":"Handlar"
+    "actions":"Handlar",
+    "transaction":"Transaktion",
+    "incomse":"Inkomst",
+    "expense":"Utgift",
+    "inTransfer":"Inkommen överföring",
+    "outTransfer":"Utgående överföring",
+    "details":"Detaljer"
   },
   "updateTransfer":
   {
