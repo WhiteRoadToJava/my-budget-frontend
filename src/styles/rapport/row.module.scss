@@ -10,7 +10,6 @@
   cursor: pointer;
   width: 800px;
 
-
   &[data-type="incomse"] {
     border-left: 10px solid variable.$color-tennis;
   }
@@ -30,7 +29,7 @@
   p {
     margin: 0;
     padding: 0 10px;
-    width: 50%;
+    min-width: 150px;
   }
 }
 
@@ -38,10 +37,22 @@
   background-color: variable.$color-gray-caviar;
 }
 .transactionType {
+  align-content: center;
+  justify-content: center;
+  padding: 5px 10px 5px 10px;
+  border-radius: variable.$radius-small;
   &[data-type="in-transfer"] {
-    color:variable.$color-tennis;
+    color: variable.$color-tennis;
   }
   &[data-type="out-transfer"] {
-    color: variable.$hover-cancel;
+    background-color: variable.$color-blue;
+  }
+  &[data-type="expense"] {
+    background-color: variable.$hover-error;
+    padding: 5px 30px 5px 10px;
+  }
+  &[data-type="incomse"] {
+    background-color: variable.$color-success;
+    padding: 5px 30px 5px 10px;
   }
 }

@@ -10,11 +10,14 @@ const Row = ({ item, onClick }) => {
     >
       <p>{formatNumber(item.amount)}</p>
       <p>{item.sourceAccount?.name}</p>
-      {item.destinationAccount && <p>{item.destinationAccount.name}</p>}
+      {item.destinationAccount ?
+        <p>{item.destinationAccount.name}</p> :
+        <p> - </p>
+      }
       <p>{new Date(item.createdAt).toLocaleDateString()}</p>
-      <p className={styles.transactionType} data-type={item.type}>
+      <div className={styles.transactionType} data-type={item.type}>
         {item.type}
-      </p>
+      </div>
     </div>
   );
 }; 
