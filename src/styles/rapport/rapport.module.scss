@@ -1,13 +1,28 @@
+@use "../../variables" as variable;
 .header{
   display: flex;
   justify-content: flex-start;
   align-items: center;
   margin-bottom: 20px;
-  gap: 40px;
+  gap: 50px;
   width: 100%;
   display: flex;
-  align-items: center
+  align-items: center;
+  padding: 20px;
+  
+  background-color: variable.$color-gray-caviar;
 }
 .datepickerContainer{
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
   
+}
+.noData{
+  font-size: variable.$font-lg;
+  color: variable.$color-text;
+  text-align: center;
+  margin-top: 20px;
 }

@@ -115,9 +115,14 @@ const TransactionInfo = ({ isOpen, onClose, accounts, transaction }) => {
   };
 
   const buttonMenuItems = [
-    <Button key="edit" text={i18n.t("buttons.edit", {
+    <Button
+      key="edit"
+      text={i18n.t("buttons.edit", {
         defaultMessage: "Edit",
-      })} type="button" onClick={handleUpdate} />,
+      })}
+      type="button"
+      onClick={handleUpdate}
+    />,
     <Button
       key="delete"
       variant="delete"
@@ -143,7 +148,8 @@ const TransactionInfo = ({ isOpen, onClose, accounts, transaction }) => {
         <div className={styles.transactionContainer}>
           <div className={styles.transactionTitle} data-type={transaction.type}>
             <h2 className={styles.transactionTitleText}>
-              {transaction.type} {i18n.t("transactionDetails.transaction")}
+              {i18n.t("transactionDetails.transaction")} {
+              transaction.type === "incomse" ? i18n.t("transactionDetails.incomse") : transaction.type === "expense" ? i18n.t("transactionDetails.expense") : transaction.type === "in-transfer" ? i18n.t("transactionDetails.inTransfer") : transaction.type === "out-transfer" ? i18n.t("transactionDetails.outTransfer") : ""}{" "} {i18n.t("transactionDetails.details")}
             </h2>
           </div>
 
@@ -163,16 +169,21 @@ const TransactionInfo = ({ isOpen, onClose, accounts, transaction }) => {
           {transaction.type === "in-transfer" ||
           transaction.type === "out-transfer" ? (
             <>
-            <p className={styles.transactionDetail}>
-              <strong>{i18n.t("transactionDetails.sourceAccount")}:</strong> {sourceAccountName}
-            </p>
-            <p className={styles.transactionDetail}>
-              <strong>{i18n.t("transactionDetails.destinationAccount")}:</strong> {destinationAccountName}
-            </p>
+              <p className={styles.transactionDetail}>
+                <strong>{i18n.t("transactionDetails.sourceAccount")}:</strong>{" "}
+                {sourceAccountName}
+              </p>
+              <p className={styles.transactionDetail}>
+                <strong>
+                  {i18n.t("transactionDetails.destinationAccount")}:
+                </strong>{" "}
+                {destinationAccountName}
+              </p>
             </>
           ) : (
             <p className={styles.transactionDetail}>
-              <strong>{i18n.t("transactionDetails.account")}:</strong> {sourceAccountName}
+              <strong>{i18n.t("transactionDetails.account")}:</strong>{" "}
+              {sourceAccountName}
             </p>
           )}
           <p className={styles.transactionDetail}>
@@ -180,13 +191,18 @@ const TransactionInfo = ({ isOpen, onClose, accounts, transaction }) => {
             {new Date(transaction.createdAt).toLocaleDateString()}
           </p>
           <p className={styles.transactionDetail}>
-            <strong>{i18n.t("transactionDetails.description")}:</strong> {transaction.description}
+            <strong>{i18n.t("transactionDetails.description")}:</strong>{" "}
+            {transaction.description}
           </p>
           <div>
             {error.hasError && <p style={{ color: "red" }}>{error.message}</p>}
           </div>
           <div className={styles.buttonContainer}>
-            <Button text={i18n.t("buttons.close")} variant="cancel" onClick={onClose} />
+            <Button
+              text={i18n.t("buttons.close")}
+              variant="cancel"
+              onClick={onClose}
+            />
           </div>
         </div>
       </Modal>

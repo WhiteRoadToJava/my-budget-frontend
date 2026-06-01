@@ -1,14 +1,19 @@
-import React, { useState, useMemo} from "react";
+import React, { useState, useMemo } from "react";
 import Row from "./Row";
 import styles from "../../styles/rapport/rapport.module.scss";
 import Datepicker from "../inputs/Datepicker";
 import Button from "../btns/Button";
 import sortingTransactions from "../../utils/sorting";
+import i18n from "../../configuration/i18n";
+import Modal from "../modals/Modal";
+import { is } from "date-fns/locale";
 
 const RapportComponent = ({ data = [], setFromDate, setToDate, search }) => {
   const [fromDate, setFromDateState] = useState(null);
   const [toDate, setToDateState] = useState(null);
   const [filteredData, setFilteredData] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   const handleSearch = async () => {
     if (fromDate && toDate) {
@@ -16,32 +21,36 @@ const RapportComponent = ({ data = [], setFromDate, setToDate, search }) => {
       setToDate(toDate);
       console.log("fromDate:", fromDate);
       console.log("toDate:", toDate);
-      await search();
+      setIsLoading(true);
+      setError(null);
+      try {
+        await search();
+      } catch (err) {
+        setError(i18n.t("messages.search_error"));
+      } finally {
+        setIsLoading(false);
+      }
     }
   };
-  useMemo (() => {
-      const sortedData = sortingTransactions(data);
-      setFilteredData(sortedData);
-    }, [data]);
+  useMemo(() => {
+    const sortedData = sortingTransactions(data);
+    setFilteredData(sortedData);
+  }, [data]);
 
   return (
     <div>
       <h2>Rapport</h2>
       <div className={styles.header}>
-        <div className={styles.datepickerContainer}>
-          <Datepicker
-            label="From: "
-            value={fromDate}
-            onChange={(data) => setFromDateState(data)}
-          />
-        </div>
-        <div className={styles.datepickerContainer}>
-          <Datepicker
-            label="To: "
-            value={toDate}
-            onChange={(data) => setToDateState(data)}
-          />
-        </div>
+        <Datepicker
+          label="From: "
+          value={fromDate}
+          onChange={(data) => setFromDateState(data)}
+        />
+        <Datepicker
+          label="To: "
+          value={toDate}
+          onChange={(data) => setToDateState(data)}
+        />
         <div className={styles.buttonContainer}>
           <Button text="Search" onClick={() => handleSearch()} />
         </div>
@@ -52,7 +61,17 @@ const RapportComponent = ({ data = [], setFromDate, setToDate, search }) => {
         {filteredData.length > 0 ? (
           filteredData.map((item, index) => <Row key={index} item={item} />)
         ) : (
-          <p>No data available.</p>
+          <div className={styles.noData}>{i18n.t("messages.noData")}
+          <Modal isOpen={isLoading || error} onRequestClose={() => {}}>
+            <div >
+              <p style={{ padding: "20px", textAlign: "center" }}>
+                {isLoading
+                  ? i18n.t("messages.loading")
+                  : i18n.t("messages.no_data_available")}
+              </p>
+            </div>
+          </Modal>
+          </div>
         )}
       </div>
     </div>

@@ -73,6 +73,8 @@
     "invalidCredentials": "خطأ في تسجيل الدخول. يرجى المحاولة مرة أخرى.",
     "noData": "لا توجد بيانات لعرضها.",
     "noOption":"لم يتم اختيار خيار.",
+    "no_data_available":"لا توجد بيانات متاحة.",
+    "search_error":"فشل البحث. يرجى المحاولة مرة أخرى.",
 
     "amoutRequired":"المبلغ مطلوب",
     "amountless":"المبلغ يجب ان يكون اكبر من الصفر",
@@ -298,7 +300,13 @@
     "type":"النوع",
     "category":"الفئة",
     "status":"الحالة",
-    "actions":"الإجراءات"
+    "actions":"الإجراءات",
+    "transaction":"المعاملة",
+    "incomse":"الدخل",
+    "expense":"المصروف",
+    "inTransfer":"تحويل وارد",
+    "outTransfer":"تحويل صادر",
+    "details":"تفاصيل"
   },
   "updateTransfer":
   {
