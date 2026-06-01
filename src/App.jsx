@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Login from "./pages/auth/LoginTemp.jsx";
 import ForgotPassword from "./pages/auth/ForgotPassword.jsx";
-import Dashboard from "./styles/pages/Dashboard.jsx";
+import Dashboard from "./pages/admin/Dashboard.jsx"
 import { AuthProvider } from "./contexts/AuthContext.jsx";
 import { UserProvider } from "./contexts/UserContext.jsx";
 import Expense from "./pages/user/expenses/Expense.jsx";
@@ -15,6 +15,7 @@ import AccountsPage from "./pages/user/AccountsPage.jsx";
 import SettingPage from "./pages/user/setting/SettingPage.jsx";
 import AllTransactions from "./pages/user/transactions/AllTransactions.jsx";
 import SchedulePage from "./pages/user/SchedulePage.jsx";
+import RapportPage from "./pages/user/RapportPage.jsx";
 
 import i18n from "./configuration/i18n.js";
 import { useEffect } from "react";
@@ -79,6 +80,10 @@ function App() {
                   <Route 
                   path="/user/schedule"
                   element={<SchedulePage />}
+                  />
+                  <Route 
+                  path="/user/accounts/search"
+                  element={<RapportPage /> }
                   />
                 </Route>
               </Route>
