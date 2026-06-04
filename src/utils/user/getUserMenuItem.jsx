@@ -12,6 +12,6 @@ export const getUserMenuItems = () => [   // ← now a function
   { label: i18n.t("menu.transactions"), icon: <FileCode />,     link: "/user/transactions" },
   { label: i18n.t("menu.schedule"),     icon: <Calendar />,     link: "/user/schedule" },
   { label: i18n.t("menu.calendar"),     icon: <Calendar />,     link: "/user/calendar" },
-  { label: i18n.t("menu.rapport"),      icon: <FileCode />,     link: "/user/accounts/search" },
+  { label: i18n.t("menu.rapports"),      icon: <FileCode />,     link: "/user/accounts/search" },
   { label: i18n.t("menu.settings"),     icon: <SettingsIcon />, link: "/user/settings" },
 ];

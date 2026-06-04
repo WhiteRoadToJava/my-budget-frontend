@@ -31,7 +31,7 @@
 
     .calendarIcon {
       position: absolute;
-      left: 90% ;
+      inset-inline-start: 100%; // ✅ right in LTR, left in RTL automatically
       top: 7px;
       cursor: pointer;
     }

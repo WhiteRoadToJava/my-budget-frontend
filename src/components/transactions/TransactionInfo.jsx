@@ -22,7 +22,6 @@ const TransactionInfo = ({ isOpen, onClose, accounts, transaction }) => {
   const [error, setError] = useState({ hasError: false, message: "" });
   const sourceAccountName = transaction?.sourceAccount?.name;
   const destinationAccountName = transaction?.destinationAccount?.name;
-  console.log("transaction ", transaction);
 
   const deleteMutation = useMutation({
     mutationFn: (incomseId) => deleteIncomse(incomseId),

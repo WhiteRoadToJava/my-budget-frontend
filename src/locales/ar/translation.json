@@ -6,6 +6,7 @@
     "incomes": "الإيرادات",
     "transactions": "المعاملات",
     "schedule":"جدولة التحويلات",
+    "rapports":"التقارير",
     "calendar": "التقويم",
     "settings": "الإعدادات"
   },
@@ -84,7 +85,9 @@
     "typeRequired": "النوع مطلوب",
     "descriptionRequired": "الوصف مطلوب",
     "categoryRequired": "الفئة مطلوبة",
-    "dateRequired": "التاريخ مطلوب"
+    "dateRequired": "التاريخ مطلوب",
+    "logoutError":"فشل تسجيل الخروج. يرجى المحاولة مرة أخرى.",
+    "deleteConfirmation":"هل أنت متأكد أنك تريد حذف هذا العنصر؟ هذا الإجراء لا يمكن التراجع عنه."
   },
   "incomses": {
     "title": "الإيرادات",
@@ -275,7 +278,8 @@
     "edit":"تعديل",
     "delete":"حذف",
     "save":"حفظ",
-    "close":"اغلاق"
+    "close":"اغلاق",
+    "ok":"موافق"
   },
 
 
@@ -302,8 +306,8 @@
     "status":"الحالة",
     "actions":"الإجراءات",
     "transaction":"المعاملة",
-    "incomse":"الدخل",
-    "expense":"المصروف",
+    "incomse":"دخل",
+    "expense":"مصروف",
     "inTransfer":"تحويل وارد",
     "outTransfer":"تحويل صادر",
     "details":"تفاصيل"
