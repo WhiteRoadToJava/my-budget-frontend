@@ -57,7 +57,7 @@ export const getAllAccountTransactions = async (account) => {
   try {
     const response = await api.post(
       "/user/accounts/allaccount-transactions",
-      account,
+      {id: account.id},
     );
     return response.data;
   } catch (error) {
