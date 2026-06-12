@@ -113,7 +113,6 @@ const Row = ({ account }) => {
         </span>
         <span>{account.currency}</span>
         <span>{account.type}</span>
-        <span>{account.status}</span>
       </div>
       <div>
         <ToggleMenu menuList={menuItems} position="top" />
