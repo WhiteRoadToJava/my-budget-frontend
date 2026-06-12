@@ -21,3 +21,9 @@
 .leftSide{
   max-width: 500px;
 }
+
+@media (max-width: 1400px) {
+  .dashboardContainer{
+    display: block;
+  }
+}
