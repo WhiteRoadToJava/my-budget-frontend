@@ -57,7 +57,7 @@ export const getAllAccountTransactions = async (account) => {
   try {
     const response = await api.post(
       "/user/accounts/allaccount-transactions",
-      account,
+      {id: account.id},
     );
     return response.data;
   } catch (error) {
@@ -85,3 +85,16 @@ export const getAllTransations = async () => {
     throw error;
   }
 };
+
+export const updateAccountStatus = async (accountId, status) => {
+  try {
+    const response = await api.patch(`/user/accounts/${accountId}/update-status`,
+      {status: [status]}
+    );
+    return response.data;
+    } catch (error) {
+    console.error(`Error updating account status with ID ${accountId}:`, error);
+    throw error;
+  }
+};
+

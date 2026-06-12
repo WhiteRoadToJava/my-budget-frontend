@@ -291,7 +291,9 @@
     "cancel": "Cancel",
     "save": "Save",
     "close": "Close",
-    "ok": "OK"
+    "ok": "OK",
+    "active":"Active",
+    "archived":"Archive the Account"
   },
   "currency": {
     "usd": "USD",
