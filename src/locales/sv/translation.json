@@ -270,7 +270,9 @@
     "cancel":"Avbryt",
     "save":"Spara",
     "close":"Stäng",
-    "ok":"OK"
+    "ok":"OK",
+    "active":"Aktiv",
+    "archived":"ِArkivera kontot"
   },
   "currency":{
     "usd":"USD",

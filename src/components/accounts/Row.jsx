@@ -5,7 +5,7 @@ import ToggleMenu from "../elements/ToggleMenu";
 import Button from "../btns/Button";
 import DeleteConfirmation from "../modals/DeleteConfirmation";
 import SuccessConfirmaton from "../modals/SuccessConfirmaton";
-import { deleteAccount } from "../../api/accountService";
+import { deleteAccount, updateAccountStatus } from "../../api/accountService";
 import { formatNumber } from "../../utils/formating";
 
 import { useMutation, useQueryClient } from "@tanstack/react-query";
@@ -43,21 +43,55 @@ const Row = ({ account }) => {
       setSuccessConfirmation(false);
     },
   });
+  const updateMutation = useMutation({
+    mutationFn: ({accountId, status}) => updateAccountStatus(accountId, status),
+    onSuccess: () => {
+      setOpenDeleteConfirmation(false);
+      queryClient.invalidateQueries({ queryKey: ["accounts"] });
+      },
+      onError:(err) => {
+        console.error("Error Update Account Status: " , err)
+        setOpenDeleteConfirmation(false);
+        setSuccessConfirmation(false);
+      }
+  });
+
+
 
   const handleDelete = () => {
     deleteMutation.mutate(account.id);
   };
 
+  const updateStatus = async () => {
+    const statusValue = account.status[0];
+    updateMutation.mutate({
+      accountId: account.id,
+      status: statusValue === "ACTIVE" ? "ARCHIVED" : "ACTIVE",
+    });
+    if (account.status === "ACTIVE") {
+      console.log(account.status)
+    } else {
+      console.log(account.status)
+    }
+    
+  }
   const menuItems = [
     <Button
-      key="edit"
+      key={account.id}
       text={i18n.t("buttons.edit")}
       variant="primary"
       type="button"
       onClick={() => setOpenEditAccount(true)}
     />,
     <Button
-      key="delete"
+      key={account.id}
+      text={account.status[0] === "ACTIVE" ? i18n.t("buttons.archived") : i18n.t("buttons.active")}
+      variant="primary"
+      type="button"
+      onClick={updateStatus}
+    />,
+    <Button
+      key={account.id}
       text={i18n.t("buttons.delete")}
       variant="delete"
       type="button"
@@ -79,6 +113,7 @@ const Row = ({ account }) => {
         </span>
         <span>{account.currency}</span>
         <span>{account.type}</span>
+        <span>{account.status}</span>
       </div>
       <div>
         <ToggleMenu menuList={menuItems} position="top" />
