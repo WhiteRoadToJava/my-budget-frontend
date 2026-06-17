@@ -1,0 +1,33 @@
+@use "../../variables" as variable;
+
+.messageContainer {
+  width: 40px;
+  height: 40px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px;
+  border: 3px solid variable.$color-tennis;
+  border-radius: 50%;
+  cursor: pointer;
+
+  &[data-type="no-message"] {
+    opacity: 50%;
+  }
+}
+.messageCounter {
+  background-color: variable.$color-error;
+  min-width: 15px;
+  min-height: 15px;
+  border-radius: 50%;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.messageIcon {
+  color: variable.$color-tennis;
+}

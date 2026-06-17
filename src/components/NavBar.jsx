@@ -3,9 +3,10 @@ import styles from "../styles/layout/navbar.module.scss";
 import LanguageSelector from "./elements/LanguageSelector";
 import { UserContext } from "../contexts/UserContext";
 import i18n from "../configuration/i18n";
+import MessageComponent from "../components/interface/MessageComponent";
 
 const NavBar = ({ profiles }) => {
-console.log("profi  ",profiles);
+  console.log("profi  ", profiles);
 
   return (
     <div className={styles.navbarContainer}>
@@ -13,7 +14,10 @@ console.log("profi  ",profiles);
         <p>{i18n.t("greeting.welcome")}:</p>
         <h2>{profiles?.data?.fullname || profiles?.firstname || "Guest"}</h2>
       </div>
-      <LanguageSelector />
+      <div className={styles.iconsContainer}>
+        <LanguageSelector />
+        <MessageComponent />
+      </div>
     </div>
   );
 };
