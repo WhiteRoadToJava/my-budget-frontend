@@ -3,7 +3,7 @@ import styles from "../../styles/auth/login.module.scss";
 import LoginTerminal from "./LoginTerminal";
 //import Eye from "src/components/icons/Eye";
 import Button from "../../components/btns/Button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import LoadingSpinner from "../displays/LoadingSpinner.jsx";
 import { useAuth } from "../../contexts/AuthContext.jsx";
@@ -25,39 +25,38 @@ export default function LoginComponent() {
       [name]: value,
     }));
   };
-  const { login } = useAuth();
+  const { login, currentUser, loading } = useAuth();
+
+  useEffect(() => {
+    if (currentUser) {
+      setIsLoading(loading);
+      const role = currentUser.roles?.[0];
+      switch (role) {
+        case "ADMIN":
+          navigation("/admin");
+          break;
+        case "USER":
+          navigation("/user");
+          break;
+        default:
+          navigation("/admin/dashboard");
+      }
+    }
+    setIsLoading(loading);
+  }, [currentUser]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrorMessage("");
     setIsLoading(true);
-
     try {
-        const response = await login(user);
-      if (response) {
-        const role = response.roles[0]; // Assuming role is an array and you want the first role
-        switch (role) {
-          case "ADMIN":
-            navigation("/admin");
-            break;
-          case "USER":
-            navigation("/user");
-            break;
-          default:
-            navigation("/");
-        }
-      } else {
-        setErrorMessage(i18n.t("login.invalidCredentials"));
-      }
+      await login(user); // فقط استدعي login
     } catch (error) {
-      setErrorMessage(
-        "An error occurred. Please try again later. " + error.message,
-      );
+      setErrorMessage("An error occurred: " + error.message);
     } finally {
       setIsLoading(false);
     }
   };
-
 
   return (
     <div className={styles.formContainer}>

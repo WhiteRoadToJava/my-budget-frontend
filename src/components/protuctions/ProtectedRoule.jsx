@@ -30,7 +30,13 @@ import { useAuth } from "../../hooks/useAuth.jsx";
 
 const ProtectedRoute = ({ requiredRoles }) => {
   // hämta den nuvarande autentisierade usern från auth context
-  const { currentUser } = useAuth();
+  const { currentUser, loading } = useAuth();
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+
 
   // om ingen user är inloggad => redirect till login
   if (!currentUser) {
