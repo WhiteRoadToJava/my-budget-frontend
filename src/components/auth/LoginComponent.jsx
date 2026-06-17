@@ -46,11 +46,8 @@ export default function LoginComponent() {
           default:
             navigation("/");
         }
-<<<<<<< Updated upstream
       } else {
         setErrorMessage(i18n.t("login.invalidCredentials"));
-=======
->>>>>>> Stashed changes
       }
     } catch (error) {
       setErrorMessage(
