@@ -11,13 +11,9 @@ export const getAdminMenuItems = [
     link: "/admin",
   },
   {
-    label: "Courses",
-    icon: <FileCode />,
-    link: "/admin/courses",
-    /*submenu: [
-      { label: "See all courses", link: "/admin/courses" },
-      { label: "Create new course", link: "/admin/courses/new/1" },
-    ],*/
+    label:"Users",
+    icon: <Calendar/>,
+    link: "/admin/users"
   },
 
   {

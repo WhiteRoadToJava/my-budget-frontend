@@ -1,10 +1,14 @@
 import React from 'react'
 import Sidebar from './sidebar/Sidebar'
+import AddUser from './user/AddUser'
+
 
 const DashboardComponent = () => {
   return (
     <div>
-        sdfjssdlöfaösldfkjasödlfkjaasöldkfasödfkasödlfkajdflkjaöslkfjasölkdfjaslkdfaödklfjaösldkfjöasldfjaslkdföaslkdfaöslkdjaslkfjöalskdfjöl
+      sssss
+      <AddUser />
+
     </div>
   )
 }

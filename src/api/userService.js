@@ -19,3 +19,15 @@ export const updateUser = async (userData) => {
     throw error;
   }
 };
+
+export const registeUser = (userData) =>{
+  try{
+    const response = api.post('/auth/register',
+      userData
+    )
+    return response;
+  }catch(err){
+    console.error("Error Register user", err)
+    throw err
+  }
+}

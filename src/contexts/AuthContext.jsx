@@ -16,7 +16,6 @@ export const AuthProvider = ({ children }) => {
  const checkAuthStatus = async () => {
   try {
     const token = localStorage.getItem("token");
-    console.log("checkAuthStatus - token:", token);
     const response = await api.get("/auth/check", {
       withCredentials: true,
     });

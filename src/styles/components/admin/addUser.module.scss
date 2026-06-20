@@ -1,0 +1,9 @@
+@use "../../variables" as variable;
+
+.formContainer {
+  background-color: variable.$color-gray-medium;
+  padding: variable.$padding-base;
+  border-radius: variable.$radius-small;
+  width: 100%;
+  max-width: 400px;
+}
