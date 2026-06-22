@@ -3,7 +3,7 @@ import Modal from "../modals/Modal";
 import FormInput from "../inputs/FormInput";
 import styles from "../../styles/components/admin/addUser.module.scss";
 import { registeUser } from "../../api/userService";
-import { validateRegisterUser } from "../../validators/validateRegisterUser.js";
+import  {validateRegisterUser} from '../../validators/validateRegisterUser.js'
 
 const AddUser = () => {
   const [userRequset, setuserRequest] = useState({

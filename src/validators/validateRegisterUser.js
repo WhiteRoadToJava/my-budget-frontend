@@ -1,4 +1,4 @@
-export default function validteUpdateUser(profile) {
+export const validateRegisterUser = (profile) => {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (emailRegex.text(profile.username)) {
     throw {
