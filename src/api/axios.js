@@ -27,9 +27,9 @@ api.interceptors.response.use(
   (error) => {
     if (error.response && (error.response.status === 401 || error.response.status === 403)) {
       console.warn("Auth error or Forbidden, redirecting to login...");
-      localStorage.removeItem('token');
-      localStorage.removeItem('user');
-      window.location.href = '/login';
+     // localStorage.removeItem('token');
+     // localStorage.removeItem('user');
+     // window.location.href = '/login';
     }
     return Promise.reject(error);
   }

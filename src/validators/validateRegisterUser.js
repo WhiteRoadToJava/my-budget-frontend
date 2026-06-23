@@ -1,47 +1,59 @@
 export const validateRegisterUser = (profile) => {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (emailRegex.text(profile.username)) {
-    throw {
-      hasError: true,
-      message: "Username is not match an email type",
-      position: "username",
-    };
-  }
-  if (profile.username.trim()) {
-    throw {
+
+  // 1. فحص إذا كان فارغاً أولاً
+  if (!profile.username || !profile.username.trim()) {
+    return {
       hasError: true,
       message: "Username is required",
       position: "username",
     };
   }
-  // function to check
-  if (profile.password.trim()) {
-    throw {
+
+  // 2. فحص مطابقة الإيميل
+  if (!emailRegex.test(profile.username)) {
+    return {
       hasError: true,
-      message: "the password can not be empty.",
+      message: "Username is not match an email type",
+      position: "username",
+    };
+  }
+
+  // 3. فحص كلمة المرور
+  if (!profile.password || !profile.password.trim()) {
+    return {
+      hasError: true,
+      message: "The password can not be empty.",
       position: "password",
     };
   }
-  if (!profile.firstname?.trim()) {
-    throw {
+
+  // 4. الاسم الأول
+  if (!profile.firstname || !profile.firstname.trim()) {
+    return {
       hasError: true,
       message: "First name is required",
       position: "firstname",
     };
   }
-  if (!profile.lastname?.trim()) {
-    throw {
+
+  // 5. الاسم الأخير
+  if (!profile.lastname || !profile.lastname.trim()) {
+    return {
       hasError: true,
       message: "Last name is required",
       position: "lastname",
     };
   }
-  if (!profile.phone?.trim()) {
-    throw {
+
+  // 6. رقم الهاتف
+  if (!profile.phone || !profile.phone.trim()) {
+    return {
       hasError: true,
       message: "Phone number is required",
       position: "phone",
     };
   }
-  return { hasError: false };
-}
+
+  return { hasError: false, message: "", position: "" };
+};

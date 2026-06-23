@@ -2,20 +2,22 @@ import React, { useState } from "react";
 import Modal from "../modals/Modal";
 import FormInput from "../inputs/FormInput";
 import styles from "../../styles/components/admin/addUser.module.scss";
-import { registeUser } from "../../api/userService";
-import  {validateRegisterUser} from '../../validators/validateRegisterUser.js'
+import { addUser } from "../../api/admin/adminService.js";
+import { validateRegisterUser } from "../../validators/validateRegisterUser.js";
+import Button from "../../components/btns/Button.jsx";
+import SuccessConfigration from "../../components/modals/SuccessConfirmaton.jsx";
 
 const AddUser = () => {
   const [userRequset, setuserRequest] = useState({
     username: "",
-    passswprd: "",
+    passsword: "",
     firstname: "",
     lastname: "",
-    phnne: "",
+    phone: "",
   });
   const [open, setOpen] = useState(true);
   const [error, setError] = useState({
-    hseError: true,
+    hasError: false,
     message: "",
     errorPosition: "",
   });
@@ -32,27 +34,36 @@ const AddUser = () => {
       message: "",
       errorPosition: "",
     });
-    console.log(userRequset);
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (event) => {
+    event.preventDefault();
     const payload = { ...userRequset };
     const validation = validateRegisterUser(payload);
     if (validation.hasError) {
-      setError(validation);
+      setError({
+        hasError: validation.hasError,
+        message: validation.message,
+        errorPosition: validation.position,
+        
+      });
+      console.log( "hte error". validation)
+      return;
     }
+
     try {
-      const response = await registeUser(payload);
-      if (response.status === 200) {
+      const response = await addUser(payload);
+      if (response.status === 201) {
         setSuccess({
           isSucess: true,
           message: "register user is successfully",
         });
+        setOpen(true);
       }
     } catch (err) {
       setError({
         hasError: true,
-        message: "You can not register the new user" + err,
+        message: "You can not register the new user \n" + err,
         errorPosition: "general",
       });
     }
@@ -63,27 +74,27 @@ const AddUser = () => {
     setSuccess({ hasSuccess: false, message: "" });
     setuserRequest({
       username: "",
-      passswprd: "",
+      passsword: "",
       firstname: "",
       lastname: "",
-      phnne: "",
+      phosne: "",
     });
-    setOpen(false)
+    setOpen(false);
   };
 
   return (
     <>
       <Modal isOpen={open} close={() => setOpen(false)}>
         <div className={styles.formContainer}>
-          <h2>Add new user</h2>
-          <form>
+          <h2 className={styles.title}>Add new user</h2>
+          <form onSubmit={handleSubmit}>
             <div className={styles.inputContainer}>
               <FormInput
                 label="Username"
                 placeholder="Type username in here..."
                 name="username"
                 error={
-                  error.hseError && error.errorPosition == "username"
+                  error.errorPosition == "username"
                     ? error.message
                     : null
                 }
@@ -101,7 +112,7 @@ const AddUser = () => {
                 value={userRequset.password}
                 onChange={handleInputChange}
                 error={
-                  error.hseError && error.errorPosition == "password"
+                  error.errorPosition == "password"
                     ? error.message
                     : null
                 }
@@ -116,7 +127,7 @@ const AddUser = () => {
                 value={userRequset.firstname}
                 onChange={handleInputChange}
                 error={
-                  error.hseError && error.errorPosition == "firstname"
+                  error.errorPosition == "firstname"
                     ? error.message
                     : null
                 }
@@ -131,7 +142,7 @@ const AddUser = () => {
                 value={userRequset.lastname}
                 onChange={handleInputChange}
                 error={
-                  error.hseError && error.errorPosition == "lastname"
+                  error.errorPosition == "lastname"
                     ? error.message
                     : null
                 }
@@ -146,15 +157,19 @@ const AddUser = () => {
                 value={userRequset.phone}
                 onChange={handleInputChange}
                 error={
-                  error.hseError && error.errorPosition == "phone"
+                  error.errorPosition == "phone"
                     ? error.message
                     : null
                 }
               />
             </div>
 
+            {error.errorPosition === "general" ? (
+              <p className={styles.errorMessage}>{error.message}</p>
+            ) : null}
+
             <div className={styles.buttonContainer}>
-              <Button variant="primary" text="Update Password" type="submit" />
+              <Button variant="primary" text="Create user" type="submit" />
               <Button
                 variant="cancel"
                 text="Cancel"
@@ -168,7 +183,10 @@ const AddUser = () => {
 
       <SuccessConfigration
         isOpen={success.isSucess}
-        isClose={() => setSuccess.isSucess === false}
+        onClose={() => setSuccess({
+          isSucess:false
+        })}
+        message={success.message}
       />
     </>
   );

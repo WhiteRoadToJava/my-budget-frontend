@@ -7,3 +7,19 @@
   width: 100%;
   max-width: 400px;
 }
+.title{
+  padding: 20px;
+}
+
+.inputContainer{
+  padding-bottom: 20px
+}
+
+.buttonContainer{
+  display: flex;
+  gap: 20px;
+}
+.errorMessage{
+  color: variable.$color-error;
+  padding-bottom: 20px;
+}
