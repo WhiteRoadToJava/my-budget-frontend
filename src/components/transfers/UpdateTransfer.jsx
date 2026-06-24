@@ -7,6 +7,7 @@ import DropDown from "../elements/DropDown.jsx";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { getTransferById, updateTransfer } from "../../api/transferServce.js";
 import i18n from "../../configuration/i18n.js";
+import Datepicker from "../inputs/Datepicker.jsx";
 
 const UpdateTransfer = ({ isOpen, isClose, accounts, transfer }) => {
   const queryClient = useQueryClient();
@@ -21,6 +22,7 @@ const UpdateTransfer = ({ isOpen, isClose, accounts, transfer }) => {
     amountReceived: 0,
     description: "",
     category: "transfer",
+    createdAt: "",
   });
 
   const [error, setError] = useState({ hasError: false, message: "" });
@@ -37,6 +39,7 @@ const UpdateTransfer = ({ isOpen, isClose, accounts, transfer }) => {
         exChangeRate: tranferIncomingFromServer.exChangeRate || 1,
         amountReceived: tranferIncomingFromServer.amountReceived || 0,
         description: tranferIncomingFromServer.description || "", // تصحيح الخطأ الإملائي desccription
+        createdAt: tranferIncomingFromServer.createdAt || "",
       });
     }
     };
@@ -121,6 +124,7 @@ const UpdateTransfer = ({ isOpen, isClose, accounts, transfer }) => {
       
     });
   };
+  console.log(transfer)
 
   return (
     <Modal isOpen={isOpen} onRequestClose={isClose}>
@@ -179,6 +183,22 @@ const UpdateTransfer = ({ isOpen, isClose, accounts, transfer }) => {
             value={transferData.description}
             onChange={handleInputChange}
           />
+
+          <div>
+            <Datepicker
+              label={i18n.t("updateTransfer.date")}
+              name="date"
+              value={transferData.createdAt}
+              onChange={(date) => {
+                const localDateTime = `${date}T00:00:00.000Z`
+                setTransferData((prev) => ({
+                  ...prev,
+                  createdAt: localDateTime,
+                }));
+                setError({ hasError: false, message: "" });
+              }}
+            />  
+          </div>
 
           {error.hasError && (
             <p className={styles.errorMessage}>{error.message}</p>
