@@ -6,12 +6,14 @@ import Button from "../../components/btns/Button";
 import { updateIncomse, getIncomseById } from "../../api/incomseService";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import i18n from "../../configuration/i18n";
+import Datepicker from "../inputs/Datepicker";
 
 const UpdateIncomse = ({ isOpen, isClose, incomse }) => {
   const [incomseData, setIncomseData] = useState({
     account: { id: "" },
     category: "",
     amount: "",
+    createdAt: "",
   });
   const [error, setError] = useState({ hasError: false, message: "" });
   const queryClient = useQueryClient();
@@ -92,6 +94,22 @@ const UpdateIncomse = ({ isOpen, isClose, incomse }) => {
                 onChange={handleInputChange}
               />
             </div>
+            <div className={styles.inputContainer}>
+              <p>{i18n.t("updateIncomse.createdAt")}:</p>
+              <Datepicker
+                placeholder={i18n.t("placeholder.createdAt")}
+                name="createdAt"
+                value={incomseData.createdAt}
+                onChange={(date) => {
+                  const localDateTime = `${date}T00:00:00.000Z`;
+                  setIncomseData((prev) => ({
+                    ...prev,
+                    createdAt: localDateTime,
+                  }));
+                  setError({ hasError: false, message: "" });
+                }}
+              />
+              </div>
             <div>
               {error.hasError && (
                 <p style={{ color: "red" }}>{error.message}</p>
