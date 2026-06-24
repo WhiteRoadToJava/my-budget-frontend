@@ -231,7 +231,9 @@
     "description":"Beskrivning",
     "amount":"Belopp",
     "currency":"Valuta",
-    "name":"Namn"
+    "name":"Namn",
+    "createdAt":"Skapad",
+    "updatedAt":"Uppdaterad"
   },
   "updateIncomse":{
     "title":"Uppdatera inkomst",
@@ -239,7 +241,9 @@
     "description":"Beskrivning",
     "date":"Datum",
     "category":"Kategori",
-    "name":"Namn"
+    "name":"Namn",
+    "createdAt":"Skapad",
+    "updatedAt":"Uppdaterad"
   },
   "updateSchedule":{
 
@@ -312,7 +316,10 @@
     "exchangeRate":"Växelkurs",
     "amountReceived":"Summa mottagen",
     "description":"Beskrivning",
-    "date":"Datum"
-
+    "date":"Datum",
+    "status":"Status",
+    "createdAt":"Skapad",
+    "updatedAt":"Uppdaterad",
+    "actions":"Handlar"
   }
 }
