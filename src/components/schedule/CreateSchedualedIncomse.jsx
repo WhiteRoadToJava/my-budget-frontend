@@ -9,12 +9,7 @@ import { addSchedule } from "../../api/scheduleService";
 import Datepicker from "../../components/inputs/Datepicker";
 import i18n from "../../configuration/i18n";
 
-const interval = [
-  "DAILY",
-  "WEEKLY",
-  "MONTHLY",
-  "YEARLY"
-]
+const interval = ["DAILY", "WEEKLY", "MONTHLY", "YEARLY"];
 
 const CreateScheduledIncome = ({
   isOpen,
@@ -25,7 +20,7 @@ const CreateScheduledIncome = ({
   const [incomeData, setIncomeData] = useState({
     name: "",
     description: "",
-    sourceAccountId:"",
+    sourceAccountId: "",
     transactionTypes: [transactionType],
     category: "",
     amountSend: 0,
@@ -56,11 +51,9 @@ const CreateScheduledIncome = ({
   // Fix 2: Now safe to use accountsList here
   const filteredSourceList = accountsList.map((acc) => acc.name);
 
-  const getAccountNameById = (id) =>{
+  const getAccountNameById = (id) => {
     return accountsList.find((acc) => acc.id === id)?.name;
-  }
-
-
+  };
 
   // Fix 3: Use correct state field 'sourceAccountId'
   const selectedSourceName = getAccountNameById(incomeData.sourceAccountId);
@@ -78,7 +71,7 @@ const CreateScheduledIncome = ({
     );
     setIncomeData((prev) => ({
       ...prev,
-      sourceAccountId:  selectedAccount?.id || "" ,
+      sourceAccountId: selectedAccount?.id || "",
     }));
     setError({ hasError: false, message: "" });
   };
@@ -111,9 +104,6 @@ const CreateScheduledIncome = ({
     setError({ hasError: false, message: "" });
   };
 
- 
-
-
   return (
     <Modal isOpen={isOpen}>
       <div className={styles.formContainer}>
@@ -140,20 +130,20 @@ const CreateScheduledIncome = ({
             />
           </div>
 
-                    <div>
+          <div>
             <DropDown
               label={i18n.t("CreateScheduledIncome.interval")}
               placeholder={i18n.t("placeholder.interval")}
               list={interval}
               name="scheduleIntervals"
               value={incomeData.scheduleIntervals || ""}
-              onChange={(e) =>{
+              onChange={(e) => {
                 const selectedValue = e.target.value;
                 setIncomeData((prev) => ({
                   ...prev,
                   scheduleIntervals: [selectedValue],
                 }));
-                setError({ hasError: false, message: "" }); 
+                setError({ hasError: false, message: "" });
               }}
             />
           </div>
@@ -173,7 +163,7 @@ const CreateScheduledIncome = ({
               name="nextExecutionDate"
               value={incomeData.nextExecutionDate}
               onChange={(date) => {
-                const localDateTime = `${date}T00:00:00.000Z`
+                const localDateTime = `${date}T00:00:00.000Z`;
                 setIncomeData((prev) => ({
                   ...prev,
                   nextExecutionDate: localDateTime,
@@ -182,7 +172,7 @@ const CreateScheduledIncome = ({
               }}
             />
           </div>
-          
+
           <div className={styles.inputContainer}>
             <FormInput
               label={i18n.t("CreateScheduledIncome.category")}
