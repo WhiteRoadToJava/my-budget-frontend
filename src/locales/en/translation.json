@@ -257,7 +257,9 @@
     "description": "Description",
     "amount": "Amount",
     "currency": "Currency",
-    "name": "Name"
+    "name": "Name",
+    "createdAt": "Created At",
+    "updatedAt": "Updated At"
   },
   "updateIncomse": {
     "title": "Update Incomse",
@@ -265,7 +267,9 @@
     "description": "Description",
     "date": "Date",
     "category": "Category",
-    "name": "Name"
+    "name": "Name",
+    "createdAt": "Created At",
+    "updatedAt": "Updated At"
   },
   "updateSchedule": {},
   "updateTransaction": {},
@@ -332,6 +336,10 @@
     "exchangeRate": "Exchange Rate",
     "amountReceived": "Amount Received",
     "description": "Description",
-    "date": "Date"
+    "date": "Date",
+    "status": "Status",
+    "createdAt": "Created At",
+    "updatedAt": "Updated At",
+    "actions": "Actions"
   }
 }

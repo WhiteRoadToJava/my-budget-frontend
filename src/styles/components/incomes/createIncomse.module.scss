@@ -1,7 +1,6 @@
 @use "../../variables" as variable;
 
 .createIncomseContainer {
-
   display: flex;
   justify-content: center;
   align-items: center;
@@ -15,6 +14,7 @@
 }
 .inputContainer {
   margin-bottom: 20px;
+  margin-top: 20px;
 }
 .inputContainer label {
   display: block;

@@ -124,7 +124,6 @@ const UpdateTransfer = ({ isOpen, isClose, accounts, transfer }) => {
       
     });
   };
-  console.log(transfer)
 
   return (
     <Modal isOpen={isOpen} onRequestClose={isClose}>
@@ -184,9 +183,10 @@ const UpdateTransfer = ({ isOpen, isClose, accounts, transfer }) => {
             onChange={handleInputChange}
           />
 
-          <div>
+          <div className={styles.inputContainer}>
+            <p>{i18n.t("updateTransfer.createdAt")}:</p>
             <Datepicker
-              label={i18n.t("updateTransfer.date")}
+              label={i18n.t("updateTransfer.createdAt")}
               name="date"
               value={transferData.createdAt}
               onChange={(date) => {

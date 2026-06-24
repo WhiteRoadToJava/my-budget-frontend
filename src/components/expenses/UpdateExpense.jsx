@@ -6,14 +6,14 @@ import Button from "../../components/btns/Button";
 import { updateExpense, getExpenseById } from "../../api/expenseService";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import i18n from "../../configuration/i18n";
-
-
+import Datepicker from "../inputs/Datepicker";
 
 const UpdateExpense = ({ isOpen, isClose, expense }) => {
   const [expwnseData, setExpenseData] = useState({
     account: { id: "" },
     category: "",
     amount: "",
+    createdAt: "",
   });
   const [error, setError] = useState({ hasError: false, message: "" });
   const queryClient = useQueryClient();
@@ -23,7 +23,7 @@ const UpdateExpense = ({ isOpen, isClose, expense }) => {
       queryClient.invalidateQueries({ queryKey: ["transactions"] });
       queryClient.invalidateQueries({ queryKey: ["accounts"] });
 
-      isClose();
+      isClose == false;
       setExpenseData({ account: { id: "" }, category: "", amount: "" });
     },
     onError: () => {
@@ -93,6 +93,22 @@ const UpdateExpense = ({ isOpen, isClose, expense }) => {
                 onChange={handleInputChange}
               />
             </div>
+            <div className={styles.inputContainer}>
+              <p>{i18n.t("updateExpense.createdAt")}:</p>
+              <Datepicker
+                placeholder={i18n.t("placeholder.createdAt")}
+                name="createdAt"
+                value={expwnseData.createdAt}
+                onChange={(date) => {
+                  const localDateTime = `${date}T00:00:00.000Z`;
+                  setExpenseData((prev) => ({
+                    ...prev,
+                    createdAt: localDateTime,
+                  }));
+                  setError({ hasError: false, message: "" });
+                }}
+              />
+            </div>
             <div>
               {error.hasError && (
                 <p style={{ color: "red" }}>{error.message}</p>
@@ -101,11 +117,19 @@ const UpdateExpense = ({ isOpen, isClose, expense }) => {
             <div className={styles.buttonContainer}>
               <Button
                 variant="primary"
-                text={nutation.isPending ? i18n.t("message.loading") : i18n.t("buttons.updateExpense")}
+                text={
+                  nutation.isPending
+                    ? i18n.t("message.loading")
+                    : i18n.t("buttons.updateExpense")
+                }
                 type="submit"
                 onClick={handleUpdateIncomse}
               />
-              <Button variant="cancel" text={i18n.t("buttons.cancel")} onClick={isClose} />
+              <Button
+                variant="cancel"
+                text={i18n.t("buttons.cancel")}
+                onClick={() => isClose(false)}
+              />
             </div>
           </form>
         </div>
