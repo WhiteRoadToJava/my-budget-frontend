@@ -6,7 +6,7 @@ import Button from "../btns/Button";
 import sortingTransactions from "../../utils/sorting";
 import i18n from "../../configuration/i18n";
 import Modal from "../modals/Modal";
-import { is } from "date-fns/locale";
+
 
 const RapportComponent = ({ data = [], setFromDate, setToDate, search }) => {
   const [fromDate, setFromDateState] = useState(null);
@@ -17,11 +17,11 @@ const RapportComponent = ({ data = [], setFromDate, setToDate, search }) => {
 
   const handleSearch = async () => {
     if (fromDate && toDate) {
+      setIsLoading(true);
       setFromDate(fromDate);
       setToDate(toDate);
       console.log("fromDate:", fromDate);
       console.log("toDate:", toDate);
-      setIsLoading(true);
       setError(null);
       try {
         await search();
@@ -41,18 +41,26 @@ const RapportComponent = ({ data = [], setFromDate, setToDate, search }) => {
     <div>
       <h2>Rapport</h2>
       <div className={styles.header}>
-        <Datepicker
-          label="From: "
-          value={fromDate}
-          onChange={(data) => setFromDateState(data)}
-        />
-        <Datepicker
-          label="To: "
-          value={toDate}
-          onChange={(data) => setToDateState(data)}
-        />
+        <div className={styles.header}>
+          <div>
+            <p>Fromt Date:</p>
+            <Datepicker
+              label="From: "
+              value={fromDate}
+              onChange={(data) => setFromDateState(data)}
+            />
+          </div>
+          <div>
+            <p>To Date:</p>
+            <Datepicker
+              label="To: "
+              value={toDate}
+              onChange={(data) => setToDateState(data)}
+            />
+          </div>
+        </div>
         <div className={styles.buttonContainer}>
-          <Button text="Search" onClick={() => handleSearch()} />
+          <Button text="Search" onClick={handleSearch} />
         </div>
         <div className={styles.divider}></div>
       </div>
@@ -61,16 +69,17 @@ const RapportComponent = ({ data = [], setFromDate, setToDate, search }) => {
         {filteredData.length > 0 ? (
           filteredData.map((item, index) => <Row key={index} item={item} />)
         ) : (
-          <div className={styles.noData}>{i18n.t("messages.noData")}
-          <Modal isOpen={isLoading || error} onRequestClose={() => {}}>
-            <div >
-              <p style={{ padding: "20px", textAlign: "center" }}>
-                {isLoading
-                  ? i18n.t("messages.loading")
-                  : i18n.t("messages.no_data_available")}
-              </p>
-            </div>
-          </Modal>
+          <div className={styles.noData}>
+            {i18n.t("messages.noData")}
+            <Modal isOpen={isLoading || error} onRequestClose={() => {}}>
+              <div>
+                <p style={{ padding: "20px", textAlign: "center" }}>
+                  {isLoading
+                    ? i18n.t("messages.loading")
+                    : i18n.t("messages.no_data_available")}
+                </p>
+              </div>
+            </Modal>
           </div>
         )}
       </div>
