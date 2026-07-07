@@ -46,6 +46,7 @@ const UpdateExpense = ({ isOpen, isClose, expense }) => {
               amount: data.amount || "",
             });
           }
+          isOpen == false;
         } catch (err) {
           console.error("Error fetching expense:", err);
         }
@@ -61,6 +62,7 @@ const UpdateExpense = ({ isOpen, isClose, expense }) => {
   const handleUpdateIncomse = async (e) => {
     e.preventDefault(); // avoid form submission causing page reload
     nutation.mutate(expwnseData);
+    isClose(false);
   };
   const handleInputChange = (e) => {
     const { name, value } = e.target;
