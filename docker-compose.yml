@@ -1,10 +1,11 @@
-version: '3.8'
-
 services:
   frontend:
     build: .
     ports:
       - "3000:3000"
     environment:
-      - VITE_API_URL=http://localhost:8080
+      # قم بتغيير 192.168.1.100 إلى عنوان الـ IP الحقيقي الخاص باللابتوب السيرفر
+      - VITE_API_URL=http://192.168.0.108:8080
+      # أضفنا هذا المتغير لحل مشكلة Nginx التي ظهرت سابقاً في السجلات
+      - PORT=3000 
     restart: unless-stopped

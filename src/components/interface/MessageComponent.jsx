@@ -1,4 +1,4 @@
-import Message from "../icons/interface/Message.jsx";
+import Message from "../icons/interface/message.jsx";
 import styles from "../../styles/interface/messagComponent.module.scss";
 import React from "react";
 
