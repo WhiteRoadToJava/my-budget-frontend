@@ -7,13 +7,16 @@ import { updateExpense, getExpenseById } from "../../api/expenseService";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import i18n from "../../configuration/i18n";
 import Datepicker from "../inputs/Datepicker";
+import { imagesUpload } from "../../api/upload";
 
 const UpdateExpense = ({ isOpen, isClose, expense }) => {
+  const [imageUrls, setImageUrls] = useState(null);
   const [expwnseData, setExpenseData] = useState({
     account: { id: "" },
     category: "",
     amount: "",
     createdAt: "",
+    image: null,
   });
   const [error, setError] = useState({ hasError: false, message: "" });
   const queryClient = useQueryClient();
@@ -23,7 +26,7 @@ const UpdateExpense = ({ isOpen, isClose, expense }) => {
       queryClient.invalidateQueries({ queryKey: ["transactions"] });
       queryClient.invalidateQueries({ queryKey: ["accounts"] });
 
-      isClose == false;
+      isClose();
       setExpenseData({ account: { id: "" }, category: "", amount: "" });
     },
     onError: () => {
@@ -44,6 +47,7 @@ const UpdateExpense = ({ isOpen, isClose, expense }) => {
               account: { id: data.account?.id || "" },
               category: data.category || "",
               amount: data.amount || "",
+              image: data.image || null,
             });
           }
           isOpen == false;
@@ -59,7 +63,7 @@ const UpdateExpense = ({ isOpen, isClose, expense }) => {
     };
   }, [isOpen, expense]);
 
-  const handleUpdateIncomse = async (e) => {
+  const handleUpdateExpense = async (e) => {
     e.preventDefault(); // avoid form submission causing page reload
     nutation.mutate(expwnseData);
     isClose(false);
@@ -68,6 +72,37 @@ const UpdateExpense = ({ isOpen, isClose, expense }) => {
     const { name, value } = e.target;
     setExpenseData({ ...expwnseData, [name]: value });
     setError({ hasError: false, message: "" }); // Clear error on input change
+  };
+
+  const handleImagesUploading = async (event) => {
+    const selectedFile = event.target.files[0];
+    const formData = new FormData();
+    formData.append("file", selectedFile);
+
+    const response = await imagesUpload(formData);
+    if (response) {
+    const uploadedImage = {
+      filename: response.filename,
+      url: response.url
+    }
+    setExpenseData((prev) => ({
+      ...prev,
+      image: uploadedImage
+    }));
+    setImageUrls(uploadedImage);
+    console.log(uploadedImage);
+  } else{
+    const uploadedImage = {
+      filename: "",
+      url: ""
+    }
+    setImageUrls(uploadedImage);
+    console.log(uploadedImage);
+    setExpenseData((prev) => ({
+      ...prev,
+      image: uploadedImage
+    }));
+  }
   };
 
   return (
@@ -111,6 +146,14 @@ const UpdateExpense = ({ isOpen, isClose, expense }) => {
                 }}
               />
             </div>
+            <div className={styles.inputContainer}>
+              <input
+                type="file"
+                accept="image/*"
+                capture="environment"
+                onChange={handleImagesUploading}
+              />
+            </div>
             <div>
               {error.hasError && (
                 <p style={{ color: "red" }}>{error.message}</p>
@@ -125,12 +168,12 @@ const UpdateExpense = ({ isOpen, isClose, expense }) => {
                     : i18n.t("buttons.updateExpense")
                 }
                 type="submit"
-                onClick={handleUpdateIncomse}
+                onClick={handleUpdateExpense}
               />
               <Button
                 variant="cancel"
                 text={i18n.t("buttons.cancel")}
-                onClick={() => isClose(false)}
+                onClick={isClose}
               />
             </div>
           </form>
