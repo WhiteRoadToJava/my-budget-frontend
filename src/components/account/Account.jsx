@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import styles from "../../styles/components/account/account.module.scss";
 import Row from "./Row";
 import {
@@ -19,6 +19,7 @@ const Account = ({ account }) => {
   const [isCreateExpenseOpen, setIsCreateExpenseOpen] = useState(false);
   const [selectedTransaction, setSelectedTransaction] = useState(null);
   const [isCreateTransfer, setIsCreateTransfer] = useState(false);
+  const [totalBalance, setTotalBalance] = useState(account.totalBalance || 0);
 
   const {
     data: transactions = [],
@@ -37,7 +38,11 @@ const Account = ({ account }) => {
   });
   if (isTxLoading) return <div>{i18n.t("messages.loading")}</div>;
   if (isTxError) {
-    return <div>{i18n.t("messages.loadingError")} {txError.message}</div>;
+    return (
+      <div>
+        {i18n.t("messages.loadingError")} {txError.message}
+      </div>
+    );
   }
 
   const handleTransactionClick = (transaction) => {
@@ -72,18 +77,17 @@ const Account = ({ account }) => {
       <div className={styles.totalBalanceContainer}>
         {i18n.t("account.totalBalance")}{" "}
         <span className={styles.totalBalance}>
-          {Number(account.totalBalance).toFixed(2)}
+          {Number(totalBalance).toFixed(2)}
         </span>
       </div>
 
-
       <div className={styles.transactionsContainer}>
-              <div className={styles.rowTitle}>
-        <p>{i18n.t("account.amount")}</p>
-        <p>{i18n.t("account.category")}</p>
-        <p>{i18n.t("account.date")}</p>
-        <p>{i18n.t("account.type")}</p>
-      </div>
+        <div className={styles.rowTitle}>
+          <p>{i18n.t("account.amount")}</p>
+          <p>{i18n.t("account.category")}</p>
+          <p>{i18n.t("account.date")}</p>
+          <p>{i18n.t("account.type")}</p>
+        </div>
 
         {transactions.length > 0 ? (
           transactions.map((transaction) => (

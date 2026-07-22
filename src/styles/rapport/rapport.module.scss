@@ -20,9 +20,12 @@
   width: 100%;
   
 }
-.noData{
+.dataModal{
+  width: 100vw;
+  height: 100%;
   font-size: variable.$font-lg;
   color: variable.$color-text;
+  background-color: variable.$color-gray-medium;
   text-align: center;
   margin-top: 20px;
 }
