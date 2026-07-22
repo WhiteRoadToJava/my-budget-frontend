@@ -10,7 +10,6 @@ import Datepicker from "../inputs/Datepicker";
 import { imagesUpload } from "../../api/upload";
 
 const UpdateExpense = ({ isOpen, isClose, expense }) => {
-  const [imageUrls, setImageUrls] = useState(null);
   const [expwnseData, setExpenseData] = useState({
     account: { id: "" },
     category: "",
@@ -89,21 +88,18 @@ const UpdateExpense = ({ isOpen, isClose, expense }) => {
       ...prev,
       image: uploadedImage
     }));
-    setImageUrls(uploadedImage);
-    console.log(uploadedImage);
   } else{
     const uploadedImage = {
       filename: "",
       url: ""
     }
-    setImageUrls(uploadedImage);
-    console.log(uploadedImage);
     setExpenseData((prev) => ({
       ...prev,
       image: uploadedImage
     }));
   }
   };
+  console.log("the expense is:",expwnseData);
 
   return (
     <div className={styles.createIncomseContainer}>
