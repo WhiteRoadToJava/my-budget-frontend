@@ -62,8 +62,7 @@
 
 .buttonContainer {
   display: flex;
-  justify-content: flex-end; // ✅ this is actually fine if dir is set on parent,
-                              // but use "end" to be safe:
+  justify-content: flex-end; 
   justify-content: end;
 }
 
@@ -71,4 +70,15 @@
   position: relative;
   top: -48px;
   inset-inline-start: 90%; // ✅ replaces "left", flips to "right" in RTL automatically
+}
+
+
+.transactionImage{
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 150px;
+  max-height: 150px;
+  border-radius: 10px;
 }

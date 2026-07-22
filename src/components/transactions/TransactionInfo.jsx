@@ -17,6 +17,7 @@ const TransactionInfo = ({ isOpen, onClose, accounts, transaction }) => {
   const queryClient = useQueryClient();
   const [openUpdateTransfer, setOpenUpdateTransfer] = useState(false);
   const [openUpdateIncomse, setOpenUpdateIncomse] = useState(false);
+  const [openUpdateExpense, setOpenUpdateExpense] = useState(false);
   const [openConfirmDelete, setOpenConfirmDelete] = useState(false);
   const [updateExpense, setUpdateExpense] = useState(false);
   const [error, setError] = useState({ hasError: false, message: "" });
@@ -40,6 +41,7 @@ const TransactionInfo = ({ isOpen, onClose, accounts, transaction }) => {
       });
     },
   });
+  console.log(transaction);
   const deleteExpenseMutation = useMutation({
     mutationFn: (expenseId) => deleteExpense(expenseId),
     onSuccess: () => {
@@ -147,8 +149,17 @@ const TransactionInfo = ({ isOpen, onClose, accounts, transaction }) => {
         <div className={styles.transactionContainer}>
           <div className={styles.transactionTitle} data-type={transaction.type}>
             <h2 className={styles.transactionTitleText}>
-              {i18n.t("transactionDetails.transaction")} {
-              transaction.type === "incomse" ? i18n.t("transactionDetails.incomse") : transaction.type === "expense" ? i18n.t("transactionDetails.expense") : transaction.type === "in-transfer" ? i18n.t("transactionDetails.inTransfer") : transaction.type === "out-transfer" ? i18n.t("transactionDetails.outTransfer") : ""}{" "} {i18n.t("transactionDetails.details")}
+              {i18n.t("transactionDetails.transaction")}{" "}
+              {transaction.type === "incomse"
+                ? i18n.t("transactionDetails.incomse")
+                : transaction.type === "expense"
+                  ? i18n.t("transactionDetails.expense")
+                  : transaction.type === "in-transfer"
+                    ? i18n.t("transactionDetails.inTransfer")
+                    : transaction.type === "out-transfer"
+                      ? i18n.t("transactionDetails.outTransfer")
+                      : ""}{" "}
+              {i18n.t("transactionDetails.details")}
             </h2>
           </div>
 
@@ -193,9 +204,23 @@ const TransactionInfo = ({ isOpen, onClose, accounts, transaction }) => {
             <strong>{i18n.t("transactionDetails.description")}:</strong>{" "}
             {transaction.description}
           </p>
+          {transaction.image && (
+            <div className={styles.transactionImageContainer}>
+              <img
+                src={transaction.image.url}
+                alt={transaction.image.filename}
+                className={styles.transactionImage}
+                onClick={() =>
+                  window.open(transaction.image.url, "_blank")
+                }
+              />
+            </div>
+          )}
           <div>
             {error.hasError && <p style={{ color: "red" }}>{error.message}</p>}
           </div>
+          
+
           <div className={styles.buttonContainer}>
             <Button
               text={i18n.t("buttons.close")}
@@ -221,7 +246,7 @@ const TransactionInfo = ({ isOpen, onClose, accounts, transaction }) => {
         <UpdateExpense
           isOpen={updateExpense}
           isClose={() => {
-            setOpenUpdateIncomse(false);
+            setUpdateExpense(false);
             onClose(false);
           }}
           expense={transaction}

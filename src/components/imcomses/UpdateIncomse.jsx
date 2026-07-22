@@ -7,6 +7,7 @@ import { updateIncomse, getIncomseById } from "../../api/incomseService";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import i18n from "../../configuration/i18n";
 import Datepicker from "../inputs/Datepicker";
+import { imagesUpload } from "../../api/upload";
 
 const UpdateIncomse = ({ isOpen, isClose, incomse }) => {
   const [incomseData, setIncomseData] = useState({
@@ -15,6 +16,7 @@ const UpdateIncomse = ({ isOpen, isClose, incomse }) => {
     amount: "",
     createdAt: "",
   });
+  const [imageUrls, setImageUrls] = useState(null);
   const [error, setError] = useState({ hasError: false, message: "" });
   const queryClient = useQueryClient();
   const nutation = useMutation({
@@ -68,6 +70,18 @@ const UpdateIncomse = ({ isOpen, isClose, incomse }) => {
     setIncomseData({ ...incomseData, [name]: value });
     setError({ hasError: false, message: "" }); // Clear error on input change
   };
+
+  const handleImagesUploading = (event) =>{
+    const file = event.target.files[0];
+    const formData = new FormData();
+    formData.append("file", file);
+
+    const respone = imagesUpload(formData);
+    if(respones === 200){
+      setImageUrls(respone.data.url)
+    }
+
+  }
 
   return (
     <div className={styles.createIncomseContainer}>
