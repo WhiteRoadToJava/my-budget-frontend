@@ -1,0 +1,19 @@
+img{
+    width: 50px;
+}
+.imagePicker{
+    display: flex;
+    gap:20px;
+    
+}
+.cameraButton{
+      display: "flex";
+      align-items: "center";
+      justify-content: "center";
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: "1px solid #ddd";
+      background: #fff;
+      cursor: pointer;
+}

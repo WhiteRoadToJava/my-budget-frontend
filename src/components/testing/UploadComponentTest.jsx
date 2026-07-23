@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { imagesUpload } from "../../api/upload";
+import { ImagePicker } from "../ImagePicker";
 
 export const UploadComponentTest = () => {
   const [imageUrls, setImageUrls] = useState(null);
@@ -37,6 +38,10 @@ export const UploadComponentTest = () => {
           }}
         />
       )}
+
+      <div>
+        <ImagePicker onImageChange={setImageUrls} />
+      </div>
     </div>
   );
 };
