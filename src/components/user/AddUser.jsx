@@ -47,7 +47,6 @@ const AddUser = () => {
         errorPosition: validation.position,
         
       });
-      console.log( "hte error". validation)
       return;
     }
 

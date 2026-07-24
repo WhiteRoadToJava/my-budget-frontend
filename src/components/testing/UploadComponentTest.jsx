@@ -12,7 +12,7 @@ export const UploadComponentTest = () => {
 
     const response = await imagesUpload(formData);
     setImageUrls(response.url);
-    console.log(imageUrls);
+
   };
   return (
     <div>

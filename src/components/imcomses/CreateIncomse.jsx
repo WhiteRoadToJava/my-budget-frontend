@@ -6,6 +6,7 @@ import Button from "../../components/btns/Button";
 import { addIncomse } from "../../api/incomseService";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import i18n from "../../configuration/i18n";
+import { ImagePicker } from "../ImagePicker";
 
 
 const CreateIncomse = ({ isOpen, isClose, account }) => {
@@ -14,7 +15,9 @@ const CreateIncomse = ({ isOpen, isClose, account }) => {
     account: { id: "" },
     category: "",
     amount: "",
+    inage: null,
   });
+  const [imageUrls, setImageUrls] = useState(null);
   const [error, setError] = useState({ hasError: false, message: "" });
 
   const nutation = useMutation({
@@ -34,6 +37,14 @@ const CreateIncomse = ({ isOpen, isClose, account }) => {
     }
 
   });
+  useEffect(() => {
+    setIncomseData(
+      (prev) => ({
+        ...prev,
+        image: imageUrls,
+      }
+    ))
+  }, [imageUrls])
 
 
   const handleCreateIncomse = async (e) => {
@@ -94,6 +105,9 @@ const CreateIncomse = ({ isOpen, isClose, account }) => {
               value={incomseData.category}
               onChange={handleInputChange}
             />
+          </div>
+          <div>
+            <ImagePicker onImageChange={setImageUrls} />
           </div>
           <div>
             {error.hasError && <p style={{ color: "red" }}>{error.message}</p>}

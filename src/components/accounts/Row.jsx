@@ -68,12 +68,6 @@ const Row = ({ account }) => {
       accountId: account.id,
       status: statusValue === "ACTIVE" ? "ARCHIVED" : "ACTIVE",
     });
-    if (account.status === "ACTIVE") {
-      console.log(account.status)
-    } else {
-      console.log(account.status)
-    }
-    
   }
   const menuItems = [
     <Button

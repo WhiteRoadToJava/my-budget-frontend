@@ -41,7 +41,7 @@ const TransactionInfo = ({ isOpen, onClose, accounts, transaction }) => {
       });
     },
   });
-  console.log(transaction);
+
   const deleteExpenseMutation = useMutation({
     mutationFn: (expenseId) => deleteExpense(expenseId),
     onSuccess: () => {
