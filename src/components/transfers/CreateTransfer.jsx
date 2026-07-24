@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import styles from "../../styles/components/ecpenses/createExpense.module.scss";
 import Button from "../../components/btns/Button";
 import Modal from "../../components/modals/Modal";
@@ -7,6 +7,7 @@ import DropDown from "../elements/DropDown";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { createTransfer } from "../../api/transferServce.js";
 import i18n from "../../configuration/i18n.js";
+import { ImagePicker } from "../ImagePicker.jsx";
 
 const CreateTransfer = ({ isOpen, isClose, accounts, currentAccount }) => {
   const queryClient = useQueryClient();
@@ -18,7 +19,9 @@ const CreateTransfer = ({ isOpen, isClose, accounts, currentAccount }) => {
     amountReceived: 0,
     description: "",
     category: "transfer", // أضفتها لتطابق طلبك السابق
+    image: null,
   });
+  const [imageUrls, setImageUrls] = useState(null);
 
   const [error, setError] = useState({ hasError: false, message: "" });
 
@@ -59,9 +62,11 @@ const CreateTransfer = ({ isOpen, isClose, accounts, currentAccount }) => {
           : Number(updatedData.exChangeRate);
       updatedData.amountReceived = sent * rate;
     }
-    if(name === "amountReceived"){
+    if (name === "amountReceived") {
       const received =
-        name === "amountReceived" ? Number(value) : Number(updatedData.amountReceived);
+        name === "amountReceived"
+          ? Number(value)
+          : Number(updatedData.amountReceived);
       const sent =
         name === "amountSent" ? Number(value) : Number(updatedData.amountSent);
       updatedData.exChangeRate = received / sent;
@@ -76,7 +81,7 @@ const CreateTransfer = ({ isOpen, isClose, accounts, currentAccount }) => {
         setTransferData((prev) => ({
           ...prev,
           sourceAccount: { id: currentAccount.id },
-          destinationAccount: { id: "" }
+          destinationAccount: { id: "" },
         }));
       }
     };
@@ -97,6 +102,7 @@ const CreateTransfer = ({ isOpen, isClose, accounts, currentAccount }) => {
         amountReceived: 0,
         description: "",
         category: "transfer",
+        image:null
       });
     },
     onError: (err) => {
@@ -106,6 +112,13 @@ const CreateTransfer = ({ isOpen, isClose, accounts, currentAccount }) => {
       });
     },
   });
+
+  useEffect(() => {
+    setTransferData((prev) => ({
+      ...prev,
+      image: imageUrls || null,
+    }));
+  }, [imageUrls]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -117,13 +130,16 @@ const CreateTransfer = ({ isOpen, isClose, accounts, currentAccount }) => {
         message: i18n.t("masseges.transferSameAccount"),
       });
     }
-    const finalPayload = {
+    const payload = {
       ...transferData,
       amountSent: Number(transferData.amountSent),
       exChangeRate: Number(transferData.exChangeRate),
     };
-    mutation.mutate(finalPayload);
+    mutation.mutate(payload);
   };
+  useEffect(() => {
+    console.log("image is", transferData);
+  }, [imageUrls, transferData]);
 
   const selectedSourceName = getAccountNameById(transferData.sourceAccount.id);
   const selectedDestName = getAccountNameById(
@@ -184,6 +200,7 @@ const CreateTransfer = ({ isOpen, isClose, accounts, currentAccount }) => {
             value={transferData.description || ""}
             onChange={handleInputChange}
           />
+          <ImagePicker onImageChange={setImageUrls} />
 
           {error.hasError && (
             <p className={styles.errorMessage}>{error.message}</p>
@@ -192,7 +209,11 @@ const CreateTransfer = ({ isOpen, isClose, accounts, currentAccount }) => {
           <div className={styles.buttonContainer}>
             <Button
               variant="primary"
-              text={mutation.isPending ? i18n.t("buttons.processing") : i18n.t("buttons.createTransfer")}
+              text={
+                mutation.isPending
+                  ? i18n.t("buttons.processing")
+                  : i18n.t("buttons.createTransfer")
+              }
               type="submit"
               disabled={mutation.isPending}
             />

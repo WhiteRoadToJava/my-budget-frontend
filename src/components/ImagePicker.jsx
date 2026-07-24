@@ -1,16 +1,13 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { imagesUpload } from "../api/upload";
-import Camera from "./icons/Camera";
-import Upload from "./icons/Upload";
 import { icons } from "../assiets/assiits";
 import styles from "../styles/ImagePicker.module.scss";
-
 
 export const ImagePicker = ({ onImageChange }) => {
   const camerInputRef = useRef(null);
   const galleryInputRef = useRef(null);
   const [preview, setPreview] = useState(null);
-  const [Uploading, setUploading] = useState(false);
+  const [uploading, setUploading] = useState(false);
 
   const handleFileSelected = async (event) => {
     const file = event.target.files[0];
@@ -19,7 +16,7 @@ export const ImagePicker = ({ onImageChange }) => {
     setUploading(true);
 
     const formData = new FormData();
-    formData.append("image", file);
+    formData.append("file", file);
 
     try {
       const response = await imagesUpload(formData);
@@ -28,38 +25,45 @@ export const ImagePicker = ({ onImageChange }) => {
       console.error(err);
     } finally {
       setUploading(false);
+      event.target.value = "";
     }
   };
 
-  return(
-  <div className={styles.imagePicker}>
-    <button className={styles.cameraButton} 
-    onClick={() => camerInputRef.current?.click()}
-    >
-      <img src={icons.UploadFolder} />
-    </button>
-    <input
-      type="file"
-      accept="image/*"
-      ref={galleryInputRef}
-      onChange={handleFileSelected}
-      style={{ display: "none" }}
-    />
-   
+  return (
+    <div className={styles.imagePicker}>
+      <button
+        type="button"
+        className={styles.cameraButton}
+        onClick={() => galleryInputRef.current?.click()}
+      >
+        <img src={icons.UploadFolder} alt="Upload" />
+      </button>
+      <input
+        type="file"
+        accept="image/*"
+        ref={galleryInputRef}
+        onChange={handleFileSelected}
+        style={{ display: "none" }}
+      />
 
-    <button className={styles.cameraButton}
-    onClick={() => galleryInputRef.current?.click()}
-    >
-      <img src={icons.cameraButton} />
-    </button>
-     <input
-      type="file"
-      accept="image/*"
-      capture="environment"
-      ref={camerInputRef}
-      onChange={handleFileSelected}
-      style={{ display: "none" }}
-    />
-  </div>
-  )
+      <button
+        type="button"
+        className={styles.cameraButton}
+        onClick={() => camerInputRef.current?.click()}
+      >
+        <img src={icons.camera} alt="Camera" />
+      </button>
+      <input
+        type="file"
+        accept="image/*"
+        capture="environment"
+        ref={camerInputRef}
+        onChange={handleFileSelected}
+        style={{ display: "none" }}
+      />
+
+      {uploading && <p>Uploading...</p>}
+      {preview && <img src={preview} alt="preview" width={100} height={100} />}
+    </div>
+  );
 };

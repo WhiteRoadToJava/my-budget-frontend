@@ -6,7 +6,7 @@ import Button from "../../components/btns/Button";
 import { addExpense } from "../../api/expenseService";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import i18n from "../../configuration/i18n";
-
+import { ImagePicker } from "../ImagePicker";
 
 const CreateExpense = ({ isOpen, isClose, account }) => {
   const queryClient = useQueryClient();
@@ -15,7 +15,9 @@ const CreateExpense = ({ isOpen, isClose, account }) => {
     account: { id: "" },
     category: "",
     amount: "",
+    image: null,
   });
+  const [imageUrls, setImageUrls] = useState(null);
 
   const [error, setError] = useState({ hasError: false, message: "" });
 
@@ -24,13 +26,20 @@ const CreateExpense = ({ isOpen, isClose, account }) => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["transactions"] });
       queryClient.invalidateQueries({ queryKey: ["accounts"] });
-      
+
       isClose(); // إغلاق المودال
-      setExpenseData({ account: { id: account?.id || "" }, category: "", amount: "" }); // تصغير البيانات
+      setExpenseData({
+        account: { id: account?.id || "" },
+        category: "",
+        amount: "",
+      }); // تصغير البيانات
     },
     onError: () => {
-      setError({ hasError: true, message: i18n.t("message.errorCreateExpense") });
-    }
+      setError({
+        hasError: true,
+        message: i18n.t("message.errorCreateExpense"),
+      });
+    },
   });
 
   useEffect(() => {
@@ -48,9 +57,13 @@ const CreateExpense = ({ isOpen, isClose, account }) => {
   const handleCreateExpense = async (e) => {
     e.preventDefault();
     if (!handleValidation()) return;
-    
+    const filnalExpenseData = {
+      ...expenseData,
+      image: imageUrls || null,
+    };
     // 3. تنفيذ الـ Mutation
-    mutation.mutate(expenseData);
+    setExpenseData(filnalExpenseData);
+    mutation.mutate(filnalExpenseData);
   };
 
   const handleValidation = () => {
@@ -64,6 +77,9 @@ const CreateExpense = ({ isOpen, isClose, account }) => {
     }
     return true;
   };
+useEffect(() => {
+  console.log("image is",imageUrls);
+}, [imageUrls])
 
   return (
     <div className={styles.createExpenseContainer}>
@@ -91,16 +107,30 @@ const CreateExpense = ({ isOpen, isClose, account }) => {
               />
             </div>
             <div>
-              {error.hasError && <p style={{ color: "red" }}>{error.message}</p>}
+              {error.hasError && (
+                <p style={{ color: "red" }}>{error.message}</p>
+              )}
+            </div>
+            <div>
+              <ImagePicker onImageChange={setImageUrls} />
             </div>
             <div className={styles.buttonContainer}>
               <Button
                 variant="primary"
-                text={mutation.isPending ? i18n.t("message.loading") : i18n.t("buttons.createExpense")}
+                text={
+                  mutation.isPending
+                    ? i18n.t("message.loading")
+                    : i18n.t("buttons.createExpense")
+                }
                 type="submit"
                 disabled={mutation.isPending}
               />
-              <Button variant="cancel" text={i18n.t("buttons.cancel")} onClick={isClose} type="button" />
+              <Button
+                variant="cancel"
+                text={i18n.t("buttons.cancel")}
+                onClick={isClose}
+                type="button"
+              />
             </div>
           </form>
         </div>
