@@ -8,6 +8,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import i18n from "../../configuration/i18n";
 import Datepicker from "../inputs/Datepicker";
 import { imagesUpload } from "../../api/upload";
+import { ImagePicker } from "../ImagePicker";
 
 const UpdateExpense = ({ isOpen, isClose, expense }) => {
   const [expwnseData, setExpenseData] = useState({
@@ -17,6 +18,7 @@ const UpdateExpense = ({ isOpen, isClose, expense }) => {
     createdAt: "",
     image: null,
   });
+  const [imageUrls, setImageUrls] = useState(null);
   const [error, setError] = useState({ hasError: false, message: "" });
   const queryClient = useQueryClient();
   const nutation = useMutation({
@@ -73,34 +75,14 @@ const UpdateExpense = ({ isOpen, isClose, expense }) => {
     setError({ hasError: false, message: "" }); // Clear error on input change
   };
 
-  const handleImagesUploading = async (event) => {
-    const selectedFile = event.target.files[0];
-    const formData = new FormData();
-    formData.append("file", selectedFile);
-
-    const response = await imagesUpload(formData);
-    if (response) {
-    const uploadedImage = {
-      filename: response.filename,
-      url: response.url
-    }
-    setExpenseData((prev) => ({
-      ...prev,
-      image: uploadedImage
-    }));
-  } else{
-    const uploadedImage = {
-      filename: "",
-      url: ""
-    }
-    setExpenseData((prev) => ({
-      ...prev,
-      image: uploadedImage
-    }));
-  }
-  };
-  console.log("the expense is:",expwnseData);
-
+useEffect(() => {
+    setExpenseData(
+      (prev) => ({
+        ...prev,
+        image: imageUrls,
+      }
+    ))
+  }, [imageUrls])
   return (
     <div className={styles.createIncomseContainer}>
       <Modal isOpen={isOpen} onRequestClose={isClose}>
@@ -143,12 +125,7 @@ const UpdateExpense = ({ isOpen, isClose, expense }) => {
               />
             </div>
             <div className={styles.inputContainer}>
-              <input
-                type="file"
-                accept="image/*"
-                capture="environment"
-                onChange={handleImagesUploading}
-              />
+              <ImagePicker onImageChange={setImageUrls} />
             </div>
             <div>
               {error.hasError && (

@@ -6,7 +6,7 @@ import i18n from "../configuration/i18n";
 import MessageComponent from "../components/interface/MessageComponent";
 
 const NavBar = ({ profiles }) => {
-  console.log("profi  ", profiles);
+
 
   return (
     <div className={styles.navbarContainer}>

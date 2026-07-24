@@ -137,9 +137,6 @@ const CreateTransfer = ({ isOpen, isClose, accounts, currentAccount }) => {
     };
     mutation.mutate(payload);
   };
-  useEffect(() => {
-    console.log("image is", transferData);
-  }, [imageUrls, transferData]);
 
   const selectedSourceName = getAccountNameById(transferData.sourceAccount.id);
   const selectedDestName = getAccountNameById(

@@ -23,7 +23,7 @@ const UserLayout =  ()  => {
     },[localStorage.getItem("profiles")]);
 
 
-  console.log( "navebar profile ",profile);
+
   return (
     <>
       {" "}

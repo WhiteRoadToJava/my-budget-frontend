@@ -19,7 +19,6 @@ export const AuthProvider = ({ children }) => {
     const response = await api.get("/auth/check", {
       withCredentials: true,
     });
-    console.log("checkAuthStatus - response:", response.data);
     setCurrentUser(response.data);
     } catch (error) {
       setCurrentUser(null);
@@ -38,9 +37,6 @@ export const AuthProvider = ({ children }) => {
 
       // تأكد أن السيرفر يرسل التوكن في حقل jwtToken (أو الاسم الذي اخترته في AuthResponse)
       const token = response.data.jwtToken;
-
-      console.log("Full response data:", response.data); // add this
-      console.log("Token received:", token); // add this
 
       if (token && token !== "Login successful") {
         localStorage.setItem("token", token); // تخزين التوكن الحقيقي

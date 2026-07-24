@@ -77,9 +77,7 @@ const CreateExpense = ({ isOpen, isClose, account }) => {
     }
     return true;
   };
-useEffect(() => {
-  console.log("image is",imageUrls);
-}, [imageUrls])
+
 
   return (
     <div className={styles.createExpenseContainer}>
