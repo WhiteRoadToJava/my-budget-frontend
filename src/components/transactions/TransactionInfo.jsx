@@ -204,7 +204,7 @@ const TransactionInfo = ({ isOpen, onClose, accounts, transaction }) => {
             <strong>{i18n.t("transactionDetails.description")}:</strong>{" "}
             {transaction.description}
           </p>
-          {transaction.image && (
+          {transaction.image && transaction.image.url !==""&& (
             <div className={styles.transactionImageContainer}>
               <img
                 src={transaction.image.url}
