@@ -8,6 +8,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { getTransferById, updateTransfer } from "../../api/transferServce.js";
 import i18n from "../../configuration/i18n.js";
 import Datepicker from "../inputs/Datepicker.jsx";
+import { ImagePicker } from "../ImagePicker.jsx";
 
 const UpdateTransfer = ({ isOpen, isClose, accounts, transfer }) => {
   const queryClient = useQueryClient();
@@ -23,8 +24,9 @@ const UpdateTransfer = ({ isOpen, isClose, accounts, transfer }) => {
     description: "",
     category: "transfer",
     createdAt: "",
+    image: null,
   });
-
+  const [imageUrls, setImageUrls] = useState(null);
   const [error, setError] = useState({ hasError: false, message: "" });
 
   useEffect(() => {
@@ -40,6 +42,7 @@ const UpdateTransfer = ({ isOpen, isClose, accounts, transfer }) => {
         amountReceived: tranferIncomingFromServer.amountReceived || 0,
         description: tranferIncomingFromServer.description || "", // تصحيح الخطأ الإملائي desccription
         createdAt: tranferIncomingFromServer.createdAt || "",
+        image: tranferIncomingFromServer.image || null,
       });
     }
     };
@@ -105,6 +108,13 @@ const UpdateTransfer = ({ isOpen, isClose, accounts, transfer }) => {
       });
     },
   });
+useEffect(() => {
+  setTransferData((prev) => ({
+    ...prev,
+    image: imageUrls || null,
+  }));
+  console.log(transferData);
+}, [imageUrls]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -199,6 +209,8 @@ const UpdateTransfer = ({ isOpen, isClose, accounts, transfer }) => {
               }}
             />  
           </div>
+          <ImagePicker onImageChange={setImageUrls} />
+
 
           {error.hasError && (
             <p className={styles.errorMessage}>{error.message}</p>

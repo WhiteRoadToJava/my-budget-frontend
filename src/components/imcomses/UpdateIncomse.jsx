@@ -49,6 +49,8 @@ const UpdateIncomse = ({ isOpen, isClose, incomse }) => {
               account: { id: data.account?.id || "" },
               category: data.category || "",
               amount: data.amount || "",
+              createdAt: data.createdAt || "",
+              image: data.image || null,
             });
           }
         } catch (err) {
