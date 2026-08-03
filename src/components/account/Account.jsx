@@ -13,6 +13,7 @@ import { useQuery } from "@tanstack/react-query";
 import TransactionInfo from "../transactions/TransactionInfo";
 import CreateTransfer from "../transfers/CreateTransfer";
 import i18n from "../../configuration/i18n";
+import { getAccountById } from "../../api/accountService";
 
 const Account = ({ account }) => {
   const [isCreateIncomseOpen, setIsCreateIncomseOpen] = useState(false);
@@ -36,6 +37,14 @@ const Account = ({ account }) => {
     queryKey: ["accounts"],
     queryFn: getAccounts,
   });
+  const getTotalBalance = async () => {
+    const accountData = await getAccountById(account.id);
+    setTotalBalance(accountData.totalBalance);
+  };
+  useEffect(() => {
+    getTotalBalance();
+  }, [transactions]);
+
   if (isTxLoading) return <div>{i18n.t("messages.loading")}</div>;
   if (isTxError) {
     return (
@@ -76,7 +85,8 @@ const Account = ({ account }) => {
       <div className={styles.divider}></div>
       <div className={styles.totalBalanceContainer}>
         {i18n.t("account.totalBalance")}{" "}
-        <span className={styles.totalBalance}>
+        <span className={styles.totalBalance} 
+        data-balance={totalBalance<0 ? "negative" : "positive"}>
           {Number(totalBalance).toFixed(2)}
         </span>
       </div>
