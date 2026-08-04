@@ -3,21 +3,17 @@ import Account from '../../components/account/Account'
 import { useParams } from 'react-router-dom';
 import { getAccountById } from '../../api/accountService';
 import i18n from '../../configuration/i18n';
+import { useQuery } from "@tanstack/react-query";
+
 
 const AccountsPage = () => {
   const {accountId} = useParams();
-  const[account, setAccount] = useState(null);
-  useEffect(() => {
-    const fetchAccount = async () => {
-      try {
-        const data = await getAccountById(accountId);
-        setAccount(data);
-      } catch (error) {
-        console.error("Failed to load account", error);
-      }
-    };
-    fetchAccount();
-  }, [accountId]);
+  
+  const { data: account } = useQuery({
+    queryKey: ["account", accountId],
+    queryFn: () => getAccountById(accountId),
+  });
+
   if (!account) return <div>{i18n.t("masseges.loading")}</div>;
   return (
     <div>

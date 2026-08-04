@@ -1,10 +1,7 @@
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import styles from "../../styles/components/account/account.module.scss";
 import Row from "./Row";
-import {
-  getAccounts,
-  getAllAccountTransactions,
-} from "../../api/accountService";
+import { getAccountById, getAccounts, getAllAccountTransactions } from "../../api/accountService";
 import Button from "../btns/Button";
 import CreateIncomse from "../imcomses/CreateIncomse";
 import CreateExpense from "../expenses/CreateExpense";
@@ -13,7 +10,6 @@ import { useQuery } from "@tanstack/react-query";
 import TransactionInfo from "../transactions/TransactionInfo";
 import CreateTransfer from "../transfers/CreateTransfer";
 import i18n from "../../configuration/i18n";
-import { getAccountById } from "../../api/accountService";
 
 const Account = ({ account }) => {
   const [isCreateIncomseOpen, setIsCreateIncomseOpen] = useState(false);
@@ -33,17 +29,40 @@ const Account = ({ account }) => {
     select: (data) =>
       [...data].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)),
   });
+
   const { data: accounts = [] } = useQuery({
     queryKey: ["accounts"],
     queryFn: getAccounts,
   });
-  const getTotalBalance = async () => {
-    const accountData = await getAccountById(account.id);
-    setTotalBalance(accountData.totalBalance);
-  };
+const handleTotalBalance = async () => {
+  const accountData = await getAccountById(account.id);
+  if (!accountData) return;
+  setTotalBalance(accountData.totalBalance);
+};
   useEffect(() => {
-    getTotalBalance();
+    handleTotalBalance();
   }, [transactions]);
+  
+  const months = useMemo(() => {
+    const seen = new Set();
+    const result = [];
+    transactions.forEach((t) => {
+      const date = new Date(t.createdAt);
+      const key = `${date.getFullYear()}-${date.getMonth()}`;
+      if (!seen.has(key)) {
+        seen.add(key);
+        result.push({
+          key,
+          label: date.toLocaleString("default", { month: "long", year: "numeric" }),
+        });
+      }
+    });
+    return result;
+  }, [transactions]);
+
+  const handleTransactionClick = (transaction) => {
+    setSelectedTransaction(transaction);
+  };
 
   if (isTxLoading) return <div>{i18n.t("messages.loading")}</div>;
   if (isTxError) {
@@ -54,29 +73,10 @@ const Account = ({ account }) => {
     );
   }
 
-  const handleTransactionClick = (transaction) => {
-    setSelectedTransaction(transaction);
-  };
-
   const buttonMenuItems = [
-    <Button
-      key="inc"
-      variant="primary"
-      text={i18n.t("buttons.createIncomse")}
-      onClick={() => setIsCreateIncomseOpen(true)}
-    />,
-    <Button
-      key="exp"
-      variant="cancel"
-      text={i18n.t("buttons.createExpense")}
-      onClick={() => setIsCreateExpenseOpen(true)}
-    />,
-    <Button
-      key="tra"
-      variant="blue"
-      text={i18n.t("buttons.createTransfer")}
-      onClick={() => setIsCreateTransfer(true)}
-    />,
+    <Button key="inc" variant="primary" text={i18n.t("buttons.createIncomse")} onClick={() => setIsCreateIncomseOpen(true)} />,
+    <Button key="exp" variant="cancel" text={i18n.t("buttons.createExpense")} onClick={() => setIsCreateExpenseOpen(true)} />,
+    <Button key="tra" variant="blue" text={i18n.t("buttons.createTransfer")} onClick={() => setIsCreateTransfer(true)} />,
   ];
 
   return (
@@ -85,8 +85,10 @@ const Account = ({ account }) => {
       <div className={styles.divider}></div>
       <div className={styles.totalBalanceContainer}>
         {i18n.t("account.totalBalance")}{" "}
-        <span className={styles.totalBalance} 
-        data-balance={totalBalance<0 ? "negative" : "positive"}>
+        <span
+          className={styles.totalBalance}
+          data-balance={totalBalance < 0 ? "negative" : "positive"}
+        >
           {Number(totalBalance).toFixed(2)}
         </span>
       </div>
@@ -99,13 +101,23 @@ const Account = ({ account }) => {
           <p>{i18n.t("account.type")}</p>
         </div>
 
-        {transactions.length > 0 ? (
-          transactions.map((transaction) => (
-            <Row
-              key={transaction.id}
-              transaction={transaction}
-              onClick={() => handleTransactionClick(transaction)}
-            />
+        {months.length > 0 ? (
+          months.map(({ key, label }) => (
+            <div key={key}>
+              <h3 className={styles.monthHeader}>{label}</h3>
+              {transactions
+                .filter((t) => {
+                  const d = new Date(t.createdAt);
+                  return `${d.getFullYear()}-${d.getMonth()}` === key;
+                })
+                .map((transaction) => (
+                  <Row
+                    key={transaction.id}
+                    transaction={transaction}
+                    onClick={() => handleTransactionClick(transaction)}
+                  />
+                ))}
+            </div>
           ))
         ) : (
           <p>{i18n.t("account.noTransactions")}</p>
@@ -116,17 +128,8 @@ const Account = ({ account }) => {
         <ToogleMenu menuList={buttonMenuItems} position="bottom" />
       </div>
 
-      {/* Modals و Popups */}
-      <CreateIncomse
-        isOpen={isCreateIncomseOpen}
-        isClose={() => setIsCreateIncomseOpen(false)}
-        account={account}
-      />
-      <CreateExpense
-        isOpen={isCreateExpenseOpen}
-        isClose={() => setIsCreateExpenseOpen(false)}
-        account={account}
-      />
+      <CreateIncomse isOpen={isCreateIncomseOpen} isClose={() => setIsCreateIncomseOpen(false)} account={account} />
+      <CreateExpense isOpen={isCreateExpenseOpen} isClose={() => setIsCreateExpenseOpen(false)} account={account} />
       <TransactionInfo
         isOpen={!!selectedTransaction}
         onClose={() => setSelectedTransaction(null)}
