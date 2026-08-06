@@ -7,6 +7,8 @@ import { addIncomse } from "../../api/incomseService";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import i18n from "../../configuration/i18n";
 import { ImagePicker } from "../ImagePicker";
+import {incomseCategoryList} from "../../assiets/categories/assits"
+import IncomseCategoryList from "../categories/IncomseCategoryList.jsx";
 
 
 const CreateIncomse = ({ isOpen, isClose, account }) => {
@@ -81,6 +83,13 @@ const CreateIncomse = ({ isOpen, isClose, account }) => {
     }
     return true;
   };
+
+  const handleCategoryChange = (id) => {
+    const category = incomseCategoryList.find((item) => item.id === id);
+    if (category) {
+      setIncomseData({ ...incomseData, category: category.id });
+    }
+  }
   return (
     <div className={styles.createIncomseContainer}>
       <Modal isOpen={isOpen} onRequestClose={isClose}>
@@ -98,13 +107,7 @@ const CreateIncomse = ({ isOpen, isClose, account }) => {
             />
           </div>
           <div>
-            <FormInput
-              label={i18n.t("createIncomse.category")}
-              placeholder={i18n.t("placeholder.category")}
-              name="category"
-              value={incomseData.category}
-              onChange={handleInputChange}
-            />
+            <IncomseCategoryList incomseItem={handleCategoryChange} />
           </div>
           <div>
             <ImagePicker onImageChange={setImageUrls} />

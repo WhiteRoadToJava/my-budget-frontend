@@ -113,7 +113,6 @@ useEffect(() => {
     ...prev,
     image: imageUrls || null,
   }));
-  console.log(transferData);
 }, [imageUrls]);
 
   const handleSubmit = (e) => {
