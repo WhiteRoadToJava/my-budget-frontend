@@ -7,6 +7,8 @@ import { addExpense } from "../../api/expenseService";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import i18n from "../../configuration/i18n";
 import { ImagePicker } from "../ImagePicker";
+import { expenseCategoryList } from "../../assiets/categories/assits";
+import ExpenseCategoryList from "../categories/ExpenseCategoryList";
 
 const CreateExpense = ({ isOpen, isClose, account }) => {
   const queryClient = useQueryClient();
@@ -79,6 +81,13 @@ const CreateExpense = ({ isOpen, isClose, account }) => {
   };
 
 
+    const handleCategoryChange = (id) => {
+      const category = expenseCategoryList.find((item) => item.id === id);
+      if (category) {
+        setExpenseData({ ...expenseData, category: category.id });
+      }
+    }
+
   return (
     <div className={styles.createExpenseContainer}>
       <Modal isOpen={isOpen} onRequestClose={isClose}>
@@ -96,13 +105,7 @@ const CreateExpense = ({ isOpen, isClose, account }) => {
               />
             </div>
             <div>
-              <FormInput
-                label={i18n.t("createExpense.category")}
-                placeholder={i18n.t("placeholder.category")}
-                name="category"
-                value={expenseData.category}
-                onChange={handleInputChange}
-              />
+              <ExpenseCategoryList expenseItem={handleCategoryChange} />
             </div>
             <div>
               {error.hasError && (

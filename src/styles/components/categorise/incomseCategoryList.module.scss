@@ -1,0 +1,34 @@
+@use "../../variables" as variable;
+
+.categoryInput {
+    position: relative;
+}
+.listContainer {
+    position: absolute;
+    padding-left:10px;
+      display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+    height: auto;
+    background-color: variable.$color-gray-caviar;
+    border-radius: 8px;
+    z-index: 22;
+    width: 270px;
+}
+
+.category {
+  display: flex;
+  height: auto;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  cursor: pointer;
+
+  img,
+  svg {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+  }
+}
