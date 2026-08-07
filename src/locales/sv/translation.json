@@ -122,7 +122,8 @@
     "amount":"Belopp",
     "currency":"Valuta",
     "type":"Typ",
-    "actions":"Handlar"
+    "actions":"Handlar",
+    "archivedAccounts":"Arkivera konton"
   },
   "createAccount":{
     "title":"Skapa konto",
@@ -276,7 +277,7 @@
     "close":"Stäng",
     "ok":"OK",
     "active":"Aktiv",
-    "archived":"ِArkivera kontot"
+    "archived":"ِArkivera"
   },
   "currency":{
     "usd":"USD",

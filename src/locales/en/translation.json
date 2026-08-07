@@ -117,7 +117,8 @@
     "amount": "Amount",
     "currency": "Currency",
     "type": "Type",
-    "actions": "Actions"
+    "actions": "Actions",
+    "archivedAccounts": "Archive Accounts"
   },
   "account": {
     "totalBalance": "Total balance:",
@@ -297,7 +298,7 @@
     "close": "Close",
     "ok": "OK",
     "active":"Active",
-    "archived":"Archive the Account"
+    "archived":"Archive"
   },
   "currency": {
     "usd": "USD",

@@ -6,17 +6,27 @@ import PlusButton from "../btns/PlusButton";
 import CreateAccount from "../account/CreateAccount";
 import SearchInput from "../inputs/SearchInput";
 import i18n from "../../configuration/i18n";
+import { ar } from "date-fns/locale";
 
 const AccountComponent = ({ accounts }) => {
   const [accountsList, setAccountsList] = useState([]);
   const [openCreateAccount, setOpenCreateAccount] = useState(false);
+  const [activeAccounts, setActiveAccounts] = useState([]);
+  const [archivedAccounts, setArchivedAccounts] = useState([]);
+  const [showArchivedAccounts, setShowArchivedAccounts] = useState(false);
 
   useEffect(() => {
     const fetchAccounts = () => {
       if (accounts) {
         const accountsData = accounts.accounts;
+        setActiveAccounts(
+          accountsData.filter((account) => account.status[0] === "ACTIVE"),
+        );
+        setArchivedAccounts(
+          accountsData.filter((account) => account.status[0] === "ARCHIVED"),
+        );
         setAccountsList(accountsData);
-      } // Assuming accounts is already passed as a prop, we can directly use it
+      }
     };
     fetchAccounts();
   }, [accounts]);
@@ -43,8 +53,10 @@ const AccountComponent = ({ accounts }) => {
           />
         </div>
         <div>
-          <SearchInput onChange={(e) => handleOnSearch(e.target.value)}
-          placeholder={i18n.t("accountsPage.searchInput")}/>
+          <SearchInput
+            onChange={(e) => handleOnSearch(e.target.value)}
+            placeholder={i18n.t("accountsPage.searchInput")}
+          />
         </div>
       </div>
       <div className={styles.rowtitle}>
@@ -55,7 +67,7 @@ const AccountComponent = ({ accounts }) => {
         <p className={styles.headerItem}>{i18n.t("accounts.actions")}</p>
       </div>
       <div className={styles.accountBody}>
-        {accountsList.map((account) => (
+        {activeAccounts.map((account) => (
           <Row key={account.id} account={account} />
         ))}
       </div>
@@ -65,6 +77,25 @@ const AccountComponent = ({ accounts }) => {
           isOpen={openCreateAccount}
           isClose={() => setOpenCreateAccount(false)}
         />
+      </div>
+      <div className={styles.archivedAccountsContainer}>
+        <p
+          className={styles.archivedAccountsTitle}
+          onClick={() => setShowArchivedAccounts(!showArchivedAccounts)}
+        >
+          {i18n.t("accounts.archivedAccounts")}
+        </p>
+
+        {showArchivedAccounts ? (
+          <div className={styles.archivedAccounts}>
+            {archivedAccounts.length > 0 &&
+              archivedAccounts.map((accounts) => (
+                <Row key={accounts.id} account={accounts} />
+              ))}
+          </div>
+        ):(
+            <div className={styles.divider}></div>
+          )}
       </div>
     </div>
   );
