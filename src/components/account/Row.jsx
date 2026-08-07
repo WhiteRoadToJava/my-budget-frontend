@@ -17,7 +17,6 @@ const Row = ({ transaction, onClick }) => {
       );
       setCategory(category);
     }
-    console.log(transaction.type);
   }, [transaction]);
   return (
     <div
