@@ -211,7 +211,7 @@
     "status": "Status",
     "nextExecutionDate": "Next Execution Date"
   },
-  "schedualeInfo": {
+  "scheduleInfo": {
     "title": "Schedule Details",
     "account": "Account",
     "sourceAmount": "Source Amount",

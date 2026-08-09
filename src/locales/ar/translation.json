@@ -121,7 +121,7 @@
     "currency":"العملة",
     "type":"النوع",
     "actions":"الإجراءات",
-    "archivedAccounts":"Архи Chevrolet"
+    "archivedAccounts":"الحسابات المؤرشفة"
   },
   "createAccount":{
     "title":"إنشاء حساب",
@@ -238,7 +238,7 @@
     "createdAt":"تاريخ الانشاء",
     "updatedAt":"تاريخ التحديث"
   },
-  "schedualeInfo":{
+  "scheduleInfo":{
     "title":"تفاصيل الجدول",
     "account":"الحساب",
     "sourceAmount":"المبلغ المصدر",

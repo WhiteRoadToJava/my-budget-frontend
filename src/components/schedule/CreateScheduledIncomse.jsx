@@ -3,31 +3,24 @@ import Modal from "../modals/Modal";
 import FormInput from "../inputs/FormInput";
 import DropDown from "../elements/DropDown";
 import Button from "../btns/Button";
-import styles from "../../styles/components/schedule/createdSchedualedExpense.module.scss";
+import styles from "../../styles/components/schedule/createdscheduledIncomse.module.scss";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { addSchedule } from "../../api/scheduleService";
 import Datepicker from "../inputs/Datepicker";
 import i18n from "../../configuration/i18n";
 
+const interval = ["DAILY", "WEEKLY", "MONTHLY", "YEARLY"];
 
-
-const interval = [
-  "DAILY",
-  "WEEKLY",
-  "MONTHLY",
-  "YEARLY"
-]
-
-const CreateScheduledExpense = ({
+const CreateScheduledIncome = ({
   isOpen,
   isClose,
   transactionType,
   accounts,
 }) => {
-  const [expenseData, setExpenseData] = useState({
+  const [incomeData, setIncomeData] = useState({
     name: "",
     description: "",
-    sourceAccountId:"",
+    sourceAccountId: "",
     transactionTypes: [transactionType],
     category: "",
     amountSend: 0,
@@ -47,7 +40,7 @@ const CreateScheduledExpense = ({
     onError: () => {
       setError({
         hasError: true,
-        message: i18n.t("message.errorCreateExpense"),
+        message: i18n.t("errorCreateIncomse"),
       });
     },
   });
@@ -58,18 +51,16 @@ const CreateScheduledExpense = ({
   // Fix 2: Now safe to use accountsList here
   const filteredSourceList = accountsList.map((acc) => acc.name);
 
-  const getAccountNameById = (id) =>{
+  const getAccountNameById = (id) => {
     return accountsList.find((acc) => acc.id === id)?.name;
-  }
-
-
+  };
 
   // Fix 3: Use correct state field 'sourceAccountId'
-  const selectedSourceName = getAccountNameById(expenseData.sourceAccountId);
+  const selectedSourceName = getAccountNameById(incomeData.sourceAccountId);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setExpenseData((prev) => ({ ...prev, [name]: value }));
+    setIncomeData((prev) => ({ ...prev, [name]: value }));
     setError({ hasError: false, message: "" });
   };
 
@@ -78,24 +69,24 @@ const CreateScheduledExpense = ({
     const selectedAccount = accountsList.find(
       (acc) => acc.name === selectedName,
     );
-    setExpenseData((prev) => ({
+    setIncomeData((prev) => ({
       ...prev,
-      sourceAccountId:  selectedAccount?.id || "" ,
+      sourceAccountId: selectedAccount?.id || "",
     }));
     setError({ hasError: false, message: "" });
   };
 
   const handleValidation = () => {
     // Fix 4: Validate against correct field 'amountSend'
-    if (!expenseData.amountSend || parseFloat(expenseData.amountSend) <= 0) {
+    if (!incomeData.amountSend || parseFloat(incomeData.amountSend) <= 0) {
       setError({
         hasError: true,
-        message: i18n.t("message.amountless"),
+        message: i18n.t("errorCreateIncomse"),
       });
       return false;
     }
-    if (!expenseData.category) {
-      setError({ hasError: true, message: i18n.t("message.categoryRequired") });
+    if (!incomeData.category) {
+      setError({ hasError: true, message: i18n.t("categoryRequired") });
       return false;
     }
     return true;
@@ -104,7 +95,7 @@ const CreateScheduledExpense = ({
   const handleCreateIncome = (e) => {
     e.preventDefault();
     if (!handleValidation()) return;
-    mutation.mutate(expenseData);
+    mutation.mutate(incomeData);
   };
 
   // Fix 5: cleanData now correctly calls isClose()
@@ -113,28 +104,24 @@ const CreateScheduledExpense = ({
     setError({ hasError: false, message: "" });
   };
 
- 
-
-
   return (
     <Modal isOpen={isOpen}>
       <div className={styles.formContainer}>
-        <h2 className={styles.title}>Create Schedualed Expense</h2>
+        <h2 className={styles.title}>Create scheduled Income</h2>
         <form onSubmit={handleCreateIncome}>
           <div className={styles.inputContainer}>
             <FormInput
-              label={i18n.t("createSchedule.name")}
-              placeholder={i18n.t("placeholder.name")}
+              label={i18n.t("CreateScheduledIncome.name")}
               name="name"
               type="text"
-              value={expenseData.name}
+              value={incomeData.name}
               onChange={handleInputChange}
             />
           </div>
 
           <div>
             <DropDown
-              label={i18n.t("createSchedule.sourceAccount")}
+              label={i18n.t("CreateScheduledIncome.sourceAccount")}
               placeholder={i18n.t("placeholder.sourceAccount")}
               list={filteredSourceList}
               name="sourceAccountId"
@@ -143,43 +130,41 @@ const CreateScheduledExpense = ({
             />
           </div>
 
-                    <div>
+          <div>
             <DropDown
-              label={i18n.t("createSchedule.interval")}
+              label={i18n.t("CreateScheduledIncome.interval")}
               placeholder={i18n.t("placeholder.interval")}
               list={interval}
               name="scheduleIntervals"
-              value={expenseData.scheduleIntervals || ""}
-              onChange={(e) =>{
+              value={incomeData.scheduleIntervals || ""}
+              onChange={(e) => {
                 const selectedValue = e.target.value;
-                setExpenseData((prev) => ({
+                setIncomeData((prev) => ({
                   ...prev,
                   scheduleIntervals: [selectedValue],
                 }));
-                setError({ hasError: false, message: "" }); 
+                setError({ hasError: false, message: "" });
               }}
             />
           </div>
 
           <div className={styles.inputContainer}>
             <FormInput
-              label={i18n.t("createSchedule.amount")}
-              placeholder={i18n.t("placeholder.amount")}
+              label={i18n.t("CreateScheduledIncome.amountSend")}
               name="amountSend"
               type="number"
-              value={expenseData.amountSend}
+              value={incomeData.amountSend}
               onChange={handleInputChange}
             />
           </div>
           <div className={styles.inputContainer}>
             <Datepicker
-              label={i18n.t("createSchedule.nextExecutionDate")}
-              placeholder={i18n.t("placeholder.nextExecutionDate")}
+              label={i18n.t("CreateScheduledIncome.nextExecutionDate")}
               name="nextExecutionDate"
-              value={expenseData.nextExecutionDate}
+              value={incomeData.nextExecutionDate}
               onChange={(date) => {
-                const localDateTime = `${date}T00:00:00.000Z`
-                setExpenseData((prev) => ({
+                const localDateTime = `${date}T00:00:00.000Z`;
+                setIncomeData((prev) => ({
                   ...prev,
                   nextExecutionDate: localDateTime,
                 }));
@@ -187,23 +172,23 @@ const CreateScheduledExpense = ({
               }}
             />
           </div>
-          
+
           <div className={styles.inputContainer}>
             <FormInput
-              label={i18n.t("createSchedule.category")}
+              label={i18n.t("CreateScheduledIncome.category")}
               name="category"
               type="text"
-              value={expenseData.category}
+              value={incomeData.category}
               onChange={handleInputChange}
             />
           </div>
 
           <div className={styles.inputContainer}>
             <FormInput
-              label={i18n.t("createSchedule.description")}
+              label={i18n.t("CreateScheduledIncome.description")}
               name="description"
               type="textarea"
-              value={expenseData.description}
+              value={incomeData.description}
               onChange={handleInputChange}
             />
           </div>
@@ -213,7 +198,7 @@ const CreateScheduledExpense = ({
           <div className={styles.buttonContainer}>
             <Button
               variant="primary"
-              text={mutation.isPending ? i18n.t("buttons.loading") : i18n.t("buttons.createExpense")}
+              text={mutation.isPending ? "Saving..." : "Create Income"}
               type="submit"
               disabled={mutation.isPending}
             />
@@ -231,4 +216,4 @@ const CreateScheduledExpense = ({
   );
 };
 
-export default CreateScheduledExpense;
+export default CreateScheduledIncome;
