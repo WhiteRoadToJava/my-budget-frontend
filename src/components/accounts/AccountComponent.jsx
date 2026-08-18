@@ -9,7 +9,6 @@ import i18n from "../../configuration/i18n";
 import { ar } from "date-fns/locale";
 
 const AccountComponent = ({ accounts }) => {
-  const [accountsList, setAccountsList] = useState([]);
   const [openCreateAccount, setOpenCreateAccount] = useState(false);
   const [activeAccounts, setActiveAccounts] = useState([]);
   const [archivedAccounts, setArchivedAccounts] = useState([]);
@@ -25,7 +24,6 @@ const AccountComponent = ({ accounts }) => {
         setArchivedAccounts(
           accountsData.filter((account) => account.status[0] === "ARCHIVED"),
         );
-        setAccountsList(accountsData);
       }
     };
     fetchAccounts();
@@ -36,7 +34,7 @@ const AccountComponent = ({ accounts }) => {
     const filteredAccounts = accounts?.accounts?.filter((account) =>
       account.name.toLowerCase().includes(value.toLowerCase()),
     );
-    setAccountsList(filteredAccounts || []);
+    setActiveAccounts(filteredAccounts || []);
   };
 
   return (
