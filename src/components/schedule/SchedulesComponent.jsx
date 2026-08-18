@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import Row from "./Row";
 import styles from "../../styles/components/schedule/sechedule.module.scss";
-import CreatescheduledIncomse from "./CreatescheduledIncomse";
+import CreatescheduledIncomse from "./CreateScheduledIncomse";
 import Button from "../btns/Button";
-import ToogleMenu from "../elements/ToggleMenu";
+import ToggleMenu from "../elements/ToggleMenu";
 import { useQuery } from "@tanstack/react-query";
 import { getAccounts } from "../../api/accountService";
-import CreateScheduledExpense from "./CreatescheduledExpense ";
+import CreateScheduledExpense from "./CreateScheduledExpense ";
 import ScheduleInfo from "./ScheduleInfo";
 import i18n from "../../configuration/i18n";
 
@@ -104,7 +104,7 @@ const SchedulesComponent = ({ schedules }) => {
       />
 
       <div className={styles.buttonContainer}>
-        <ToogleMenu menuList={buttonMenuItems} position="bottom" />
+        <ToggleMenu menuList={buttonMenuItems} position="bottom" />
       </div>
     </div>
   );

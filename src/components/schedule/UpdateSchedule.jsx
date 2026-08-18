@@ -3,7 +3,7 @@ import Modal from "../modals/Modal";
 import FormInput from "../inputs/FormInput";
 import DropDown from "../elements/DropDown";
 import Button from "../btns/Button";
-import styles from "../../styles/components/schedule/createdscheduledExpense.module.scss";
+import styles from "../../styles/components/schedule/createdScheduledExpense.module.scss";
 import { updateSchedule } from "../../api/scheduleService";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import Datepicker from "../inputs/Datepicker";
