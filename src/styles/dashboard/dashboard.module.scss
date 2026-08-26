@@ -1,23 +1,70 @@
-.dashboardContainer{
-  margin-bottom: 50px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
-  justify-content: center;
-  gap: 10px;
+@use "../variables" as variable;
 
+.dashboardContainer {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(19rem, 0.85fr);
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 90rem;
+  padding: 0.5rem 0 2rem;
+  margin: 0 auto;
 }
-.accountContainer{
+
+.leftSide,
+.rightSide {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 100%;
+  min-width: 0;
+  max-width: none;
+}
+
+.accountContainer,
+.transactionContainer {
+  width: 100%;
   height: auto;
-  width: 650px;
+  padding: 1.25rem;
+  overflow: hidden;
+  background: rgba(23, 33, 57, 0.82);
+  border: 1px solid variable.$color-border;
+  border-radius: variable.$radius-small;
+  box-shadow: variable.$shadow-card;
 }
-.transactionContainer{
-  height: auto;
-  width: 650px;
+
+.accountContainer h2,
+.transactionContainer h2 {
+  margin-bottom: 1rem;
+  color: variable.$color-text;
+  font-size: variable.$font-lg;
 }
-.rightSide{
-  width: 500px;
+
+.accountList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
 }
-.leftSide{
-  max-width: 500px;
+
+@media (max-width: 980px) {
+  .dashboardContainer {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .dashboardContainer {
+    gap: 1rem;
+    padding-top: 0;
+  }
+
+  .leftSide,
+  .rightSide {
+    gap: 1rem;
+  }
+
+  .accountContainer,
+  .transactionContainer {
+    padding: 1rem;
+    border-radius: 1rem;
+  }
 }
