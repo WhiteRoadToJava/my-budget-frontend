@@ -1,34 +1,27 @@
-import React from 'react'
-import { getAccounts } from '../../api/accountService'
-import { useQuery } from '@tanstack/react-query'
-import styles from '../../styles/dashboard/dashboard.module.scss'
-import Row from '../accounts/Row'
-import i18n from '../../configuration/i18n'
+import React from "react";
+import styles from '../../styles/dashboard/dashboard.module.scss';
+import Row from '../accounts/Row';
+import i18n from '../../configuration/i18n';
 
-
-
-const ViewAccounts = ({data = [], isError, error, isLoading }) => {
-
-
-
-
+const ViewAccounts = ({ data = [], isError, error, isLoading }) => {
   if (isLoading) {
-    return <div>{i18n.t("masseges.loading")}</div>;
+    return <div className={styles.accountContainer}>{i18n.t("messages.loadingAccounts", { defaultValue: "Loading accounts..." })}</div>;
   }
-  if (error) {
-    return <div>{i18n.t("masseges.errorLoading")} {error.message}</div>;
-  }
-  return (
-    <div className={styles.accountContainer}>
-      <h2></h2>
-      {data.slice(0, 3).map((account) => (
-        <div key={account.id} className={styles.accountContainer}>
-          <Row key={account.id} account={account}  />
-        </div>
-      ))
-    }
-    </div>
-  )
-}
 
-export default ViewAccounts
+  if (isError || error) {
+    return <div className={styles.accountContainer}>{i18n.t("messages.errorLoadingAccounts", { defaultValue: "Unable to load accounts" })}</div>;
+  }
+
+  return (
+    <section className={styles.accountContainer} aria-labelledby="accounts-heading">
+      <h2 id="accounts-heading">{i18n.t("viewAccounts.title", { defaultValue: "Accounts" })}</h2>
+      <div className={styles.accountList}>
+        {data.slice(0, 3).map((account) => (
+          <Row key={account.id} account={account} />
+        ))}
+      </div>
+    </section>
+  );
+};
+
+export default ViewAccounts;
