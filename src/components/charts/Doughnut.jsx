@@ -1,103 +1,61 @@
 import React from "react";
-import {
-  PieChart,
-  Pie,
-  Cell,
-  Tooltip,
-  Legend,
-  ResponsiveContainer,
-} from "recharts";
+import { PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer } from "recharts";
 import styles from "../../styles/Charts/dashboard.module.scss";
 
-
-const COLORS = ["#00C49F", "#FF8042"]; // green = income, red = expense
-
-const MONTH_NAMES = [
-  "January",
-  "February",
-  "March",
-  "April",
-  "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "October",
-  "November",
-  "December",
-];
+const COLORS = ["#d6ff41", "#ff6b78"];
+const MONTH_NAMES = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
 function DoughnutChart({ transactions = [] }) {
-  // Group transactions by "month-year" key
-const monthlyTotals = transactions.reduce((acc, item) => {
-  const date = new Date(item.createdAt);
-  const month = date.getMonth();
-  const year = date.getFullYear();
-  const key = `${month}-${year}`;
+  const monthlyTotals = transactions.reduce((acc, item) => {
+    const date = new Date(item.createdAt);
+    const key = date.getMonth() + "-" + date.getFullYear();
+    if (!acc[key]) acc[key] = { incomse: 0, expense: 0 };
+    if (item.type === "incomse") acc[key].incomse += item.amount;
+    else acc[key].expense += item.amount;
+    return acc;
+  }, {});
 
-  if (!acc[key]) {
-    acc[key] = { incomse: 0, expense: 0 };
-  }
-
-  if (item.type === "incomse") {
-    acc[key].incomse += item.amount;
-  } else {
-    acc[key].expense += item.amount;
-  }
-
-  return acc;
-
-
-
-}, {});
   const sortedMonths = Object.entries(monthlyTotals).sort((a, b) => {
-    const [monthA, yearA] = a[0].split("-");
-    const [monthB, yearB] = b[0].split("-");
-    if (yearA === yearB) {
-      return monthB - monthA;
-    }
-    return yearA - yearB  
-  }
-)
-
-
+    const [monthA, yearA] = a[0].split("-").map(Number);
+    const [monthB, yearB] = b[0].split("-").map(Number);
+    return yearB - yearA || monthB - monthA;
+  });
 
   return (
-    <div className={styles.doughnutContainer}>
-      {sortedMonths.map(([monthIndex, totals]) => {
-        const chartData = [
-          { name: "Incomse", value: totals.incomse },
-          { name: "Expense", value: totals.expense },
-        ].filter((entry) => entry.value > 0);
-        return (
-          <div key={monthIndex} style={{ marginBottom: "2rem" }}>
-            <h3>{MONTH_NAMES[Number(monthIndex)]}</h3>
-
-
-            <ResponsiveContainer  height={100} className={styles.PieChart} >
-              <PieChart>
-                <Pie
-                  data={chartData}
-                  dataKey="value"
-                  nameKey="name"
-                  cx="50%"
-                  cy="50%"
-                  innerRadius={20}
-                  outerRadius={30}
-                  paddingAngle={4}
-
-                >
-                  <Cell key={"incomse"} fill={totals.incomse ? COLORS[0] : COLORS[1]}  />
-                  <Cell key={"expense"} fill={COLORS[1]} />
-                </Pie>
-                <Tooltip formatter={(value, name) => [value, name]} />
-                <Legend />
-              </PieChart>
-            </ResponsiveContainer>
-          </div>
-        );
-      })}
-    </div>
+    <section className={styles.chartCard} aria-labelledby="monthly-summary-heading">
+      <div className={styles.chartHeader}>
+        <div>
+          <p className={styles.eyebrow}>Summary</p>
+          <h2 id="monthly-summary-heading">Monthly activity</h2>
+        </div>
+      </div>
+      {sortedMonths.length === 0 ? (
+        <p className={styles.emptyChart}>No monthly activity yet</p>
+      ) : (
+        <div className={styles.doughnutContainer}>
+          {sortedMonths.map(([monthIndex, totals]) => {
+            const chartData = [
+              { name: "Income", value: totals.incomse, color: COLORS[0] },
+              { name: "Expense", value: totals.expense, color: COLORS[1] },
+            ].filter((entry) => entry.value > 0);
+            return (
+              <div className={styles.monthCard} key={monthIndex}>
+                <h3>{MONTH_NAMES[Number(monthIndex)]}</h3>
+                <ResponsiveContainer width="100%" height={170}>
+                  <PieChart>
+                    <Pie data={chartData} dataKey="value" nameKey="name" cx="50%" cy="46%" innerRadius={42} outerRadius={64} paddingAngle={4}>
+                      {chartData.map((entry) => <Cell key={entry.name} fill={entry.color} />)}
+                    </Pie>
+                    <Tooltip contentStyle={{ background: "#172139", border: "1px solid rgba(174, 184, 203, 0.14)", borderRadius: "12px" }} />
+                    <Legend verticalAlign="bottom" height={24} wrapperStyle={{ fontSize: "11px", color: "#aeb8cb" }} />
+                  </PieChart>
+                </ResponsiveContainer>
+              </div>
+            );
+          })}
+        </div>
+      )}
+    </section>
   );
 }
 
