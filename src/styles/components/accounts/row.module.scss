@@ -1,38 +1,76 @@
 @use "../../variables" as variable;
-.rowDetails {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
 
-}
 .rowContainer {
   display: flex;
-  justify-content: s flex-start;
   align-items: center;
-      max-width: 800px;
-  border: 1px solid variable.$color-text;
-  padding: 10px;
+  gap: 0.75rem;
+  width: 100%;
+  max-width: none;
+  padding: 0.85rem 1rem;
+  margin-bottom: 0;
+  overflow: hidden;
+  color: variable.$color-text;
+  background: rgba(11, 16, 32, 0.34);
+  border: 1px solid variable.$color-border;
+  border-radius: 0.9rem;
   cursor: pointer;
-  transition: all 0.3s ease-in-out;
-  margin-bottom: 5px;
-}
-.rowContainer:hover {
-  border: 1px solid variable.$color-tennis;
-}
-span {
-  min-width: 150px;
-}
-// account.module.scss
-.totalBalance {
-  font-weight: bold;
+  transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
 
-  // Use & to create .balance.plus-value
-  &.plusValue { 
-    color: variable.$color-tennis;
+  &:hover {
+    background: rgba(30, 42, 69, 0.8);
+    border-color: variable.$color-border-strong;
+    transform: translateY(-1px);
+  }
+}
+
+.rowDetails {
+  display: grid;
+  grid-template-columns: minmax(7rem, 1.5fr) minmax(6rem, 1fr) minmax(4rem, auto) minmax(5rem, auto);
+  align-items: center;
+  gap: 0.75rem;
+  flex: 1;
+  min-width: 0;
+}
+
+.rowDetails span {
+  min-width: 0;
+  overflow: hidden;
+  color: variable.$color-text-gray;
+  font-size: variable.$font-sm;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.rowDetails span:first-child {
+  color: variable.$color-text;
+  font-weight: 700;
+}
+
+.totalBalance {
+  font-weight: 700;
+  text-align: right;
+
+  &.plusValue {
+    color: variable.$color-tennis !important;
   }
 
   &.minusValue {
-    color: variable.$color-error;
+    color: variable.$color-error !important;
+  }
+}
+
+@media (max-width: 620px) {
+  .rowContainer {
+    padding: 0.75rem;
+  }
+
+  .rowDetails {
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 0.25rem 0.75rem;
+  }
+
+  .rowDetails span:nth-child(3),
+  .rowDetails span:nth-child(4) {
+    display: none;
   }
 }
