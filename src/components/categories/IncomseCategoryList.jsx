@@ -1,5 +1,5 @@
 import React, { useState }from "react";
-import styles from "../../styles/components/categorise/IncomseCategoryList.module.scss";
+import styles from "../../styles/components/categorise/incomseCategoryList.module.scss";
 import { incomseCategoryList } from "../../assiets/categories/assits";
 import FormInput from "../inputs/FormInput";
 
