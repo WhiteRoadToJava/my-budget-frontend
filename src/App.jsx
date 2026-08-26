@@ -20,7 +20,7 @@ import RapportPage from "./pages/user/RapportPage.jsx";
 import i18n from "./configuration/i18n.js";
 import { useEffect } from "react";
 import { UploadComponentTest } from "./components/testing/UploadComponentTest.jsx";
-import TestIncomsecategory from "./components/testing/testIncomsecategory.jsx";
+import TestIncomsecategory from "./components/testing/TestIncomsecategory.jsx";
 
 
 
