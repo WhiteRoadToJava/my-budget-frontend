@@ -1,5 +1,5 @@
-import SidebarStar from "./icons/SidebarStar";
-import styles from "../../styles//layout/sidebar/sidebar.module.scss";
+import React from "react";
+import styles from "../../styles/layout/sidebar/sidebarTop.module.scss";
 import KlarrLogoIcon from "../icons/logos/KlarrLogoIcon";
 import KLogo from "./icons/KLogo.jsx";
 
@@ -12,7 +12,7 @@ export default function SidebarTop({ isOpen }) {
             <KlarrLogoIcon
               className={styles.logo}
               textColor="white"
-              dotColor="#FF6C00"
+              dotColor="#D6FF41"
             />
           </div>
         </div>
