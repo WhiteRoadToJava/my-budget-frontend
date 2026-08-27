@@ -1,24 +1,26 @@
 @use "../variables" as variable;
-@import url("https://fonts.googleapis.com/css2?family=Agdasima:wght@400;700&display=swap");
 
 .formContainer {
-  background: variable.$gradient-bg;
-  width: 540px;
-  height: 630px;
-  padding: 3rem 6rem;
-  border: 2px solid variable.$color-stroke;
-  border-radius: 25px;
+  width: min(100%, 34rem);
+  min-height: 36rem;
+  padding: clamp(1.5rem, 5vw, 3rem);
+  background: rgba(23, 33, 57, 0.9);
+  border: 1px solid variable.$color-border;
+  border-radius: 1.75rem;
+  box-shadow: variable.$shadow-card;
+  backdrop-filter: blur(18px);
 }
 
 .header {
+  margin: 1.25rem 0 0;
   text-align: center;
-  margin: 3rem 0 0 0;
 
   p {
     color: variable.$color-text;
-    font-size: variable.$font-md;
-    letter-spacing: 1px;
-    font-weight: 400;
+    font-family: "Manrope", sans-serif;
+    font-size: variable.$font-lg;
+    font-weight: 700;
+    letter-spacing: -0.03em;
   }
 }
 
@@ -29,109 +31,93 @@
 .terminal {
   display: flex;
   justify-content: center;
+  width: 100%;
 }
-
-/*form styles*/
 
 .form {
   display: flex;
   flex-direction: column;
-  margin-top: 3rem;
+  gap: 0.85rem;
+  margin-top: 2rem;
 }
 
 .input {
-  padding: 0 0 0.5rem 0;
-  border: none;
-  border-bottom: 2px solid variable.$color-text;
-  background: none;
-  font-size: variable.$font-base;
-  font-weight: 400;
-  outline: none;
+  width: 100%;
+  min-height: 3.25rem;
+  padding: 0.9rem 1rem;
   color: variable.$color-text;
+  background: rgba(11, 16, 32, 0.52);
+  border: 1px solid variable.$color-border;
+  border-radius: 0.85rem;
+  outline: none;
+  font-size: variable.$font-base;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
 
   &:focus {
-    border-bottom-color: variable.$color-tennis;
-    background: none;
-    color: variable.$color-text;
+    background: rgba(11, 16, 32, 0.72);
+    border-color: variable.$color-tennis;
+    box-shadow: variable.$shadow-glow;
   }
 
   &:-webkit-autofill {
     -webkit-background-clip: text;
-    background-color: transparent !important;
     -webkit-text-fill-color: variable.$color-text;
+    box-shadow: 0 0 0 1000px #11182a inset;
   }
 
   &::placeholder {
-    color: variable.$color-gray-light;
+    color: variable.$color-text-muted;
   }
-}
-
-.input:not(:last-of-type) {
-  margin-bottom: 2.5rem;
-}
-
-.eyeIcon {
-  cursor: pointer;
-  position: relative;
-  bottom: 27px;
-  left: 20rem;
 }
 
 .btnGroup {
   display: flex;
-  flex-direction: column;
-  margin-top: 2.5rem;
+  width: 100%;
+  margin-top: 1rem;
+
+  :global(button) {
+    width: 100%;
+    justify-content: center;
+    min-height: 3.1rem;
+  }
 }
 
 .forgotPassword {
-  color: variable.$color-gray-light;
-  text-align: right;
-  padding-top: 0.25rem;
+  align-self: flex-end;
+  margin-top: 0.15rem;
+  color: variable.$color-text-muted;
+  font-size: variable.$font-sm;
+  text-decoration: none;
+  transition: color 0.2s ease;
 
-  cursor: pointer;
-  font-size: variable.$font-xs;
-  transition: all 0.5s ease-in-out;
-
-  &:hover {
-    color: variable.$color-purple;
+  &:hover,
+  &:focus-visible {
+    color: variable.$color-tennis;
   }
 }
-//Override for spinner component since it has position absolute
-.spinner{
-   width: 22rem;
-  height: 6rem;
-  position:relative;
-}
 
-@media only screen and (-webkit-min-device-pixel-ratio: 2),
-  only screen and (min--moz-device-pixel-ratio: 2),
-  only screen and (-o-min-device-pixel-ratio: 2/1),
-  only screen and (min-device-pixel-ratio: 2),
-  only screen and (min-resolution: 192dpi),
-  only screen and (min-resolution: 2dppx) {
-  .input {
-    font-size: variable.$font-sm;
-  }
-
-  .input:not(:last-of-type) {
-    margin-bottom: 2rem;
-  }
-
-  .eyeIcon {
-    bottom: 25px;
-    left: 16.4rem;
-  }
-
-  .btnGroup {
-    margin-top: 3rem;
-  }
-
-  .forgotPassword {
-    margin-top: -5px;
-  }
+.spinner {
+  position: relative;
+  width: 100%;
+  height: 5rem;
 }
 
 .errorMessage {
+  padding: 0.75rem 0.9rem;
   color: variable.$color-error;
-  font-size: variable.$font-md;
+  background: rgba(255, 107, 120, 0.1);
+  border: 1px solid rgba(255, 107, 120, 0.25);
+  border-radius: 0.75rem;
+  font-size: variable.$font-sm;
+}
+
+@media (max-width: 520px) {
+  .authLayout {
+    padding: 0.75rem;
+  }
+
+  .formContainer {
+    min-height: auto;
+    border-radius: 1.25rem;
+  }
 }
