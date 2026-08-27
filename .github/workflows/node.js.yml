@@ -27,4 +27,4 @@ jobs:
     - run: npm ci
     - run: npm run lint
     - run: npm run build --if-present
-    # TODO: re-add `npm test` once a test suite exists (see Issue #10)
+    - run: npm test
