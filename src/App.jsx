@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Login from "./pages/auth/LoginTemp.jsx";
 import ForgotPassword from "./pages/auth/ForgotPassword.jsx";
-import Dashboard from "./pages/admin/Dashboard.jsx";
+import Dashboard from "./pages/admin/Dashboard.jsx"
 import { AuthProvider } from "./contexts/AuthContext.jsx";
 import { UserProvider } from "./contexts/UserContext.jsx";
 import Expense from "./pages/user/expenses/Expense.jsx";
@@ -20,16 +20,22 @@ import RapportPage from "./pages/user/RapportPage.jsx";
 import i18n from "./configuration/i18n.js";
 import { useEffect } from "react";
 
+
+
+
+
 function App() {
+
   useEffect(() => {
     const language = localStorage.getItem("language") || "en";
     i18n.changeLanguage(language);
     document.documentElement.dir = language === "ar" ? "rtl" : "ltr";
     document.documentElement.lang = language;
   }, []);
-
+  
   return (
     <div className="App">
+
       <BrowserRouter>
         <AuthProvider>
           <UserProvider>
@@ -62,26 +68,27 @@ function App() {
                     path="/user/calendar"
                     element={<div>Calendar Page</div>}
                   />
-                  <Route path="/user/settings" element={<SettingPage />} />
+                  <Route
+                    path="/user/settings"
+                    element={<SettingPage />}
+                  />
                   <Route
                     path="/user/accounts/:accountId"
                     element={<AccountsPage />}
                   />
-                  <Route
-                    path="/user/transactions"
-                    element={<AllTransactions />}
+                  <Route 
+                  path="/user/transactions"
+                  element={<AllTransactions />}
                   />
-                  <Route path="/user/schedule" element={<SchedulePage />} />
-                  <Route
-                    path="/user/accounts/search"
-                    element={<RapportPage />}
+                  <Route 
+                  path="/user/schedule"
+                  element={<SchedulePage />}
+                  />
+                  <Route 
+                  path="/user/accounts/search"
+                  element={<RapportPage /> }
                   />
                 </Route>
-                <Route
-                  path="/user/uploadimage"
-                  element={<UploadComponentTest />}
-                />
-                <Route path="user/testing" element={<TestIncomsecategory />} />
               </Route>
             </Routes>
           </UserProvider>
