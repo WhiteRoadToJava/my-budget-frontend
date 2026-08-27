@@ -55,20 +55,13 @@ const UpdateSchedule = ({ isOpen, isClose, schedule }) => {
     mutation.mutate(updateScheduleRequest);
   };
 
-  const handleSourceAccountChange = (e) => {
-    const selectedName = e.target.value;
-    const selectedAccount = accountsList.find(
-      (acc) => acc.name === selectedName,
-    );
-    setUpdateScheduleRequest((prev) => ({
-      ...prev,
-      sourceAccountId: selectedAccount?.id || "",
-    }));
-    setError({ hasError: false, message: "" });
-  };
-
+  // Deliberate: initializes the editable form fields from the `schedule` prop
+  // when it changes. Candidate for a `key`-based remount at the call site
+  // instead of this effect; tracked as a follow-up cleanup rather than
+  // changed here to keep this fix scoped to CI unblocking.
   useEffect(() => {
     if (!schedule || !schedule.id) return;
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setUpdateScheduleRequest({
       name: schedule.name,
       description: schedule.description,
@@ -80,8 +73,6 @@ const UpdateSchedule = ({ isOpen, isClose, schedule }) => {
       nextExecutionDate: schedule.executionDate,
       isActive: schedule.isActive ?? true,
     });
-    console.log("schedule: ",schedule);
-    console.log("updateScheduleRequest: ",updateScheduleRequest);
   }, [schedule]);
 
   return (

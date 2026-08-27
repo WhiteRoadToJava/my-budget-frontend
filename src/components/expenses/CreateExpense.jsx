@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Modal from "../modals/Modal";
 import FormInput from "../../components/inputs/FormInput";
 import styles from "..//../styles/components/ecpenses/createExpense.module.scss";
@@ -14,7 +14,6 @@ const CreateExpense = ({ isOpen, isClose, account }) => {
   const queryClient = useQueryClient();
 
   const [expenseData, setExpenseData] = useState({
-    account: { id: "" },
     category: "",
     amount: "",
     image: null,
@@ -31,7 +30,6 @@ const CreateExpense = ({ isOpen, isClose, account }) => {
 
       isClose(); // إغلاق المودال
       setExpenseData({
-        account: { id: account?.id || "" },
         category: "",
         amount: "",
       }); // تصغير البيانات
@@ -44,12 +42,6 @@ const CreateExpense = ({ isOpen, isClose, account }) => {
     },
   });
 
-  useEffect(() => {
-    if (account && account.id) {
-      setExpenseData((prev) => ({ ...prev, account: { id: account.id } }));
-    }
-  }, [account]);
-
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setExpenseData({ ...expenseData, [name]: value });
@@ -61,6 +53,7 @@ const CreateExpense = ({ isOpen, isClose, account }) => {
     if (!handleValidation()) return;
     const filnalExpenseData = {
       ...expenseData,
+      account: { id: account?.id || "" },
       image: imageUrls || null,
     };
     // 3. تنفيذ الـ Mutation

@@ -8,11 +8,11 @@ import UpdateIncomse from "../imcomses/UpdateIncomse";
 import UpdateExpense from "../expenses/UpdateExpense";
 import DeleteConfimation from "../modals/DeleteConfirmation";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { deleteSchedule, updateSchedule } from "../../api/scheduleService";
+import { deleteSchedule } from "../../api/scheduleService";
 import i18n from "../../configuration/i18n";
 import UpdateSchedule from "./UpdateSchedule";
 
-const scheduleInfo = ({ isOpen, onClose, accounts, schedule }) => {
+const ScheduleInfo = ({ isOpen, onClose, accounts, schedule }) => {
   const queryClient = useQueryClient();
   const [openUpdateSchedule, setOpenUpdateSchedule] = useState(false);
   const [openConfirmDelete, setOpenConfirmDelete] = useState(false);
@@ -33,8 +33,6 @@ const scheduleInfo = ({ isOpen, onClose, accounts, schedule }) => {
         });
       },
     });
-
-  const handleUpdate = () => {};
 
   const handleDelete = async () => {
     deleteSchdule.mutate(schedule.id);
@@ -132,4 +130,4 @@ const scheduleInfo = ({ isOpen, onClose, accounts, schedule }) => {
   );
 };
 
-export default scheduleInfo;
+export default ScheduleInfo;

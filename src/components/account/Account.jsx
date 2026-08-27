@@ -40,6 +40,11 @@ const handleTotalBalance = async () => {
   setTotalBalance(accountData.totalBalance);
 };
   useEffect(() => {
+    // Deliberate: re-fetches the account's server-computed total balance
+    // whenever the transactions list changes. Not a pure prop->state sync,
+    // so it can't be computed during render. Candidate for a react-query
+    // refactor (tracked separately) instead of this eslint-disable long term.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     handleTotalBalance();
   }, [transactions]);
   

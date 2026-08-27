@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Modal from "../modals/Modal";
 import FormInput from "../../components/inputs/FormInput";
 import styles from "..//../styles/components/incomes/createIncomse.module.scss";
@@ -14,7 +14,6 @@ import IncomseCategoryList from "../categories/IncomseCategoryList.jsx";
 const CreateIncomse = ({ isOpen, isClose, account }) => {
   const queryClient = useQueryClient();
   const [incomseData, setIncomseData] = useState({
-    account: { id: "" },
     category: "",
     amount: "",
     inage: null,
@@ -29,7 +28,7 @@ const CreateIncomse = ({ isOpen, isClose, account }) => {
       queryClient.invalidateQueries({ queryKey: ["accounts"] });
 
       isClose();
-      setIncomseData({ account: { id: account?.id || "" }, category: "", amount: "" });
+      setIncomseData({ category: "", amount: "" });
     },
     onError: () => {
       setError({
@@ -39,30 +38,17 @@ const CreateIncomse = ({ isOpen, isClose, account }) => {
     }
 
   });
-  useEffect(() => {
-    setIncomseData(
-      (prev) => ({
-        ...prev,
-        image: imageUrls,
-      }
-    ))
-  }, [imageUrls])
-
 
   const handleCreateIncomse = async (e) => {
     e.preventDefault(); // avoid form submission causing page reload
     if (!handleValidation()) return; // Stop if validation fails;
     // Implement the logic to create an incomse using the API
-    nutation.mutate(incomseData);
+    nutation.mutate({
+      ...incomseData,
+      account: { id: account?.id || "" },
+      image: imageUrls || null,
+    });
   };
-  useEffect(() => {
-    const fetchAccount = async () => {
-      if (account && account.id) {
-        setIncomseData({ ...incomseData, account: { id: account.id } });
-      }
-    };
-    fetchAccount();
-  }, [account]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
