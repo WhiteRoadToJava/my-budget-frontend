@@ -1,18 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styles from "../styles/layout/navbar.module.scss";
 import LanguageSelector from "./elements/LanguageSelector";
-import { UserContext } from "../contexts/UserContext";
 import i18n from "../configuration/i18n";
 import MessageComponent from "../components/interface/MessageComponent";
 
 const NavBar = ({ profiles }) => {
-
+  const displayName = profiles?.data?.fullname || profiles?.firstname || "Guest";
+  const initial = displayName.trim().charAt(0).toUpperCase() || "G";
 
   return (
     <div className={styles.navbarContainer}>
       <div className={styles.userContainer}>
-        <p>{i18n.t("greeting.welcome")}:</p>
-        <h2>{profiles?.data?.fullname || profiles?.firstname || "Guest"}</h2>
+        <div className={styles.avatar} aria-hidden="true">{initial}</div>
+        <div>
+          <p>{i18n.t("greeting.welcome")}:</p>
+          <h2>{displayName}</h2>
+        </div>
       </div>
       <div className={styles.iconsContainer}>
         <LanguageSelector />

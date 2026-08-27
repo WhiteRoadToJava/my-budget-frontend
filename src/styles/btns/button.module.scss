@@ -1,197 +1,141 @@
 @use "../variables.scss" as variable;
 
 .btn {
-  font-size: variable.$font-sm;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-  border-radius: 100px;
-  cursor: pointer;
-  transition: all 0.5s ease-in-out;
   display: inline-flex;
   align-items: center;
-  flex-grow: 0;
+  justify-content: center;
   align-self: flex-start;
-  padding: 5px 25px;
-  border: none;
-  background: none;
+  flex-grow: 0;
+  min-height: 2.6rem;
+  padding: 0.65rem 1.4rem;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  color: inherit;
+  cursor: pointer;
+  font-size: variable.$font-sm;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover:not(:disabled) {
+    transform: translateY(-1px);
+  }
+
+  &:focus-visible {
+    outline: 2px solid variable.$color-tennis;
+    outline-offset: 3px;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.55;
+  }
 }
 
 .primary {
-  background-color: variable.$color-tennis;
   color: variable.$color-black;
+  background: variable.$color-tennis;
+  box-shadow: 0 8px 20px rgba(214, 255, 65, 0.12);
 
-  &:hover {
-    background-color: variable.$color-text;
+  &:hover:not(:disabled) {
+    background: variable.$hover-primary;
+    box-shadow: 0 10px 24px rgba(214, 255, 65, 0.2);
   }
 }
 
 .secondary {
-  background-color: variable.$color-purple;
   color: variable.$color-black;
+  background: variable.$color-purple;
 
-  &:hover {
-    background-color: variable.$color-text;
-  }
+  &:hover:not(:disabled) { background: variable.$hover-secondary; }
 }
 
 .cancel {
-  background-color: variable.$color-fire;
   color: variable.$color-black;
+  background: variable.$color-fire;
 
-  &:hover {
-    background-color: #f44662;
-  }
+  &:hover:not(:disabled) { background: variable.$hover-cancel; }
 }
-// fixed to new design system
+
 .light {
-  background-color: variable.$color-icy-lilac;
   color: variable.$color-black;
+  background: variable.$color-icy-lilac;
 
-  &:hover {
-    background-color: variable.$color-text-gray;
-  }
+  &:hover:not(:disabled) { background: variable.$hover-light; }
 }
-.blue {
-  background-color: variable.$color-blue;
-  color: variable.$color-black;
 
-  &:hover {
-    background-color: #4dabf7;
-  }
+.blue {
+  color: variable.$color-black;
+  background: variable.$color-blue;
+
+  &:hover:not(:disabled) { background: variable.$color-blue-hover; }
 }
 
 .dark {
-  background-color: variable.$primaryBg;
   color: variable.$color-text;
+  background: variable.$primaryBg;
+  border-color: variable.$color-border;
 
-  &:hover {
-    background-color: variable.$color-gray-medium;
-  }
+  &:hover:not(:disabled) { background: variable.$surface-3; }
 }
 
-.cancel-outlined {
-  background-color: variable.$color-black;
-  color: variable.$color-fire;
-  border: 1px solid variable.$color-fire;
-
-  &:hover {
-    color: #f44662;
-    border: 1px solid #f44662;
-  }
-}
+.cancel-outlined,
 .cancel-outlined-transparent {
   color: variable.$color-fire;
-  border: 1px solid variable.$color-fire;
+  background: transparent;
+  border-color: variable.$color-fire;
 
-  &:hover {
-    color: #f44662;
-    border: 1px solid #f44662;
+  &:hover:not(:disabled) {
+    color: variable.$hover-cancel;
+    border-color: variable.$hover-cancel;
   }
 }
-.delete{
-  background-color: variable.$color-error;
-  color: variable.$color-black;
 
-  &:hover {
-    background-color: #f44662;
-  }
-}
+.delete,
 .delete-outlined {
-  background-color: variable.$color-black;
-  color: variable.$color-fire;
-  border: 1px solid variable.$color-error ;
+  color: variable.$color-black;
+  background: variable.$color-error;
 
-  &:hover {
-    color: #f44662;
-    border: 1px solid #f44662;
-  }
+  &:hover:not(:disabled) { background: variable.$hover-error; }
 }
 
-
-.yellow-outlined {
-  background-color: none;
-  border: 1px solid variable.$color-tennis;
-  color: variable.$color-tennis;
-  background: none;
-
-  &:hover {
-    border: 1px solid variable.$color-fire;
-    color: variable.$color-fire;
-  }
+.delete-outlined {
+  color: variable.$color-error;
+  background: transparent;
+  border-color: variable.$color-error;
 }
 
+.yellow-outlined,
 .yellow-outlined-success {
-    background-color: none;
-  border: 1px solid variable.$color-tennis;
   color: variable.$color-tennis;
-  background: none;
+  background: transparent;
+  border-color: variable.$color-tennis;
 
-  &:hover {
-    border: 1px solid variable.$color-white;
-    color: variable.$color-white;
+  &:hover:not(:disabled) {
+    color: variable.$color-black;
+    background: variable.$color-tennis;
   }
 }
 
 .purple-outlined {
-  background-color: none;
-  border: 1px solid variable.$color-purple;
   color: variable.$color-purple;
-  background: none;
+  background: transparent;
+  border-color: variable.$color-purple;
 
-  &:hover {
-    border: 1px solid variable.$color-fire;
-    color: variable.$color-fire;
+  &:hover:not(:disabled) {
+    color: variable.$color-black;
+    background: variable.$color-purple;
   }
 }
 
-.light-outlined {
-  background-color: variable.$color-black;
-  color: variable.$color-text;
-  border: 1px solid variable.$color-text;
-
-  &:hover {
-    color: #ddcefd;
-    border: 1px solid #ddcefd;
-  }
-}
-
-
+.light-outlined,
 .light-outlined-transparent {
   color: variable.$color-text;
-  border: 1px solid variable.$color-text;
+  background: transparent;
+  border-color: variable.$color-text-gray;
 
-  &:hover {
-    color: #ddcefd;
-    border: 1px solid #ddcefd;
-  }
-}
-
-@media only screen and (-webkit-min-device-pixel-ratio: 2),
-  only screen and (min--moz-device-pixel-ratio: 2),
-  only screen and (-o-min-device-pixel-ratio: 2/1),
-  only screen and (min-device-pixel-ratio: 2),
-  only screen and (min-resolution: 192dpi),
-  only screen and (min-resolution: 2dppx) {
-  .btn {
-    font-size: variable.$font-sm;
-  }
-
-  .primary {
-    padding: 0.438rem 1.875rem; // was 7px 30px;
-    font-size: variable.$font-sm;
-  }
-
-  .secondary {
-    font-size: variable.$font-sm;
-  }
-
-  .draft {
-    font-size: variable.$font-sm;
-    padding: 0.438rem 1.875rem; // was 7px 30px;
-  }
-
-  .next {
-    font-size: variable.$font-sm;
-    padding: 0.438rem 1.875rem; // was 7px 30px;
+  &:hover:not(:disabled) {
+    color: variable.$color-black;
+    background: variable.$color-text;
   }
 }

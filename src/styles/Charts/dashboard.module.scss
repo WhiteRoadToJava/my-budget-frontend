@@ -1,11 +1,75 @@
-.PieChart{
+@use "../variables" as variable;
 
+.chartCard {
+  width: 100%;
+  min-width: 0;
+  padding: 1.25rem;
+  overflow: hidden;
+  background: rgba(23, 33, 57, 0.82);
+  border: 1px solid variable.$color-border;
+  border-radius: variable.$radius-small;
+  box-shadow: variable.$shadow-card;
 }
-.doughnutContainer{
+
+.chartHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.chartHeader h2 {
+  color: variable.$color-text;
+  font-size: variable.$font-lg;
+}
+
+.eyebrow {
+  margin-bottom: 0.15rem;
+  color: variable.$color-text-muted;
+  font-size: variable.$font-xs;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.chartBadge {
+  padding: 0.35rem 0.6rem;
+  color: variable.$color-tennis;
+  background: rgba(214, 255, 65, 0.1);
+  border: 1px solid rgba(214, 255, 65, 0.18);
+  border-radius: 999px;
+  font-size: variable.$font-xs;
+  white-space: nowrap;
+}
+
+.chartCanvas {
+  width: 100%;
+  min-height: 280px;
+}
+
+.doughnutContainer {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+  gap: 0.75rem;
+}
+
+.monthCard {
+  min-width: 0;
+  padding: 0.75rem 0.5rem 0.25rem;
+  background: rgba(11, 16, 32, 0.28);
+  border: 1px solid variable.$color-border;
+  border-radius: variable.$radius-xs;
+}
+
+.monthCard h3 {
+  padding-left: 0.25rem;
+  color: variable.$color-text;
+  font-size: variable.$font-sm;
+}
+
+.emptyChart {
+  padding: 2rem 0;
+  color: variable.$color-text-muted;
+  text-align: center;
 }

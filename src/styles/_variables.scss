@@ -1,31 +1,41 @@
 // colors
-$primaryBg: #101011; // dreamless sleep
+$primaryBg: #0b1020;
 
-$color-tennis: #d6ff41; // golden fizz
-$color-purple: #dabdff; // mauve
-$color-fire: #f87931; // tango
-$color-blue: #4dabf7; // light  blue
-$color-blue-hover: #7ec0ff; // lighter blue
+$color-tennis: #d6ff41;
+$color-purple: #dabdff;
+$color-fire: #f87931;
+$color-blue: #5aa9ff;
+$color-blue-hover: #8bc4ff;
 
-$color-gray-dark: #202023; // noble black
-$color-gray-caviar: #2b2b2e;
-$color-gray-medium: #37373b; // vulcan
-$color-gray-jet: #535358;
-$color-gray-light: #84858b; // heavy gray
+$color-gray-dark: #151b2d;
+$color-gray-caviar: #1a2235;
+$color-gray-medium: #232d45;
+$color-gray-jet: #34415d;
+$color-gray-light: #8490aa;
 
-$color-text: #ffffff;
-$color-text-gray: #c2c3d0; // lavender dust
+$color-text: #f8fafc;
+$color-text-gray: #aeb8cb;
 $color-icy-lilac: #e9eaf8;
 $color-black: #000;
 
-$color-error: #f83f31;
-$color-success: #84dd3c;
+$color-error: #ff6b78;
+$color-success: #8be28b;
 
-// hover colors, lighter shades
+// semantic surfaces
+$surface-1: #11182a;
+$surface-2: #172139;
+$surface-3: #1e2a45;
+$color-border: rgba(174, 184, 203, 0.14);
+$color-border-strong: rgba(214, 255, 65, 0.35);
+$color-text-muted: #8490aa;
+$shadow-card: 0 18px 45px rgba(2, 6, 23, 0.24);
+$shadow-glow: 0 0 0 4px rgba(214, 255, 65, 0.1);
+
+// hover colors
 $hover-primary: #e5ff87;
 $hover-secondary: #f0e3ff;
-$hover-light: #c2c3d0; // this is lavender dust
-$hover-dark: #202023; // this is noble black
+$hover-light: #c2c3d0;
+$hover-dark: #202b43;
 $hover-cancel: #f9935a;
 $hover-error: #e91000;
 
@@ -34,63 +44,41 @@ $light-success: #b7dc99;
 $light-error: #e36b63;
 
 // gradients
-$gradient-bg: var(
-  --gradient_default,
-  linear-gradient(180deg, #2b2b2e 17%, #202023 59%, #101011 100%)
-);
+$gradient-bg: linear-gradient(160deg, #18233b 0%, #11182a 52%, #0d1425 100%);
+$gradient-horizontal: linear-gradient(90deg, #1d2943 0%, #d6ff41 50%, #1d2943 100%);
+$gradient-tennis: linear-gradient(90deg, #1d2943 0%, #d6ff41 50%, #1d2943 100%);
 
 // border-radius
 $radius-large: 24px;
 $radius-small: 16px;
-$radius-xs: 6px;
+$radius-xs: 8px;
 
-// only here to avoid error atm
-$color-stroke: #535358;
-$color-jet: #535358;
+$color-stroke: $color-border;
+$color-jet: $color-gray-jet;
 $color-white: white;
-
-// NOT DONE YET
-$gradient-horizontal: var(
-  --gradient_horizontal,
-  linear-gradient(
-    90deg,
-    #232325 7%,
-    #45454b 25.5%,
-    #9c9c9c 50%,
-    #45454b 78%,
-    #232325 92.5%
-  )
-);
-$gradient-tennis: var(
-  --gradient_horizontal,
-  linear-gradient(90deg, #232325 7%, #e1ff17 50%, #232325 92.5%)
-);
 
 // padding
 $padding-base: 2rem;
 $padding-retina: 1rem;
 
 // font sizes
-$font-2xs: 0.625rem; // 10px
-$font-xs: 0.75rem; // 12px
-$font-sm: 0.875rem; // 14px
-$font-base: 1rem; // 16px
-$font-md: 1.125rem; // 18px
-$font-lg: 1.5rem; // 24px
-$font-xl: 1.75rem; // 28px
-$font-xxl: 2rem; // 32px
-$font-3xl: 2.5rem; // 40px
+$font-2xs: 0.625rem;
+$font-xs: 0.75rem;
+$font-sm: 0.875rem;
+$font-base: 1rem;
+$font-md: 1.125rem;
+$font-lg: 1.5rem;
+$font-xl: 1.75rem;
+$font-xxl: 2rem;
+$font-3xl: 2.5rem;
 
 // letter spacing
 $spacing-small: 0.5px;
 $spacing: 1px;
 
 // sidebar width
-$sidebar-open-width: 15.625rem; // 250px
-/* $sidebar-closed-width: 60px;
-$sidebar-open-width: 170px;
-$sidebar-padding: 2.5rem;
-$content-transition: 0.3s ease; */
+$sidebar-open-width: 15rem;
+$sidebar-closed-width: 4.5rem;
 
 $breakpoints: (
   xxs: 790px,

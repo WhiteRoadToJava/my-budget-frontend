@@ -1,111 +1,96 @@
 @use "../../variables" as variable;
 
 .menuItem {
-  display: flex;
-  align-items: center;
-  color: variable.$color-text;
-  transition: all 0.3s linear;
-}
-
-.menuIcon {
-  display: flex;
-  justify-content: center;
-  width: 18px;
-  height: 16px;
-
-  svg {
-    fill: variable.$color-text-gray;
-  }
-}
-
-.item {
-  cursor: pointer;
-  display: flex;
-  gap: 10px;
-  margin-bottom: 1.5rem;
-  transition: all 0.3s ease-in-out;
-
-  svg {
-    transition: all 0.3s ease-in-out;
-  }
-
-  &:hover {
-    .menuText {
-      color: variable.$color-tennis;
-    }
-    svg {
-      fill: variable.$color-tennis;
-    }
-  }
-}
-
-.menuItemLink {
-  display: flex;
   width: 100%;
-  text-decoration: none;
+  margin: 0.25rem 0;
+  list-style: none;
+  color: variable.$color-text-gray;
+  border-radius: 0.9rem;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.menuItem.active {
+  color: variable.$color-black;
+
+  .item {
+    background: variable.$color-tennis;
+    box-shadow: 0 8px 20px rgba(214, 255, 65, 0.12);
+  }
+
+  .menuText {
+    color: variable.$color-black;
+    font-weight: 700;
+  }
+}
+
+.menuItemLink,
+.linkWrapper {
+  display: block;
+  width: 100%;
   color: inherit;
+  text-decoration: none;
   background: none;
 
   &:hover,
-  &:focus {
-    text-decoration: none;
+  &:focus-visible {
     outline: none;
   }
 }
 
-.menuText {
-  color: variable.$color-text;
-  font-weight: 600;
-  font-size: 14px;
-  letter-spacing: 0.3px;
+.item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-height: 2.75rem;
+  padding: 0.65rem 0.75rem;
+  margin: 0;
+  border: 1px solid transparent;
+  border-radius: 0.9rem;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+
+  &:hover {
+    color: variable.$color-text;
+    background: rgba(174, 184, 203, 0.08);
+    border-color: variable.$color-border;
+  }
 }
 
-/* Retina screens */
-@media only screen and (-webkit-min-device-pixel-ratio: 2),
-  only screen and (min--moz-device-pixel-ratio: 2),
-  only screen and (-o-min-device-pixel-ratio: 2/1),
-  only screen and (min-device-pixel-ratio: 2),
-  only screen and (min-resolution: 192dpi),
-  only screen and (min-resolution: 2dppx) {
-  .menuItem {
-    &.closed {
-      justify-content: center;
-      flex-direction: column;
-      align-items: center;
-      margin-bottom: 1.5rem;
+.menuIcon {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 1.25rem;
+  height: 1.25rem;
 
-      .menuIcon {
-        transition: opacity 0.3s linear;
-
-        svg {
-          width: 20px;
-          height: 20px;
-          fill: variable.$color-text;
-        }
-
-        &:hover {
-          svg {
-            fill: variable.$color-purple;
-          }
-        }
-      }
-    }
-
-    &.open {
-      align-items: center;
-      gap: 1rem;
-      margin-bottom: 1.5rem;
-
-      .menuIcon {
-        width: 18px;
-        height: 18px;
-      }
-
-      .menuText {
-        font-weight: 300;
-        font-size: variable.$font-xs;
-        letter-spacing: 0.5px;
-      }
-    }
+  svg {
+    width: 1.1rem;
+    height: 1.1rem;
+    fill: currentColor;
+    transition: fill 0.2s ease;
   }
+}
+
+.menuText {
+  overflow: hidden;
+  color: currentColor;
+  font-size: variable.$font-sm;
+  font-weight: 600;
+  letter-spacing: 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.closed {
+  .item {
+    justify-content: center;
+    padding-right: 0.5rem;
+    padding-left: 0.5rem;
+  }
+}
+
+.menuItem:focus-within .item {
+  outline: 2px solid variable.$color-tennis;
+  outline-offset: 2px;
 }
