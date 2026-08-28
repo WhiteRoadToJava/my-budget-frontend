@@ -1,6 +1,6 @@
 import React, { useState, useMemo, useEffect } from "react";
-import styles from "../../styles/components/account/account.module.scss";
-import Row from "./Row";
+import styles from "../../styles/components/accounts/account.module.scss";
+import Row from "./TransactionRow";
 import { getAccountById, getAccounts, getAllAccountTransactions } from "../../api/accountService";
 import Button from "../btns/Button";
 import CreateIncomse from "../imcomses/CreateIncomse";

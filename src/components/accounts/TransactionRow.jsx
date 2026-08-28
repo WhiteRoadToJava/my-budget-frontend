@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import styles from "../../styles/components/account/row.module.scss";
+import styles from "../../styles/components/accounts/transactionRow.module.scss";
 import { formatNumber } from "../../utils/formating";
 import { incomseCategoryList } from "../../assiets/categories/assits";
 import { expenseCategoryList } from "../../assiets/categories/assits";
