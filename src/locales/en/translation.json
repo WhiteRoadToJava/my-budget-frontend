@@ -11,7 +11,9 @@
     "settings": "Settings"
   },
   "sidebar": {
-    "logout": "Logout"
+    "logout": "Logout",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
   },
   "forgotPassword": {
     "header": "Reset your password",

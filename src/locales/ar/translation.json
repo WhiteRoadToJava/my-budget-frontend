@@ -11,7 +11,9 @@
     "settings": "الإعدادات"
   },
   "sidebar": {
-    "logout": "تسجيل الخروج"
+    "logout": "تسجيل الخروج",
+    "openMenu": "فتح القائمة",
+    "closeMenu": "إغلاق القائمة"
   },
   "forgotPassword": {
     "header": "نسيت كلمة السر",

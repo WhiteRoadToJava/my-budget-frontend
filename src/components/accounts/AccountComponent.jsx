@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import Row from "./Row";
 import styles from "../../styles/components/accounts/accounts.module.scss";
 import AccountsInfo from "./AccountsInfo";
-import PlusButton from "../btns/PlusButton";
+import Button from "../btns/Button";
+import PlusIcon from "../icons/btns/PlusIcon";
 import CreateAccount from "../account/CreateAccount";
 import SearchInput from "../inputs/SearchInput";
 import i18n from "../../configuration/i18n";
@@ -44,9 +45,11 @@ const AccountComponent = ({ accounts }) => {
       <div className={styles.divider}></div>
       <div className={styles.accountHeader}>
         <div>
-          <PlusButton
+          <Button
             text={i18n.t("accountsPage.buttonText")}
             type="button"
+            variant="primary"
+            Icon={PlusIcon}
             onClick={() => setOpenCreateAccount(true)}
           />
         </div>

@@ -45,13 +45,13 @@
   gap: 0.65rem;
 }
 
-@media (max-width: 980px) {
+@include variable.respond(tablet-lg) {
   .dashboardContainer {
     grid-template-columns: 1fr;
   }
 }
 
-@media (max-width: 560px) {
+@include variable.respond(mobile-lg) {
   .dashboardContainer {
     gap: 1rem;
     padding-top: 0;

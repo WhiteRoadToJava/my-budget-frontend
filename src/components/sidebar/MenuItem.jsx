@@ -2,7 +2,7 @@ import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import styles from "../../styles/layout/sidebar/menuItem.module.scss";
 
-export default function MenuItem({ item, isOpen }) {
+export default function MenuItem({ item, isOpen, onClick }) {
   const location = useLocation();
   const isActive = location.pathname === item.link;
   const menuItemClasses = [
@@ -13,7 +13,7 @@ export default function MenuItem({ item, isOpen }) {
 
   return (
     <li className={menuItemClasses}>
-      <Link to={item.link} className={styles.linkWrapper}>
+      <Link to={item.link} className={styles.linkWrapper} onClick={onClick}>
         <div className={styles.item}>
           <div className={styles.menuIcon}>
             {item.icon
