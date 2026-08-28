@@ -18,7 +18,7 @@
   background-color: variable.$primaryBg;
   border: 2px solid variable.$color-stroke;
   padding: 2rem;
-  border-radius: 10px;
+  border-radius: variable.$radius-md;
   position: relative;
   max-width: 37.5rem; // was 600px;
   width: 100%;

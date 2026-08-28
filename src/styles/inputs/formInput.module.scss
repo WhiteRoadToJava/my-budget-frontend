@@ -10,7 +10,7 @@
     background-color: variable.$primaryBg;
     border: 1px solid variable.$color-jet;
     padding: 8px;
-    border-radius: 7px;
+    border-radius: variable.$radius-xs;
     outline: none;
     color: variable.$color-text;
 
@@ -38,16 +38,16 @@
 // ERROR STYLES
 .hasError {
   input {
-    border-color: #e36b63;
+    border-color: variable.$light-error;
   }
 
   input:focus {
-    border-color: #e36b63;
+    border-color: variable.$light-error;
   }
 }
 
 .inputError {
-  border-color: #e36b63;
+  border-color: variable.$light-error;
 }
 
 .errorContainer {
@@ -73,16 +73,16 @@
 // SUCCESS STYLES
 .success {
   input {
-    border-color: #b7dc99;
+    border-color: variable.$light-success;
   }
 
   input:focus {
-    border-color: #b7dc99;
+    border-color: variable.$light-success;
   }
 }
 
 .inputSuccess {
-  border-color: #b7dc99;
+  border-color: variable.$light-success;
 }
 
 .successContainer {

@@ -5,7 +5,7 @@
   font-size: variable.$font-xs;
   display: flex;
   padding: 7px;
-  border-radius: 5px;
+  border-radius: variable.$radius-xs;
   align-items: center;
   cursor: pointer;
   color: variable.$color-white;

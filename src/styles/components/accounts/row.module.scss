@@ -12,7 +12,7 @@
   color: variable.$color-text;
   background: rgba(11, 16, 32, 0.34);
   border: 1px solid variable.$color-border;
-  border-radius: 0.9rem;
+  border-radius: variable.$radius-small;
   cursor: pointer;
   transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
 

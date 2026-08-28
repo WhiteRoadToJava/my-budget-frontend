@@ -7,7 +7,7 @@
 
   textarea,
   input {
-    border-radius: 7px;
+    border-radius: variable.$radius-xs;
     padding: 7px 5px 7px 5px;
     background-color: variable.$primaryBg;
     border: 1px solid variable.$color-stroke;

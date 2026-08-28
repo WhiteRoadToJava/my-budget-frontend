@@ -1,19 +1,20 @@
-img{
+@use "variables" as variable;
+
+img {
     width: 50px;
 }
-.imagePicker{
+.imagePicker {
     display: flex;
-    gap:20px;
-    
+    gap: 20px;
 }
-.cameraButton{
-      display: "flex";
-      align-items: "center";
-      justify-content: "center";
+.cameraButton {
+      display: flex;
+      align-items: center;
+      justify-content: center;
       width: 44px;
       height: 44px;
       border-radius: 50%;
-      border: "1px solid #ddd";
-      background: #fff;
+      border: 1px solid variable.$color-border;
+      background: variable.$surface-3;
       cursor: pointer;
 }

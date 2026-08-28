@@ -5,7 +5,7 @@
   height: 700px;
   border: 1px solid variable.$color-text;
   background: variable.$gradient-bg;
-  border-radius: 20px;
+  border-radius: variable.$radius-large;
 }
 .title{
   padding: 30px;
@@ -27,7 +27,7 @@
 .switch{
   padding:20px;
   border: 1px solid variable.$color-text;
-  border-radius: 10px;
+  border-radius: variable.$radius-md;
   margin-bottom: 5px;
   cursor: pointer;
   &:hover{

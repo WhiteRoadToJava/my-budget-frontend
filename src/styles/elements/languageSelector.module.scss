@@ -39,7 +39,7 @@
   min-width: 160px;
   background: variable.$color-gray-caviar;
   border: 1px solid variable.$color-white;
-  border-radius: 12px;
+  border-radius: variable.$radius-md;
   padding: 4px;
   z-index: 100;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
@@ -53,7 +53,7 @@
   padding: 8px 10px;
   border: none;
   color: variable.$color-white;
-  border-radius: 8px;
+  border-radius: variable.$radius-xs;
   background: transparent;
   font-size: 13px;
   cursor: pointer;
