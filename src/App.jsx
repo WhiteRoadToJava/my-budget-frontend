@@ -5,9 +5,9 @@ import Dashboard from "./pages/admin/Dashboard.jsx"
 import { AuthProvider } from "./contexts/AuthContext.jsx";
 import { UserProvider } from "./contexts/UserContext.jsx";
 import Expense from "./pages/user/expenses/Expense.jsx";
-import Incomse from "./pages/user/imcomes/Incomse.jsx";
+import Income from "./pages/user/incomes/Income.jsx";
 import UserDashboard from "./pages/user/UserDashboard.jsx";
-import ProtectedRoute from "./components/protuctions/ProtectedRoule.jsx";
+import ProtectedRoute from "./components/routing/ProtectedRoute.jsx";
 import AdminLayout from "./components/admin/AdminLayout.jsx";
 import UserLyout from "./components/user/UserLyout.jsx";
 import Account from "./pages/user/accounts/Account.jsx";
@@ -62,7 +62,7 @@ function App() {
                   <Route path="/user" element={<UserDashboard />} />
                   <Route path="/user/accounts" element={<Account />} />
                   <Route path="/user/expenses" element={<Expense />} />
-                  <Route path="/user/incomses" element={<Incomse />} />
+                  <Route path="/user/incomes" element={<Income />} />
 
                   <Route
                     path="/user/calendar"

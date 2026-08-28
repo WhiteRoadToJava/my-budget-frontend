@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Modal from "../modals/Modal";
 import FormInput from "../../components/inputs/FormInput";
-import styles from "..//../styles/components/ecpenses/createExpense.module.scss";
+import styles from "../../styles/components/expenses/createExpense.module.scss";
 import Button from "../../components/btns/Button";
 import { updateAccount } from "../../api/accountService";
 import { useMutation, useQueryClient } from "@tanstack/react-query";

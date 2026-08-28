@@ -2,7 +2,7 @@ import React from "react";
 import { getAllTransations } from "../../../api/accountService";
 import { useQuery } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
-import styles from "../../../styles/incomses/incomses.module.scss";
+import styles from "../../../styles/components/incomes/incomes.module.scss";
 import Row from "../../../components/accounts/TransactionRow";
 import TransactionInfo from "../../../components/transactions/TransactionInfo";
 import {

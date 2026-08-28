@@ -4,7 +4,7 @@ import styles from "../../styles/components/transactions/transactionInfo.module.
 import Button from "../btns/Button";
 import ToggleMenu from "../elements/ToggleMenu";
 import UpdateTransfer from "../transfers/UpdateTransfer";
-import UpdateIncomse from "../imcomses/UpdateIncomse";
+import UpdateIncome from "../incomes/UpdateIncome";
 import UpdateExpense from "../expenses/UpdateExpense";
 import DeleteConfimation from "../modals/DeleteConfirmation";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
@@ -16,7 +16,7 @@ import i18n from "../../configuration/i18n";
 const TransactionInfo = ({ isOpen, onClose, accounts, transaction }) => {
   const queryClient = useQueryClient();
   const [openUpdateTransfer, setOpenUpdateTransfer] = useState(false);
-  const [openUpdateIncomse, setOpenUpdateIncomse] = useState(false);
+  const [openUpdateIncome, setOpenUpdateIncome] = useState(false);
   const [openUpdateExpense, setOpenUpdateExpense] = useState(false);
   const [openConfirmDelete, setOpenConfirmDelete] = useState(false);
   const [updateExpense, setUpdateExpense] = useState(false);
@@ -78,7 +78,7 @@ const TransactionInfo = ({ isOpen, onClose, accounts, transaction }) => {
     const type = transaction && transaction?.type;
     switch (type) {
       case "incomse":
-        setOpenUpdateIncomse(true);
+        setOpenUpdateIncome(true);
         break;
       case "expense":
         setUpdateExpense(true);
@@ -252,10 +252,10 @@ const TransactionInfo = ({ isOpen, onClose, accounts, transaction }) => {
           expense={transaction}
         />
       ) : (
-        <UpdateIncomse
-          isOpen={openUpdateIncomse}
+        <UpdateIncome
+          isOpen={openUpdateIncome}
           isClose={() => {
-            setOpenUpdateIncomse(false);
+            setOpenUpdateIncome(false);
             onClose(false);
           }}
           incomse={transaction}

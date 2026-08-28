@@ -1,9 +1,9 @@
 import React, { useState }from "react";
-import styles from "../../styles/components/categorise/incomseCategoryList.module.scss";
+import styles from "../../styles/components/categories/incomeCategoryList.module.scss";
 import { incomseCategoryList } from "../../assiets/categories/assits";
 import FormInput from "../inputs/FormInput";
 
-const IncomseCategoryList = ({ incomseItem }) => {
+const IncomeCategoryList = ({ incomseItem }) => {
   const list = incomseCategoryList || [];
   const [isOpen, setIsOpen] = useState(false);
   const [category, setCategory] = useState(null); 
@@ -59,4 +59,4 @@ const IncomseCategoryList = ({ incomseItem }) => {
   );
 };
 
-export default IncomseCategoryList;
+export default IncomeCategoryList;

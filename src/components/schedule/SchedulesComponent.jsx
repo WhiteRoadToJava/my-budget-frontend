@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Row from "./Row";
 import styles from "../../styles/components/schedule/sechedule.module.scss";
-import CreatescheduledIncomse from "./CreateScheduledIncomse";
+import CreateScheduledIncome from "./CreateScheduledIncome";
 import Button from "../btns/Button";
 import ToggleMenu from "../elements/ToggleMenu";
 import { useQuery } from "@tanstack/react-query";
@@ -11,7 +11,7 @@ import ScheduleInfo from "./ScheduleInfo";
 import i18n from "../../configuration/i18n";
 
 const SchedulesComponent = ({ schedules }) => {
-  const [createscheduledIncomse, setCreatescheduledIncomse] = useState(false);
+  const [createScheduledIncome, setCreateScheduledIncome] = useState(false);
   const [createscheduledExpense, setCreatescheduledExpense] = useState(false);
   const [createscheduledTransfer, setCreatescheduledTransfer] = useState(false);
   const [selectedschedule, setSelectedschedule] = useState(null);
@@ -51,7 +51,7 @@ const SchedulesComponent = ({ schedules }) => {
       key="inc"
       variant="primary"
       text={i18n.t("buttons.createIncomse")}
-      onClick={() => setCreatescheduledIncomse(true)}
+      onClick={() => setCreateScheduledIncome(true)}
     />,
     <Button
       key="exp"
@@ -87,9 +87,9 @@ const SchedulesComponent = ({ schedules }) => {
         )}
       </div>
 
-      <CreatescheduledIncomse
-        isOpen={createscheduledIncomse}
-        isClose={() => setCreatescheduledIncomse(false)}
+      <CreateScheduledIncome
+        isOpen={createScheduledIncome}
+        isClose={() => setCreateScheduledIncome(false)}
         transactionType="INCOMSE"
         accounts={accounts}
       />

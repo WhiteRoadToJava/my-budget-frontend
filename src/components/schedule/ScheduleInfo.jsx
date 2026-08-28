@@ -4,7 +4,7 @@ import styles from "../../styles/components/schedule/scheduleInfo.module.scss";
 import Button from "../btns/Button";
 import ToggleMenu from "../elements/ToggleMenu";
 import UpdateTransfer from "../transfers/UpdateTransfer";
-import UpdateIncomse from "../imcomses/UpdateIncomse";
+import UpdateIncome from "../incomes/UpdateIncome";
 import UpdateExpense from "../expenses/UpdateExpense";
 import DeleteConfimation from "../modals/DeleteConfirmation";
 import { useMutation, useQueryClient } from "@tanstack/react-query";

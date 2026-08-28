@@ -3,7 +3,7 @@ import styles from "../../styles/components/accounts/account.module.scss";
 import Row from "./TransactionRow";
 import { getAccountById, getAccounts, getAllAccountTransactions } from "../../api/accountService";
 import Button from "../btns/Button";
-import CreateIncomse from "../imcomses/CreateIncomse";
+import CreateIncome from "../incomes/CreateIncome";
 import CreateExpense from "../expenses/CreateExpense";
 import ToogleMenu from "../elements/ToggleMenu";
 import { useQuery } from "@tanstack/react-query";
@@ -12,7 +12,7 @@ import CreateTransfer from "../transfers/CreateTransfer";
 import i18n from "../../configuration/i18n";
 
 const Account = ({ account }) => {
-  const [isCreateIncomseOpen, setIsCreateIncomseOpen] = useState(false);
+  const [isCreateIncomeOpen, setIsCreateIncomeOpen] = useState(false);
   const [isCreateExpenseOpen, setIsCreateExpenseOpen] = useState(false);
   const [selectedTransaction, setSelectedTransaction] = useState(null);
   const [isCreateTransfer, setIsCreateTransfer] = useState(false);
@@ -79,7 +79,7 @@ const handleTotalBalance = async () => {
   }
 
   const buttonMenuItems = [
-    <Button key="inc" variant="primary" text={i18n.t("buttons.createIncomse")} onClick={() => setIsCreateIncomseOpen(true)} />,
+    <Button key="inc" variant="primary" text={i18n.t("buttons.createIncomse")} onClick={() => setIsCreateIncomeOpen(true)} />,
     <Button key="exp" variant="cancel" text={i18n.t("buttons.createExpense")} onClick={() => setIsCreateExpenseOpen(true)} />,
     <Button key="tra" variant="blue" text={i18n.t("buttons.createTransfer")} onClick={() => setIsCreateTransfer(true)} />,
   ];
@@ -133,7 +133,7 @@ const handleTotalBalance = async () => {
         <ToogleMenu menuList={buttonMenuItems} position="bottom" />
       </div>
 
-      <CreateIncomse isOpen={isCreateIncomseOpen} isClose={() => setIsCreateIncomseOpen(false)} account={account} />
+      <CreateIncome isOpen={isCreateIncomeOpen} isClose={() => setIsCreateIncomeOpen(false)} account={account} />
       <CreateExpense isOpen={isCreateExpenseOpen} isClose={() => setIsCreateExpenseOpen(false)} account={account} />
       <TransactionInfo
         isOpen={!!selectedTransaction}

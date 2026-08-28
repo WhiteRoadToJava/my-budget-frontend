@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import styles from "../../styles/components/ecpenses/createExpense.module.scss";
+import styles from "../../styles/components/expenses/createExpense.module.scss";
 import Button from "../btns/Button.jsx";
 import Modal from "../modals/Modal.jsx";
 import FormInput from "../inputs/FormInput.jsx";

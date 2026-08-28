@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import Modal from "../modals/Modal";
 import FormInput from "../../components/inputs/FormInput";
-import styles from "..//../styles/components/incomes/createIncomse.module.scss";
+import styles from "../../styles/components/incomes/createIncome.module.scss";
 import Button from "../../components/btns/Button";
 import { addIncomse } from "../../api/incomseService";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import i18n from "../../configuration/i18n";
 import { ImagePicker } from "../ImagePicker";
 import {incomseCategoryList} from "../../assiets/categories/assits"
-import IncomseCategoryList from "../categories/IncomseCategoryList.jsx";
+import IncomeCategoryList from "../categories/IncomeCategoryList.jsx";
 
 
 const CreateIncomse = ({ isOpen, isClose, account }) => {
@@ -93,7 +93,7 @@ const CreateIncomse = ({ isOpen, isClose, account }) => {
             />
           </div>
           <div>
-            <IncomseCategoryList incomseItem={handleCategoryChange} />
+            <IncomeCategoryList incomseItem={handleCategoryChange} />
           </div>
           <div>
             <ImagePicker onImageChange={setImageUrls} />
