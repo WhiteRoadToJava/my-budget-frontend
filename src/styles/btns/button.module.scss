@@ -6,6 +6,7 @@
   justify-content: center;
   align-self: flex-start;
   flex-grow: 0;
+  gap: 0.4rem;
   min-height: 2.6rem;
   padding: 0.65rem 1.4rem;
   border: 1px solid transparent;
@@ -137,5 +138,15 @@
   &:hover:not(:disabled) {
     color: variable.$color-black;
     background: variable.$color-text;
+  }
+}
+
+.icon {
+  display: inline-flex;
+  flex-shrink: 0;
+
+  svg,
+  path {
+    fill: currentColor;
   }
 }

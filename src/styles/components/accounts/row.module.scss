@@ -59,7 +59,7 @@
   }
 }
 
-@media (max-width: 620px) {
+@include variable.respond(mobile-lg) {
   .rowContainer {
     padding: 0.75rem;
   }

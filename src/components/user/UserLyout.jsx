@@ -8,6 +8,7 @@ import styles from "../../styles/layout/layout.module.scss";
 
 const UserLayout = () => {
   const [menuItems, setMenuItems] = useState(getUserMenuItems());
+  const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
   const [profile, setProfile] = useState(() => {
     try {
       return JSON.parse(localStorage.getItem("profiles")) || null;
@@ -37,12 +38,19 @@ const UserLayout = () => {
   return (
     <div className={styles.layout}>
       <aside className={styles.sidebar}>
-        <Sidebar menuItems={menuItems} />
+        <Sidebar
+          menuItems={menuItems}
+          isMobileOpen={isMobileNavOpen}
+          onMobileClose={() => setIsMobileNavOpen(false)}
+        />
       </aside>
       <div className={styles.bodyLayout}>
         <div className={styles.content}>
           <header className={styles.topContent}>
-            <NavBar profiles={profile} />
+            <NavBar
+              profiles={profile}
+              onMenuButtonClick={() => setIsMobileNavOpen(true)}
+            />
           </header>
           <main className={styles.mainContent}>
             <Outlet />

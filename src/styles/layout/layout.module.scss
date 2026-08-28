@@ -52,14 +52,14 @@
   padding-top: 0.25rem;
 }
 
-@media (max-width: 768px) {
+@include variable.respond(tablet) {
   .layout {
     gap: 0.75rem;
     padding: 0.75rem;
   }
 
   .sidebar {
-    min-height: calc(100dvh - 1.5rem);
+    min-height: 0;
   }
 
   .bodyLayout {

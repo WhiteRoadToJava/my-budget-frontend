@@ -1,3 +1,5 @@
+@use "sass:map";
+
 // colors
 $primaryBg: #0b1020;
 
@@ -80,12 +82,22 @@ $spacing: 1px;
 $sidebar-open-width: 15rem;
 $sidebar-closed-width: 4.5rem;
 
+// breakpoints
+// تطابق النقاط الحقيقية المستخدمة فعلياً بالتطبيق (auth forms, navbar,
+// account rows, layout/sidebar, dashboard) بدل أرقام كانت غير مستخدمة أصلاً.
 $breakpoints: (
-  xxs: 790px,
-  xs: 883px,
-  s: 969px,
-  sm: 1030px,
-  md: 1085px,
-  lg: 1200px,
-  xl: 1283px,
+  mobile: 520px,       // auth forms, navbar
+  mobile-lg: 620px,    // account rows
+  tablet: 768px,       // layout, sidebar
+  tablet-lg: 980px,    // dashboard
 );
+
+@mixin respond($key) {
+  @if map.has-key($breakpoints, $key) {
+    @media (max-width: map.get($breakpoints, $key)) {
+      @content;
+    }
+  } @else {
+    @warn "Unknown breakpoint: #{$key}. Available: #{map.keys($breakpoints)}";
+  }
+}
