@@ -7,7 +7,7 @@ import {
   getAllIncomseAndExpensesTransactions,
 } from "../../../api/accountService";
 import { useNavigate } from "react-router-dom";
-import styles from "../../../styles/incomses/incomses.module.scss";
+import styles from "../../../styles/components/incomes/incomes.module.scss";
 import i18n from "../../../configuration/i18n";
 
 
