@@ -12,7 +12,7 @@
     flex-direction: column;
     height: auto;
     background-color: variable.$color-gray-caviar;
-    border-radius: 8px;
+    border-radius: variable.$radius-xs;
     z-index: 22;
     width: 270px;
 }

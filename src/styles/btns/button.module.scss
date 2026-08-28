@@ -10,7 +10,7 @@
   min-height: 2.6rem;
   padding: 0.65rem 1.4rem;
   border: 1px solid transparent;
-  border-radius: 999px;
+  border-radius: variable.$radius-pill;
   color: inherit;
   cursor: pointer;
   font-size: variable.$font-sm;

@@ -5,7 +5,7 @@
   margin: 0.25rem 0;
   list-style: none;
   color: variable.$color-text-gray;
-  border-radius: 0.9rem;
+  border-radius: variable.$radius-small;
   transition: background 0.2s ease, color 0.2s ease;
 }
 
@@ -45,7 +45,7 @@
   padding: 0.65rem 0.75rem;
   margin: 0;
   border: 1px solid transparent;
-  border-radius: 0.9rem;
+  border-radius: variable.$radius-small;
   cursor: pointer;
   transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
 

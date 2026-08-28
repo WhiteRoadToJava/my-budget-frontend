@@ -34,7 +34,7 @@
     position: absolute;
     right: 0; // تظهر محاذية لليمين
 
-    border-radius: 8px;
+    border-radius: variable.$radius-xs;
     &[data-position="top"] {
       top: 100%;
     }
@@ -50,7 +50,7 @@
     .menuItem {
       padding: 10px 15px;
       font-size: 14px;
-      color: #333;
+      color: variable.$color-text;
       cursor: pointer;
       transition: background 0.2s;
     }

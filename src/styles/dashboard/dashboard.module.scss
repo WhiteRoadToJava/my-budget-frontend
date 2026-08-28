@@ -65,6 +65,6 @@
   .accountContainer,
   .transactionContainer {
     padding: 1rem;
-    border-radius: 1rem;
+    border-radius: variable.$radius-small;
   }
 }
