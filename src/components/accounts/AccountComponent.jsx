@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import Row from "./Row";
+import Row from "./AccountRow";
 import styles from "../../styles/components/accounts/accounts.module.scss";
 import AccountsInfo from "./AccountsInfo";
 import Button from "../btns/Button";
 import PlusIcon from "../icons/btns/PlusIcon";
-import CreateAccount from "../account/CreateAccount";
+import CreateAccount from "./CreateAccount";
 import SearchInput from "../inputs/SearchInput";
 import i18n from "../../configuration/i18n";
 import { ar } from "date-fns/locale";

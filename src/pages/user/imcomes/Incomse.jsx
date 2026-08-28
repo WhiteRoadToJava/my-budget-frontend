@@ -1,5 +1,5 @@
 import React, {useState }from "react";
-import Row from "../../../components/account/Row";
+import Row from "../../../components/accounts/TransactionRow";
 import { useQuery } from "@tanstack/react-query";
 import TransactionInfo from "../../../components/transactions/TransactionInfo"
 import {

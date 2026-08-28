@@ -1,7 +1,7 @@
 import React from "react";
 import i18n from "../../configuration/i18n";
 import styles from "../../styles/dashboard/dashboard.module.scss";
-import Row from "../account/Row";
+import Row from "../accounts/TransactionRow";
 import sortingTransactions from "../../utils/sorting";
 
 const ViewTransations = ({data = [], isError, error, isLoading }) => {

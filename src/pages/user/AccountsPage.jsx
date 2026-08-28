@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import Account from '../../components/account/Account'
+import Account from '../../components/accounts/Account'
 import { useParams } from 'react-router-dom';
 import { getAccountById } from '../../api/accountService';
 import i18n from '../../configuration/i18n';

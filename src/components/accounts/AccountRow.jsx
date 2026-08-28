@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import styles from "../../styles/components/accounts/row.module.scss";
+import styles from "../../styles/components/accounts/accountRow.module.scss";
 import { useNavigate } from "react-router-dom";
 import ToggleMenu from "../elements/ToggleMenu";
 import Button from "../btns/Button";
@@ -9,8 +9,8 @@ import { deleteAccount, updateAccountStatus } from "../../api/accountService";
 import { formatNumber } from "../../utils/formating";
 
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import CreateAccount from "../account/CreateAccount";
-import UpdateAccount from "../account/UpdateAccount";
+import CreateAccount from "./CreateAccount";
+import UpdateAccount from "./UpdateAccount";
 import i18n from "../../configuration/i18n";
 const Row = ({ account }) => {
   const [openDeleteConfirmation, setOpenDeleteConfirmation] = useState(false);

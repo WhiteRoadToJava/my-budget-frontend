@@ -1,6 +1,6 @@
 import React from "react";
 import styles from '../../styles/dashboard/dashboard.module.scss';
-import Row from '../accounts/Row';
+import Row from '../accounts/AccountRow';
 import i18n from '../../configuration/i18n';
 
 const ViewAccounts = ({ data = [], isError, error, isLoading }) => {
