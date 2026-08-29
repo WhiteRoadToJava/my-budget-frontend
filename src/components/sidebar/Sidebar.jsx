@@ -9,6 +9,7 @@ import SidebarTop from "./SidebarTop";
 import DoubleChevronLeft from "../icons/chevrons/DoubleChevronLeft.jsx";
 import DoubleChevronRight from "../icons/chevrons/DoubleChevronRight.jsx";
 import i18n from "../../configuration/i18n.js";
+import { onEnterOrSpace } from "../../utils/accessibility";
 
 export default function Sidebar({ menuItems, isMobileOpen = false, onMobileClose }) {
   const navigate = useNavigate();
@@ -94,7 +95,13 @@ export default function Sidebar({ menuItems, isMobileOpen = false, onMobileClose
         </ul>
         </div>
 
-        <div className={styles.logout} onClick={handleLogout}>
+        <div
+          className={styles.logout}
+          onClick={handleLogout}
+          role="button"
+          tabIndex={0}
+          onKeyDown={onEnterOrSpace(handleLogout)}
+        >
           <LogoutIcon />
           {showFullContent && <p>{i18n.t("sidebar.logout")}</p>}
         </div>

@@ -9,6 +9,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import styles from "../../../styles/components/incomes/incomes.module.scss";
 import i18n from "../../../configuration/i18n";
+import { onEnterOrSpace } from "../../../utils/accessibility";
 
 
 const Incomse = () => {
@@ -72,7 +73,10 @@ const [isOpen, setIsOpen] = useState(false);
               <div className={styles.account} key={account.id}>
                 <p>{account.name}</p>
                 <div className={styles.totalBalance}
-                onClick={() => handleAccountClick(account)}>
+                onClick={() => handleAccountClick(account)}
+                role="button"
+                tabIndex={0}
+                onKeyDown={onEnterOrSpace(() => handleAccountClick(account))}>
                   {i18n.t("incomses.totolBalance")}:{" "}
                   <p
                     className={styles.totalBalanceValue}
