@@ -62,9 +62,14 @@ export default function Sidebar({ menuItems, isMobileOpen = false, onMobileClose
       >
         <div className={styles.top}><SidebarTop isOpen={showFullContent} /></div>
 
-        <div className={styles.btn} onClick={() => setIsOpen(!isOpen)}>
+        <button
+          type="button"
+          className={styles.btn}
+          onClick={() => setIsOpen(!isOpen)}
+          aria-label={i18n.t(isOpen ? "sidebar.collapseMenu" : "sidebar.expandMenu")}
+        >
           {isOpen ? <DoubleChevronLeft  /> : <DoubleChevronRight />}
-        </div>
+        </button>
 
         <button
           type="button"

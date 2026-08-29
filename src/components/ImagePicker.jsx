@@ -35,8 +35,9 @@ export const ImagePicker = ({ onImageChange }) => {
         type="button"
         className={styles.cameraButton}
         onClick={() => galleryInputRef.current?.click()}
+        aria-label="Upload from gallery"
       >
-        <img src={icons.UploadFolder} alt="Upload" />
+        <img src={icons.UploadFolder} alt="" />
       </button>
       <input
         type="file"
@@ -50,8 +51,9 @@ export const ImagePicker = ({ onImageChange }) => {
         type="button"
         className={styles.cameraButton}
         onClick={() => camerInputRef.current?.click()}
+        aria-label="Take a photo"
       >
-        <img src={icons.camera} alt="Camera" />
+        <img src={icons.camera} alt="" />
       </button>
       <input
         type="file"

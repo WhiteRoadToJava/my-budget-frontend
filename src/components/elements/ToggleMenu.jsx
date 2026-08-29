@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef} from 'react'
 import styles from "../../styles/components/elements/ToggleMenu.module.scss";
+import i18n from "../../configuration/i18n";
 
 
 
@@ -22,21 +23,26 @@ const ToggleMenu = ({ menuList , position}) => {
   return (
     <div className={styles.toggleMenuContainer} ref={menuRef}>
       {/* زر النقاط الثلاث */}
-      <div 
-        className={styles.dotsTrigger} 
+      <button
+        type="button"
+        className={styles.dotsTrigger}
         onClick={() => setIsOpen(!isOpen)}
+        aria-haspopup="true"
+        aria-expanded={isOpen}
+        aria-label={i18n.t("buttons.moreOptions")}
       >
         <div className={styles.dot}></div>
         <div className={styles.dot}></div>
         <div className={styles.dot}></div>
-      </div>
+      </button>
 
       {/* القائمة المنسدلة */}
       {isOpen && (
-        <div className={styles.menu} data-position={position}>
+        <div className={styles.menu} data-position={position} role="menu">
           {menuList.map((item, index) => (
-            <div 
-              key={index} 
+            <div
+              key={index}
+              role="menuitem"
               className={styles.menuItem}
               onClick={() => {
                 setIsOpen(false);

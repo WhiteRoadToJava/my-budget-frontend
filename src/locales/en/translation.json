@@ -13,7 +13,9 @@
   "sidebar": {
     "logout": "Logout",
     "openMenu": "Open menu",
-    "closeMenu": "Close menu"
+    "closeMenu": "Close menu",
+    "collapseMenu": "Collapse sidebar",
+    "expandMenu": "Expand sidebar"
   },
   "forgotPassword": {
     "header": "Reset your password",
@@ -278,6 +280,7 @@
   "updateTransaction": {},
 
   "buttons": {
+    "moreOptions": "More options",
     "add": "Add",
     "addAccount": "Add Account",
     "updateAccount": "Update Account",
@@ -344,5 +347,8 @@
     "createdAt": "Created At",
     "updatedAt": "Updated At",
     "actions": "Actions"
+  },
+  "languageSelector": {
+    "label": "Change language"
   }
 }

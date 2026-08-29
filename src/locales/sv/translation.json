@@ -13,7 +13,9 @@
   "sidebar": {
     "logout": "Logga ut",
     "openMenu": "Öppna meny",
-    "closeMenu": "Stäng meny"
+    "closeMenu": "Stäng meny",
+    "collapseMenu": "Fäll ihop sidopanelen",
+    "expandMenu": "Fäll ut sidopanelen"
   },
   "forgotPassword": {
     "header": "Återställ ditt lösenord",
@@ -256,6 +258,7 @@
   },
 
   "buttons":{
+    "moreOptions":"Fler alternativ",
     "add":"Lägg till",
     "addAccount":"Skapa konto",
     "updateAccount":"Uppdatera konto",
@@ -324,5 +327,8 @@
     "createdAt":"Skapad",
     "updatedAt":"Uppdaterad",
     "actions":"Handlar"
+  },
+  "languageSelector": {
+    "label": "Byt språk"
   }
 }
