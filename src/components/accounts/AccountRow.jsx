@@ -7,6 +7,7 @@ import DeleteConfirmation from "../modals/DeleteConfirmation";
 import SuccessConfirmaton from "../modals/SuccessConfirmaton";
 import { deleteAccount, updateAccountStatus } from "../../api/accountService";
 import { formatNumber } from "../../utils/formating";
+import { onEnterOrSpace } from "../../utils/accessibility";
 
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import CreateAccount from "./CreateAccount";
@@ -95,7 +96,13 @@ const Row = ({ account }) => {
 
   return (
     <div className={styles.rowContainer}>
-      <div className={styles.rowDetails} onClick={handleClick}>
+      <div
+        className={styles.rowDetails}
+        onClick={handleClick}
+        role="button"
+        tabIndex={0}
+        onKeyDown={onEnterOrSpace(handleClick)}
+      >
         <span>{account.name}</span>
         <span
           className={`

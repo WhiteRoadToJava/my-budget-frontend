@@ -1,7 +1,17 @@
+import { useEffect } from "react";
 import styles from "../../styles/modals/modal.module.scss";
 import i18n from "../../configuration/i18n";
 
 export default function Modal({ children, isOpen, onClose, className }) {
+  useEffect(() => {
+    if (!isOpen) return;
+    const handleEscape = (event) => {
+      if (event.key === "Escape") onClose?.();
+    };
+    document.addEventListener("keydown", handleEscape);
+    return () => document.removeEventListener("keydown", handleEscape);
+  }, [isOpen, onClose]);
+
   if (!isOpen) return null;
 
   return (

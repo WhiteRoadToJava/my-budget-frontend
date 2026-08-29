@@ -3,6 +3,7 @@ import { getAllTransations } from "../../../api/accountService";
 import { useQuery } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import styles from "../../../styles/components/incomes/incomes.module.scss";
+import { onEnterOrSpace } from "../../../utils/accessibility";
 import Row from "../../../components/accounts/TransactionRow";
 import TransactionInfo from "../../../components/transactions/TransactionInfo";
 import {
@@ -73,6 +74,9 @@ const AllTransactions = () => {
                 <div
                   className={styles.totalBalance}
                   onClick={() => handleAccountClick(account)}
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={onEnterOrSpace(() => handleAccountClick(account))}
                 >
                   TotalBalance:{" "}
                   <p

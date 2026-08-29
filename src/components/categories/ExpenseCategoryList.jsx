@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styles from "../../styles/components/categories/incomeCategoryList.module.scss";
 import { expenseCategoryList } from "../../assiets/categories/assits";
 import FormInput from "../inputs/FormInput";
+import { onEnterOrSpace } from "../../utils/accessibility";
 
 const ExpenseCategoryList = ({ expenseItem }) => {
   const list = expenseCategoryList || [];
@@ -33,6 +34,7 @@ const ExpenseCategoryList = ({ expenseItem }) => {
         value={category ? category.name : ""}
         style={{ cursor: "pointer" }}
         onClick={handleClickOnInputarea}
+        onKeyDown={onEnterOrSpace(handleClickOnInputarea)}
       />
       {isOpen && (
         <div
@@ -44,6 +46,9 @@ const ExpenseCategoryList = ({ expenseItem }) => {
               key={item.id}
               className={styles.category}
               onClick={() => handleChooseCategory(item.id)}
+              role="button"
+              tabIndex={0}
+              onKeyDown={onEnterOrSpace(() => handleChooseCategory(item.id))}
             >
               {typeof item.icon === "string" ? (
                 <img src={item.icon} alt={item.name} />

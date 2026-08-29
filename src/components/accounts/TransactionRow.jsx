@@ -3,6 +3,7 @@ import styles from "../../styles/components/accounts/transactionRow.module.scss"
 import { formatNumber } from "../../utils/formating";
 import { incomseCategoryList } from "../../assiets/categories/assits";
 import { expenseCategoryList } from "../../assiets/categories/assits";
+import { onEnterOrSpace } from "../../utils/accessibility";
 const Row = ({ transaction, onClick }) => {
   const [category, setCategory] = useState(null);
   useEffect(() => {
@@ -27,6 +28,9 @@ const Row = ({ transaction, onClick }) => {
       className={styles.rowContainer}
       data-type={transaction.type}
       onClick={onClick}
+      role="button"
+      tabIndex={0}
+      onKeyDown={onEnterOrSpace(onClick)}
     >
       <p>{formatNumber(transaction.amount)}</p>
       <p>{category?.name}</p>

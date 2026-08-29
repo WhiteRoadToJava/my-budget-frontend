@@ -10,6 +10,7 @@ import {
 } from "date-fns";
 import styles from "../../styles/inputs/datepicker.module.scss";
 import Calendar from "../icons/calendar/Calendar";
+import { onEnterOrSpace } from "../../utils/accessibility";
 
 export default function Datepicker({ onChange, value }) {
   const [showCalendar, setShowCalendar] = useState(false);
@@ -49,6 +50,7 @@ export default function Datepicker({ onChange, value }) {
           value={value ? format(new Date(value), "MMM dd, yyyy") : ""}
           placeholder="Choose date..."
           readOnly
+          onKeyDown={onEnterOrSpace(() => setShowCalendar((prev) => !prev))}
         />
         <span className={styles.calendarIcon}>
           <Calendar color="#E7E7E7" />
@@ -81,6 +83,9 @@ export default function Datepicker({ onChange, value }) {
                 key={day.toString()}
                 className={styles.day}
                 onClick={() => handleDateClick(day)}
+                role="button"
+                tabIndex={0}
+                onKeyDown={onEnterOrSpace(() => handleDateClick(day))}
               >
                 {format(day, "d")}
               </div>
