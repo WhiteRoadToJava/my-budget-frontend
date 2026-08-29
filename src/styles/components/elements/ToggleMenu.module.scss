@@ -1,67 +1,64 @@
 @use "../../variables" as variable;
-.toggleMenuContainer {
-  position: relative; // ضروري لكي تظهر القائمة بالنسبة للنقاط
-  display: inline-block;
 
-  .dotsTrigger {
-    display: flex;
-    min-width: 40px; // لضبط حجم المنطقة القابلة للنقر
-    min-height: 40px;
-    max-width: 50px;
-    max-height: 50px;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 3px; // المسافة بين النقاط
-    cursor: pointer;
-    background: transparent;
-    border: none;
-    padding: 0;
+.dotsTrigger {
+  display: flex;
+  min-width: 40px; // لضبط حجم المنطقة القابلة للنقر
+  min-height: 40px;
+  max-width: 50px;
+  max-height: 50px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px; // المسافة بين النقاط
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  padding: 8px;
+  border-radius: 50%;
+  transition: background 0.2s;
 
-    &:focus-visible {
-      outline: 2px solid variable.$color-tennis;
-      outline-offset: 2px;
-      border-radius: 50%;
-    }
-    padding: 8px;
-    border-radius: 50%;
-    transition: background 0.2s;
-
-    &:hover {
-      background-color: variable.$color-blue-hover;
-    }
-
-    .dot {
-      width: 4px;
-      height: 4px;
-      background-color: variable.$color-text-gray; // لون النقاط
-      border-radius: 50%;
-    }
+  &:focus-visible {
+    outline: 2px solid variable.$color-tennis;
+    outline-offset: 2px;
   }
 
-  .menu {
-    position: absolute;
-    right: 0; // تظهر محاذية لليمين
+  &:hover {
+    background-color: variable.$color-blue-hover;
+  }
 
-    border-radius: variable.$radius-xs;
-    &[data-position="top"] {
-      top: 100%;
-    }
-    &[data-position="bottom"] {
-      top: auto;
-      bottom: 100%;
-    }
+  .dot {
+    width: 4px;
+    height: 4px;
+    background-color: variable.$color-text-gray; // لون النقاط
+    border-radius: 50%;
+  }
+}
 
-    z-index: 1000; // لضمان ظهورها فوق أي عنصر آخر
-    min-width: 120px;
-    overflow: hidden;
+// نافذة الخيارات (مبنية فوق Modal.jsx المشترك) — أصغر من المودالات العادية
+// لأنها بس قائمة أزرار قصيرة، مش فورم كامل.
+.optionsModal {
+  position: relative;
+  width: 100%;
+  max-width: 18rem;
+  padding: 1.5rem 1rem 1rem;
+  background-color: variable.$primaryBg;
+  border: 2px solid variable.$color-stroke;
+  border-radius: variable.$radius-md;
+}
 
-    .menuItem {
-      padding: 10px 15px;
-      font-size: 14px;
-      color: variable.$color-text;
-      cursor: pointer;
-      transition: background 0.2s;
-    }
+.optionsList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 2rem;
+}
+
+.optionItem {
+  display: flex;
+
+  // الأزرار جوا القائمة (كومبوننت Button المشترك) بتاخد العرض كامل
+  // جوا نافذة الخيارات عشان تسهل الضغط عليها بالموبايل.
+  > * {
+    width: 100%;
   }
 }
