@@ -17,6 +17,13 @@
     "collapseMenu": "طي القائمة الجانبية",
     "expandMenu": "توسيع القائمة الجانبية"
   },
+  "calendar": {
+    "previousMonth": "الشهر السابق",
+    "nextMonth": "الشهر التالي",
+    "transfers": "تحويلات",
+    "noTransactions": "لا توجد معاملات بهذا اليوم",
+    "errorLoading": "خطأ بتحميل المعاملات"
+  },
   "forgotPassword": {
     "header": "نسيت كلمة السر",
     "success": "تم ارسال رابط تغيير كلمة السر",

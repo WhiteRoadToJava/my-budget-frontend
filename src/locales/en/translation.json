@@ -17,6 +17,13 @@
     "collapseMenu": "Collapse sidebar",
     "expandMenu": "Expand sidebar"
   },
+  "calendar": {
+    "previousMonth": "Previous month",
+    "nextMonth": "Next month",
+    "transfers": "Transfers",
+    "noTransactions": "No transactions on this day",
+    "errorLoading": "Error loading transactions"
+  },
   "forgotPassword": {
     "header": "Reset your password",
     "success": "A password reset link has been sent to",

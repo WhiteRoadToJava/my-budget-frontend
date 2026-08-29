@@ -48,7 +48,6 @@ const UpdateSchedule = ({ isOpen, isClose, schedule }) => {
     const { name, value } = e.target;
     setUpdateScheduleRequest((prev) => ({ ...prev, [name]: value }));
     setError({ hasError: false, message: "" });
-    console.log(updateScheduleRequest);
   };
   const handleUpdateSchedule = (e) => {
     e.preventDefault();

@@ -16,6 +16,7 @@ import SettingPage from "./pages/user/setting/SettingPage.jsx";
 import AllTransactions from "./pages/user/transactions/AllTransactions.jsx";
 import SchedulePage from "./pages/user/SchedulePage.jsx";
 import RapportPage from "./pages/user/RapportPage.jsx";
+import CalendarPage from "./pages/user/CalendarPage.jsx";
 
 import i18n from "./configuration/i18n.js";
 import { useEffect } from "react";
@@ -66,7 +67,7 @@ function App() {
 
                   <Route
                     path="/user/calendar"
-                    element={<div>Calendar Page</div>}
+                    element={<CalendarPage />}
                   />
                   <Route
                     path="/user/settings"
