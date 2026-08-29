@@ -109,7 +109,7 @@ const Row = ({ account }) => {
         <span>{account.type}</span>
       </div>
       <div>
-        <ToggleMenu menuList={menuItems} position="top" />
+        <ToggleMenu menuList={menuItems} />
       </div>
       <div>
         <DeleteConfirmation

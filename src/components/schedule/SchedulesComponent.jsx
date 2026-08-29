@@ -109,7 +109,7 @@ const SchedulesComponent = ({ schedules }) => {
       />
 
       <div className={styles.buttonContainer}>
-        <ToggleMenu menuList={buttonMenuItems} position="bottom" />
+        <ToggleMenu menuList={buttonMenuItems} />
       </div>
     </div>
   );
