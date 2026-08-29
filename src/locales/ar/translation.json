@@ -13,7 +13,9 @@
   "sidebar": {
     "logout": "تسجيل الخروج",
     "openMenu": "فتح القائمة",
-    "closeMenu": "إغلاق القائمة"
+    "closeMenu": "إغلاق القائمة",
+    "collapseMenu": "طي القائمة الجانبية",
+    "expandMenu": "توسيع القائمة الجانبية"
   },
   "forgotPassword": {
     "header": "نسيت كلمة السر",
@@ -267,6 +269,7 @@
   },
 
   "buttons":{
+    "moreOptions":"خيارات إضافية",
     "addAccount":"إنشاء حساب",
     "createIncomse":"دخل حديد",
     "updateAccount":"تحديث الحساب",
@@ -337,5 +340,8 @@
     "updatedAt":"تاريخ التحديث",
     "actions":"الإجراءات"
     
+  },
+  "languageSelector": {
+    "label": "تغيير اللغة"
   }
 }

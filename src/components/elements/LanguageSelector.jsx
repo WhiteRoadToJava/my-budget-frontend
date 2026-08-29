@@ -46,8 +46,11 @@ const LanguageSelector = () => {
       <button
         className={styles.languageSelectorButton}
         onClick={() => setOpen(!open)}
+        aria-haspopup="true"
+        aria-expanded={open}
+        aria-label={i18n.t("languageSelector.label")}
       >
-        <img src={current.flag} width={15} />
+        <img src={current.flag} width={15} alt="" />
       </button>
 
       {open && (
@@ -62,7 +65,7 @@ const LanguageSelector = () => {
                 {current.code === lang.code ? "   ✓    " : "   "}
                 {lang.label}
               </span>
-              <img src={lang.flag} width={15} />
+              <img src={lang.flag} width={15} alt="" />
             </button>
           ))}
         </div>
