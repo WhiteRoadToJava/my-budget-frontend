@@ -17,6 +17,13 @@
     "collapseMenu": "Fäll ihop sidopanelen",
     "expandMenu": "Fäll ut sidopanelen"
   },
+  "calendar": {
+    "previousMonth": "Föregående månad",
+    "nextMonth": "Nästa månad",
+    "transfers": "Överföringar",
+    "noTransactions": "Inga transaktioner denna dag",
+    "errorLoading": "Fel vid laddning av transaktioner"
+  },
   "forgotPassword": {
     "header": "Återställ ditt lösenord",
     "success": "Ett återställningslänk har skickats till",

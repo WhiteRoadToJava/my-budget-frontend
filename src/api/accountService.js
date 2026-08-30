@@ -98,3 +98,14 @@ export const updateAccountStatus = async (accountId, status) => {
   }
 };
 
+
+export const getUserAllTransactions = async () => {
+  try {
+    const response = await api.get("/user/accounts/user-all-transactions");
+    return response.data;
+
+  } catch (error) {
+    console.error("Error fetching user transactions:", error);
+    throw error;
+  }
+};
