@@ -104,6 +104,7 @@
 
     "amoutRequired":"المبلغ مطلوب",
     "amountless":"المبلغ يجب ان يكون اكبر من الصفر",
+    "accountRequired":"الرجاء اختيار الحساب المصدر والحساب الوجهة",
     "nameRequired": "الاسم مطلوب",
     "balanceRequired": "الرصيد مطلوب",
     "currencyRequired": "العملة مطلوبة",

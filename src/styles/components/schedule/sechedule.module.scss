@@ -1,44 +1,81 @@
 @use "../../variables" as variable;
 
 .scheduleContainer {
-  padding: 20px;
+  padding: 1.25rem;
   max-width: 900px;
 }
-.divider {
-  height: 1px;
-  background-color: variable.$color-gray-light;
-  margin: 20px 0;
-}
-.accountHeader {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  padding: 20px;
 
-  
+.header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+
+  h2 {
+    margin: 0;
+    color: variable.$color-text;
+    font-size: variable.$font-lg;
+  }
 }
-.accountBody {
+
+.headerActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+// عناوين الأعمدة — نفس ترتيب/عرض الأعمدة بـ Row.jsx (المبلغ، الاسم،
+// الفاصل، التاريخ، النوع) عشان تتطابق بصرياً مع الصفوف تحتها
+.rowtitle {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  color: variable.$color-text-gray;
+  font-size: variable.$font-sm;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.headerItem {
+  flex: 1;
+  margin: 0;
+  padding: 0 10px;
+}
+
+.scheduleBody {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
   max-height: 800px;
   overflow-y: auto;
 }
 
-
-
-.buttonContainer {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  z-index: 999;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  justify-content: flex-end;
-  gap: 10px;
+.emptyState {
+  padding: 2rem;
+  color: variable.$color-text-muted;
+  text-align: center;
 }
 
+@include variable.respond(mobile-lg) {
+  .scheduleContainer {
+    padding: 0.85rem;
+  }
 
+  .header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .headerActions {
+    flex-direction: column;
+  }
+
+  // بالموبايل الأعمدة بتتلخبط عرضياً، فنخفي عناوين الأعمدة ونخلي كل
+  // معلومة تبين واضحة جوا الصف نفسه (نفس المنطق المستخدم بجداول تانية
+  // بالتطبيق على الشاشات الصغيرة)
+  .rowtitle {
+    display: none;
+  }
+}

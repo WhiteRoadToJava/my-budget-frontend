@@ -105,9 +105,9 @@ const CreateScheduledIncome = ({
   };
 
   return (
-    <Modal isOpen={isOpen}>
+    <Modal isOpen={isOpen} onClose={cleanData}>
       <div className={styles.formContainer}>
-        <h2 className={styles.title}>Create scheduled Income</h2>
+        <h2 className={styles.title}>{i18n.t("buttons.createIncomse")}</h2>
         <form onSubmit={handleCreateIncome}>
           <div className={styles.inputContainer}>
             <FormInput
@@ -193,7 +193,7 @@ const CreateScheduledIncome = ({
             />
           </div>
 
-          {error.hasError && <p style={{ color: "red" }}>{error.message}</p>}
+          {error.hasError && <p className={styles.errorMessage} role="alert">{error.message}</p>}
 
           <div className={styles.buttonContainer}>
             <Button
