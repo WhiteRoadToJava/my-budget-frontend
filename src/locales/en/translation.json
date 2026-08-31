@@ -102,6 +102,7 @@
 
     "amoutRequired": "Amount is required",
     "amountless": "Amount must be greater than zero.",
+    "accountRequired": "Please select both a source and destination account.",
     "logoutError": "Failed to logout. Please try again.",
     "no_data_available": "No data available.",
     "search_error": "Failed to search. Please try again.",
