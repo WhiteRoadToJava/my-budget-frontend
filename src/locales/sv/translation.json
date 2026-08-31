@@ -36,7 +36,21 @@
     "email": "E-postadress",
     "password": "Lösenord",
     "forgotPassword": "Glömt ditt lösenord?",
-    "submit": "Logga in"
+    "submit": "Logga in",
+    "noAccount": "Har du inget konto?",
+    "registerLink": "Registrera dig"
+  },
+  "register": {
+    "header": "Skapa ditt konto",
+    "firstname": "Förnamn",
+    "lastname": "Efternamn",
+    "email": "E-postadress",
+    "phone": "Telefonnummer",
+    "password": "Lösenord",
+    "submit": "Skapa konto",
+    "haveAccount": "Har du redan ett konto?",
+    "loginLink": "Logga in",
+    "genericError": "Registreringen misslyckades. Försök igen."
   },
   "terminal": {
     "terminal": "Välkommen resenär, till det stora",

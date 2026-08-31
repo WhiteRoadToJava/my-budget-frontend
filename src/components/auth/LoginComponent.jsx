@@ -63,6 +63,10 @@ export default function LoginComponent() {
               <Button variant="primary" text={i18n.t("login.submit")} type="submit" paddingSize="12px 20px" fontSize="16px" />
             </div>
           )}
+          <p className={styles.registerLink}>
+            {i18n.t("login.noAccount")}{" "}
+            <Link to="/auth/register">{i18n.t("login.registerLink")}</Link>
+          </p>
         </form>
       </div>
     </div>

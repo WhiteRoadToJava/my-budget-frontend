@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Login from "./pages/auth/LoginTemp.jsx";
+import Register from "./pages/auth/Register.jsx";
 import ForgotPassword from "./pages/auth/ForgotPassword.jsx";
 import Dashboard from "./pages/admin/Dashboard.jsx"
 import { AuthProvider } from "./contexts/AuthContext.jsx";
@@ -45,6 +46,7 @@ function App() {
               <Route path="/" element={<Navigate to="/home" />} />
               <Route path="/home" element={<Login />} />
               <Route path="/auth/login" element={<Login />} />
+              <Route path="/auth/register" element={<Register />} />
               <Route path="/login" element={<Login />} />
               <Route
                 path="/auth/forgot-password"
