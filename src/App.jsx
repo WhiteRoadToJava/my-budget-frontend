@@ -21,6 +21,7 @@ import CalendarPage from "./pages/user/CalendarPage.jsx";
 import ActivateAccount from "./pages/auth/ActivateAccount.jsx";
 import i18n from "./configuration/i18n.js";
 import { useEffect } from "react";
+import ResetPassword from "./pages/auth/ResetPassword.jsx";
 
 
 
@@ -49,6 +50,7 @@ function App() {
               <Route path="/auth/register" element={<Register />} />
               <Route path="/login" element={<Login />} />
               <Route path="/auth/activate" element={<ActivateAccount />} />
+              <Route path="/auth/reset-password" element={<ResetPassword />} />
               <Route
                 path="/auth/forgot-password"
                 element={<ForgotPassword />}

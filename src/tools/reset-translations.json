@@ -1,0 +1,107 @@
+{
+  "en": {
+    "forgotPassword": {
+      "emailRequired": "Enter your email address",
+      "successText": "If an account exists for {{email}}, we sent a password reset link. It expires in 1 hour.",
+      "spamHint": "Can't find it? Check your Spam folder.",
+      "resend": "Send again",
+      "resendWait": "Send again in {{seconds}}s",
+      "backToLogin": "Back to login",
+      "genericError": "Could not send the email. Please try again later."
+    },
+    "resetPassword": {
+      "header": "Choose a new password",
+      "newPassword": "New password",
+      "confirmPassword": "Confirm new password",
+      "submit": "Reset password",
+      "mismatch": "Passwords do not match",
+      "weak": "Password does not meet the requirements",
+      "successTitle": "Password updated",
+      "successText": "Your password was changed. You can log in with the new password now.",
+      "goToLogin": "Go to login",
+      "expiredTitle": "This link has expired",
+      "expiredText": "Reset links are valid for 1 hour. Request a new one.",
+      "invalidTitle": "This link is not valid",
+      "invalidText": "The link was already used or is incorrect. Request a new one.",
+      "requestNew": "Request a new link",
+      "errorGeneric": "Something went wrong. Please try again."
+    },
+    "passwordPolicy": {
+      "title": "Your password must have:",
+      "length": "At least 8 characters",
+      "uppercase": "One uppercase letter (A-Z)",
+      "number": "One number",
+      "special": "One special character (! @ # $ % ^ & * ( ) - _ = + { } ; : , < . >)"
+    }
+  },
+  "ar": {
+    "forgotPassword": {
+      "emailRequired": "اكتب بريدك الإلكتروني",
+      "successText": "لو في حساب مرتبط بـ {{email}}، أرسلنا رابط إعادة تعيين كلمة السر. الرابط صالح لمدة ساعة.",
+      "spamHint": "ما لقيته؟ شوف مجلد الرسائل غير المرغوب فيها (Spam).",
+      "resend": "إعادة الإرسال",
+      "resendWait": "إعادة الإرسال بعد {{seconds}} ثانية",
+      "backToLogin": "العودة لتسجيل الدخول",
+      "genericError": "تعذّر إرسال الرسالة. حاول مرة تانية بعد شوية."
+    },
+    "resetPassword": {
+      "header": "اختر كلمة سر جديدة",
+      "newPassword": "كلمة السر الجديدة",
+      "confirmPassword": "تأكيد كلمة السر الجديدة",
+      "submit": "تغيير كلمة السر",
+      "mismatch": "كلمتا السر غير متطابقتين",
+      "weak": "كلمة السر لا تستوفي الشروط",
+      "successTitle": "تم تغيير كلمة السر",
+      "successText": "تم تغيير كلمة السر. تقدر تسجّل الدخول بالكلمة الجديدة دلوقتي.",
+      "goToLogin": "الذهاب لتسجيل الدخول",
+      "expiredTitle": "انتهت صلاحية الرابط",
+      "expiredText": "روابط إعادة التعيين صالحة لمدة ساعة. اطلب رابط جديد.",
+      "invalidTitle": "الرابط غير صالح",
+      "invalidText": "الرابط اتستخدم قبل كده أو فيه خطأ. اطلب رابط جديد.",
+      "requestNew": "طلب رابط جديد",
+      "errorGeneric": "حصل خطأ. حاول مرة تانية."
+    },
+    "passwordPolicy": {
+      "title": "لازم كلمة السر تحتوي على:",
+      "length": "8 حروف على الأقل",
+      "uppercase": "حرف إنجليزي كبير واحد على الأقل (A-Z)",
+      "number": "رقم واحد على الأقل",
+      "special": "رمز خاص واحد على الأقل (! @ # $ % ^ & * ( ) - _ = + { } ; : , < . >)"
+    }
+  },
+  "sv": {
+    "forgotPassword": {
+      "emailRequired": "Ange din e-postadress",
+      "successText": "Om det finns ett konto för {{email}} har vi skickat en länk för att återställa lösenordet. Länken gäller i 1 timme.",
+      "spamHint": "Hittar du den inte? Titta i skräppostmappen.",
+      "resend": "Skicka igen",
+      "resendWait": "Skicka igen om {{seconds}} s",
+      "backToLogin": "Tillbaka till inloggningen",
+      "genericError": "Det gick inte att skicka mejlet. Försök igen senare."
+    },
+    "resetPassword": {
+      "header": "Välj ett nytt lösenord",
+      "newPassword": "Nytt lösenord",
+      "confirmPassword": "Bekräfta nytt lösenord",
+      "submit": "Återställ lösenord",
+      "mismatch": "Lösenorden matchar inte",
+      "weak": "Lösenordet uppfyller inte kraven",
+      "successTitle": "Lösenordet har ändrats",
+      "successText": "Ditt lösenord har ändrats. Du kan logga in med det nya lösenordet nu.",
+      "goToLogin": "Gå till inloggningen",
+      "expiredTitle": "Länken har gått ut",
+      "expiredText": "Länkar för återställning gäller i 1 timme. Begär en ny.",
+      "invalidTitle": "Länken är inte giltig",
+      "invalidText": "Länken har redan använts eller är felaktig. Begär en ny.",
+      "requestNew": "Begär en ny länk",
+      "errorGeneric": "Något gick fel. Försök igen."
+    },
+    "passwordPolicy": {
+      "title": "Lösenordet måste innehålla:",
+      "length": "Minst 8 tecken",
+      "uppercase": "Minst en stor bokstav (A-Z)",
+      "number": "Minst en siffra",
+      "special": "Minst ett specialtecken (! @ # $ % ^ & * ( ) - _ = + { } ; : , < . >)"
+    }
+  }
+}
