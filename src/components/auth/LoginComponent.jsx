@@ -2,6 +2,7 @@
 import styles from "../../styles/auth/login.module.scss";
 import LoginTerminal from "./LoginTerminal";
 import Button from "../../components/btns/Button";
+import ResendActivation from "./ResendActivation.jsx";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import LoadingSpinner from "../displays/LoadingSpinner.jsx";
@@ -11,6 +12,8 @@ import i18n from "../../configuration/i18n.js";
 export default function LoginComponent() {
   const [user, setUser] = useState({ username: "", password: "" });
   const [errorMessage, setErrorMessage] = useState("");
+  // true when the backend answered 403 ACCOUNT_NOT_ACTIVATED
+  const [needsActivation, setNeedsActivation] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const navigation = useNavigate();
   const { login, currentUser, loading } = useAuth();
@@ -36,11 +39,21 @@ export default function LoginComponent() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrorMessage("");
+    setNeedsActivation(false);
     setIsLoading(true);
     try {
       await login(user);
     } catch (error) {
-      setErrorMessage("An error occurred: " + error.message);
+      const status = error.response?.status;
+      const code = error.response?.data?.code;
+      if (status === 403 && code === "ACCOUNT_NOT_ACTIVATED") {
+        setNeedsActivation(true);
+        setErrorMessage(i18n.t("activation.notActivated"));
+      } else if (status === 401) {
+        setErrorMessage(i18n.t("login.invalidCredentials"));
+      } else {
+        setErrorMessage(i18n.t("login.genericError"));
+      }
     } finally {
       setIsLoading(false);
     }
@@ -56,6 +69,7 @@ export default function LoginComponent() {
           <input className={styles.input} type="password" placeholder={i18n.t("login.password")} value={user.password} name="password" onChange={handleInputChange} autoComplete="current-password" required />
           <Link to="/auth/forgot-password" className={styles.forgotPassword}>{i18n.t("login.forgotPassword")}</Link>
           {errorMessage && <p className={styles.errorMessage} role="alert">{errorMessage}</p>}
+          {needsActivation && <ResendActivation email={user.username} />}
           {isLoading ? (
             <div className={styles.spinner}><LoadingSpinner /></div>
           ) : (

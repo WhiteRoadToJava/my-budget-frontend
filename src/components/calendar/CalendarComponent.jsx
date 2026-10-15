@@ -25,7 +25,8 @@ const isIncome = (t) => t.type === "incomse";
 const isExpense = (t) => t.type === "expense";
 const isTransfer = (t) => t.type === "in-transfer" || t.type === "out-transfer";
 
-const CalendarComponent = ({ transactions = [], accounts = [] }) => {
+const 
+CalendarComponent = ({ transactions = [], accounts = [] }) => {
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const [selectedDay, setSelectedDay] = useState(null);
   const [selectedTransaction, setSelectedTransaction] = useState(null);

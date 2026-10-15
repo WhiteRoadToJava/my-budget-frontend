@@ -1,9 +1,11 @@
 "use client";
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import styles from "../../styles/auth/register.module.scss";
+import activation from "../../styles/auth/activation.module.scss";
 import Button from "../../components/btns/Button";
 import LoadingSpinner from "../displays/LoadingSpinner.jsx";
+import ResendActivation from "./ResendActivation.jsx";
 import { useAuth } from "../../contexts/AuthContext.jsx";
 import { validateRegisterUser } from "../../validators/validateRegisterUser.js";
 import i18n from "../../configuration/i18n.js";
@@ -21,7 +23,8 @@ export default function RegisterComponent() {
   const [fieldError, setFieldError] = useState({ position: "", message: "" });
   const [errorMessage, setErrorMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const navigate = useNavigate();
+  // set after a successful registration: we show "check your email" instead of the form
+  const [registeredEmail, setRegisteredEmail] = useState("");
   const { register } = useAuth();
 
   const handleInputChange = (e) => {
@@ -47,19 +50,50 @@ export default function RegisterComponent() {
     }
     setFieldError({ position: "", message: "" });
 
+    // the backend DTO uses firstName / lastName (camelCase), the form uses firstname / lastname
+    const payload = {
+      username: profile.username.trim(),
+      password: profile.password,
+      firstName: profile.firstname.trim(),
+      lastName: profile.lastname.trim(),
+      phone: profile.phone.trim(),
+      language: i18n.language || "en",
+    };
+
     setIsLoading(true);
     try {
-      await register(profile);
-      navigate("/user");
+      await register(payload);
+      setRegisteredEmail(payload.username);
     } catch (error) {
+      // the backend answers with a plain string (409, 400) or with { message }
+      const data = error.response?.data;
+      const serverMessage = typeof data === "string" ? data : data?.message;
       setErrorMessage(
-        error.response?.data?.message ||
+        serverMessage ||
           i18n.t("register.genericError", { defaultValue: "Registration failed. Please try again." })
       );
     } finally {
       setIsLoading(false);
     }
   };
+
+  if (registeredEmail) {
+    return (
+      <div className={activation.formContainer}>
+        <div className={activation.header}>
+          <p>{i18n.t("activation.checkEmailTitle")}</p>
+        </div>
+        <p className={activation.message}>
+          {i18n.t("activation.checkEmailText")} <strong>{registeredEmail}</strong>
+        </p>
+        <p className={activation.hint}>{i18n.t("activation.checkEmailSpam")}</p>
+        <ResendActivation email={registeredEmail} />
+        <p className={activation.loginLink}>
+          <Link to="/auth/login">{i18n.t("activation.backToLogin")}</Link>
+        </p>
+      </div>
+    );
+  }
 
   return (
     <div className={styles.formContainer}>

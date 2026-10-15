@@ -1,4 +1,26 @@
 {
+  "activation": {
+    "checkEmailTitle": "Kontrollera din e-post",
+    "checkEmailText": "Vi har skickat en aktiveringslänk till",
+    "checkEmailSpam": "Hittar du den inte? Titta i skräppostmappen.",
+    "backToLogin": "Tillbaka till inloggningen",
+    "notActivated": "Ditt konto är inte aktiverat ännu. Kontrollera din e-post för aktiveringslänken.",
+    "resend": "Skicka aktiveringsmejlet igen",
+    "resendWait": "Skicka igen om {{seconds}} s",
+    "resendSent": "Om kontot finns och inte är aktiverat ännu är ett nytt mejl på väg.",
+    "resendError": "Det gick inte att skicka mejlet. Försök igen senare.",
+    "emailPlaceholder": "E-postadress",
+    "activating": "Aktiverar ditt konto...",
+    "successTitle": "Kontot är aktiverat",
+    "successText": "Ditt konto är klart. Du kan logga in nu.",
+    "goToLogin": "Gå till inloggningen",
+    "expiredTitle": "Länken har gått ut",
+    "expiredText": "Ange din e-postadress så skickar vi en ny aktiveringslänk.",
+    "invalidTitle": "Länken är inte giltig",
+    "invalidText": "Länken har redan använts eller är felaktig. Om ditt konto inte är aktiverat ännu kan du begära en ny länk.",
+    "errorTitle": "Något gick fel",
+    "errorText": "Vi kunde inte aktivera ditt konto just nu. Försök igen senare."
+  },
   "menu": {
     "overview": "Översikt",
     "accounts": "Konton",
@@ -38,7 +60,9 @@
     "forgotPassword": "Glömt ditt lösenord?",
     "submit": "Logga in",
     "noAccount": "Har du inget konto?",
-    "registerLink": "Registrera dig"
+    "registerLink": "Registrera dig",
+    "invalidCredentials": "Fel användarnamn eller lösenord",
+    "genericError": "Något gick fel. Försök igen."
   },
   "register": {
     "header": "Skapa ditt konto",

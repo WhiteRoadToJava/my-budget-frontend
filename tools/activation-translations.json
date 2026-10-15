@@ -1,0 +1,86 @@
+{
+  "en": {
+    "activation": {
+      "checkEmailTitle": "Check your email",
+      "checkEmailText": "We sent an activation link to",
+      "checkEmailSpam": "Can't find it? Check your Spam folder.",
+      "backToLogin": "Back to login",
+      "notActivated": "Your account is not activated yet. Check your email for the activation link.",
+      "resend": "Resend activation email",
+      "resendWait": "Resend in {{seconds}}s",
+      "resendSent": "If the account exists and isn't activated yet, a new email is on its way.",
+      "resendError": "Could not send the email. Please try again later.",
+      "emailPlaceholder": "Email",
+      "activating": "Activating your account...",
+      "successTitle": "Account activated",
+      "successText": "Your account is ready. You can log in now.",
+      "goToLogin": "Go to login",
+      "expiredTitle": "This link has expired",
+      "expiredText": "Enter your email and we'll send you a new activation link.",
+      "invalidTitle": "This link is not valid",
+      "invalidText": "The link was already used or is incorrect. If your account is not active yet, request a new link.",
+      "errorTitle": "Something went wrong",
+      "errorText": "We couldn't activate your account right now. Please try again later."
+    },
+    "login": {
+      "invalidCredentials": "Incorrect username or password",
+      "genericError": "Something went wrong. Please try again."
+    }
+  },
+  "ar": {
+    "activation": {
+      "checkEmailTitle": "تحقق من بريدك الإلكتروني",
+      "checkEmailText": "أرسلنا رابط التفعيل إلى",
+      "checkEmailSpam": "ما لقيته؟ شوف مجلد الرسائل غير المرغوب فيها (Spam).",
+      "backToLogin": "العودة لتسجيل الدخول",
+      "notActivated": "حسابك لسه مش مفعّل. افتح بريدك الإلكتروني واضغط على رابط التفعيل.",
+      "resend": "إعادة إرسال رسالة التفعيل",
+      "resendWait": "إعادة الإرسال بعد {{seconds}} ثانية",
+      "resendSent": "لو الحساب موجود وغير مفعّل، رسالة جديدة في الطريق إليك.",
+      "resendError": "تعذّر إرسال الرسالة. حاول مرة تانية بعد شوية.",
+      "emailPlaceholder": "البريد الإلكتروني",
+      "activating": "جاري تفعيل حسابك...",
+      "successTitle": "تم تفعيل الحساب",
+      "successText": "حسابك جاهز. تقدر تسجّل الدخول دلوقتي.",
+      "goToLogin": "الذهاب لتسجيل الدخول",
+      "expiredTitle": "انتهت صلاحية الرابط",
+      "expiredText": "اكتب بريدك الإلكتروني وهنبعتلك رابط تفعيل جديد.",
+      "invalidTitle": "الرابط غير صالح",
+      "invalidText": "الرابط اتستخدم قبل كده أو فيه خطأ. لو حسابك لسه مش مفعّل، اطلب رابط جديد.",
+      "errorTitle": "حصل خطأ",
+      "errorText": "ما قدرنا نفعّل حسابك دلوقتي. حاول مرة تانية بعد شوية."
+    },
+    "login": {
+      "invalidCredentials": "اسم المستخدم أو كلمة السر غير صحيحة",
+      "genericError": "حصل خطأ. حاول مرة تانية."
+    }
+  },
+  "sv": {
+    "activation": {
+      "checkEmailTitle": "Kontrollera din e-post",
+      "checkEmailText": "Vi har skickat en aktiveringslänk till",
+      "checkEmailSpam": "Hittar du den inte? Titta i skräppostmappen.",
+      "backToLogin": "Tillbaka till inloggningen",
+      "notActivated": "Ditt konto är inte aktiverat ännu. Kontrollera din e-post för aktiveringslänken.",
+      "resend": "Skicka aktiveringsmejlet igen",
+      "resendWait": "Skicka igen om {{seconds}} s",
+      "resendSent": "Om kontot finns och inte är aktiverat ännu är ett nytt mejl på väg.",
+      "resendError": "Det gick inte att skicka mejlet. Försök igen senare.",
+      "emailPlaceholder": "E-postadress",
+      "activating": "Aktiverar ditt konto...",
+      "successTitle": "Kontot är aktiverat",
+      "successText": "Ditt konto är klart. Du kan logga in nu.",
+      "goToLogin": "Gå till inloggningen",
+      "expiredTitle": "Länken har gått ut",
+      "expiredText": "Ange din e-postadress så skickar vi en ny aktiveringslänk.",
+      "invalidTitle": "Länken är inte giltig",
+      "invalidText": "Länken har redan använts eller är felaktig. Om ditt konto inte är aktiverat ännu kan du begära en ny länk.",
+      "errorTitle": "Något gick fel",
+      "errorText": "Vi kunde inte aktivera ditt konto just nu. Försök igen senare."
+    },
+    "login": {
+      "invalidCredentials": "Fel användarnamn eller lösenord",
+      "genericError": "Något gick fel. Försök igen."
+    }
+  }
+}

@@ -18,7 +18,7 @@ import AllTransactions from "./pages/user/transactions/AllTransactions.jsx";
 import SchedulePage from "./pages/user/SchedulePage.jsx";
 import RapportPage from "./pages/user/RapportPage.jsx";
 import CalendarPage from "./pages/user/CalendarPage.jsx";
-
+import ActivateAccount from "./pages/auth/ActivateAccount.jsx";
 import i18n from "./configuration/i18n.js";
 import { useEffect } from "react";
 
@@ -48,6 +48,7 @@ function App() {
               <Route path="/auth/login" element={<Login />} />
               <Route path="/auth/register" element={<Register />} />
               <Route path="/login" element={<Login />} />
+              <Route path="/auth/activate" element={<ActivateAccount />} />
               <Route
                 path="/auth/forgot-password"
                 element={<ForgotPassword />}

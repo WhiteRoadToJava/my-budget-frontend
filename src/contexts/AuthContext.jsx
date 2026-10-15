@@ -58,20 +58,16 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const register = async (registerData) => {
-    try {
-      const resonse = await api.post("/auth/register", registerData, {
-        withCredentials: true,
-      });
-      setCurrentUser(resonse.data);
-      return resonse.data;
-    } catch (error) {
-      console.error(
-        "Error during register:",
-        error.response?.data || error.message,
-      );
-    }
-  };
+ const register = async (registerData) => {
+  try {
+    const response = await api.post("/auth/register", registerData);
+    // الحساب غير مفعّل لحد ما يتأكد الإيميل، فمش بنعمل setCurrentUser هنا
+    return response.data;
+  } catch (error) {
+    console.error("Error during register:", error.response?.data || error.message);
+    throw error;
+  }
+};
 
   const logout = async () => {
     try {

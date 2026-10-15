@@ -1,4 +1,26 @@
 {
+  "activation": {
+    "checkEmailTitle": "Check your email",
+    "checkEmailText": "We sent an activation link to",
+    "checkEmailSpam": "Can't find it? Check your Spam folder.",
+    "backToLogin": "Back to login",
+    "notActivated": "Your account is not activated yet. Check your email for the activation link.",
+    "resend": "Resend activation email",
+    "resendWait": "Resend in {{seconds}}s",
+    "resendSent": "If the account exists and isn't activated yet, a new email is on its way.",
+    "resendError": "Could not send the email. Please try again later.",
+    "emailPlaceholder": "Email",
+    "activating": "Activating your account...",
+    "successTitle": "Account activated",
+    "successText": "Your account is ready. You can log in now.",
+    "goToLogin": "Go to login",
+    "expiredTitle": "This link has expired",
+    "expiredText": "Enter your email and we'll send you a new activation link.",
+    "invalidTitle": "This link is not valid",
+    "invalidText": "The link was already used or is incorrect. If your account is not active yet, request a new link.",
+    "errorTitle": "Something went wrong",
+    "errorText": "We couldn't activate your account right now. Please try again later."
+  },
   "menu": {
     "overview": "Overview",
     "accounts": "Accounts",
@@ -38,7 +60,9 @@
     "forgotPassword": "Forgot Password?",
     "submit": "Login",
     "noAccount": "Don't have an account?",
-    "registerLink": "Sign up"
+    "registerLink": "Sign up",
+    "invalidCredentials": "Incorrect username or password",
+    "genericError": "Something went wrong. Please try again."
   },
   "register": {
     "header": "Create your account",
