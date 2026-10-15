@@ -1,4 +1,28 @@
 {
+  "passwordPolicy": {
+    "title": "Lösenordet måste innehålla:",
+    "length": "Minst 8 tecken",
+    "uppercase": "Minst en stor bokstav (A-Z)",
+    "number": "Minst en siffra",
+    "special": "Minst ett specialtecken (! @ # $ % ^ & * ( ) - _ = + { } ; : , < . >)"
+  },
+  "resetPassword": {
+    "header": "Välj ett nytt lösenord",
+    "newPassword": "Nytt lösenord",
+    "confirmPassword": "Bekräfta nytt lösenord",
+    "submit": "Återställ lösenord",
+    "mismatch": "Lösenorden matchar inte",
+    "weak": "Lösenordet uppfyller inte kraven",
+    "successTitle": "Lösenordet har ändrats",
+    "successText": "Ditt lösenord har ändrats. Du kan logga in med det nya lösenordet nu.",
+    "goToLogin": "Gå till inloggningen",
+    "expiredTitle": "Länken har gått ut",
+    "expiredText": "Länkar för återställning gäller i 1 timme. Begär en ny.",
+    "invalidTitle": "Länken är inte giltig",
+    "invalidText": "Länken har redan använts eller är felaktig. Begär en ny.",
+    "requestNew": "Begär en ny länk",
+    "errorGeneric": "Något gick fel. Försök igen."
+  },
   "activation": {
     "checkEmailTitle": "Kontrollera din e-post",
     "checkEmailText": "Vi har skickat en aktiveringslänk till",
@@ -50,7 +74,14 @@
     "header": "Återställ ditt lösenord",
     "success": "Ett återställningslänk har skickats till",
     "email": "E-postadress",
-    "submit": "Skicka återställningslänken"
+    "submit": "Skicka återställningslänken",
+    "emailRequired": "Ange din e-postadress",
+    "successText": "Om det finns ett konto för {{email}} har vi skickat en länk för att återställa lösenordet. Länken gäller i 1 timme.",
+    "spamHint": "Hittar du den inte? Titta i skräppostmappen.",
+    "resend": "Skicka igen",
+    "resendWait": "Skicka igen om {{seconds}} s",
+    "backToLogin": "Tillbaka till inloggningen",
+    "genericError": "Det gick inte att skicka mejlet. Försök igen senare."
   },
   "login": {
     "header": "Vänligen ange dina inloggningsuppgifter",

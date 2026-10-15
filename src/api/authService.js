@@ -20,3 +20,21 @@ export const resendActivation = async(username, language) => {
   });
   return response.data;
 }
+
+
+export const forgotPassword = async (username, language) =>{
+  const response = await api.post("/auth/forgot-password", {
+    username,
+    language,
+  });
+  return response.data;
+}
+
+export const resetPassword = async (token, newPassword, confirmPassword) => {
+  const response = api.post("/auth/forgot-password",{
+  token,
+  newPassword,
+  confirmPassword
+  })
+return response.data;
+}

@@ -1,3 +1,5 @@
+import { isStrongPassword } from "./passwordPolicy.js";
+
 export const validateRegisterUser = (profile) => {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -24,6 +26,16 @@ export const validateRegisterUser = (profile) => {
     return {
       hasError: true,
       message: "The password can not be empty.",
+      position: "password",
+    };
+  }
+
+  // 3b. قوة كلمة المرور (نفس شروط الباك إند)
+  if (!isStrongPassword(profile.password)) {
+    return {
+      hasError: true,
+      message:
+        "Password must be at least 8 characters and include an uppercase letter, a number and a special character",
       position: "password",
     };
   }

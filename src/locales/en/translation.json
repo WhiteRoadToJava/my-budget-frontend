@@ -1,4 +1,28 @@
 {
+  "passwordPolicy": {
+    "title": "Your password must have:",
+    "length": "At least 8 characters",
+    "uppercase": "One uppercase letter (A-Z)",
+    "number": "One number",
+    "special": "One special character (! @ # $ % ^ & * ( ) - _ = + { } ; : , < . >)"
+  },
+  "resetPassword": {
+    "header": "Choose a new password",
+    "newPassword": "New password",
+    "confirmPassword": "Confirm new password",
+    "submit": "Reset password",
+    "mismatch": "Passwords do not match",
+    "weak": "Password does not meet the requirements",
+    "successTitle": "Password updated",
+    "successText": "Your password was changed. You can log in with the new password now.",
+    "goToLogin": "Go to login",
+    "expiredTitle": "This link has expired",
+    "expiredText": "Reset links are valid for 1 hour. Request a new one.",
+    "invalidTitle": "This link is not valid",
+    "invalidText": "The link was already used or is incorrect. Request a new one.",
+    "requestNew": "Request a new link",
+    "errorGeneric": "Something went wrong. Please try again."
+  },
   "activation": {
     "checkEmailTitle": "Check your email",
     "checkEmailText": "We sent an activation link to",
@@ -50,7 +74,14 @@
     "header": "Reset your password",
     "success": "A password reset link has been sent to",
     "email": "Email",
-    "submit": "Send Reset Link "
+    "submit": "Send Reset Link ",
+    "emailRequired": "Enter your email address",
+    "successText": "If an account exists for {{email}}, we sent a password reset link. It expires in 1 hour.",
+    "spamHint": "Can't find it? Check your Spam folder.",
+    "resend": "Send again",
+    "resendWait": "Send again in {{seconds}}s",
+    "backToLogin": "Back to login",
+    "genericError": "Could not send the email. Please try again later."
   },
   "login": {
     "header": "Please enter your details",

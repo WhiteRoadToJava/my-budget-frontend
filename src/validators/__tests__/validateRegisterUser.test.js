@@ -3,7 +3,7 @@ import { validateRegisterUser } from "../validateRegisterUser.js";
 
 const validProfile = {
   username: "test@example.com",
-  password: "secret123",
+  password: "Secret@123",
   firstname: "Jane",
   lastname: "Doe",
   phone: "1234567890",
