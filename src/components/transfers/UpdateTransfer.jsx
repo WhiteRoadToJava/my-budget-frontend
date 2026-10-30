@@ -52,7 +52,7 @@ const UpdateTransfer = ({ isOpen, isClose, accounts, transfer }) => {
   // دالة مساعدة للحصول على الاسم من الـ ID
   const getAccountNameById = (accountId) => {
     const id = typeof accountId === 'object' ? accountId.id : accountId;
-    return accountsList.find((acc) => acc.id === id)?.name || "";
+    return accountsList.find((acc) => acc.id === id)?.name || i18n.t("account.accountdeleted");
   };
 
   // تصفية القوائم لمنع اختيار نفس الحساب
