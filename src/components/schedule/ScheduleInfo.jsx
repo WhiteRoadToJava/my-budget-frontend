@@ -5,10 +5,10 @@ import Button from "../btns/Button";
 import ToggleMenu from "../elements/ToggleMenu";
 import DeleteConfimation from "../modals/DeleteConfirmation";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { deleteSchedule } from "../../api/scheduleService";
+import { deleteSchedule, updateSchedule } from "../../api/scheduleService";
 import i18n from "../../configuration/i18n";
 import UpdateSchedule from "./UpdateSchedule";
-import { rollForwardExecutionDate } from "../../utils/scheduleDate";
+import { rollForwardExecutionDate } from "../../utils/scheduleDate.js";
 
 const ScheduleInfo = ({ isOpen, onClose, accounts, schedule }) => {
   const queryClient = useQueryClient();
@@ -30,24 +30,23 @@ const ScheduleInfo = ({ isOpen, onClose, accounts, schedule }) => {
       });
     },
   });
-  const [updateSchedule, setUpdateSchedule] = useState(null);
-  const current =
-    updateSchedule && updateSchedule.id === schedule.id
-      ? updateSchedule
-      : schedule;
+    const [updatedSchedule, setUpdatedSchedule] = useState(null);
+ const current =
+    updatedSchedule && updatedSchedule.id === schedule.id ? updatedSchedule : schedule;
   const isActive = current?.isActive !== false;
 
   const handleClose = () => {
-    setUpdateSchedule(null);
+    setUpdatedSchedule(null);
     setError({ hasError: false, message: "" });
+    onClose();
   };
 
   
 
   const toggleActive = useMutation({
-    mutationFn: (date) => updateSchedule(schedule.id, date),
+    mutationFn: (date) => updateSchedule(schedule.id, date) ,
     onSuccess: (saved) => {
-      setUpdateSchedule(saved);
+      setUpdatedSchedule(saved);
       setError({ hasError: false, message: "" });
       queryClient.invalidateQueries({ queryKey: ["schedules"] });
     },
@@ -59,22 +58,22 @@ const ScheduleInfo = ({ isOpen, onClose, accounts, schedule }) => {
     },
   });
 
-  const handleToggleIsActive = () => {
-    const resuming = isActive;
+    const handleToggleIsActive = () => {
+    const resuming = !isActive;
     toggleActive.mutate({
       name: current.name,
       description: current.description,
       category: current.category,
-      scheduleIntervalSet: [current.scheduleIntervalSet],
-      amountSent: current.amountSend,
-      exChangeRate: current.amountSend,
+      scheduleIntervalSet: [current.scheduleInterval],
+      amountSend: current.amountSend,
+      exChangeRate: current.exChangeRate,
       amountReceived: current.amountReceived,
-      nextExecutionDate: resuming? rollForwardExecutionDate(current.executionDate, current.scheduleIntervalSet)
-      : current.executionDate,
+      nextExecutionDate: resuming
+        ? rollForwardExecutionDate(current.executionDate, current.scheduleInterval)
+        : current.executionDate,
       isActive: resuming,
-    })
-    
-  }
+    });
+  };
 
   const handleDelete = async () => {
     deleteSchdule.mutate(schedule.id);
@@ -110,7 +109,7 @@ const ScheduleInfo = ({ isOpen, onClose, accounts, schedule }) => {
   ];
   return (
     <>
-      <Modal isOpen={isOpen} onClose={onClose}>
+      <Modal isOpen={isOpen} onClose={handleClose}>
         <div className={styles.transactionContainer}>
           <div
             className={styles.transactionTitle}
@@ -147,12 +146,13 @@ const ScheduleInfo = ({ isOpen, onClose, accounts, schedule }) => {
           <p className={styles.transactionDetail}>
             <strong>{i18n.t("scheduleInfo.account")}:</strong> {accountName}
           </p>
-          <p className={styles.transactionDetail}>
-            <strong>{i18n.t("ScheduleInfo.status")}:</strong> {" "}
+                   <p className={styles.transactionDetail}>
+            <strong>{i18n.t("scheduleInfo.status")}:</strong>{" "}
+            {isActive ? i18n.t("scheduleInfo.active") : i18n.t("scheduleInfo.paused")}
           </p>
           <p className={styles.transactionDetail}>
             <strong>{i18n.t("scheduleInfo.nextExecutionDate")}:</strong>{" "}
-            {new Date(schedule.executionDate).toLocaleDateString()}
+            {new Date(current.executionDate).toLocaleDateString()}
           </p>
           <p className={styles.transactionDetail}>
             <strong>{i18n.t("scheduleInfo.description")}:</strong>{" "}

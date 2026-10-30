@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { rollForwardExecutionDate } from "../scheduleDates";
+import { rollForwardExecutionDate } from "../../utils/scheduleDate.js"
 
 const today = new Date(2026, 9, 29); // 29 Oct 2026, local time
 

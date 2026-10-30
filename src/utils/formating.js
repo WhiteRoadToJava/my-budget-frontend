@@ -1,4 +1,6 @@
- export const formatNumber = (number) => {
-    const formated = number.toLocaleString("fr-FR");
-    return formated;
-  };
+export const formatNumber = (number) => {
+  if (number === null || number === undefined || number === "") return "—";
+  const value = Number(number);
+  if (Number.isNaN(value)) return "—";
+  return value.toLocaleString("fr-FR");
+};

@@ -24,6 +24,9 @@
   &[data-type="out-transfer"] {
     border-left-color: variable.$color-blue;
   }
+  &[ data-active="false"]{
+    opacity: 0.55;
+  }
 
   &:hover {
     background: rgba(30, 42, 69, 0.8);
@@ -64,4 +67,12 @@
       flex: 1 1 40%;
     }
   }
+}
+
+.paddedBadge {
+  margin-inline-start: 0.5rem;
+  padding: 0.1rem 0.45rem;
+  font-size: 0.75rem;
+  border:1px solid variable.$color-border-strong;
+  border-radius: variable.$radius-small;
 }
