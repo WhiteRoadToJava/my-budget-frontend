@@ -69,10 +69,10 @@
   }
 }
 
-.paddedBadge {
+.pausedBadge {
   margin-inline-start: 0.5rem;
   padding: 0.1rem 0.45rem;
   font-size: 0.75rem;
-  border:1px solid variable.$color-border-strong;
+  border: 1px solid variable.$color-border-strong;
   border-radius: variable.$radius-small;
 }
