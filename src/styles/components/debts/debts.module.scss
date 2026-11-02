@@ -1,0 +1,161 @@
+@use "../../variables" as variable;
+
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding: 1.5rem;
+  max-width: 1100px;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 0;
+}
+
+/* ---------- summary ---------- */
+
+.summaryGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+}
+
+.summaryCard {
+  background: variable.$surface-2;
+  border: 1px solid variable.$color-border;
+  border-radius: variable.$radius-md;
+  padding: 1rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.summaryCurrency {
+  font-weight: bold;
+  color: variable.$color-text-gray;
+}
+
+.summaryLine {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.amountOut {
+  color: variable.$color-error;
+}
+
+.amountIn {
+  color: variable.$color-success;
+}
+
+/* ---------- filter ---------- */
+
+.filters {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.filterButton {
+  background: variable.$surface-1;
+  color: variable.$color-text;
+  border: 1px solid variable.$color-border;
+  border-radius: variable.$radius-pill;
+  padding: 0.35rem 0.9rem;
+  cursor: pointer;
+
+  &[aria-pressed="true"] {
+    border-color: variable.$color-border-strong;
+    background: variable.$surface-3;
+  }
+
+  &:focus-visible {
+    box-shadow: variable.$shadow-glow;
+    outline: none;
+  }
+}
+
+/* ---------- cards ---------- */
+
+.cardGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1rem;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  background: variable.$surface-1;
+  border: 1px solid variable.$color-border;
+  border-radius: variable.$radius-md;
+  padding: 1rem 1.25rem;
+  color: variable.$color-text;
+  text-decoration: none;
+
+  &:hover,
+  &:focus-visible {
+    background: variable.$surface-3;
+    outline: none;
+    box-shadow: variable.$shadow-glow;
+  }
+
+  &[data-settled="true"] {
+    opacity: 0.6;
+  }
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.cardName {
+  font-weight: bold;
+  margin: 0;
+}
+
+.cardCounterparty {
+  color: variable.$color-text-muted;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.badge {
+  font-size: 0.75rem;
+  padding: 0.1rem 0.5rem;
+  border-radius: variable.$radius-pill;
+  border: 1px solid variable.$color-border;
+  white-space: nowrap;
+
+  &[data-direction="OWED_BY_ME"] {
+    color: variable.$color-error;
+  }
+
+  &[data-direction="OWED_TO_ME"] {
+    color: variable.$color-success;
+  }
+}
+
+.cardAmount {
+  font-size: 1.4rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+.cardMeta {
+  display: flex;
+  justify-content: space-between;
+  color: variable.$color-text-muted;
+  font-size: 0.85rem;
+}
+
+.empty {
+  color: variable.$color-text-muted;
+}

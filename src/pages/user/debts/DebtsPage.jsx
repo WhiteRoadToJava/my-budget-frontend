@@ -1,32 +1,66 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useMemo, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { getDebts } from "../../../api/debtService";
 import i18n from "../../../configuration/i18n";
+import styles from "../../../styles/components/debts/debts.module.scss";
+import DebtsSummary from "../../../components/debts/DebtsSummary";
+import DebtCard from "../../../components/debts/DebtCard";
+import { filterDebts, sortDebts, summarizeDebts } from "../../../utils/debts/summarizeDebts";
 
-// F1: route, data loading and navigation only. The list design comes in F2.
+const FILTERS = [
+  { value: "ALL", label: "debts.all" },
+  { value: "OWED_BY_ME", label: "debts.owedByMe" },
+  { value: "OWED_TO_ME", label: "debts.owedToMe" },
+];
+
 const DebtsPage = () => {
+  const [filter, setFilter] = useState("ALL");
   const { data: debts = [], isLoading, isError } = useQuery({
     queryKey: ["debts"],
     queryFn: getDebts,
   });
 
-  if (isLoading) return <div>{i18n.t("debts.loading")}</div>;
-  if (isError) return <div>{i18n.t("debts.loadError")}</div>;
+  // the summary always covers all debts; the filter only changes the cards
+  const totals = useMemo(() => summarizeDebts(debts), [debts]);
+  const visible = useMemo(() => sortDebts(filterDebts(debts, filter)), [debts, filter]);
+
+  if (isLoading) return <div className={styles.page}>{i18n.t("debts.loading")}</div>;
+  if (isError) return <div className={styles.page}>{i18n.t("debts.loadError")}</div>;
 
   return (
-    <div>
-      <h2>{i18n.t("debts.title")}</h2>
+    <div className={styles.page}>
+      <h2 className={styles.title}>{i18n.t("debts.title")}</h2>
+
       {debts.length === 0 ? (
-        <p>{i18n.t("debts.empty")}</p>
+        <p className={styles.empty}>{i18n.t("debts.empty")}</p>
       ) : (
-        <ul>
-          {debts.map((debt) => (
-            <li key={debt.id}>
-              <Link to={`/user/debts/${debt.id}`}>{debt.name}</Link>
-            </li>
-          ))}
-        </ul>
+        <>
+          <DebtsSummary totals={totals} />
+
+          <div className={styles.filters} role="group" aria-label={i18n.t("debts.direction")}>
+            {FILTERS.map((f) => (
+              <button
+                key={f.value}
+                type="button"
+                className={styles.filterButton}
+                aria-pressed={filter === f.value}
+                onClick={() => setFilter(f.value)}
+              >
+                {i18n.t(f.label)}
+              </button>
+            ))}
+          </div>
+
+          {visible.length === 0 ? (
+            <p className={styles.empty}>{i18n.t("debts.noMatch")}</p>
+          ) : (
+            <div className={styles.cardGrid}>
+              {visible.map((debt) => (
+                <DebtCard key={debt.id} debt={debt} />
+              ))}
+            </div>
+          )}
+        </>
       )}
     </div>
   );
