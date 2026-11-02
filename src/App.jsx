@@ -22,6 +22,8 @@ import i18n from "./configuration/i18n.js";
 import { useEffect } from "react";
 import ResetPassword from "./pages/auth/ResetPassword.jsx";
 import ReportPage from "./pages/user/ReportPage.jsx";
+import DebtsPage from "./pages/user/debts/DebtsPage.jsx";
+import DebtDetailsPage from "./pages/user/debts/DebtDetailsPage.jsx";
 
 
 
@@ -92,6 +94,8 @@ function App() {
                   path="/user/accounts/search"
                   element={<ReportPage /> }
                   />
+                  <Route path="/user/debts" element={<DebtsPage />} />
+                  <Route path="/user/debts/:debtId" element={<DebtDetailsPage />} />
                 </Route>
               </Route>
             </Routes>

@@ -15,6 +15,7 @@ import bank from "./icons/bank.svg"
 import gift from "./icons/gift.svg"
 import bills from "./icons/bills.svg"
 import investment from "./icons/investment.svg"
+import debt from "./icons/debt.svg"
 
 
 
@@ -114,3 +115,23 @@ export const incomseCategoryList = [
         icon: investment  
     },
 ]
+
+// Records created by a debt movement (and debt payment schedules) are stored by the
+// backend with the category "Debt" instead of a numeric id from the lists above.
+// It is not in the lists on purpose: users should not pick it in income/expense forms.
+export const DEBT_CATEGORY = "Debt";
+
+export const debtCategory = {
+    id: DEBT_CATEGORY,
+    name: "Debt",
+    icon: debt
+};
+
+// Finds the category of a transaction, including "Debt" and debt-in / debt-out rows.
+export const findCategory = (category, type) => {
+    if (category === DEBT_CATEGORY || type === "debt-in" || type === "debt-out") {
+        return debtCategory;
+    }
+    const list = type === "incomse" ? incomseCategoryList : expenseCategoryList;
+    return list.find((item) => item.id === Number(category));
+};
