@@ -363,6 +363,18 @@
 
   "debts":{
 
+    "summary":"Summary",
+
+    "all":"All",
+
+    "net":"Net",
+
+    "settled":"Settled",
+
+    "noMatch":"No debts in this group.",
+
+    "ratePerYear":"{{rate}}% / year",
+
     "title":"Debts",
 
     "detailsTitle":"Debt details",

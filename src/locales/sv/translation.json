@@ -342,6 +342,18 @@
 
   "debts":{
 
+    "summary":"Sammanfattning",
+
+    "all":"Alla",
+
+    "net":"Netto",
+
+    "settled":"Betald",
+
+    "noMatch":"Inga skulder i den här gruppen.",
+
+    "ratePerYear":"{{rate}} % / år",
+
     "title":"Skulder",
 
     "detailsTitle":"Skulddetaljer",
