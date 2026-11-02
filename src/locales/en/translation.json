@@ -202,6 +202,7 @@
     "archivedAccounts": "Archive Accounts"
   },
   "account": {
+    "accountdeleted":"Deleted account",
     "totalBalance": "Total balance:",
     "date": "Date",
     "category": "Category",
@@ -293,6 +294,8 @@
     "nextExecutionDate": "Next Execution Date"
   },
   "scheduleInfo": {
+    "active":"Active",
+    "paused":"Paused",
     "title": "Schedule Details",
     "account": "Account",
     "sourceAmount": "Source Amount",

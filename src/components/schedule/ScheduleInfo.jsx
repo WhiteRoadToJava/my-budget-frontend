@@ -16,7 +16,9 @@ const ScheduleInfo = ({ isOpen, onClose, accounts, schedule }) => {
   const [openConfirmDelete, setOpenConfirmDelete] = useState(false);
   const [error, setError] = useState({ hasError: false, message: "" });
   const accountName = schedule?.sourceAccount?.name;
-  const deleteSchedule = useMutation({
+  // named deleteMutation: calling it deleteSchedule would hide the API function
+  // imported above, and the mutation would then call itself
+  const deleteMutation = useMutation({
     mutationFn: (scheduleId) => deleteSchedule(scheduleId),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["schedules"] });
@@ -26,7 +28,7 @@ const ScheduleInfo = ({ isOpen, onClose, accounts, schedule }) => {
     onError: () => {
       setError({
         hasError: true,
-        message: i18n.t("errorDeleteSchedule"),
+        message: i18n.t("messages.errorDeleteSchedule"),
       });
     },
   });
@@ -76,13 +78,13 @@ const ScheduleInfo = ({ isOpen, onClose, accounts, schedule }) => {
   };
 
   const handleDelete = async () => {
-    deleteSchedule.mutate(schedule.id);
+    deleteMutation.mutate(schedule.id);
   };
 
   const buttonMenuItems = [
     <Button
       key="edit"
-      text="Edit"
+      text={i18n.t("buttons.edit")}
       type="button"
       onClick={() => setOpenUpdateSchedule(true)}
     />,
@@ -104,7 +106,7 @@ const ScheduleInfo = ({ isOpen, onClose, accounts, schedule }) => {
       variant="cancel"
       text={i18n.t("buttons.close")}
       type="button"
-      onClick={onClose}
+      onClick={handleClose}
     />,
   ];
   return (
@@ -162,12 +164,11 @@ const ScheduleInfo = ({ isOpen, onClose, accounts, schedule }) => {
             <Button
               text={i18n.t("buttons.close")}
               variant="cancel"
-              onClick={onClose}
+              onClick={handleClose}
             />
           </div>
         </div>
       </Modal>
-      <UpdateSchedule scheduleId={schedule.id} schedule={schedule} />
 
       <DeleteConfimation
         isOpen={openConfirmDelete}

@@ -35,7 +35,7 @@ const UpdateSchedule = ({ isOpen, isClose, schedule }) => {
     onError: () => {
       setError({
         hasError: true,
-        message: i18n.t("errorUpdateSchedule"),
+        message: i18n.t("messages.errorUpdateSchedule"),
       });
     },
   });

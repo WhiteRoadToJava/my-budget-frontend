@@ -189,6 +189,7 @@
     "title":"المعاملات"
   },
   "account":{
+    "accountdeleted":"حساب محذوف",
     "totalBalance":"الرصيد الكلي:",
     "date":"التاريخ",
     "category":"الفئة",
@@ -320,6 +321,8 @@
     "updatedAt":"تاريخ التحديث"
   },
   "scheduleInfo":{
+    "active":"نشط",
+    "paused":"متوقف مؤقتاً",
     "title":"تفاصيل الجدول",
     "account":"الحساب",
     "sourceAmount":"المبلغ المصدر",

@@ -142,13 +142,13 @@
     "errorDeleteAccount":"Failed to delete account. Please try again.",
     "errorDeleteIncomse":"Failed to delete incomse. Please try again.",
     "errorDeleteExpenses":"Failed to delete expenses. Please try again.",
-    "errorDeleteSchedule":"Failed to delete schedule. Please try again.",
+    "errorDeleteSchedule":"Det gick inte att ta bort schemat. Försök igen.",
     "errorDeleteTransactions":"Failed to delete transactions. Please try again.",
     "errorDeleteTransfers":"Failed to delete transfers. Please try again",
     "errorUpdateAccount":"Failed to update account. Please try again.",
     "errorUpdateIncomse":"Failed to update incomse. Please try again.",
     "errorUpdateExpenses":"Failed to update expenses. Please try again.",
-    "errorUpdateSchedule":"Failed to update schedule. Please try again.",
+    "errorUpdateSchedule":"Det gick inte att uppdatera schemat. Försök igen.",
     "errorUpdateTransactions":"Failed to update transactions. Please try again.",
     "errorUpdateTransfers":"Failed to update transfers. Please try again.",
     "invalidCredentials": "Login failed. Please try again.",
@@ -191,6 +191,7 @@
     "title":"Transaktioner"
   },
   "account":{
+    "accountdeleted":"Raderat konto",
     "totalBalance":"Total balance:",
     "date":"Datum",
     "category":"",
@@ -281,6 +282,8 @@
     "name":"Namn"
   },
   "scheduleInfo":{
+    "active":"Aktiv",
+    "paused":"Pausad",
     "title":"Planering",
     "amount":"Belopp",
     "account":"Konto",
