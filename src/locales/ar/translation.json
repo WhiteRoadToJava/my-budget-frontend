@@ -429,5 +429,10 @@
   },
   "languageSelector": {
     "label": "تغيير اللغة"
+  },
+  "report": {
+    "fromDate": "من تاريخ",
+    "toDate": "إلى تاريخ",
+    "search": "بحث"
   }
 }

@@ -436,5 +436,10 @@
   },
   "languageSelector": {
     "label": "Change language"
+  },
+  "report": {
+    "fromDate": "From Date",
+    "toDate": "To Date",
+    "search": "Search"
   }
 }

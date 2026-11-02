@@ -42,7 +42,7 @@ const ReportComponent = () => {
       <div className={styles.header}>
         <div className={styles.header}>
           <div>
-            <p>{i18n.t("labels.fromDate")}</p>
+            <p>{i18n.t("report.fromDate")}</p>
             <Datepicker
               label={i18n.t("labels.fromDate")}
               value={fromDate}
@@ -50,16 +50,16 @@ const ReportComponent = () => {
             />
           </div>
           <div>
-            <p>{i18n.t("labels.toDate")}</p>
+            <p>{i18n.t("report.toDate")}</p>
             <Datepicker
-              label={i18n.t("labels.toDate")}
+              label={i18n.t("report.toDate")}
               value={toDate}
               onChange={(data) => setToDateState(data)}
             />
           </div>
         </div>
         <div className={styles.buttonContainer}>
-          <Button text="Search" onClick={handleSearch} />
+          <Button text={i18n.t("report.search")} onClick={handleSearch} />
         </div>
         <div className={styles.divider}></div>
       </div>

@@ -416,5 +416,10 @@
   },
   "languageSelector": {
     "label": "Byt språk"
+  },
+  "report": {
+    "fromDate": "Från datum",
+    "toDate": "Till datum",
+    "search": "Sök"
   }
 }
