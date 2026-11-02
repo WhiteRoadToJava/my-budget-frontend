@@ -369,7 +369,13 @@
     "close":"اغلاق",
     "ok":"موافق",
     "active":"نشط",
-    "archived":"ارشفة"
+    "archived":"ارشفة",
+    "confirmDelete":"تأكيد الحذف",
+    "confirm":"تأكيد",
+    "yes":"نعم",
+    "no":"لا",
+    "pause":"ايقاف",
+    "resume":"استئناف"
   },
 
 

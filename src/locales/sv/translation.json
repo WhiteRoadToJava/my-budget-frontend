@@ -359,7 +359,13 @@
     "close":"Stäng",
     "ok":"OK",
     "active":"Aktiv",
-    "archived":"ِArkivera"
+    "archived":"ِArkivera",
+    "confirmDelete":"Bekräfta borttagning",
+    "confirm":"Bekräfta",
+    "yes":"Ja",
+    "no":"Nej",
+    "pause":"Pausa",
+    "resume":"Återuppta"
   },
   "currency":{
     "usd":"USD",
