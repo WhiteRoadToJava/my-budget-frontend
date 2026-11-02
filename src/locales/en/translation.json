@@ -363,6 +363,14 @@
 
   "debts":{
 
+    "lockedHint":"Direction and currency can not change after movements were added.",
+
+    "remainingHint":"Remaining today: {{amount}} {{currency}}",
+
+    "noAccountInCurrency":"You have no active account in {{currency}}.",
+
+    "validation":{"nameRequired": "Name is required.", "directionRequired": "Choose a direction.", "currencyRequired": "Choose a currency.", "rateRange": "Interest must be between 0 and 100.", "startDateRequired": "Choose a start date.", "noFutureDate": "The date can not be in the future.", "typeRequired": "Choose a type.", "amountPositive": "Amount must be greater than zero.", "dateRequired": "Choose a date.", "beforeStart": "The date is before the start of the debt.", "accountRequired": "Choose an account.", "repaymentTooBig": "The repayment is more than what is owed.", "lockedAfterMovements": "Direction and currency can not change after movements were added.", "accountArchived": "The account is archived.", "currencyMismatch": "The account must have the same currency as the debt."},
+
     "type":"Type",
 
     "interestPaid":"Interest paid",
