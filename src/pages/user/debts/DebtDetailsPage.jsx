@@ -3,12 +3,15 @@ import { parseISO } from "date-fns";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { deleteDebt, deleteDebtMovement, getDebt } from "../../../api/debtService";
+import { debtErrorKey } from "../../../utils/debts/debtForms";
 import i18n from "../../../configuration/i18n";
 import styles from "../../../styles/components/debts/debtDetails.module.scss";
 import DebtSummaryCards from "../../../components/debts/DebtSummaryCards";
 import DebtMovementsTable from "../../../components/debts/DebtMovementsTable";
 import DeleteConfirmation from "../../../components/modals/DeleteConfirmation";
 import Button from "../../../components/btns/Button";
+import DebtFormModal from "../../../components/debts/DebtFormModal";
+import MovementFormModal from "../../../components/debts/MovementFormModal";
 
 const COMPOUNDING = {
   NONE: "debts.compoundingNone",
@@ -23,6 +26,8 @@ const DebtDetailsPage = () => {
   const [movementToDelete, setMovementToDelete] = useState(null);
   const [confirmDeleteDebt, setConfirmDeleteDebt] = useState(false);
   const [error, setError] = useState(null);
+  const [showEdit, setShowEdit] = useState(false);
+  const [showAddMovement, setShowAddMovement] = useState(false);
 
   const { data, isLoading, isError } = useQuery({
     queryKey: ["debts", debtId],
@@ -44,9 +49,10 @@ const DebtDetailsPage = () => {
       setMovementToDelete(null);
       setError(null);
     },
-    onError: () => {
+    onError: (err) => {
       setMovementToDelete(null);
-      setError(i18n.t("debts.errorDeleteMovement"));
+      // e.g. deleting a disbursement would leave a later repayment bigger than the debt
+      setError(i18n.t(debtErrorKey(err, "debts.errorDeleteMovement")));
     },
   });
 
@@ -101,6 +107,7 @@ const DebtDetailsPage = () => {
         </div>
         <div className={styles.actions}>
           <span className={styles.badge} data-direction={debt.direction}>{directionLabel}</span>
+          <Button variant="edit-outlined" text={i18n.t("buttons.edit")} onClick={() => setShowEdit(true)} />
           <Button
             variant="delete-outlined"
             text={i18n.t("buttons.delete")}
@@ -125,13 +132,27 @@ const DebtDetailsPage = () => {
 
       {debt.note && <p className={styles.subtitle}>{debt.note}</p>}
 
-      <h3 className={styles.sectionTitle}>{i18n.t("debts.movements")}</h3>
+      <div className={styles.header}>
+        <h3 className={styles.sectionTitle}>{i18n.t("debts.movements")}</h3>
+        <Button text={i18n.t("debts.addMovement")} onClick={() => setShowAddMovement(true)} />
+      </div>
       <DebtMovementsTable
         movements={movements}
         currency={debt.currency}
         onDelete={setMovementToDelete}
         deletingId={deleteMovementMutation.isPending ? movementToDelete?.id : null}
       />
+
+      {showEdit && (
+        <DebtFormModal
+          debt={debt}
+          hasMovements={movements.length > 0}
+          onClose={() => setShowEdit(false)}
+        />
+      )}
+      {showAddMovement && (
+        <MovementFormModal debt={debt} onClose={() => setShowAddMovement(false)} />
+      )}
 
       <DeleteConfirmation
         isOpen={!!movementToDelete}

@@ -352,6 +352,14 @@
 
   "debts":{
 
+    "lockedHint":"لا يمكن تغيير الاتجاه والعملة بعد إضافة حركات.",
+
+    "remainingHint":"المتبقي اليوم: {{amount}} {{currency}}",
+
+    "noAccountInCurrency":"لا يوجد لديك حساب نشط بعملة {{currency}}.",
+
+    "validation":{"nameRequired": "الاسم مطلوب.", "directionRequired": "اختر الاتجاه.", "currencyRequired": "اختر العملة.", "rateRange": "يجب أن تكون الفائدة بين 0 و100.", "startDateRequired": "اختر تاريخ البداية.", "noFutureDate": "لا يمكن أن يكون التاريخ في المستقبل.", "typeRequired": "اختر النوع.", "amountPositive": "يجب أن يكون المبلغ أكبر من صفر.", "dateRequired": "اختر التاريخ.", "beforeStart": "التاريخ قبل بداية الدين.", "accountRequired": "اختر الحساب.", "repaymentTooBig": "السداد أكبر من المبلغ المستحق.", "lockedAfterMovements": "لا يمكن تغيير الاتجاه والعملة بعد إضافة حركات.", "accountArchived": "الحساب مؤرشف.", "currencyMismatch": "يجب أن تكون عملة الحساب مثل عملة الدين."},
+
     "type":"النوع",
 
     "interestPaid":"الفائدة المدفوعة",

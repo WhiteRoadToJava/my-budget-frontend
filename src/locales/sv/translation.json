@@ -342,6 +342,14 @@
 
   "debts":{
 
+    "lockedHint":"Riktning och valuta kan inte ändras efter att transaktioner lagts till.",
+
+    "remainingHint":"Kvar i dag: {{amount}} {{currency}}",
+
+    "noAccountInCurrency":"Du har inget aktivt konto i {{currency}}.",
+
+    "validation":{"nameRequired": "Namn krävs.", "directionRequired": "Välj riktning.", "currencyRequired": "Välj valuta.", "rateRange": "Räntan måste vara mellan 0 och 100.", "startDateRequired": "Välj startdatum.", "noFutureDate": "Datumet kan inte vara i framtiden.", "typeRequired": "Välj typ.", "amountPositive": "Beloppet måste vara större än noll.", "dateRequired": "Välj datum.", "beforeStart": "Datumet är före skuldens start.", "accountRequired": "Välj konto.", "repaymentTooBig": "Återbetalningen är större än skulden.", "lockedAfterMovements": "Riktning och valuta kan inte ändras efter att transaktioner lagts till.", "accountArchived": "Kontot är arkiverat.", "currencyMismatch": "Kontot måste ha samma valuta som skulden."},
+
     "type":"Typ",
 
     "interestPaid":"Betald ränta",

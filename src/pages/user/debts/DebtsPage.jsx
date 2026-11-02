@@ -5,6 +5,8 @@ import i18n from "../../../configuration/i18n";
 import styles from "../../../styles/components/debts/debts.module.scss";
 import DebtsSummary from "../../../components/debts/DebtsSummary";
 import DebtCard from "../../../components/debts/DebtCard";
+import DebtFormModal from "../../../components/debts/DebtFormModal";
+import Button from "../../../components/btns/Button";
 import { filterDebts, sortDebts, summarizeDebts } from "../../../utils/debts/summarizeDebts";
 
 const FILTERS = [
@@ -15,6 +17,7 @@ const FILTERS = [
 
 const DebtsPage = () => {
   const [filter, setFilter] = useState("ALL");
+  const [showCreate, setShowCreate] = useState(false);
   const { data: debts = [], isLoading, isError } = useQuery({
     queryKey: ["debts"],
     queryFn: getDebts,
@@ -29,7 +32,10 @@ const DebtsPage = () => {
 
   return (
     <div className={styles.page}>
-      <h2 className={styles.title}>{i18n.t("debts.title")}</h2>
+      <div className={styles.pageHeader}>
+        <h2 className={styles.title}>{i18n.t("debts.title")}</h2>
+        <Button text={i18n.t("debts.addDebt")} onClick={() => setShowCreate(true)} />
+      </div>
 
       {debts.length === 0 ? (
         <p className={styles.empty}>{i18n.t("debts.empty")}</p>
@@ -62,6 +68,8 @@ const DebtsPage = () => {
           )}
         </>
       )}
+
+      {showCreate && <DebtFormModal onClose={() => setShowCreate(false)} />}
     </div>
   );
 };
