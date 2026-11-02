@@ -7,7 +7,6 @@ import { updateIncomse, getIncomseById } from "../../api/incomseService";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import i18n from "../../configuration/i18n";
 import Datepicker from "../inputs/Datepicker";
-import { imagesUpload } from "../../api/upload";
 import { ImagePicker } from "../ImagePicker";
 
 const UpdateIncomse = ({ isOpen, isClose, incomse }) => {

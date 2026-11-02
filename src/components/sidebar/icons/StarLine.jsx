@@ -34,7 +34,7 @@ const StarLine = ({ children, starPosition = 0.5, className = "" }) => {
   }, []);
 
   return (
-    <div ref={containerRef} className={`${styles.flexDisplay} ${styles.className}`}>
+    <div ref={containerRef} className={`${styles.flexDisplay} ${className}`}>
       <svg
         width={10}
         height={height}

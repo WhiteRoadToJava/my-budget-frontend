@@ -7,7 +7,6 @@ import { updateExpense, getExpenseById } from "../../api/expenseService";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import i18n from "../../configuration/i18n";
 import Datepicker from "../inputs/Datepicker";
-import { imagesUpload } from "../../api/upload";
 import { ImagePicker } from "../ImagePicker";
 
 const UpdateExpense = ({ isOpen, isClose, expense }) => {

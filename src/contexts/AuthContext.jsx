@@ -15,12 +15,11 @@ export const AuthProvider = ({ children }) => {
 
  const checkAuthStatus = async () => {
   try {
-    const token = localStorage.getItem("token");
     const response = await api.get("/auth/check", {
       withCredentials: true,
     });
     setCurrentUser(response.data);
-    } catch (error) {
+    } catch {
       setCurrentUser(null);
       localStorage.removeItem("token"); // ← امسح الـ token إذا انتهت صلاحيته
     } finally {

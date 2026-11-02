@@ -29,7 +29,9 @@ import ReportPage from "./pages/user/ReportPage.jsx";
 
 function App() {
   useEffect(() => {
-    i18n.changeLanguage(localStorage.getItem("language") || "en");
+    // "sw" was stored by an older version of the language selector
+    const stored = localStorage.getItem("language") || "en";
+    i18n.changeLanguage(stored === "sw" ? "sv" : stored);
   }, []);
   
   return (
