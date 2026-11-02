@@ -10,30 +10,26 @@ import Income from "./pages/user/incomes/Income.jsx";
 import UserDashboard from "./pages/user/UserDashboard.jsx";
 import ProtectedRoute from "./components/routing/ProtectedRoute.jsx";
 import AdminLayout from "./components/admin/AdminLayout.jsx";
-import UserLyout from "./components/user/UserLyout.jsx";
 import Account from "./pages/user/accounts/Account.jsx";
 import AccountsPage from "./pages/user/AccountsPage.jsx";
 import SettingPage from "./pages/user/setting/SettingPage.jsx";
 import AllTransactions from "./pages/user/transactions/AllTransactions.jsx";
 import SchedulePage from "./pages/user/SchedulePage.jsx";
-import RapportPage from "./pages/user/RapportPage.jsx";
 import CalendarPage from "./pages/user/CalendarPage.jsx";
 import ActivateAccount from "./pages/auth/ActivateAccount.jsx";
+import UserLayout from "./components/user/UserLayout.jsx";
 import i18n from "./configuration/i18n.js";
 import { useEffect } from "react";
 import ResetPassword from "./pages/auth/ResetPassword.jsx";
+import ReportPage from "./pages/user/ReportPage.jsx";
 
 
 
 
 
 function App() {
-
   useEffect(() => {
-    const language = localStorage.getItem("language") || "en";
-    i18n.changeLanguage(language);
-    document.documentElement.dir = language === "ar" ? "rtl" : "ltr";
-    document.documentElement.lang = language;
+    i18n.changeLanguage(localStorage.getItem("language") || "en");
   }, []);
   
   return (
@@ -64,7 +60,7 @@ function App() {
                 </Route>
               </Route>
               <Route element={<ProtectedRoute requiredRoles={["USER"]} />}>
-                <Route element={<UserLyout />}>
+                <Route element={<UserLayout />}>
                   <Route path="/user" element={<UserDashboard />} />
                   <Route path="/user/accounts" element={<Account />} />
                   <Route path="/user/expenses" element={<Expense />} />
@@ -92,7 +88,7 @@ function App() {
                   />
                   <Route 
                   path="/user/accounts/search"
-                  element={<RapportPage /> }
+                  element={<ReportPage /> }
                   />
                 </Route>
               </Route>

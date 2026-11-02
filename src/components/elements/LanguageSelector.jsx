@@ -8,7 +8,7 @@ const languages = [
     code: "ar",
     label: "Arabic",
     native: "العربية",
-    flag: flags.saudiAribian_flag,
+    flag: flags.saudiArabian_flag,
     dir: "rtl",
   },
   {
@@ -20,7 +20,7 @@ const languages = [
   },
 
   {
-    code: "sw",
+    code: "sv",
     label: "swedish",
     native: "svenska",
     flag: flags.swedish_flag,

@@ -52,7 +52,7 @@
     "incomes": "الإيرادات",
     "transactions": "المعاملات",
     "schedule":"جدولة التحويلات",
-    "rapports":"التقارير",
+    "reports":"التقارير",
     "calendar": "التقويم",
     "settings": "الإعدادات"
   },
@@ -189,6 +189,7 @@
     "title":"المعاملات"
   },
   "account":{
+    "accountdeleted":"حساب محذوف",
     "totalBalance":"الرصيد الكلي:",
     "date":"التاريخ",
     "category":"الفئة",
@@ -320,6 +321,8 @@
     "updatedAt":"تاريخ التحديث"
   },
   "scheduleInfo":{
+    "active":"نشط",
+    "paused":"متوقف مؤقتاً",
     "title":"تفاصيل الجدول",
     "account":"الحساب",
     "sourceAmount":"المبلغ المصدر",
@@ -377,8 +380,6 @@
     "pause":"ايقاف",
     "resume":"استئناف"
   },
-
-
   "currency":{
     "usd":"USD",
     "eur":"EUR",
@@ -426,5 +427,10 @@
   },
   "languageSelector": {
     "label": "تغيير اللغة"
+  },
+  "report": {
+    "fromDate": "من تاريخ",
+    "toDate": "إلى تاريخ",
+    "search": "بحث"
   }
 }

@@ -1,14 +1,14 @@
 import React, { useState, useMemo } from "react";
 import Row from "./Row";
-import styles from "../../styles/rapport/rapport.module.scss";
+import styles from "../../styles/report/report.module.scss";
 import Datepicker from "../inputs/Datepicker";
 import Button from "../btns/Button";
 import sortingTransactions from "../../utils/sorting";
 import i18n from "../../configuration/i18n";
 import Modal from "../modals/Modal";
-import { getTransactionsBetweenTwoDates } from "../../api/rapportService";
+import { getTransactionsBetweenTwoDates } from "../../api/reportService";
 
-const RapportComponent = () => {
+const ReportComponent = () => {
   const [fromDate, setFromDateState] = useState(null);
   const [toDate, setToDateState] = useState(null);
   const [data, setData] = useState([]);
@@ -17,12 +17,13 @@ const RapportComponent = () => {
   const [error, setError] = useState(null);
 
   const handleSearch = async () => {
-    if (fromDate && toDate) {
+    if(fromDate && toDate){
       setIsLoading(true);
-      getTransactionsBetweenTwoDates(fromDate, toDate);
+      const transactions = await getTransactionsBetweenTwoDates(fromDate, toDate);
+      setData(transactions);
       setIsLoading(false);
-      try {
-        await search();
+    try {
+      await search();
       } catch (err) {
         setError(i18n.t("messages.search_error"));
       } finally {
@@ -37,32 +38,32 @@ const RapportComponent = () => {
 
   return (
     <div>
-      <h2>Rapport</h2>
+      <h2>report</h2>
       <div className={styles.header}>
         <div className={styles.header}>
           <div>
-            <p>Fromt Date:</p>
+            <p>{i18n.t("report.fromDate")}</p>
             <Datepicker
-              label="From: "
+              label={i18n.t("labels.fromDate")}
               value={fromDate}
               onChange={(data) => setFromDateState(data)}
             />
           </div>
           <div>
-            <p>To Date:</p>
+            <p>{i18n.t("report.toDate")}</p>
             <Datepicker
-              label="To: "
+              label={i18n.t("report.toDate")}
               value={toDate}
               onChange={(data) => setToDateState(data)}
             />
           </div>
         </div>
         <div className={styles.buttonContainer}>
-          <Button text="Search" onClick={handleSearch} />
+          <Button text={i18n.t("report.search")} onClick={handleSearch} />
         </div>
         <div className={styles.divider}></div>
       </div>
-      {/* Render the rapport data here */}
+      {/* Render the report data here */}
       <div>
         {filteredData.length > 0 ? (
           filteredData.map((item, index) => <Row key={index} item={item} />)
@@ -87,4 +88,4 @@ const RapportComponent = () => {
   );
 };
 
-export default RapportComponent;
+export default ReportComponent;

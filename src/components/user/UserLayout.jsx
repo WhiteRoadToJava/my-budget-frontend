@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
-import Sidebar from "../sidebar/Sidebar";
+import Sidebar from "../sidebar/Sidebar.jsx";
 import { getUserMenuItems } from "../../utils/user/getUserMenuItem.jsx";
 import i18n from "../../configuration/i18n.js";
 import NavBar from "../NavBar.jsx";
