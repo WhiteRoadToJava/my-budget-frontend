@@ -55,17 +55,9 @@ const UpdateTransfer = ({ isOpen, isClose, accounts, transfer }) => {
     return accountsList.find((acc) => acc.id === id)?.name || i18n.t("account.accountdeleted");
   };
 
-  // تصفية القوائم لمنع اختيار نفس الحساب
+  // both account fields are read-only in this form, so only their names are needed
   const currentSourceLabel = getAccountNameById(transferData.sourceAccount);
   const currentDestLabel = getAccountNameById(transferData.destinationAccount);
-
-  const filteredSourceList = accountsList
-    .filter((acc) => acc.name !== currentDestLabel)
-    .map((acc) => acc.name);
-
-  const filteredDestinationList = accountsList
-    .filter((acc) => acc.name !== currentSourceLabel)
-    .map((acc) => acc.name);
 
   // 3. معالج المدخلات الديناميكي
   const handleInputChange = (e) => {
@@ -101,10 +93,10 @@ const UpdateTransfer = ({ isOpen, isClose, accounts, transfer }) => {
       queryClient.invalidateQueries({ queryKey: ["accounts"] });
       isClose();
     },
-    onError: (err) => {
+    onError: () => {
       setError({
         hasError: true,
-        message: i18n.t("masseges.errorUpdateTransfer")
+        message: i18n.t("messages.errorUpdateTransfer")
       });
     },
   });

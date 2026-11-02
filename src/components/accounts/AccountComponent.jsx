@@ -7,7 +7,6 @@ import PlusIcon from "../icons/btns/PlusIcon";
 import CreateAccount from "./CreateAccount";
 import SearchInput from "../inputs/SearchInput";
 import i18n from "../../configuration/i18n";
-import { ar } from "date-fns/locale";
 
 const AccountComponent = ({ accounts }) => {
   const [openCreateAccount, setOpenCreateAccount] = useState(false);

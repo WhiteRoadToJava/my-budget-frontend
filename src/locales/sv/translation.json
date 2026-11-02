@@ -122,6 +122,7 @@
     "lastUpdate": "Last update"
   },
   "messages": {
+    "errorUpdateTransfer":"Det gick inte att uppdatera överföringen. Försök igen.",
     "success": "Ett återställningslänk har skickats till",
     "loadingError": "Error loading transactions: ",
     "loading":"Laddar transaktioner...",

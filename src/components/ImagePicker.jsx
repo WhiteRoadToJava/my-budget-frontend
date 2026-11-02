@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { imagesUpload } from "../api/upload";
 import { icons } from "../assiets/assiits";
 import styles from "../styles/ImagePicker.module.scss";

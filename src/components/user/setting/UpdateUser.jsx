@@ -3,7 +3,7 @@ import styles from "../../../styles/components/user/setting/updateUser.module.sc
 import Modal from "../../modals/Modal";
 import FormInput from "../../inputs/FormInput";
 import Button from "../../btns/Button";
-import { updateUser, getUser } from "../../../api/userService";
+import { updateUser } from "../../../api/userService";
 import SuccessConfirmaton from "../../modals/SuccessConfirmaton";
 import validteUpdateUser from "../../../validators/validteUpdateUser";
 import NavBar from "../../NavBar";

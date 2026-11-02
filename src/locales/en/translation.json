@@ -122,6 +122,7 @@
     "lastUpdate": "Last update"
   },
   "messages": {
+    "errorUpdateTransfer":"Failed to update transfer. Please try again.",
     "success": "A password reset link has been sent to",
     "loadingError": "Error loading transactions: ",
     "loading": "Loading transactions...",

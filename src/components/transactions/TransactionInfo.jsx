@@ -17,7 +17,6 @@ const TransactionInfo = ({ isOpen, onClose, accounts, transaction }) => {
   const queryClient = useQueryClient();
   const [openUpdateTransfer, setOpenUpdateTransfer] = useState(false);
   const [openUpdateIncome, setOpenUpdateIncome] = useState(false);
-  const [openUpdateExpense, setOpenUpdateExpense] = useState(false);
   const [openConfirmDelete, setOpenConfirmDelete] = useState(false);
   const [updateExpense, setUpdateExpense] = useState(false);
   const [error, setError] = useState({ hasError: false, message: "" });

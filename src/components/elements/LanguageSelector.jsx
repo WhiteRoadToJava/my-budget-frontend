@@ -34,9 +34,8 @@ const LanguageSelector = () => {
     languages.find((l) => l.code === i18n.language) ?? languages[0];
 
   const handleSelect = (lang) => {
+    // direction and lang attribute follow from the languageChanged listener in configuration/i18n.js
     i18n.changeLanguage(lang.code);
-    document.documentElement.dir = lang.dir;
-    document.documentElement.lang = lang.code;
     localStorage.setItem("language", lang.code);
     setOpen(false);
   };
