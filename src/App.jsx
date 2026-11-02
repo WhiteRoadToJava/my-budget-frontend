@@ -28,12 +28,8 @@ import ReportPage from "./pages/user/ReportPage.jsx";
 
 
 function App() {
-
   useEffect(() => {
-    const language = localStorage.getItem("language") || "en";
-    i18n.changeLanguage(language);
-    document.documentElement.dir = language === "ar" ? "rtl" : "ltr";
-    document.documentElement.lang = language;
+    i18n.changeLanguage(localStorage.getItem("language") || "en");
   }, []);
   
   return (

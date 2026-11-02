@@ -17,5 +17,11 @@ i18n.use(initReactI18next).init({
   },
 });
 
+const applyDocumentLanguage = (language) => {
+  document.documentElement.lang = language;
+  document.documentElement.dir = language === "ar" ? "rtl" : "ltr";
+};
+i18n.on("languageChanged", applyDocumentLanguage);
+
 export default i18n;
 
