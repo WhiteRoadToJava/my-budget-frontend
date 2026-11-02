@@ -352,6 +352,18 @@
 
   "debts":{
 
+    "type":"النوع",
+
+    "interestPaid":"الفائدة المدفوعة",
+
+    "asOf":"محسوب بتاريخ {{date}}",
+
+    "recorded":"مسجَّل",
+
+    "deleteMovement":"حذف الحركة",
+
+    "errorDeleteMovement":"تعذّر حذف الحركة.",
+
     "summary":"الملخص",
 
     "all":"الكل",

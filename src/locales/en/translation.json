@@ -363,6 +363,18 @@
 
   "debts":{
 
+    "type":"Type",
+
+    "interestPaid":"Interest paid",
+
+    "asOf":"Calculated on {{date}}",
+
+    "recorded":"recorded",
+
+    "deleteMovement":"Delete movement",
+
+    "errorDeleteMovement":"Could not delete the movement.",
+
     "summary":"Summary",
 
     "all":"All",
