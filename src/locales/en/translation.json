@@ -363,6 +363,8 @@
 
   "debts":{
 
+    "openDebt":"Open debt",
+
     "lockedHint":"Direction and currency can not change after movements were added.",
 
     "remainingHint":"Remaining today: {{amount}} {{currency}}",
@@ -535,6 +537,10 @@
   },
 
   "transactionDetails": {
+
+    "debtIn":"Debt in",
+
+    "debtOut":"Debt out",
     "amount": "Amount",
     "account": "Account",
     "sourceAccount": "Source Account",

@@ -352,6 +352,8 @@
 
   "debts":{
 
+    "openDebt":"فتح الدين",
+
     "lockedHint":"لا يمكن تغيير الاتجاه والعملة بعد إضافة حركات.",
 
     "remainingHint":"المتبقي اليوم: {{amount}} {{currency}}",
@@ -524,6 +526,8 @@
   },
   "transactionDetails":
   {
+    "debtIn":"دين داخل",
+    "debtOut":"دين خارج",
     "amount":"المبلغ",
     "account":"الحساب",
     "sourceAccount":"الحساب المصدر",

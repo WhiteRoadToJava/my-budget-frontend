@@ -24,6 +24,10 @@
   &[data-type="out-transfer"] {
     border-left: 10px solid variable.$color-blue;
   }
+  &[data-type="debt-in"],
+  &[data-type="debt-out"] {
+    border-left: 10px solid variable.$color-purple;
+  }
 
   p {
     margin: 0;
@@ -41,5 +45,9 @@
   }
   &[data-type="out-transfer"] {
     color: variable.$hover-cancel;
+  }
+  &[data-type="debt-in"],
+  &[data-type="debt-out"] {
+    color: variable.$color-purple;
   }
 }

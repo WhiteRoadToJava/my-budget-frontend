@@ -342,6 +342,8 @@
 
   "debts":{
 
+    "openDebt":"Öppna skuld",
+
     "lockedHint":"Riktning och valuta kan inte ändras efter att transaktioner lagts till.",
 
     "remainingHint":"Kvar i dag: {{amount}} {{currency}}",
@@ -515,6 +517,8 @@
   },
   "transactionDetails":
   {
+    "debtIn":"Skuld in",
+    "debtOut":"Skuld ut",
     "amount":"Belopp",
     "account":"Konto",
     "sourceAccount":"Källakonto",

@@ -1,28 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useMemo } from "react";
 import styles from "../../styles/components/accounts/transactionRow.module.scss";
 import { formatNumber } from "../../utils/formating";
-import { incomseCategoryList } from "../../assiets/categories/assits";
-import { expenseCategoryList } from "../../assiets/categories/assits";
+import { findCategory } from "../../assiets/categories/assits";
+import { categoryName, typeLabelKey } from "../../utils/transactionTypes";
 import { onEnterOrSpace } from "../../utils/accessibility";
+import i18n from "../../configuration/i18n";
+
 const Row = ({ transaction, onClick }) => {
-  const [category, setCategory] = useState(null);
-  useEffect(() => {
-    // Deliberate: pure derivation from `transaction` + static category lists.
-    // Could become useMemo instead of local state; tracked as a follow-up
-    // cleanup rather than changed here to keep this fix scoped to CI unblocking.
-    if (transaction.type === "incomse") {
-      const category = incomseCategoryList.find(
-        (item) => item.id === Number(transaction.category),
-      );
-      // eslint-disable-next-line react-hooks/set-state-in-effect -- see note above
-      setCategory(category);
-    } else if (transaction.type === "expense") {
-      const category = expenseCategoryList.find(
-        (item) => item.id === Number(transaction.category),
-      );
-      setCategory(category);
-    }
-  }, [transaction]);
+  // derived from the transaction; findCategory also knows "Debt" and debt-in / debt-out
+  const category = useMemo(
+    () => findCategory(transaction.category, transaction.type),
+    [transaction.category, transaction.type],
+  );
+  const typeKey = typeLabelKey(transaction.type);
+
   return (
     <div
       className={styles.rowContainer}
@@ -33,10 +24,10 @@ const Row = ({ transaction, onClick }) => {
       onKeyDown={onEnterOrSpace(onClick)}
     >
       <p>{formatNumber(transaction.amount)}</p>
-      <p>{category?.name}</p>
+      <p>{categoryName(category)}</p>
       <p>{new Date(transaction.createdAt).toLocaleDateString()}</p>
       <p className={styles.transactionType} data-type={transaction.type}>
-        {transaction.type}
+        {typeKey ? i18n.t(typeKey) : transaction.type}
       </p>
     </div>
   );
