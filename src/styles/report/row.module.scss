@@ -25,6 +25,10 @@
   &[data-type="out-transfer"] {
     border-left: 10px solid variable.$color-blue;
   }
+  &[data-type="debt-in"],
+  &[data-type="debt-out"] {
+    border-left: 10px solid variable.$color-purple;
+  }
 
   p {
     margin: 0;

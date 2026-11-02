@@ -12,6 +12,13 @@ import { deleteIncomse } from "../../api/incomseService";
 import { deleteExpense } from "../../api/expenseService";
 import { deleteTransfer } from "../../api/transferServce";
 import i18n from "../../configuration/i18n";
+import { useNavigate } from "react-router-dom";
+import { findCategory } from "../../assiets/categories/assits";
+import { belongsToDebt, categoryName, typeLabelKey } from "../../utils/transactionTypes";
+
+// 409: the record was created by a debt movement and can only change from the debt page
+const deleteErrorMessage = (err, fallbackKey) =>
+  i18n.t(err?.response?.status === 409 ? "debts.errorDebtRecord" : fallbackKey);
 
 const TransactionInfo = ({ isOpen, onClose, accounts, transaction }) => {
   const queryClient = useQueryClient();
@@ -22,6 +29,10 @@ const TransactionInfo = ({ isOpen, onClose, accounts, transaction }) => {
   const [error, setError] = useState({ hasError: false, message: "" });
   const sourceAccountName = transaction?.sourceAccount?.name;
   const destinationAccountName = transaction?.destinationAccount?.name;
+  const navigate = useNavigate();
+  const isDebtRecord = belongsToDebt(transaction);
+  const category = findCategory(transaction?.category, transaction?.type);
+  const typeKey = typeLabelKey(transaction?.type);
 
   const deleteMutation = useMutation({
     mutationFn: (incomseId) => deleteIncomse(incomseId),
@@ -31,12 +42,11 @@ const TransactionInfo = ({ isOpen, onClose, accounts, transaction }) => {
       onClose();
       setOpenConfirmDelete(false);
     },
-    onError: () => {
+    onError: (err) => {
+      setOpenConfirmDelete(false);
       setError({
         hasError: true,
-        message: i18n.t("masseges.errorDeleteIncomse", {
-          defaultMessage: "Failed to delete incomse. Please try again.",
-        }),
+        message: deleteErrorMessage(err, "messages.errorDeleteIncomse"),
       });
     },
   });
@@ -49,11 +59,11 @@ const TransactionInfo = ({ isOpen, onClose, accounts, transaction }) => {
       onClose();
       setOpenConfirmDelete(false);
     },
-    onError: () => {
+    onError: (err) => {
+      setOpenConfirmDelete(false);
       setError({
         hasError: true,
-        message: i18n.t("masseges.errorDeleteExpense"),
-        defaultMessage: "Failed to delete expense. Please try again.",
+        message: deleteErrorMessage(err, "messages.errorDeleteExpenses"),
       });
     },
   });
@@ -68,8 +78,7 @@ const TransactionInfo = ({ isOpen, onClose, accounts, transaction }) => {
     onError: () => {
       setError({
         hasError: true,
-        message: i18n.t("masseges.errorDeleteTransfers"),
-        defaultMessage: "Failed to delete transfer. Please try again.",
+        message: i18n.t("messages.errorDeleteTransfers"),
       });
     },
   });
@@ -114,6 +123,23 @@ const TransactionInfo = ({ isOpen, onClose, accounts, transaction }) => {
     }
   };
 
+  // debt records are changed from the debt page: offer a way there instead of edit/delete
+  const openDebt = () => {
+    onClose();
+    navigate(transaction?.debtId ? `/user/debts/${transaction.debtId}` : "/user/debts");
+  };
+
+  const debtMenuItems = [
+    <Button key="open-debt" text={i18n.t("debts.openDebt")} type="button" onClick={openDebt} />,
+    <Button
+      key="close"
+      variant="cancel"
+      text={i18n.t("buttons.close")}
+      type="button"
+      onClick={onClose}
+    />,
+  ];
+
   const buttonMenuItems = [
     <Button
       key="edit"
@@ -149,15 +175,7 @@ const TransactionInfo = ({ isOpen, onClose, accounts, transaction }) => {
           <div className={styles.transactionTitle} data-type={transaction.type}>
             <h2 className={styles.transactionTitleText}>
               {i18n.t("transactionDetails.transaction")}{" "}
-              {transaction.type === "incomse"
-                ? i18n.t("transactionDetails.incomse")
-                : transaction.type === "expense"
-                  ? i18n.t("transactionDetails.expense")
-                  : transaction.type === "in-transfer"
-                    ? i18n.t("transactionDetails.inTransfer")
-                    : transaction.type === "out-transfer"
-                      ? i18n.t("transactionDetails.outTransfer")
-                      : ""}{" "}
+              {typeKey ? i18n.t(typeKey) : ""}{" "}
               {i18n.t("transactionDetails.details")}
             </h2>
           </div>
@@ -165,8 +183,18 @@ const TransactionInfo = ({ isOpen, onClose, accounts, transaction }) => {
           <div className={styles.divider}></div>
 
           <div className={styles.menuContainer}>
-            <ToggleMenu menuList={buttonMenuItems} />
+            <ToggleMenu menuList={isDebtRecord ? debtMenuItems : buttonMenuItems} />
           </div>
+          {isDebtRecord && (
+            <p className={styles.transactionDetail} role="note">
+              {i18n.t("debts.errorDebtRecord")}
+            </p>
+          )}
+          {category && (
+            <p className={styles.transactionDetail}>
+              <strong>{i18n.t("transactionDetails.category")}:</strong> {categoryName(category)}
+            </p>
+          )}
           <p className={styles.transactionDetail}>
             <strong>{i18n.t("transactionDetails.amount")}:</strong>{" "}
             {transaction?.amount
