@@ -16,7 +16,7 @@ const ScheduleInfo = ({ isOpen, onClose, accounts, schedule }) => {
   const [openConfirmDelete, setOpenConfirmDelete] = useState(false);
   const [error, setError] = useState({ hasError: false, message: "" });
   const accountName = schedule?.sourceAccount?.name;
-  const deleteSchdule = useMutation({
+  const deleteSchedule = useMutation({
     mutationFn: (scheduleId) => deleteSchedule(scheduleId),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["schedules"] });
@@ -76,7 +76,7 @@ const ScheduleInfo = ({ isOpen, onClose, accounts, schedule }) => {
   };
 
   const handleDelete = async () => {
-    deleteSchdule.mutate(schedule.id);
+    deleteSchedule.mutate(schedule.id);
   };
 
   const buttonMenuItems = [
@@ -122,9 +122,6 @@ const ScheduleInfo = ({ isOpen, onClose, accounts, schedule }) => {
           </div>
 
           <div className={styles.divider}></div>
-          <div>
-            <ToggleMenu menuList={buttonMenuItems} />
-          </div>
           <div className={styles.menuContainer}>
             <ToggleMenu menuList={buttonMenuItems} />
           </div>
@@ -170,7 +167,7 @@ const ScheduleInfo = ({ isOpen, onClose, accounts, schedule }) => {
           </div>
         </div>
       </Modal>
-      <UpdateSchedule sechuleId={schedule.id} schedule={schedule} />
+      <UpdateSchedule scheduleId={schedule.id} schedule={schedule} />
 
       <DeleteConfimation
         isOpen={openConfirmDelete}

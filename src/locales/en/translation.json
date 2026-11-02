@@ -380,7 +380,13 @@
     "close": "Close",
     "ok": "OK",
     "active":"Active",
-    "archived":"Archive"
+    "archived":"Archive",
+    "confirmDelete": "Confirm Delete",
+    "confirm": "Confirm",
+    "yes": "Yes",
+    "no": "No",
+    "pause": "Pause",
+    "resume": "Resume"
   },
   "currency": {
     "usd": "USD",
