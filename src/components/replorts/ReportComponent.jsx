@@ -1,14 +1,14 @@
 import React, { useState, useMemo } from "react";
 import Row from "./Row";
-import styles from "../../styles/rapport/rapport.module.scss";
+import styles from "../../styles/report/report.module.scss";
 import Datepicker from "../inputs/Datepicker";
 import Button from "../btns/Button";
 import sortingTransactions from "../../utils/sorting";
 import i18n from "../../configuration/i18n";
 import Modal from "../modals/Modal";
-import { getTransactionsBetweenTwoDates } from "../../api/rapportService";
+import { getTransactionsBetweenTwoDates } from "../../api/reportService";
 
-const RapportComponent = () => {
+const ReportComponent = () => {
   const [fromDate, setFromDateState] = useState(null);
   const [toDate, setToDateState] = useState(null);
   const [data, setData] = useState([]);
@@ -38,7 +38,7 @@ const RapportComponent = () => {
 
   return (
     <div>
-      <h2>Rapport</h2>
+      <h2>report</h2>
       <div className={styles.header}>
         <div className={styles.header}>
           <div>
@@ -63,7 +63,7 @@ const RapportComponent = () => {
         </div>
         <div className={styles.divider}></div>
       </div>
-      {/* Render the rapport data here */}
+      {/* Render the report data here */}
       <div>
         {filteredData.length > 0 ? (
           filteredData.map((item, index) => <Row key={index} item={item} />)
@@ -88,4 +88,4 @@ const RapportComponent = () => {
   );
 };
 
-export default RapportComponent;
+export default ReportComponent;

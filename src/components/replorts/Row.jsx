@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "../../styles/rapport/row.module.scss"
+import styles from "../../styles/report/row.module.scss"
 import { formatNumber } from "../../utils/formating";
 import { onEnterOrSpace } from "../../utils/accessibility";
 const Row = ({ item, onClick }) => {
