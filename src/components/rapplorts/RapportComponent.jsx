@@ -17,12 +17,13 @@ const RapportComponent = () => {
   const [error, setError] = useState(null);
 
   const handleSearch = async () => {
-    if (fromDate && toDate) {
+    if(fromDate && toDate){
       setIsLoading(true);
-      getTransactionsBetweenTwoDates(fromDate, toDate);
+      const transactions = await getTransactionsBetweenTwoDates(fromDate, toDate);
+      setData(transactions);
       setIsLoading(false);
-      try {
-        await search();
+    try {
+      await search();
       } catch (err) {
         setError(i18n.t("messages.search_error"));
       } finally {
@@ -41,17 +42,17 @@ const RapportComponent = () => {
       <div className={styles.header}>
         <div className={styles.header}>
           <div>
-            <p>Fromt Date:</p>
+            <p>{i18n.t("labels.fromDate")}</p>
             <Datepicker
-              label="From: "
+              label={i18n.t("labels.fromDate")}
               value={fromDate}
               onChange={(data) => setFromDateState(data)}
             />
           </div>
           <div>
-            <p>To Date:</p>
+            <p>{i18n.t("labels.toDate")}</p>
             <Datepicker
-              label="To: "
+              label={i18n.t("labels.toDate")}
               value={toDate}
               onChange={(data) => setToDateState(data)}
             />
