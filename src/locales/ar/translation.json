@@ -46,6 +46,7 @@
     "errorText": "ما قدرنا نفعّل حسابك دلوقتي. حاول مرة تانية بعد شوية."
   },
   "menu": {
+    "debts":"الديون",
     "overview": "نظرة عامة",
     "accounts": "الحسابات",
     "expenses": "المصاريف",
@@ -346,6 +347,104 @@
 
   },
   "updateTransaction":{
+
+  },
+
+  "debts":{
+
+    "title":"الديون",
+
+    "detailsTitle":"تفاصيل الدين",
+
+    "empty":"لا توجد ديون بعد.",
+
+    "loading":"جاري تحميل الديون...",
+
+    "loadError":"تعذّر تحميل الديون.",
+
+    "notFound":"لم يُعثر على هذا الدين.",
+
+    "backToList":"العودة إلى الديون",
+
+    "owedByMe":"عليّ",
+
+    "owedToMe":"لي",
+
+    "name":"الاسم",
+
+    "counterparty":"الطرف الآخر",
+
+    "direction":"الاتجاه",
+
+    "currency":"العملة",
+
+    "annualRate":"الفائدة السنوية (%)",
+
+    "compounding":"ضم الفائدة",
+
+    "compoundingNone":"بدون",
+
+    "compoundingMonthly":"شهرياً",
+
+    "compoundingYearly":"سنوياً",
+
+    "startDate":"تاريخ البداية",
+
+    "note":"ملاحظة",
+
+    "countInflowsAsIncome":"تسجيل المبالغ الداخلة كدخل",
+
+    "countOutflowsAsExpense":"تسجيل المبالغ الخارجة كمصروف",
+
+    "principal":"الأصل",
+
+    "accruedInterest":"الفائدة",
+
+    "totalOwed":"المتبقي",
+
+    "totalDisbursed":"إجمالي المبلغ",
+
+    "totalRepaid":"إجمالي المسدَّد",
+
+    "movements":"الحركات",
+
+    "noMovements":"لا توجد حركات بعد.",
+
+    "disbursement":"مبلغ جديد",
+
+    "repayment":"سداد",
+
+    "amount":"المبلغ",
+
+    "date":"التاريخ",
+
+    "account":"الحساب",
+
+    "description":"الوصف",
+
+    "interestPart":"جزء الفائدة",
+
+    "principalPart":"جزء الأصل",
+
+    "addDebt":"إضافة دين",
+
+    "editDebt":"تعديل الدين",
+
+    "addMovement":"إضافة حركة",
+
+    "errorSave":"تعذّر حفظ الدين.",
+
+    "errorDelete":"تعذّر حذف الدين.",
+
+    "errorHasMovements":"احذف حركات هذا الدين أولاً.",
+
+    "errorMovement":"تعذّر حفظ الحركة.",
+
+    "errorAccountHasDebt":"هذا الحساب عليه حركات دين ولا يمكن حذفه.",
+
+    "errorDebtRecord":"هذا السجل تابع لدين. عدّله من صفحة الدين.",
+
+    "category":"دين"
 
   },
 

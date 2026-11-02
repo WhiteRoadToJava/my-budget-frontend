@@ -46,6 +46,7 @@
     "errorText": "Vi kunde inte aktivera ditt konto just nu. Försök igen senare."
   },
   "menu": {
+    "debts":"Skulder",
     "overview": "Översikt",
     "accounts": "Konton",
     "expenses": "Utgifter",
@@ -336,6 +337,104 @@
 
   },
   "updateTransaction":{
+
+  },
+
+  "debts":{
+
+    "title":"Skulder",
+
+    "detailsTitle":"Skulddetaljer",
+
+    "empty":"Inga skulder än.",
+
+    "loading":"Laddar skulder...",
+
+    "loadError":"Det gick inte att ladda skulderna.",
+
+    "notFound":"Skulden hittades inte.",
+
+    "backToList":"Tillbaka till skulder",
+
+    "owedByMe":"Jag är skyldig",
+
+    "owedToMe":"Skyldig mig",
+
+    "name":"Namn",
+
+    "counterparty":"Motpart",
+
+    "direction":"Riktning",
+
+    "currency":"Valuta",
+
+    "annualRate":"Årsränta (%)",
+
+    "compounding":"Ränta läggs till",
+
+    "compoundingNone":"Aldrig",
+
+    "compoundingMonthly":"Månadsvis",
+
+    "compoundingYearly":"Årsvis",
+
+    "startDate":"Startdatum",
+
+    "note":"Anteckning",
+
+    "countInflowsAsIncome":"Registrera inbetalningar som inkomst",
+
+    "countOutflowsAsExpense":"Registrera utbetalningar som utgift",
+
+    "principal":"Kapital",
+
+    "accruedInterest":"Ränta",
+
+    "totalOwed":"Kvar att betala",
+
+    "totalDisbursed":"Totalt lånat / utlånat",
+
+    "totalRepaid":"Totalt återbetalt",
+
+    "movements":"Transaktioner",
+
+    "noMovements":"Inga transaktioner än.",
+
+    "disbursement":"Nytt belopp",
+
+    "repayment":"Återbetalning",
+
+    "amount":"Belopp",
+
+    "date":"Datum",
+
+    "account":"Konto",
+
+    "description":"Beskrivning",
+
+    "interestPart":"Räntedel",
+
+    "principalPart":"Kapitaldel",
+
+    "addDebt":"Lägg till skuld",
+
+    "editDebt":"Redigera skuld",
+
+    "addMovement":"Lägg till transaktion",
+
+    "errorSave":"Det gick inte att spara skulden.",
+
+    "errorDelete":"Det gick inte att ta bort skulden.",
+
+    "errorHasMovements":"Ta bort skuldens transaktioner först.",
+
+    "errorMovement":"Det gick inte att spara transaktionen.",
+
+    "errorAccountHasDebt":"Kontot har skuldtransaktioner och kan inte tas bort.",
+
+    "errorDebtRecord":"Posten hör till en skuld. Redigera den från skuldsidan.",
+
+    "category":"Skuld"
 
   },
 

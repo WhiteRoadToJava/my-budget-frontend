@@ -46,6 +46,7 @@
     "errorText": "We couldn't activate your account right now. Please try again later."
   },
   "menu": {
+    "debts":"Debts",
     "overview": "Overview",
     "accounts": "Accounts",
     "expenses": "Expenses",
@@ -359,6 +360,104 @@
   },
   "updateSchedule": {},
   "updateTransaction": {},
+
+  "debts":{
+
+    "title":"Debts",
+
+    "detailsTitle":"Debt details",
+
+    "empty":"No debts yet.",
+
+    "loading":"Loading debts...",
+
+    "loadError":"Could not load debts.",
+
+    "notFound":"This debt was not found.",
+
+    "backToList":"Back to debts",
+
+    "owedByMe":"I owe",
+
+    "owedToMe":"Owed to me",
+
+    "name":"Name",
+
+    "counterparty":"Counterparty",
+
+    "direction":"Direction",
+
+    "currency":"Currency",
+
+    "annualRate":"Annual interest (%)",
+
+    "compounding":"Interest added",
+
+    "compoundingNone":"Never",
+
+    "compoundingMonthly":"Monthly",
+
+    "compoundingYearly":"Yearly",
+
+    "startDate":"Start date",
+
+    "note":"Note",
+
+    "countInflowsAsIncome":"Record money in as income",
+
+    "countOutflowsAsExpense":"Record money out as expense",
+
+    "principal":"Principal",
+
+    "accruedInterest":"Interest",
+
+    "totalOwed":"Remaining",
+
+    "totalDisbursed":"Total borrowed / lent",
+
+    "totalRepaid":"Total repaid",
+
+    "movements":"Movements",
+
+    "noMovements":"No movements yet.",
+
+    "disbursement":"New amount",
+
+    "repayment":"Repayment",
+
+    "amount":"Amount",
+
+    "date":"Date",
+
+    "account":"Account",
+
+    "description":"Description",
+
+    "interestPart":"Interest part",
+
+    "principalPart":"Principal part",
+
+    "addDebt":"Add debt",
+
+    "editDebt":"Edit debt",
+
+    "addMovement":"Add movement",
+
+    "errorSave":"Could not save the debt.",
+
+    "errorDelete":"Could not delete the debt.",
+
+    "errorHasMovements":"Delete the movements of this debt first.",
+
+    "errorMovement":"Could not save the movement.",
+
+    "errorAccountHasDebt":"This account has debt movements and cannot be deleted.",
+
+    "errorDebtRecord":"This record belongs to a debt. Edit it from the debt page.",
+
+    "category":"Debt"
+
+  },
 
   "buttons": {
     "moreOptions": "More options",

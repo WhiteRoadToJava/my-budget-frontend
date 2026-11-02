@@ -2,6 +2,7 @@ import Calendar from "../../components/icons/calendar/Calendar.jsx";
 import Home from "../../components/icons/interface/Home";
 import FileCode from "../../components/icons/file_code/FolderCode";
 import SettingsIcon from "../../components/sidebar/icons/SettingsIcon";
+import Database from "../../components/icons/file_code/Database";
 import i18n from "../../configuration/i18n.js";
 
 export const getUserMenuItems = () => [   // ← now a function
@@ -10,6 +11,7 @@ export const getUserMenuItems = () => [   // ← now a function
   { label: i18n.t("menu.expenses"),     icon: <FileCode />,     link: "/user/expenses" },
   { label: i18n.t("menu.incomes"),      icon: <FileCode />,     link: "/user/incomes" },
   { label: i18n.t("menu.transactions"), icon: <FileCode />,     link: "/user/transactions" },
+  { label: i18n.t("menu.debts"),        icon: <Database />,     link: "/user/debts" },
   { label: i18n.t("menu.schedule"),     icon: <Calendar />,     link: "/user/schedule" },
   { label: i18n.t("menu.calendar"),     icon: <Calendar />,     link: "/user/calendar" },
   { label: i18n.t("menu.reports"),      icon: <FileCode />,     link: "/user/accounts/search" },
