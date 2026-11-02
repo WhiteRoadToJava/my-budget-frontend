@@ -1,0 +1,196 @@
+@use "../../variables" as variable;
+
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding: 1.5rem;
+  max-width: 1100px;
+}
+
+.back {
+  color: variable.$color-blue;
+  text-decoration: none;
+
+  &:hover,
+  &:focus-visible {
+    color: variable.$color-blue-hover;
+    text-decoration: underline;
+  }
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.subtitle {
+  color: variable.$color-text-muted;
+  margin: 0.25rem 0 0;
+}
+
+.badge {
+  font-size: 0.8rem;
+  padding: 0.15rem 0.6rem;
+  border-radius: variable.$radius-pill;
+  border: 1px solid variable.$color-border;
+
+  &[data-direction="OWED_BY_ME"] {
+    color: variable.$color-error;
+  }
+
+  &[data-direction="OWED_TO_ME"] {
+    color: variable.$color-success;
+  }
+}
+
+.actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+/* ---------- info and summary ---------- */
+
+.infoGrid,
+.summaryGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 0.75rem;
+}
+
+.infoItem,
+.summaryItem {
+  background: variable.$surface-1;
+  border: 1px solid variable.$color-border;
+  border-radius: variable.$radius-md;
+  padding: 0.75rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.label {
+  color: variable.$color-text-muted;
+  font-size: 0.85rem;
+}
+
+.value {
+  font-weight: bold;
+}
+
+.summaryItem[data-main="true"] {
+  border-color: variable.$color-border-strong;
+
+  .value {
+    font-size: 1.4rem;
+  }
+}
+
+.asOf {
+  color: variable.$color-text-muted;
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+/* ---------- movements ---------- */
+
+.sectionTitle {
+  font-size: 18px;
+  margin: 0;
+}
+
+.tableWrapper {
+  overflow-x: auto;
+  border: 1px solid variable.$color-border;
+  border-radius: variable.$radius-md;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 720px;
+
+  th,
+  td {
+    padding: 0.6rem 0.75rem;
+    text-align: start;
+    border-bottom: 1px solid variable.$color-border;
+    white-space: nowrap;
+  }
+
+  th {
+    color: variable.$color-text-muted;
+    font-weight: normal;
+    background: variable.$surface-1;
+  }
+
+  tbody tr:last-child td {
+    border-bottom: none;
+  }
+}
+
+.number {
+  text-align: end !important;
+  font-variant-numeric: tabular-nums;
+}
+
+.in {
+  color: variable.$color-success;
+}
+
+.out {
+  color: variable.$color-error;
+}
+
+.description {
+  white-space: normal !important;
+  color: variable.$color-text-gray;
+}
+
+.deleteButton {
+  background: none;
+  border: 1px solid variable.$color-border;
+  border-radius: variable.$radius-xs;
+  color: variable.$color-error;
+  padding: 0.2rem 0.6rem;
+  cursor: pointer;
+
+  &:hover,
+  &:focus-visible {
+    border-color: variable.$color-error;
+    outline: none;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: default;
+  }
+}
+
+.empty {
+  color: variable.$color-text-muted;
+}
+
+.error {
+  color: variable.$color-error;
+  margin: 0;
+}
+
+/* text for screen readers only */
+.visuallyHidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}

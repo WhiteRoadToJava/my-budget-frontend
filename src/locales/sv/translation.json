@@ -342,6 +342,18 @@
 
   "debts":{
 
+    "type":"Typ",
+
+    "interestPaid":"Betald ränta",
+
+    "asOf":"Beräknat {{date}}",
+
+    "recorded":"registrerad",
+
+    "deleteMovement":"Ta bort transaktion",
+
+    "errorDeleteMovement":"Det gick inte att ta bort transaktionen.",
+
     "summary":"Sammanfattning",
 
     "all":"Alla",
