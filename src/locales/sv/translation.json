@@ -295,7 +295,8 @@
     "category":"Kategori",
     "status":"Status",
     "nextExecutionDate":"Nästa körning",
-    "actions":"Handlar"
+    "actions":"Handlar",
+    "interval":"Interval"
   },
   "createTransaction":{
 
