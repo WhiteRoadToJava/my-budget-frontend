@@ -12,6 +12,11 @@ import DeleteConfirmation from "../../../components/modals/DeleteConfirmation";
 import Button from "../../../components/btns/Button";
 import DebtFormModal from "../../../components/debts/DebtFormModal";
 import MovementFormModal from "../../../components/debts/MovementFormModal";
+import DebtPaymentFormModal from "../../../components/debts/DebtPaymentFormModal";
+import DebtSchedulesList from "../../../components/debts/DebtSchedulesList";
+import ScheduleInfo from "../../../components/schedule/ScheduleInfo";
+import { getAllSchedule } from "../../../api/scheduleService";
+import { debtSchedulesOf } from "../../../utils/debts/debtSchedules";
 
 const COMPOUNDING = {
   NONE: "debts.compoundingNone",
@@ -28,10 +33,17 @@ const DebtDetailsPage = () => {
   const [error, setError] = useState(null);
   const [showEdit, setShowEdit] = useState(false);
   const [showAddMovement, setShowAddMovement] = useState(false);
+  const [showAddPayment, setShowAddPayment] = useState(false);
+  const [selectedSchedule, setSelectedSchedule] = useState(null);
 
   const { data, isLoading, isError } = useQuery({
     queryKey: ["debts", debtId],
     queryFn: () => getDebt(debtId),
+  });
+  // same query key as the schedules page, so both stay in sync
+  const { data: schedules = [] } = useQuery({
+    queryKey: ["schedules"],
+    queryFn: getAllSchedule,
   });
 
   // a movement changes the debt, the account balance and the transaction lists
@@ -84,6 +96,8 @@ const DebtDetailsPage = () => {
   }
 
   const { debt, movements = [] } = data;
+  const debtSchedules = debtSchedulesOf(schedules, debt.id);
+  const settled = Number(debt.summary?.totalOwed ?? 0) <= 0;
   const directionLabel =
     debt.direction === "OWED_BY_ME" ? i18n.t("debts.owedByMe") : i18n.t("debts.owedToMe");
 
@@ -141,6 +155,25 @@ const DebtDetailsPage = () => {
         currency={debt.currency}
         onDelete={setMovementToDelete}
         deletingId={deleteMovementMutation.isPending ? movementToDelete?.id : null}
+      />
+
+      <div className={styles.header}>
+        <h3 className={styles.sectionTitle}>{i18n.t("debts.recurringPayments")}</h3>
+        <Button
+          text={i18n.t("debts.recurringPayment")}
+          onClick={() => setShowAddPayment(true)}
+          disabled={settled}
+        />
+      </div>
+      <DebtSchedulesList schedules={debtSchedules} debt={debt} onSelect={setSelectedSchedule} />
+
+      {showAddPayment && (
+        <DebtPaymentFormModal debt={debt} onClose={() => setShowAddPayment(false)} />
+      )}
+      <ScheduleInfo
+        isOpen={!!selectedSchedule}
+        onClose={() => setSelectedSchedule(null)}
+        schedule={selectedSchedule || {}}
       />
 
       {showEdit && (

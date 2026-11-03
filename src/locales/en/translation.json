@@ -296,6 +296,10 @@
     "nextExecutionDate": "Next Execution Date"
   },
   "scheduleInfo": {
+    "typeIncome":"Income",
+    "typeExpense":"Expense",
+    "typeTransfer":"Transfer",
+    "typeDebtPayment":"Debt payment",
     "active":"Active",
     "paused":"Paused",
     "title": "Schedule Details",
@@ -363,6 +367,32 @@
 
   "debts":{
 
+    "recurringPayment":"Recurring payment",
+
+    "recurringPayments":"Recurring payments",
+
+    "noRecurringPayments":"No recurring payments.",
+
+    "recurringPaymentHint":"A repayment is added automatically every period, never more than what is still owed. The schedule stops when the debt is paid.",
+
+    "interval":"Every",
+
+    "intervalDaily":"Day",
+
+    "intervalWeekly":"Week",
+
+    "intervalMonthly":"Month",
+
+    "intervalYearly":"Year",
+
+    "firstPaymentDate":"First payment",
+
+    "nextPayment":"Next: {{date}}",
+
+    "paymentFinished":"Finished",
+
+    "errorSchedule":"Could not create the recurring payment.",
+
     "openDebt":"Open debt",
 
     "lockedHint":"Direction and currency can not change after movements were added.",
@@ -371,7 +401,11 @@
 
     "noAccountInCurrency":"You have no active account in {{currency}}.",
 
-    "validation":{"nameRequired": "Name is required.", "directionRequired": "Choose a direction.", "currencyRequired": "Choose a currency.", "rateRange": "Interest must be between 0 and 100.", "startDateRequired": "Choose a start date.", "noFutureDate": "The date can not be in the future.", "typeRequired": "Choose a type.", "amountPositive": "Amount must be greater than zero.", "dateRequired": "Choose a date.", "beforeStart": "The date is before the start of the debt.", "accountRequired": "Choose an account.", "repaymentTooBig": "The repayment is more than what is owed.", "lockedAfterMovements": "Direction and currency can not change after movements were added.", "accountArchived": "The account is archived.", "currencyMismatch": "The account must have the same currency as the debt."},
+    "validation":{
+
+      "intervalRequired":"Choose how often.",
+
+      "noPastDate":"The first payment can not be in the past.","nameRequired": "Name is required.", "directionRequired": "Choose a direction.", "currencyRequired": "Choose a currency.", "rateRange": "Interest must be between 0 and 100.", "startDateRequired": "Choose a start date.", "noFutureDate": "The date can not be in the future.", "typeRequired": "Choose a type.", "amountPositive": "Amount must be greater than zero.", "dateRequired": "Choose a date.", "beforeStart": "The date is before the start of the debt.", "accountRequired": "Choose an account.", "repaymentTooBig": "The repayment is more than what is owed.", "lockedAfterMovements": "Direction and currency can not change after movements were added.", "accountArchived": "The account is archived.", "currencyMismatch": "The account must have the same currency as the debt."},
 
     "type":"Type",
 

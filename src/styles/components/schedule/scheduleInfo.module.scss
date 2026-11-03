@@ -25,6 +25,9 @@
   &[data-type="TRANSFER"] .transactionTitleText {
     color: variable.$color-blue;
   }
+  &[data-type="DEBT_PAYMENT"] .transactionTitleText {
+    color: variable.$color-purple;
+  }
 }
 .transactionTitleText {
   color: variable.$color-white;

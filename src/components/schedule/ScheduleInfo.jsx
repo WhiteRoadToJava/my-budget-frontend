@@ -9,6 +9,8 @@ import { deleteSchedule, updateSchedule } from "../../api/scheduleService";
 import i18n from "../../configuration/i18n";
 import UpdateSchedule from "./UpdateSchedule";
 import { rollForwardExecutionDate } from "../../utils/scheduleDate.js";
+import { useNavigate } from "react-router-dom";
+import { scheduleTypeKey } from "../../utils/debts/scheduleTypes";
 
 const ScheduleInfo = ({ isOpen, onClose, accounts, schedule }) => {
   const queryClient = useQueryClient();
@@ -16,6 +18,8 @@ const ScheduleInfo = ({ isOpen, onClose, accounts, schedule }) => {
   const [openConfirmDelete, setOpenConfirmDelete] = useState(false);
   const [error, setError] = useState({ hasError: false, message: "" });
   const accountName = schedule?.sourceAccount?.name;
+  const navigate = useNavigate();
+  const isDebtPayment = schedule?.transactionType === "DEBT_PAYMENT";
   // named deleteMutation: calling it deleteSchedule would hide the API function
   // imported above, and the mutation would then call itself
   const deleteMutation = useMutation({
@@ -82,6 +86,19 @@ const ScheduleInfo = ({ isOpen, onClose, accounts, schedule }) => {
   };
 
   const buttonMenuItems = [
+    ...(isDebtPayment && schedule.debtId
+      ? [
+          <Button
+            key="open-debt"
+            text={i18n.t("debts.openDebt")}
+            type="button"
+            onClick={() => {
+              handleClose();
+              navigate(`/user/debts/${schedule.debtId}`);
+            }}
+          />,
+        ]
+      : []),
     <Button
       key="edit"
       text={i18n.t("buttons.edit")}
@@ -118,8 +135,7 @@ const ScheduleInfo = ({ isOpen, onClose, accounts, schedule }) => {
             data-type={schedule.transactionType}
           >
             <h2 className={styles.transactionTitleText}>
-              {i18n.t("scheduleInfo.title")}
-              {" " + schedule.transactionType} Details
+              {i18n.t("scheduleInfo.title")}: {i18n.t(scheduleTypeKey(schedule.transactionType))}
             </h2>
           </div>
 

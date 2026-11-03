@@ -194,3 +194,42 @@
   clip: rect(0 0 0 0);
   white-space: nowrap;
 }
+
+/* ---------- recurring payments ---------- */
+
+.scheduleList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.scheduleItem {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1.5fr 1fr auto;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.6rem 1rem;
+  background: variable.$surface-1;
+  border: 1px solid variable.$color-border;
+  border-inline-start: 6px solid variable.$color-purple;
+  border-radius: variable.$radius-md;
+  cursor: pointer;
+
+  &:hover,
+  &:focus-visible {
+    background: variable.$surface-3;
+    outline: none;
+    box-shadow: variable.$shadow-glow;
+  }
+
+  &[data-active="false"] {
+    opacity: 0.6;
+  }
+
+  @media (max-width: 700px) {
+    grid-template-columns: 1fr 1fr;
+  }
+}
