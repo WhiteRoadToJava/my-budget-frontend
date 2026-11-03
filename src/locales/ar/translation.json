@@ -115,7 +115,19 @@
   },
   "accountsPage": {
     "buttonText": "إضافة حساب",
-    "searchInput": "بحث"
+    "searchInput": "بحث",
+    "title": "الحسابات",
+    "activeTab": "النشطة ({{count}})",
+    "archivedTab": "المؤرشفة ({{count}})",
+    "activeCount": "{{count}} حسابات نشطة",
+    "sinceOpening": "منذ الافتتاح",
+    "empty": "لا توجد حسابات بعد. أضف حساباً لتبدأ متابعة أموالك.",
+    "archivedEmpty": "لا توجد حسابات مؤرشفة.",
+    "noMatch": "لا توجد حسابات تطابق \"{{query}}\".",
+    "types": {
+      "NORMAL": "شخصي",
+      "COMPANY": "تجاري"
+    }
   },
   "accountInfo": {
     "totaBalance": "الرصيد الكلي",
@@ -233,7 +245,7 @@
     "description": "الوصف"
   },
   "createIncomse": {
-    "title": "دخل حديد",
+    "title": "دخل جديد",
     "amount": "المبلغ",
     "description": "الوصف",
     "date": "التاريخ",
@@ -262,7 +274,7 @@
     "sourceAccount": "حدد الحساب",
     "destinationAccount": "حدد الحساب",
     "category": "حدد الفئة",
-    "type": "حدد نوع",
+    "type": "حدد النوع",
     "interval": "اختر التكرار",
     "status": "حدد الحالة",
     "name": "ادخل اسم",
@@ -271,7 +283,7 @@
     "description": "ادخل الوصف",
     "date": "حدد التاريخ",
     "balance": "ادخل الرصيد",
-    "nextExecutionDate": "حدد التاريخ التنفيذ القادم"
+    "nextExecutionDate": "حدد تاريخ التنفيذ القادم"
   },
   "CreateScheduledIncome": {
     "title": "جدولة الدخل",
@@ -448,9 +460,9 @@
   "buttons": {
     "moreOptions": "خيارات إضافية",
     "addAccount": "إنشاء حساب",
-    "createIncomse": "دخل حديد",
+    "createIncomse": "دخل جديد",
     "updateAccount": "تحديث الحساب",
-    "createExpense": "مصروف جديدد",
+    "createExpense": "مصروف جديد",
     "createSchedule": "جدولة التحويلات",
     "createTransaction": "عملية جديدة",
     "createTransfer": "تحويل جديد",
@@ -553,5 +565,21 @@
   },
   "TransactionInfo": {
     "title": "تفاصيل المعاملة"
+  },
+  "transactionsPage": {
+    "title": "المعاملات",
+    "search": "ابحث في المعاملات",
+    "filters": {
+      "all": "الكل",
+      "income": "الدخل",
+      "expense": "المصاريف",
+      "transfer": "التحويلات",
+      "debt": "الديون"
+    },
+    "toAccount": "إلى {{name}}",
+    "fromAccount": "من {{name}}",
+    "empty": "لا توجد معاملات بعد. أضف دخلاً أو مصروفاً من أحد الحسابات.",
+    "noMatch": "لا توجد معاملات تطابق هذه الفلاتر.",
+    "backToAccounts": "كل الحسابات"
   }
 }

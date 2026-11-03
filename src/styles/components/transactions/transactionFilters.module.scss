@@ -1,0 +1,52 @@
+@use "../../variables" as variable;
+
+.filters {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.chips {
+  display: flex;
+  gap: 0.4rem;
+  overflow-x: auto;
+  scrollbar-width: none;
+
+  @media (max-width: 640px) {
+    width: 100%;
+  }
+}
+
+.chip {
+  flex-shrink: 0;
+  padding: 0.35rem 0.85rem;
+  color: variable.$color-text-gray;
+  background: variable.$surface-1;
+  border: 1px solid variable.$color-border;
+  border-radius: variable.$radius-pill;
+  font: inherit;
+  font-size: variable.$font-sm;
+  cursor: pointer;
+
+  &[aria-pressed="true"] {
+    color: variable.$color-text;
+    background: variable.$surface-3;
+    border-color: variable.$color-border-strong;
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: variable.$shadow-glow;
+  }
+}
+
+.search {
+  flex: 1 1 220px;
+  max-width: 320px;
+
+  @media (max-width: 640px) {
+    max-width: none;
+  }
+}

@@ -1,0 +1,145 @@
+@use "../../variables" as variable;
+
+/* Accounts page. One strong element: the balance per currency at the top,
+   in large tabular figures. Everything below stays quiet. */
+
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding: 1.5rem;
+  width: 100%;
+  max-width: 980px;
+  box-sizing: border-box;
+
+  @media (max-width: 640px) {
+    padding: 1rem;
+    gap: 1rem;
+  }
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.title {
+  margin: 0;
+  font-size: variable.$font-xl;
+}
+
+/* ---------- balances ---------- */
+
+.balances {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.5rem 2.5rem;
+  padding: 1.25rem 0 1rem;
+  border-bottom: 1px solid variable.$color-border;
+}
+
+.balance {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  margin: 0;
+}
+
+.balanceAmount {
+  font-size: variable.$font-3xl;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+
+  @media (max-width: 640px) {
+    font-size: variable.$font-xxl;
+  }
+}
+
+.balanceCurrency {
+  color: variable.$color-text-muted;
+  font-size: variable.$font-md;
+}
+
+.negative {
+  color: variable.$color-error;
+}
+
+.count {
+  margin: 0 0 0 auto;
+  color: variable.$color-text-muted;
+  font-size: variable.$font-sm;
+
+  @media (max-width: 640px) {
+    margin: 0;
+    width: 100%;
+  }
+}
+
+/* ---------- toolbar ---------- */
+
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.search {
+  flex: 1 1 260px;
+  max-width: 360px;
+
+  @media (max-width: 640px) {
+    max-width: none;
+  }
+}
+
+.tabs {
+  display: inline-flex;
+  padding: 3px;
+  background: variable.$surface-1;
+  border: 1px solid variable.$color-border;
+  border-radius: variable.$radius-pill;
+}
+
+.tab {
+  background: none;
+  border: none;
+  border-radius: variable.$radius-pill;
+  padding: 0.4rem 1rem;
+  color: variable.$color-text-gray;
+  font: inherit;
+  font-size: variable.$font-sm;
+  cursor: pointer;
+
+  &[aria-selected="true"] {
+    background: variable.$surface-3;
+    color: variable.$color-text;
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: variable.$shadow-glow;
+  }
+}
+
+/* ---------- list ---------- */
+
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.empty {
+  color: variable.$color-text-muted;
+  margin: 1rem 0;
+}

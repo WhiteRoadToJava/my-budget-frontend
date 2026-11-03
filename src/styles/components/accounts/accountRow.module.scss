@@ -1,75 +1,137 @@
 @use "../../variables" as variable;
 
-.rowContainer {
+/* desktop: one line  [name / type] [change since opening] [balance] [menu]
+   mobile:  name and menu on top, balance below, details under it */
+
+.row {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
-  width: 100%;
-  max-width: none;
-  padding: 0.85rem 1rem; 
-  margin-bottom: 0;
-  color: variable.$color-text;
-  background: rgba(11, 16, 32, 0.34);
+  gap: 0.5rem;
+  background: variable.$surface-1;
   border: 1px solid variable.$color-border;
-  border-radius: variable.$radius-small;
-  cursor: pointer;
-  transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+  border-radius: variable.$radius-md;
+  transition: background 0.15s ease, border-color 0.15s ease;
 
   &:hover {
-    background: rgba(30, 42, 69, 0.8);
+    background: variable.$surface-2;
     border-color: variable.$color-border-strong;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  }
+
+  &[data-archived="true"] {
+    opacity: 0.65;
   }
 }
 
-.rowDetails {
-  display: grid;
-  grid-template-columns: minmax(7rem, 1.5fr) minmax(6rem, 1fr) minmax(4rem, auto) minmax(5rem, auto);
-  align-items: center;
-  gap: 0.75rem;
+.main {
   flex: 1;
+  min-width: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr) auto;
+  grid-template-areas: "name change amount";
+  align-items: center;
+  gap: 1rem;
+  padding: 0.9rem 0 0.9rem 1.1rem;
+  color: variable.$color-text;
+  text-align: start;
+  background: none;
+  border: none;
+  font: inherit;
+  cursor: pointer;
+  border-radius: variable.$radius-md;
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: variable.$shadow-glow;
+  }
+
+  @media (max-width: 640px) {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "name"
+      "amount"
+      "change";
+    gap: 0.2rem;
+    padding: 0.85rem 0 0.85rem 1rem;
+  }
+}
+
+.identity {
+  grid-area: name;
   min-width: 0;
 }
 
-.rowDetails span {
-  min-width: 0;
+.name {
+  display: block;
+  font-weight: 700;
   overflow: hidden;
-  color: variable.$color-text-gray;
-  font-size: variable.$font-sm;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-.rowDetails span:first-child {
-  color: variable.$color-text;
-  font-weight: 700;
-}
+.type {
+  display: block;
+  color: variable.$color-text-muted;
+  font-size: variable.$font-xs;
+  margin-top: 0.15rem;
 
-.totalBalance {
-  font-weight: 700;
-  text-align: right;
-
-  &.plusValue {
-    color: variable.$color-tennis !important;
-  }
-
-  &.minusValue {
-    color: variable.$color-error !important;
-  }
-}
-
-@include variable.respond(mobile-lg) {
-  .rowContainer {
-    padding: 0.75rem;
-  }
-
-  .rowDetails {
-    grid-template-columns: minmax(0, 1fr) auto;
-    gap: 0.25rem 0.75rem;
-  }
-
-  .rowDetails span:nth-child(3),
-  .rowDetails span:nth-child(4) {
+  @media (max-width: 640px) {
     display: none;
   }
+}
+
+.change {
+  grid-area: change;
+  color: variable.$color-text-muted;
+  font-size: variable.$font-sm;
+  font-variant-numeric: tabular-nums;
+}
+
+.up {
+  color: variable.$color-success;
+}
+
+.down {
+  color: variable.$color-error;
+}
+
+.amount {
+  grid-area: amount;
+  font-size: variable.$font-md;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  text-align: end;
+  white-space: nowrap;
+
+  @media (max-width: 640px) {
+    text-align: start;
+    font-size: variable.$font-lg;
+  }
+}
+
+.currency {
+  margin-inline-start: 0.35rem;
+  color: variable.$color-text-muted;
+  font-size: variable.$font-sm;
+  font-weight: 400;
+}
+
+.negative {
+  color: variable.$color-error;
+}
+
+.menu {
+  flex-shrink: 0;
+  padding: 0 0.5rem;
+  align-self: center;
+
+  @media (max-width: 640px) {
+    align-self: flex-start;
+    padding-top: 0.6rem;
+  }
+}
+
+.error {
+  margin: 0.25rem 0 0.5rem;
+  color: variable.$color-error;
+  font-size: variable.$font-sm;
 }
