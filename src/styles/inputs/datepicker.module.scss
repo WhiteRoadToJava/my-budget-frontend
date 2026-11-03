@@ -91,6 +91,22 @@
         background-color: variable.$color-tennis;
         color: variable.$color-black;
       }
+
+      &[data-today="true"] {
+        outline: 1px solid variable.$color-tennis;
+      }
+
+      &[data-selected="true"] {
+        background-color: variable.$color-tennis;
+        color: variable.$color-black;
+        font-weight: bold;
+      }
+    }
+
+    .weekDay {
+      text-align: center;
+      font-size: 0.75rem;
+      color: variable.$color-text-muted;
     }
   }
 }

@@ -14,7 +14,6 @@ const currencies = [
   "AED", 
   "TRY",
   "SAR",
-  "AED",
   "GBP",
   "JPY",
 ];

@@ -11,7 +11,7 @@ const DeleteConfirmation = ({ isOpen, onClose, onDelete }) => {
         <p>{i18n.t('messages.deleteConfirmation')}</p>
         <div className={styles.buttonContainer}>
           <Button variant="cancel" text={i18n.t('buttons.cancel')} onClick={onClose} />
-          <Button variant="danger" text={i18n.t('buttons.delete')} onClick={onDelete} />
+          <Button variant="delete" text={i18n.t('buttons.delete')} onClick={onDelete} />
         </div>
       </div>
     </Modal>
