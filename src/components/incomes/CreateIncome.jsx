@@ -33,7 +33,7 @@ const CreateIncomse = ({ isOpen, isClose, account }) => {
     onError: () => {
       setError({
         hasError: true,
-        message: i18n.t("message.errorCreateIncomse"),
+        message: i18n.t("messages.errorCreateIncomse"),
       });
     }
 
@@ -59,12 +59,12 @@ const CreateIncomse = ({ isOpen, isClose, account }) => {
     if (!incomseData.amount || parseFloat(incomseData.amount) <= 0) {
       setError({
         hasError: true,
-        message: i18n.t("message.amountless"),
+        message: i18n.t("messages.amountless"),
       });
       return false;
     }
     if (!incomseData.category) {
-      setError({ hasError: true, message: i18n.t("message.categoryRequired") });
+      setError({ hasError: true, message: i18n.t("messages.categoryRequired") });
       return false;
     }
     return true;
@@ -104,7 +104,7 @@ const CreateIncomse = ({ isOpen, isClose, account }) => {
           <div className={styles.buttonContainer}>
             <Button
               variant="primary"
-              text={nutation.isPending ? i18n.t("message.loading") : i18n.t("buttons.createIncomse")}
+              text={nutation.isPending ? i18n.t("buttons.loading") : i18n.t("buttons.createIncomse")}
               type="submit"
               onClick={handleCreateIncomse}
             />

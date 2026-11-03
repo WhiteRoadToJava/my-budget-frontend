@@ -46,7 +46,7 @@
     "errorText": "We couldn't activate your account right now. Please try again later."
   },
   "menu": {
-    "debts":"Debts",
+    "debts": "Debts",
     "overview": "Overview",
     "accounts": "Accounts",
     "expenses": "Expenses",
@@ -110,8 +110,8 @@
   },
   "terminal": {
     "terminal": "Welcome traveler, to the vast",
-    "terminalTow": "and occasionally confusing",
-    "terminalThree": "universe of programming."
+    "terminalThree": "universe of programming.",
+    "terminalTwo": "and occasionally confusing"
   },
   "accountsPage": {
     "buttonText": "Add Account",
@@ -123,31 +123,31 @@
     "lastUpdate": "Last update"
   },
   "messages": {
-    "errorUpdateTransfer":"Failed to update transfer. Please try again.",
+    "errorUpdateTransfer": "Failed to update transfer. Please try again.",
     "success": "A password reset link has been sent to",
     "loadingError": "Error loading transactions: ",
     "loading": "Loading transactions...",
     "loadingSchedule": "Loading schedule...",
     "loadingAccounts": "Loading accounts...",
     "errorCreateAccount": "Failed to create account. Please try again.",
-    "errorCreateIncomse": "Failed to create incomse. Please try again.",
+    "errorCreateIncomse": "Failed to create income. Please try again.",
     "errorCreateExpense": "Failed to create expense. Please try again.",
     "errorCreateSchedule": "Failed to create schedule. Please try again.",
     "errorCreateTransaction": "Failed to create transaction. Please try again.",
     "errorCreateTransfer": "Failed to create transfer. Please try again.",
-    "errorLoadingIncomse": "Failed to loading incomse. Please try again.",
-    "errorLoadingExpenses": "Failed to loading expenses. Please try again.",
-    "errorLoadingSchedule": "Failed to loading schedule. Please try again.",
-    "errorLoadingTransactions": "Failed to loading transactions. Please try again.",
-    "errorLoadingTransfers": "Failed to loading transfers. Please try again.",
+    "errorLoadingIncomse": "Failed to load income. Please try again.",
+    "errorLoadingExpenses": "Failed to load expenses. Please try again.",
+    "errorLoadingSchedule": "Failed to load schedule. Please try again.",
+    "errorLoadingTransactions": "Failed to load transactions. Please try again.",
+    "errorLoadingTransfers": "Failed to load transfers. Please try again.",
     "errorDeleteAccount": "Failed to delete account. Please try again.",
-    "errorDeleteIncomse": "Failed to delete incomse. Please try again.",
+    "errorDeleteIncomse": "Failed to delete income. Please try again.",
     "errorDeleteExpenses": "Failed to delete expenses. Please try again.",
     "errorDeleteSchedule": "Failed to delete schedule. Please try again.",
     "errorDeleteTransactions": "Failed to delete transactions. Please try again.",
     "errorDeleteTransfers": "Failed to delete transfers. Please try again.",
     "errorUpdateAccount": "Failed to update account. Please try again.",
-    "errorUpdateIncomse": "Failed to update incomse. Please try again.",
+    "errorUpdateIncomse": "Failed to update income. Please try again.",
     "errorUpdateExpenses": "Failed to update expenses. Please try again.",
     "errorUpdateSchedule": "Failed to update schedule. Please try again.",
     "errorUpdateTransactions": "Failed to update transactions. Please try again.",
@@ -156,14 +156,12 @@
     "noData": "No data found.",
     "noOption": "No option selected.",
     "errorSameAccountTransfer": "Source and Destination accounts must be different.",
-
     "amoutRequired": "Amount is required",
     "amountless": "Amount must be greater than zero.",
     "accountRequired": "Please select both a source and destination account.",
     "logoutError": "Failed to logout. Please try again.",
     "no_data_available": "No data available.",
     "search_error": "Failed to search. Please try again.",
-
     "nameRequired": "Name is required",
     "balanceRequired": "Balance is required",
     "currencyRequired": "Currency is required",
@@ -171,13 +169,14 @@
     "descriptionRequired": "Description is required",
     "categoryRequired": "Category is required",
     "dateRequired": "Date is required",
-      "deleteConfirmation": "Are you sure you want to delete this item? This action cannot be undone."
-      
+    "deleteConfirmation": "Are you sure you want to delete this item? This action cannot be undone.",
+    "errorLoadingAccounts": "Unable to load accounts.",
+    "noSchedules": "No schedules yet."
   },
   "incomses": {
-    "title": "Incomses",
+    "title": "Incomes",
     "totolBalance": "Total balance:",
-    "numberOfIncomses": "Number of incomses:",
+    "numberOfIncomses": "Number of incomes:",
     "lastUpdate": "Last update"
   },
   "expenses": {
@@ -204,7 +203,7 @@
     "archivedAccounts": "Archive Accounts"
   },
   "account": {
-    "accountdeleted":"Deleted account",
+    "accountdeleted": "Deleted account",
     "totalBalance": "Total balance:",
     "date": "Date",
     "category": "Category",
@@ -236,7 +235,7 @@
     "type": "Type"
   },
   "createIncomse": {
-    "title": "Create Incomse",
+    "title": "Create Income",
     "amount": "Amount",
     "description": "Description",
     "date": "Date",
@@ -253,7 +252,7 @@
     "category": "Category",
     "description": "Description",
     "interval": "Interval",
-    "executationDate": "Executatation Date",
+    "executationDate": "Execution date",
     "name": "Name",
     "amount": "Amount",
     "currency": "Currency",
@@ -287,7 +286,7 @@
     "category": "Category",
     "description": "Description",
     "interval": "Interval",
-    "executationDate": "Executatation Date",
+    "executationDate": "Execution date",
     "name": "Name",
     "amount": "Amount",
     "currency": "Currency",
@@ -296,12 +295,12 @@
     "nextExecutionDate": "Next Execution Date"
   },
   "scheduleInfo": {
-    "typeIncome":"Income",
-    "typeExpense":"Expense",
-    "typeTransfer":"Transfer",
-    "typeDebtPayment":"Debt payment",
-    "active":"Active",
-    "paused":"Paused",
+    "typeIncome": "Income",
+    "typeExpense": "Expense",
+    "typeTransfer": "Transfer",
+    "typeDebtPayment": "Debt payment",
+    "active": "Active",
+    "paused": "Paused",
     "title": "Schedule Details",
     "account": "Account",
     "sourceAmount": "Source Amount",
@@ -312,7 +311,7 @@
     "category": "Category",
     "description": "Description",
     "interval": "Interval",
-    "executationDate": "Executatation Date",
+    "executationDate": "Execution date",
     "name": "Name",
     "amount": "Amount",
     "currency": "Currency",
@@ -330,7 +329,6 @@
     "date": "Date",
     "description": "Description"
   },
-
   "createTransaction": {},
   "createTransfer": {
     "title": "Create Transfer",
@@ -353,7 +351,7 @@
     "updatedAt": "Updated At"
   },
   "updateIncomse": {
-    "title": "Update Incomse",
+    "title": "Update Income",
     "amount": "Amount",
     "description": "Description",
     "date": "Date",
@@ -364,181 +362,115 @@
   },
   "updateSchedule": {},
   "updateTransaction": {},
-
-  "debts":{
-
-    "recurringPayment":"Recurring payment",
-
-    "recurringPayments":"Recurring payments",
-
-    "noRecurringPayments":"No recurring payments.",
-
-    "recurringPaymentHint":"A repayment is added automatically every period, never more than what is still owed. The schedule stops when the debt is paid.",
-
-    "interval":"Every",
-
-    "intervalDaily":"Day",
-
-    "intervalWeekly":"Week",
-
-    "intervalMonthly":"Month",
-
-    "intervalYearly":"Year",
-
-    "firstPaymentDate":"First payment",
-
-    "nextPayment":"Next: {{date}}",
-
-    "paymentFinished":"Finished",
-
-    "errorSchedule":"Could not create the recurring payment.",
-
-    "openDebt":"Open debt",
-
-    "lockedHint":"Direction and currency can not change after movements were added.",
-
-    "remainingHint":"Remaining today: {{amount}} {{currency}}",
-
-    "noAccountInCurrency":"You have no active account in {{currency}}.",
-
-    "validation":{
-
-      "intervalRequired":"Choose how often.",
-
-      "noPastDate":"The first payment can not be in the past.","nameRequired": "Name is required.", "directionRequired": "Choose a direction.", "currencyRequired": "Choose a currency.", "rateRange": "Interest must be between 0 and 100.", "startDateRequired": "Choose a start date.", "noFutureDate": "The date can not be in the future.", "typeRequired": "Choose a type.", "amountPositive": "Amount must be greater than zero.", "dateRequired": "Choose a date.", "beforeStart": "The date is before the start of the debt.", "accountRequired": "Choose an account.", "repaymentTooBig": "The repayment is more than what is owed.", "lockedAfterMovements": "Direction and currency can not change after movements were added.", "accountArchived": "The account is archived.", "currencyMismatch": "The account must have the same currency as the debt."},
-
-    "type":"Type",
-
-    "interestPaid":"Interest paid",
-
-    "asOf":"Calculated on {{date}}",
-
-    "recorded":"recorded",
-
-    "deleteMovement":"Delete movement",
-
-    "errorDeleteMovement":"Could not delete the movement.",
-
-    "summary":"Summary",
-
-    "all":"All",
-
-    "net":"Net",
-
-    "settled":"Settled",
-
-    "noMatch":"No debts in this group.",
-
-    "ratePerYear":"{{rate}}% / year",
-
-    "title":"Debts",
-
-    "detailsTitle":"Debt details",
-
-    "empty":"No debts yet.",
-
-    "loading":"Loading debts...",
-
-    "loadError":"Could not load debts.",
-
-    "notFound":"This debt was not found.",
-
-    "backToList":"Back to debts",
-
-    "owedByMe":"I owe",
-
-    "owedToMe":"Owed to me",
-
-    "name":"Name",
-
-    "counterparty":"Counterparty",
-
-    "direction":"Direction",
-
-    "currency":"Currency",
-
-    "annualRate":"Annual interest (%)",
-
-    "compounding":"Interest added",
-
-    "compoundingNone":"Never",
-
-    "compoundingMonthly":"Monthly",
-
-    "compoundingYearly":"Yearly",
-
-    "startDate":"Start date",
-
-    "note":"Note",
-
-    "countInflowsAsIncome":"Record money in as income",
-
-    "countOutflowsAsExpense":"Record money out as expense",
-
-    "principal":"Principal",
-
-    "accruedInterest":"Interest",
-
-    "totalOwed":"Remaining",
-
-    "totalDisbursed":"Total borrowed / lent",
-
-    "totalRepaid":"Total repaid",
-
-    "movements":"Movements",
-
-    "noMovements":"No movements yet.",
-
-    "disbursement":"New amount",
-
-    "repayment":"Repayment",
-
-    "amount":"Amount",
-
-    "date":"Date",
-
-    "account":"Account",
-
-    "description":"Description",
-
-    "interestPart":"Interest part",
-
-    "principalPart":"Principal part",
-
-    "addDebt":"Add debt",
-
-    "editDebt":"Edit debt",
-
-    "addMovement":"Add movement",
-
-    "errorSave":"Could not save the debt.",
-
-    "errorDelete":"Could not delete the debt.",
-
-    "errorHasMovements":"Delete the movements of this debt first.",
-
-    "errorMovement":"Could not save the movement.",
-
-    "errorAccountHasDebt":"This account has debt movements and cannot be deleted.",
-
-    "errorDebtRecord":"This record belongs to a debt. Edit it from the debt page.",
-
-    "category":"Debt"
-
+  "debts": {
+    "recurringPayment": "Recurring payment",
+    "recurringPayments": "Recurring payments",
+    "noRecurringPayments": "No recurring payments.",
+    "recurringPaymentHint": "A repayment is added automatically every period, never more than what is still owed. The schedule stops when the debt is paid.",
+    "interval": "Every",
+    "intervalDaily": "Day",
+    "intervalWeekly": "Week",
+    "intervalMonthly": "Month",
+    "intervalYearly": "Year",
+    "firstPaymentDate": "First payment",
+    "nextPayment": "Next: {{date}}",
+    "paymentFinished": "Finished",
+    "errorSchedule": "Could not create the recurring payment.",
+    "openDebt": "Open debt",
+    "lockedHint": "Direction and currency can not change after movements were added.",
+    "remainingHint": "Remaining today: {{amount}} {{currency}}",
+    "noAccountInCurrency": "You have no active account in {{currency}}.",
+    "validation": {
+      "intervalRequired": "Choose how often.",
+      "noPastDate": "The first payment can not be in the past.",
+      "nameRequired": "Name is required.",
+      "directionRequired": "Choose a direction.",
+      "currencyRequired": "Choose a currency.",
+      "rateRange": "Interest must be between 0 and 100.",
+      "startDateRequired": "Choose a start date.",
+      "noFutureDate": "The date can not be in the future.",
+      "typeRequired": "Choose a type.",
+      "amountPositive": "Amount must be greater than zero.",
+      "dateRequired": "Choose a date.",
+      "beforeStart": "The date is before the start of the debt.",
+      "accountRequired": "Choose an account.",
+      "repaymentTooBig": "The repayment is more than what is owed.",
+      "lockedAfterMovements": "Direction and currency can not change after movements were added.",
+      "accountArchived": "The account is archived.",
+      "currencyMismatch": "The account must have the same currency as the debt."
+    },
+    "type": "Type",
+    "interestPaid": "Interest paid",
+    "asOf": "Calculated on {{date}}",
+    "recorded": "recorded",
+    "deleteMovement": "Delete movement",
+    "errorDeleteMovement": "Could not delete the movement.",
+    "summary": "Summary",
+    "all": "All",
+    "net": "Net",
+    "settled": "Settled",
+    "noMatch": "No debts in this group.",
+    "ratePerYear": "{{rate}}% / year",
+    "title": "Debts",
+    "detailsTitle": "Debt details",
+    "empty": "No debts yet.",
+    "loading": "Loading debts...",
+    "loadError": "Could not load debts.",
+    "notFound": "This debt was not found.",
+    "backToList": "Back to debts",
+    "owedByMe": "I owe",
+    "owedToMe": "Owed to me",
+    "name": "Name",
+    "counterparty": "Counterparty",
+    "direction": "Direction",
+    "currency": "Currency",
+    "annualRate": "Annual interest (%)",
+    "compounding": "Interest added",
+    "compoundingNone": "Never",
+    "compoundingMonthly": "Monthly",
+    "compoundingYearly": "Yearly",
+    "startDate": "Start date",
+    "note": "Note",
+    "countInflowsAsIncome": "Record money in as income",
+    "countOutflowsAsExpense": "Record money out as expense",
+    "principal": "Principal",
+    "accruedInterest": "Interest",
+    "totalOwed": "Remaining",
+    "totalDisbursed": "Total borrowed / lent",
+    "totalRepaid": "Total repaid",
+    "movements": "Movements",
+    "noMovements": "No movements yet.",
+    "disbursement": "New amount",
+    "repayment": "Repayment",
+    "amount": "Amount",
+    "date": "Date",
+    "account": "Account",
+    "description": "Description",
+    "interestPart": "Interest part",
+    "principalPart": "Principal part",
+    "addDebt": "Add debt",
+    "editDebt": "Edit debt",
+    "addMovement": "Add movement",
+    "errorSave": "Could not save the debt.",
+    "errorDelete": "Could not delete the debt.",
+    "errorHasMovements": "Delete the movements of this debt first.",
+    "errorMovement": "Could not save the movement.",
+    "errorAccountHasDebt": "This account has debt movements and cannot be deleted.",
+    "errorDebtRecord": "This record belongs to a debt. Edit it from the debt page.",
+    "category": "Debt"
   },
-
   "buttons": {
     "moreOptions": "More options",
     "add": "Add",
     "addAccount": "Add Account",
     "updateAccount": "Update Account",
-    "createIncomse": "Create Incomse",
+    "createIncomse": "Create Income",
     "createExpense": "Create Expense",
     "createSchedule": "Create Schedule",
     "createTransaction": "Create Transaction",
     "createTransfer": "Create Transfer",
     "updateExpense": "Update Expense",
-    "updateIncomse": "Update Incomse",
+    "updateIncomse": "Update Income",
     "updateSchedule": "Update Schedule",
     "updateTransaction": "Update Transaction",
     "updateTransfer": "Update Transfer",
@@ -550,14 +482,15 @@
     "save": "Save",
     "close": "Close",
     "ok": "OK",
-    "active":"Active",
-    "archived":"Archive",
+    "active": "Active",
+    "archived": "Archive",
     "confirmDelete": "Confirm Delete",
     "confirm": "Confirm",
     "yes": "Yes",
     "no": "No",
     "pause": "Pause",
-    "resume": "Resume"
+    "resume": "Resume",
+    "processing": "Processing..."
   },
   "currency": {
     "usd": "USD",
@@ -569,12 +502,9 @@
     "gbp": "GBP",
     "jpy": "JPY"
   },
-
   "transactionDetails": {
-
-    "debtIn":"Debt in",
-
-    "debtOut":"Debt out",
+    "debtIn": "Debt in",
+    "debtOut": "Debt out",
     "amount": "Amount",
     "account": "Account",
     "sourceAccount": "Source Account",
@@ -586,7 +516,7 @@
     "status": "Status",
     "actions": "Actions",
     "transaction": "Transaction",
-    "incomse": "Incomse",
+    "incomse": "Income",
     "expense": "Expense",
     "inTransfer": "Incomming Transfer",
     "outTransfer": "Outgoing Transfer",
@@ -612,6 +542,21 @@
   "report": {
     "fromDate": "From Date",
     "toDate": "To Date",
-    "search": "Search"
+    "search": "Search",
+    "title": "Report"
+  },
+  "dashboard": {
+    "loading": "Loading balance...",
+    "error": "Unable to load balance",
+    "noData": "No balance data yet",
+    "overview": "Overview",
+    "balanceTrend": "Balance trend",
+    "currencies": "currencies"
+  },
+  "viewAccounts": {
+    "title": "Accounts"
+  },
+  "successConfirmation": {
+    "title": "Done"
   }
 }

@@ -44,7 +44,7 @@ export default function Sidebar({ menuItems, isMobileOpen = false, onMobileClose
       await logout();
       navigate("/auth/login");
       onMobileClose?.();
-    } catch (err) { console.error(i18n.t("logoutError"), err); }
+    } catch (err) { console.error(i18n.t("messages.logoutError"), err); }
   };
 
   // على الموبايل الـ drawer دايماً بيبان كامل (أيقونة + نص)، بغض النظر

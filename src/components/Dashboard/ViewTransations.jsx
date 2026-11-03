@@ -12,7 +12,7 @@ const ViewTransations = ({data = [], isError, error, isLoading }) => {
     return <div>{i18n.t("messages.loading")}</div>;
   }
   if (isError) {
-    return <div>{i18n.t("messages.errorLoading")} {error.message}</div>;
+    return <div>{i18n.t("messages.loadingError")} {error.message}</div>;
   }
   return (
     <div className={styles.transactionContainer}>

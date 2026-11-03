@@ -50,7 +50,7 @@ const handleSelect = (item) => {
               </div>
             ))
           ) : (
-            <div className={styles.noData}>{i18n.t("dashboard.noOption")}</div>
+            <div className={styles.noData}>{i18n.t("messages.noOption")}</div>
           )}
         </div>
       )}

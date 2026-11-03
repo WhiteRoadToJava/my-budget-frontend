@@ -36,7 +36,7 @@ const CreateScheduledTransfer = ({ isOpen, isClose, accounts }) => {
     onError: () => {
       setError({
         hasError: true,
-        message: i18n.t("message.amountless"),
+        message: i18n.t("messages.amountless"),
       });
     },
   });
@@ -71,11 +71,11 @@ const CreateScheduledTransfer = ({ isOpen, isClose, accounts }) => {
 
   const handleValidation = () => {
     if (!transferData.amountSend || parseFloat(transferData.amountSend) <= 0) {
-      setError({ hasError: true, message: i18n.t("message.amountless") });
+      setError({ hasError: true, message: i18n.t("messages.amountless") });
       return false;
     }
     if (!transferData.sourceAccountId || !transferData.destinationAccountId) {
-      setError({ hasError: true, message: i18n.t("message.accountRequired") });
+      setError({ hasError: true, message: i18n.t("messages.accountRequired") });
       return false;
     }
     return true;

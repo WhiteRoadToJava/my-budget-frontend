@@ -37,7 +37,7 @@ const CreateExpense = ({ isOpen, isClose, account }) => {
     onError: () => {
       setError({
         hasError: true,
-        message: i18n.t("message.errorCreateExpense"),
+        message: i18n.t("messages.errorCreateExpense"),
       });
     },
   });
@@ -63,11 +63,11 @@ const CreateExpense = ({ isOpen, isClose, account }) => {
 
   const handleValidation = () => {
     if (!expenseData.amount || parseFloat(expenseData.amount) <= 0) {
-      setError({ hasError: true, message: i18n.t("message.amountless") });
+      setError({ hasError: true, message: i18n.t("messages.amountless") });
       return false;
     }
     if (!expenseData.category) {
-      setError({ hasError: true, message: i18n.t("message.categoryRequired") });
+      setError({ hasError: true, message: i18n.t("messages.categoryRequired") });
       return false;
     }
     return true;
@@ -113,7 +113,7 @@ const CreateExpense = ({ isOpen, isClose, account }) => {
                 variant="primary"
                 text={
                   mutation.isPending
-                    ? i18n.t("message.loading")
+                    ? i18n.t("buttons.loading")
                     : i18n.t("buttons.createExpense")
                 }
                 type="submit"

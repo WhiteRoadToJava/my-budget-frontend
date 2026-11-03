@@ -40,7 +40,7 @@ const CreateScheduledExpense = ({
     onError: () => {
       setError({
         hasError: true,
-        message: i18n.t("message.errorCreateExpense"),
+        message: i18n.t("messages.errorCreateExpense"),
       });
     },
   });
@@ -81,12 +81,12 @@ const CreateScheduledExpense = ({
     if (!expenseData.amountSend || parseFloat(expenseData.amountSend) <= 0) {
       setError({
         hasError: true,
-        message: i18n.t("message.amountless"),
+        message: i18n.t("messages.amountless"),
       });
       return false;
     }
     if (!expenseData.category) {
-      setError({ hasError: true, message: i18n.t("message.categoryRequired") });
+      setError({ hasError: true, message: i18n.t("messages.categoryRequired") });
       return false;
     }
     return true;

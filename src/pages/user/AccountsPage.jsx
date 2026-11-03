@@ -14,7 +14,7 @@ const AccountsPage = () => {
     queryFn: () => getAccountById(accountId),
   });
 
-  if (!account) return <div>{i18n.t("masseges.loading")}</div>;
+  if (!account) return <div>{i18n.t("messages.loadingAccounts")}</div>;
   return (
     <div>
       <Account account={account} />

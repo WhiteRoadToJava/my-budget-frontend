@@ -32,7 +32,7 @@ const UpdateExpense = ({ isOpen, isClose, expense }) => {
     onError: () => {
       setError({
         hasError: true,
-        message: i18n.t("message.errorUpdateExpense"),
+        message: i18n.t("messages.errorUpdateExpenses"),
       });
     },
   });
@@ -114,7 +114,7 @@ useEffect(() => {
             <div className={styles.inputContainer}>
               <p>{i18n.t("updateExpense.createdAt")}:</p>
               <Datepicker
-                placeholder={i18n.t("placeholder.createdAt")}
+                placeholder={i18n.t("placeholder.date")}
                 name="createdAt"
                 value={expwnseData.createdAt}
                 onChange={(date) => {
@@ -140,7 +140,7 @@ useEffect(() => {
                 variant="primary"
                 text={
                   nutation.isPending
-                    ? i18n.t("message.loading")
+                    ? i18n.t("buttons.loading")
                     : i18n.t("buttons.updateExpense")
                 }
                 type="submit"

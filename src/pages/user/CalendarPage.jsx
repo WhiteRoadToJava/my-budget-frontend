@@ -24,7 +24,7 @@ const CalendarPage = () => {
   });
 
   if (isTransactionsLoading || isAccountsLoading) {
-    return <div>{i18n.t("loading")}</div>;
+    return <div>{i18n.t("messages.loading")}</div>;
   }
 
   if (isTransactionsError) {

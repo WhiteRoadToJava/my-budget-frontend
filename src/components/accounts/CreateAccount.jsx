@@ -44,7 +44,7 @@ const CreateAccount = ({ isOpen, isClose }) => {
     onError: (err) => {
       setError({
         hasError: true,
-        message: i18n.t("messages.errorAddAccount") + err.message,
+        message: i18n.t("messages.errorCreateAccount") + err.message,
       });
     },
   });

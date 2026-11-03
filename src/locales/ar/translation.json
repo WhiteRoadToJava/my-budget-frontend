@@ -26,7 +26,7 @@
   "activation": {
     "checkEmailTitle": "تحقق من بريدك الإلكتروني",
     "checkEmailText": "أرسلنا رابط التفعيل إلى",
-    "checkEmailSpam": "ما لقيته؟ شوف مجلد الرسائل غير المرغوب فيها (Spam).",
+    "checkEmailSpam": "لم تجد الرسالة؟ تحقّق من مجلد الرسائل غير المرغوب فيها (Spam).",
     "backToLogin": "العودة لتسجيل الدخول",
     "notActivated": "حسابك لسه مش مفعّل. افتح بريدك الإلكتروني واضغط على رابط التفعيل.",
     "resend": "إعادة إرسال رسالة التفعيل",
@@ -46,14 +46,14 @@
     "errorText": "ما قدرنا نفعّل حسابك دلوقتي. حاول مرة تانية بعد شوية."
   },
   "menu": {
-    "debts":"الديون",
+    "debts": "الديون",
     "overview": "نظرة عامة",
     "accounts": "الحسابات",
     "expenses": "المصاريف",
     "incomes": "الإيرادات",
     "transactions": "المعاملات",
-    "schedule":"جدولة التحويلات",
-    "reports":"التقارير",
+    "schedule": "جدولة التحويلات",
+    "reports": "التقارير",
     "calendar": "التقويم",
     "settings": "الإعدادات"
   },
@@ -78,7 +78,7 @@
     "submit": "نسيت كلمة السر",
     "emailRequired": "اكتب بريدك الإلكتروني",
     "successText": "لو في حساب مرتبط بـ {{email}}، أرسلنا رابط إعادة تعيين كلمة السر. الرابط صالح لمدة ساعة.",
-    "spamHint": "ما لقيته؟ شوف مجلد الرسائل غير المرغوب فيها (Spam).",
+    "spamHint": "لم تجد الرسالة؟ تحقّق من مجلد الرسائل غير المرغوب فيها (Spam).",
     "resend": "إعادة الإرسال",
     "resendWait": "إعادة الإرسال بعد {{seconds}} ثانية",
     "backToLogin": "العودة لتسجيل الدخول",
@@ -110,10 +110,9 @@
   },
   "terminal": {
     "terminal": "مرحبًا بالمسافر، إلى الفضاء الواسع",
-    "terminalTwo": "ومربك في بعض الأحيان",
-    "terminalThree": "عالم البرمجة"
+    "terminalThree": "عالم البرمجة",
+    "terminalTwo": "ومربك في بعض الأحيان"
   },
-
   "accountsPage": {
     "buttonText": "إضافة حساب",
     "searchInput": "بحث"
@@ -124,44 +123,43 @@
     "lastUpdate": "آخر تحديث"
   },
   "messages": {
-    "errorUpdateTransfer":"فشل تحديث التحويل. يرجى المحاولة مرة أخرى.",
+    "errorUpdateTransfer": "فشل تحديث التحويل. يرجى المحاولة مرة أخرى.",
     "success": "تم ارسال رابط تغيير كلمة السر",
     "loadingError": "خطأ في تحميل المعاملات: ",
-    "loading":"يتم تحميل المعاملات...",
-    "loadingSchedule":"يتم تحميل الجدول...",
-    "loadingAccounts":"يتم تحميل الحسابات...",
-    "errorCreateAccount":"فشل إنشاء الحساب. يرجى المحاولة مرة أخرى.",
-    "errorCreateIncomse":"فشل إنشاء الإيراد. يرجى المحاولة مرة أخرى.",
-    "errorCreateExpense":"فشل إنشاء المصروف. يرجى المحاولة مرة أخرى.",
-    "errorCreateSchedule":"فشل إنشاء الجدول. يرجى المحاولة مرة أخرى.",
-    "errorCreateTransaction":"فشل إنشاء المعامله. يرجى المحاولة مرة أخرى.",
-    "errorCreateTransfer":"فشل إنشاء التحويل. يرجى المحاولة مرة أخرى.",
-    "errorLoadingIncomse":"فشل تحميل الإيرادات. يرجى المحاولة مرة أخرى.",
-    "errorLoadingExpenses":"فشل تحميل المصروفات. يرجى المحاولة مرة أخرى.",
-    "errorLoadingSchedule":"فشل تحميل الجدول. يرجى المحاولة مرة أخرى.",
-    "errorLoadingTransactions":"فشل تحميل المعاملات. يرجى المحاولة مرة أخرى.",  
-    "errorLoadingTransfers":"فشل تحميل التحويلات. يرجى المحاولة مرة أخرى.",
-    "errorDeleteAccount":"فشل حذف الحساب. يرجى المحاولة مرة أخرى.",
-    "errorDeleteIncomse":"فشل حذف الإيراد. يرجى المحاولة مرة أخرى.",
-    "errorDeleteExpenses":"فشل حذف المصروف. يرجى المحاولة مرة أخرى.",
-    "errorDeleteSchedule":"فشل حذف الجدول. يرجى المحاولة مرة أخرى.",
-    "errorDeleteTransactions":"فشل حذف المعاملات. يرجى المحاولة مرة أخرى.",
-    "errorDeleteTransfers":"فشل حذف التحويلات. يرجى المحاولة مرة أخرى.",  
-    "errorUpdateAccount":"فشل تحديث الحساب. يرجى المحاولة مرة أخرى.",
-    "errorUpdateIncomse":"فشل تحديث الإيراد. يرجى المحاولة مرة أخرى.",
-    "errorUpdateExpenses":"فشل تحديث المصروف. يرجى المحاولة مرة أخرى.",
-    "errorUpdateSchedule":"فشل تحديث الجدول. يرجى المحاولة مرة أخرى.",
-    "errorUpdateTransactions":"فشل تحديث المعاملات. يرجى المحاولة مرة أخرى.",
-    "errorUpdateTransfers":"فشل تحديث التحويلات. يرجى المحاولة مرة أخرى.",
+    "loading": "يتم تحميل المعاملات...",
+    "loadingSchedule": "يتم تحميل الجدول...",
+    "loadingAccounts": "يتم تحميل الحسابات...",
+    "errorCreateAccount": "فشل إنشاء الحساب. يرجى المحاولة مرة أخرى.",
+    "errorCreateIncomse": "فشل إنشاء الإيراد. يرجى المحاولة مرة أخرى.",
+    "errorCreateExpense": "فشل إنشاء المصروف. يرجى المحاولة مرة أخرى.",
+    "errorCreateSchedule": "فشل إنشاء الجدول. يرجى المحاولة مرة أخرى.",
+    "errorCreateTransaction": "فشل إنشاء المعامله. يرجى المحاولة مرة أخرى.",
+    "errorCreateTransfer": "فشل إنشاء التحويل. يرجى المحاولة مرة أخرى.",
+    "errorLoadingIncomse": "فشل تحميل الإيرادات. يرجى المحاولة مرة أخرى.",
+    "errorLoadingExpenses": "فشل تحميل المصروفات. يرجى المحاولة مرة أخرى.",
+    "errorLoadingSchedule": "فشل تحميل الجدول. يرجى المحاولة مرة أخرى.",
+    "errorLoadingTransactions": "فشل تحميل المعاملات. يرجى المحاولة مرة أخرى.",
+    "errorLoadingTransfers": "فشل تحميل التحويلات. يرجى المحاولة مرة أخرى.",
+    "errorDeleteAccount": "فشل حذف الحساب. يرجى المحاولة مرة أخرى.",
+    "errorDeleteIncomse": "فشل حذف الإيراد. يرجى المحاولة مرة أخرى.",
+    "errorDeleteExpenses": "فشل حذف المصروف. يرجى المحاولة مرة أخرى.",
+    "errorDeleteSchedule": "فشل حذف الجدول. يرجى المحاولة مرة أخرى.",
+    "errorDeleteTransactions": "فشل حذف المعاملات. يرجى المحاولة مرة أخرى.",
+    "errorDeleteTransfers": "فشل حذف التحويلات. يرجى المحاولة مرة أخرى.",
+    "errorUpdateAccount": "فشل تحديث الحساب. يرجى المحاولة مرة أخرى.",
+    "errorUpdateIncomse": "فشل تحديث الإيراد. يرجى المحاولة مرة أخرى.",
+    "errorUpdateExpenses": "فشل تحديث المصروف. يرجى المحاولة مرة أخرى.",
+    "errorUpdateSchedule": "فشل تحديث الجدول. يرجى المحاولة مرة أخرى.",
+    "errorUpdateTransactions": "فشل تحديث المعاملات. يرجى المحاولة مرة أخرى.",
+    "errorUpdateTransfers": "فشل تحديث التحويلات. يرجى المحاولة مرة أخرى.",
     "invalidCredentials": "خطأ في تسجيل الدخول. يرجى المحاولة مرة أخرى.",
     "noData": "لا توجد بيانات لعرضها.",
-    "noOption":"لم يتم اختيار خيار.",
-    "no_data_available":"لا توجد بيانات متاحة.",
-    "search_error":"فشل البحث. يرجى المحاولة مرة أخرى.",
-
-    "amoutRequired":"المبلغ مطلوب",
-    "amountless":"المبلغ يجب ان يكون اكبر من الصفر",
-    "accountRequired":"الرجاء اختيار الحساب المصدر والحساب الوجهة",
+    "noOption": "لم يتم اختيار خيار.",
+    "no_data_available": "لا توجد بيانات متاحة.",
+    "search_error": "فشل البحث. يرجى المحاولة مرة أخرى.",
+    "amoutRequired": "المبلغ مطلوب",
+    "amountless": "المبلغ يجب ان يكون اكبر من الصفر",
+    "accountRequired": "الرجاء اختيار الحساب المصدر والحساب الوجهة",
     "nameRequired": "الاسم مطلوب",
     "balanceRequired": "الرصيد مطلوب",
     "currencyRequired": "العملة مطلوبة",
@@ -169,8 +167,11 @@
     "descriptionRequired": "الوصف مطلوب",
     "categoryRequired": "الفئة مطلوبة",
     "dateRequired": "التاريخ مطلوب",
-    "logoutError":"فشل تسجيل الخروج. يرجى المحاولة مرة أخرى.",
-    "deleteConfirmation":"هل أنت متأكد أنك تريد حذف هذا العنصر؟ هذا الإجراء لا يمكن التراجع عنه."
+    "logoutError": "فشل تسجيل الخروج. يرجى المحاولة مرة أخرى.",
+    "deleteConfirmation": "هل أنت متأكد أنك تريد حذف هذا العنصر؟ هذا الإجراء لا يمكن التراجع عنه.",
+    "errorLoadingAccounts": "تعذّر تحميل الحسابات.",
+    "noSchedules": "لا توجد جداول بعد.",
+    "errorSameAccountTransfer": "يجب أن يكون حساب المصدر مختلفاً عن حساب الوجهة."
   },
   "incomses": {
     "title": "الإيرادات",
@@ -184,416 +185,342 @@
     "numberOfExpenses": "عدد المصروفات:",
     "lastUpdate": "آخر تحديث"
   },
-  "userDashboard":{
-    "title":"الحسابات"
+  "userDashboard": {
+    "title": "الحسابات"
   },
-  "viewTransations":{
-    "title":"المعاملات"
+  "viewTransations": {
+    "title": "المعاملات"
   },
-  "account":{
-    "accountdeleted":"حساب محذوف",
-    "totalBalance":"الرصيد الكلي:",
-    "date":"التاريخ",
-    "category":"الفئة",
-    "type":"النوع",
-    "amount":"المبلغ",
-    "noTransactions":"لا يوجد بيانات لعرضها."
+  "account": {
+    "accountdeleted": "حساب محذوف",
+    "totalBalance": "الرصيد الكلي:",
+    "date": "التاريخ",
+    "category": "الفئة",
+    "type": "النوع",
+    "amount": "المبلغ",
+    "noTransactions": "لا يوجد بيانات لعرضها."
   },
-  "accounts":{
-    "name":"الاسم",
-    "amount":"المبلغ",
-    "currency":"العملة",
-    "type":"النوع",
-    "actions":"الإجراءات",
-    "archivedAccounts":"الحسابات المؤرشفة"
+  "accounts": {
+    "name": "الاسم",
+    "amount": "المبلغ",
+    "currency": "العملة",
+    "type": "النوع",
+    "actions": "الإجراءات",
+    "archivedAccounts": "الحسابات المؤرشفة"
   },
-  "createAccount":{
-    "title":"إنشاء حساب",
-    "name":"الاسم",
-    "balance":"الرصيد",
-    "currency":"العملة",
-    "description":"الوصف",
-    "type":"النوع"
+  "createAccount": {
+    "title": "إنشاء حساب",
+    "name": "الاسم",
+    "balance": "الرصيد",
+    "currency": "العملة",
+    "description": "الوصف",
+    "type": "النوع"
   },
-  "createExpense":{
-    "title":"مصروف جديد",
-    "name":"الاسم",
-    "amount":"المبلغ",
-    "currency":"العملة",
-    "description":"الوصف",
-    "category":"الفئة"
+  "createExpense": {
+    "title": "مصروف جديد",
+    "name": "الاسم",
+    "amount": "المبلغ",
+    "currency": "العملة",
+    "description": "الوصف",
+    "category": "الفئة"
   },
-  "updateAccount":{
-    "title":"تحديث الحساب",
-    "name":"الاسم",
-    "balance":"الرصيد",
-    "currency":"العملة",
-    "type":"النوع",
-    "description":"الوصف"
+  "updateAccount": {
+    "title": "تحديث الحساب",
+    "name": "الاسم",
+    "balance": "الرصيد",
+    "currency": "العملة",
+    "type": "النوع",
+    "description": "الوصف"
   },
-  "createIncomse":{
-    "title":"دخل حديد",
-    "amount":"المبلغ",
-    "description":"الوصف",
-    "date":"التاريخ",
-    "category":"الفئة",
-    "name":"الاسم"
+  "createIncomse": {
+    "title": "دخل حديد",
+    "amount": "المبلغ",
+    "description": "الوصف",
+    "date": "التاريخ",
+    "category": "الفئة",
+    "name": "الاسم"
   },
-  "createSchedule":{
-    "title":"",
-    "sourceAmount":"المبلغ",
-    "destinationAmount":"المبلغ",
-    "sourceAccount":"الحساب",
-    "destinationAccount":"الحساب",
-    "date":"التاريخ",
-    "category":"الفئة",
-    "description":"الوصف",
-    "name":"الاسم",
-    "amount":"المبلغ",
-    "currency":"العملة",
-    "type":"النوع",
-    "status":"الحالة",
-    "nextExecutionDate":"التاريخ القادم"
+  "createSchedule": {
+    "title": "إنشاء جدول",
+    "sourceAmount": "المبلغ",
+    "destinationAmount": "المبلغ",
+    "sourceAccount": "الحساب",
+    "destinationAccount": "الحساب",
+    "date": "التاريخ",
+    "category": "الفئة",
+    "description": "الوصف",
+    "name": "الاسم",
+    "amount": "المبلغ",
+    "currency": "العملة",
+    "type": "النوع",
+    "status": "الحالة",
+    "nextExecutionDate": "التاريخ القادم",
+    "interval": "التكرار"
+  },
+  "placeholder": {
+    "search": "بحث...",
+    "sourceAccount": "حدد الحساب",
+    "destinationAccount": "حدد الحساب",
+    "category": "حدد الفئة",
+    "type": "حدد نوع",
+    "interval": "اختر التكرار",
+    "status": "حدد الحالة",
+    "name": "ادخل اسم",
+    "amount": "ادخل المبلغ",
+    "currency": "حدد العملة",
+    "description": "ادخل الوصف",
+    "date": "حدد التاريخ",
+    "balance": "ادخل الرصيد",
+    "nextExecutionDate": "حدد التاريخ التنفيذ القادم"
+  },
+  "CreateScheduledIncome": {
+    "title": "جدولة الدخل",
+    "sourceAmount": "المبلغ",
+    "destinationAmount": "المبلغ",
+    "sourceAccount": "الحساب",
+    "destinationAccount": "الحساب",
+    "date": "التاريخ",
+    "category": "الفئة",
+    "description": "الوصف",
+    "interval": "التكرار",
+    "name": "الاسم",
+    "amount": "المبلغ",
+    "currency": "العملة",
+    "type": "النوع",
+    "status": "الحالة",
+    "nextExecutionDate": "التاريخ القادم"
+  },
+  "Schedule": {},
+  "createTransfer": {
+    "title": "تحويل جديد",
+    "sourceAccount": "الحساب المصدر",
+    "destinationAccount": "الحساب المستهدف",
+    "amountSent": "المبلغ المرسل",
+    "exchangeRate": "سعر الصرف",
+    "amountReceived": "المبلغ المستلم",
+    "description": "الوصف",
+    "date": "التاريخ"
+  },
+  "updateExpense": {
+    "title": "تحديث المصروف",
+    "category": "الفئة",
+    "description": "الوصف",
+    "amount": "المبلغ",
+    "currency": "العملة",
+    "name": "الاسم",
+    "createdAt": "تاريخ الانشاء",
+    "updatedAt": "تاريخ التحديث"
+  },
+  "updateIncomse": {
+    "title": "تحديث الدخل",
+    "amount": "المبلغ",
+    "description": "الوصف",
+    "date": "التاريخ",
+    "category": "الفئة",
+    "name": "الاسم",
+    "createdAt": "تاريخ الانشاء",
+    "updatedAt": "تاريخ التحديث"
+  },
+  "scheduleInfo": {
+    "typeIncome": "دخل",
+    "typeExpense": "مصروف",
+    "typeTransfer": "تحويل",
+    "typeDebtPayment": "دفعة دين",
+    "active": "نشط",
+    "paused": "متوقف مؤقتاً",
+    "title": "تفاصيل الجدول",
+    "account": "الحساب",
+    "sourceAmount": "المبلغ المصدر",
+    "destinationAmount": "المبلغ المستهدف",
+    "sourceAccount": "الحساب المصدر",
+    "destinationAccount": "الحساب المستهدف",
+    "date": "التاريخ",
+    "category": "الفئة",
+    "description": "الوصف",
+    "interval": "التكرار",
+    "name": "الاسم",
+    "amount": "المبلغ",
+    "currency": "العملة",
+    "type": "النوع",
+    "status": "الحالة",
+    "nextExecutionDate": "التاريخ القادم",
+    "actions": "الإجراءات"
+  },
+  "updateSchedule": {},
+  "updateTransaction": {},
+  "debts": {
+    "recurringPayment": "دفعة متكررة",
+    "recurringPayments": "الدفعات المتكررة",
+    "noRecurringPayments": "لا توجد دفعات متكررة.",
+    "recurringPaymentHint": "يُضاف سداد تلقائياً في كل فترة، ولا يتجاوز المتبقي. يتوقف الجدول عند سداد الدين.",
+    "interval": "كل",
+    "intervalDaily": "يوم",
+    "intervalWeekly": "أسبوع",
+    "intervalMonthly": "شهر",
+    "intervalYearly": "سنة",
+    "firstPaymentDate": "أول دفعة",
+    "nextPayment": "القادمة: {{date}}",
+    "paymentFinished": "انتهت",
+    "errorSchedule": "تعذّر إنشاء الدفعة المتكررة.",
+    "openDebt": "فتح الدين",
+    "lockedHint": "لا يمكن تغيير الاتجاه والعملة بعد إضافة حركات.",
+    "remainingHint": "المتبقي اليوم: {{amount}} {{currency}}",
+    "noAccountInCurrency": "لا يوجد لديك حساب نشط بعملة {{currency}}.",
+    "validation": {
+      "intervalRequired": "اختر التكرار.",
+      "noPastDate": "لا يمكن أن تكون أول دفعة في الماضي.",
+      "nameRequired": "الاسم مطلوب.",
+      "directionRequired": "اختر الاتجاه.",
+      "currencyRequired": "اختر العملة.",
+      "rateRange": "يجب أن تكون الفائدة بين 0 و100.",
+      "startDateRequired": "اختر تاريخ البداية.",
+      "noFutureDate": "لا يمكن أن يكون التاريخ في المستقبل.",
+      "typeRequired": "اختر النوع.",
+      "amountPositive": "يجب أن يكون المبلغ أكبر من صفر.",
+      "dateRequired": "اختر التاريخ.",
+      "beforeStart": "التاريخ قبل بداية الدين.",
+      "accountRequired": "اختر الحساب.",
+      "repaymentTooBig": "السداد أكبر من المبلغ المستحق.",
+      "lockedAfterMovements": "لا يمكن تغيير الاتجاه والعملة بعد إضافة حركات.",
+      "accountArchived": "الحساب مؤرشف.",
+      "currencyMismatch": "يجب أن تكون عملة الحساب مثل عملة الدين."
     },
-    "placeholder":{
-    "search":"بحث...",
-    "sourceAccount":"حدد الحساب",
-    "destinationAccount":"حدد الحساب",
-    "category":"حدد الفئة",
-    "type":"حدد نوع",
-    "interval":"حدد interval",
-    "status":"حدد الحالة",
-    "name":"ادخل اسم",
-    "amount":"ادخل المبلغ",
-    "currency":"حدد العملة",
-    "description":"ادخل الوصف",
-    "date":"حدد التاريخ",
-    "balance":"ادخل الرصيد",
-    "nextExecutionDate":"حدد التاريخ التنفيذ القادم"
+    "type": "النوع",
+    "interestPaid": "الفائدة المدفوعة",
+    "asOf": "محسوب بتاريخ {{date}}",
+    "recorded": "مسجَّل",
+    "deleteMovement": "حذف الحركة",
+    "errorDeleteMovement": "تعذّر حذف الحركة.",
+    "summary": "الملخص",
+    "all": "الكل",
+    "net": "الصافي",
+    "settled": "مسدَّد",
+    "noMatch": "لا توجد ديون في هذه المجموعة.",
+    "ratePerYear": "{{rate}}% سنوياً",
+    "title": "الديون",
+    "detailsTitle": "تفاصيل الدين",
+    "empty": "لا توجد ديون بعد.",
+    "loading": "جاري تحميل الديون...",
+    "loadError": "تعذّر تحميل الديون.",
+    "notFound": "لم يُعثر على هذا الدين.",
+    "backToList": "العودة إلى الديون",
+    "owedByMe": "عليّ",
+    "owedToMe": "لي",
+    "name": "الاسم",
+    "counterparty": "الطرف الآخر",
+    "direction": "الاتجاه",
+    "currency": "العملة",
+    "annualRate": "الفائدة السنوية (%)",
+    "compounding": "ضم الفائدة",
+    "compoundingNone": "بدون",
+    "compoundingMonthly": "شهرياً",
+    "compoundingYearly": "سنوياً",
+    "startDate": "تاريخ البداية",
+    "note": "ملاحظة",
+    "countInflowsAsIncome": "تسجيل المبالغ الداخلة كدخل",
+    "countOutflowsAsExpense": "تسجيل المبالغ الخارجة كمصروف",
+    "principal": "الأصل",
+    "accruedInterest": "الفائدة",
+    "totalOwed": "المتبقي",
+    "totalDisbursed": "إجمالي المبلغ",
+    "totalRepaid": "إجمالي المسدَّد",
+    "movements": "الحركات",
+    "noMovements": "لا توجد حركات بعد.",
+    "disbursement": "مبلغ جديد",
+    "repayment": "سداد",
+    "amount": "المبلغ",
+    "date": "التاريخ",
+    "account": "الحساب",
+    "description": "الوصف",
+    "interestPart": "جزء الفائدة",
+    "principalPart": "جزء الأصل",
+    "addDebt": "إضافة دين",
+    "editDebt": "تعديل الدين",
+    "addMovement": "إضافة حركة",
+    "errorSave": "تعذّر حفظ الدين.",
+    "errorDelete": "تعذّر حذف الدين.",
+    "errorHasMovements": "احذف حركات هذا الدين أولاً.",
+    "errorMovement": "تعذّر حفظ الحركة.",
+    "errorAccountHasDebt": "هذا الحساب عليه حركات دين ولا يمكن حذفه.",
+    "errorDebtRecord": "هذا السجل تابع لدين. عدّله من صفحة الدين.",
+    "category": "دين"
   },
-  "CreateScheduledIncome":{
-    "title":"جدولة الدخل",
-    "sourceAmount":"المبلغ",
-    "destinationAmount":"المبلغ",
-    "sourceAccount":"الحساب",
-    "destinationAccount":"الحساب",
-    "date":"التاريخ",
-    "category":"الفئة",
-    "description":"الوصف",
-    "interval":"الinterval",
-    "name":"الاسم",
-    "amount":"المبلغ",
-    "currency":"العملة",
-    "type":"النوع",
-    "status":"الحالة",
-    "nextExecutionDate":"التاريخ القادم"
+  "buttons": {
+    "moreOptions": "خيارات إضافية",
+    "addAccount": "إنشاء حساب",
+    "createIncomse": "دخل حديد",
+    "updateAccount": "تحديث الحساب",
+    "createExpense": "مصروف جديدد",
+    "createSchedule": "جدولة التحويلات",
+    "createTransaction": "عملية جديدة",
+    "createTransfer": "تحويل جديد",
+    "updateExpense": "تحديث المصروف",
+    "updateIncomse": "تحديث الدخل",
+    "updateSchedule": "تحديث الجدول",
+    "updateTransaction": "تحديث المعامله",
+    "updateTransfer": "تحديث التحويل",
+    "updating": "يتم تحديث",
+    "loading": "جار التحميل",
+    "add": "إضافة",
+    "cancel": "الغاء",
+    "edit": "تعديل",
+    "delete": "حذف",
+    "save": "حفظ",
+    "close": "اغلاق",
+    "ok": "موافق",
+    "active": "نشط",
+    "archived": "ارشفة",
+    "confirmDelete": "تأكيد الحذف",
+    "confirm": "تأكيد",
+    "yes": "نعم",
+    "no": "لا",
+    "pause": "ايقاف",
+    "resume": "استئناف",
+    "processing": "جاري المعالجة..."
   },
-  "Schedule":{
-
+  "currency": {
+    "usd": "USD",
+    "eur": "EUR",
+    "sek": "SEK",
+    "aed": "AED",
+    "trt": "TRY",
+    "sar": "SAR",
+    "gbp": "GBP",
+    "jpy": "JPY"
   },
-  "createTransfer":{
-    "title":"تحويل جديد",
-    "sourceAccount":"الحساب المصدر",
-    "destinationAccount":"الحساب المستهدف",
-    "amountSent":"المبلغ المرسل",
-    "exchangeRate":"نسبة exc",
-    "amountReceived":"المبلغ المستلم",
-    "description":"الوصف",
-    "date":"التاريخ"
+  "transactionDetails": {
+    "debtIn": "دين داخل",
+    "debtOut": "دين خارج",
+    "amount": "المبلغ",
+    "account": "الحساب",
+    "sourceAccount": "الحساب المصدر",
+    "destinationAccount": "الحساب المستهدف",
+    "date": "التاريخ",
+    "description": "الوصف",
+    "type": "النوع",
+    "category": "الفئة",
+    "status": "الحالة",
+    "actions": "الإجراءات",
+    "transaction": "المعاملة",
+    "incomse": "دخل",
+    "expense": "مصروف",
+    "inTransfer": "تحويل وارد",
+    "outTransfer": "تحويل صادر",
+    "details": "تفاصيل"
   },
-  "updateExpense":{
-    "title":"تحديث المصروف",
-    "category":"الفئة",
-    "description":"الوصف",
-    "amount":"المبلغ",
-    "currency":"العملة",
-    "name":"الاسم",
-    "createdAt":"تاريخ الانشاء",
-    "updatedAt":"تاريخ التحديث"
-  },
-
-  "updateIncomse":{
-    "title":"تحديث الدخل",
-    "amount":"المبلغ",
-    "description":"الوصف",
-    "date":"التاريخ",
-    "category":"الفئة",
-    "name":"الاسم",
-    "createdAt":"تاريخ الانشاء",
-    "updatedAt":"تاريخ التحديث"
-  },
-  "scheduleInfo":{
-    "typeIncome":"دخل",
-    "typeExpense":"مصروف",
-    "typeTransfer":"تحويل",
-    "typeDebtPayment":"دفعة دين",
-    "active":"نشط",
-    "paused":"متوقف مؤقتاً",
-    "title":"تفاصيل الجدول",
-    "account":"الحساب",
-    "sourceAmount":"المبلغ المصدر",
-    "destinationAmount":"المبلغ المستهدف",
-    "sourceAccount":"الحساب المصدر",
-    "destinationAccount":"الحساب المستهدف",
-    "date":"التاريخ",
-    "category":"الفئة",
-    "description":"الوصف",
-    "interval":"الinterval",
-    "name":"الاسم",
-    "amount":"المبلغ",
-    "currency":"العملة",
-    "type":"النوع",
-    "status":"الحالة",
-    "nextExecutionDate":"التاريخ القادم",
-    "actions":"الإجراءات"
-  },
-  "updateSchedule":{
-
-  },
-  "updateTransaction":{
-
-  },
-
-  "debts":{
-
-    "recurringPayment":"دفعة متكررة",
-
-    "recurringPayments":"الدفعات المتكررة",
-
-    "noRecurringPayments":"لا توجد دفعات متكررة.",
-
-    "recurringPaymentHint":"يُضاف سداد تلقائياً في كل فترة، ولا يتجاوز المتبقي. يتوقف الجدول عند سداد الدين.",
-
-    "interval":"كل",
-
-    "intervalDaily":"يوم",
-
-    "intervalWeekly":"أسبوع",
-
-    "intervalMonthly":"شهر",
-
-    "intervalYearly":"سنة",
-
-    "firstPaymentDate":"أول دفعة",
-
-    "nextPayment":"القادمة: {{date}}",
-
-    "paymentFinished":"انتهت",
-
-    "errorSchedule":"تعذّر إنشاء الدفعة المتكررة.",
-
-    "openDebt":"فتح الدين",
-
-    "lockedHint":"لا يمكن تغيير الاتجاه والعملة بعد إضافة حركات.",
-
-    "remainingHint":"المتبقي اليوم: {{amount}} {{currency}}",
-
-    "noAccountInCurrency":"لا يوجد لديك حساب نشط بعملة {{currency}}.",
-
-    "validation":{
-
-      "intervalRequired":"اختر التكرار.",
-
-      "noPastDate":"لا يمكن أن تكون أول دفعة في الماضي.","nameRequired": "الاسم مطلوب.", "directionRequired": "اختر الاتجاه.", "currencyRequired": "اختر العملة.", "rateRange": "يجب أن تكون الفائدة بين 0 و100.", "startDateRequired": "اختر تاريخ البداية.", "noFutureDate": "لا يمكن أن يكون التاريخ في المستقبل.", "typeRequired": "اختر النوع.", "amountPositive": "يجب أن يكون المبلغ أكبر من صفر.", "dateRequired": "اختر التاريخ.", "beforeStart": "التاريخ قبل بداية الدين.", "accountRequired": "اختر الحساب.", "repaymentTooBig": "السداد أكبر من المبلغ المستحق.", "lockedAfterMovements": "لا يمكن تغيير الاتجاه والعملة بعد إضافة حركات.", "accountArchived": "الحساب مؤرشف.", "currencyMismatch": "يجب أن تكون عملة الحساب مثل عملة الدين."},
-
-    "type":"النوع",
-
-    "interestPaid":"الفائدة المدفوعة",
-
-    "asOf":"محسوب بتاريخ {{date}}",
-
-    "recorded":"مسجَّل",
-
-    "deleteMovement":"حذف الحركة",
-
-    "errorDeleteMovement":"تعذّر حذف الحركة.",
-
-    "summary":"الملخص",
-
-    "all":"الكل",
-
-    "net":"الصافي",
-
-    "settled":"مسدَّد",
-
-    "noMatch":"لا توجد ديون في هذه المجموعة.",
-
-    "ratePerYear":"{{rate}}% سنوياً",
-
-    "title":"الديون",
-
-    "detailsTitle":"تفاصيل الدين",
-
-    "empty":"لا توجد ديون بعد.",
-
-    "loading":"جاري تحميل الديون...",
-
-    "loadError":"تعذّر تحميل الديون.",
-
-    "notFound":"لم يُعثر على هذا الدين.",
-
-    "backToList":"العودة إلى الديون",
-
-    "owedByMe":"عليّ",
-
-    "owedToMe":"لي",
-
-    "name":"الاسم",
-
-    "counterparty":"الطرف الآخر",
-
-    "direction":"الاتجاه",
-
-    "currency":"العملة",
-
-    "annualRate":"الفائدة السنوية (%)",
-
-    "compounding":"ضم الفائدة",
-
-    "compoundingNone":"بدون",
-
-    "compoundingMonthly":"شهرياً",
-
-    "compoundingYearly":"سنوياً",
-
-    "startDate":"تاريخ البداية",
-
-    "note":"ملاحظة",
-
-    "countInflowsAsIncome":"تسجيل المبالغ الداخلة كدخل",
-
-    "countOutflowsAsExpense":"تسجيل المبالغ الخارجة كمصروف",
-
-    "principal":"الأصل",
-
-    "accruedInterest":"الفائدة",
-
-    "totalOwed":"المتبقي",
-
-    "totalDisbursed":"إجمالي المبلغ",
-
-    "totalRepaid":"إجمالي المسدَّد",
-
-    "movements":"الحركات",
-
-    "noMovements":"لا توجد حركات بعد.",
-
-    "disbursement":"مبلغ جديد",
-
-    "repayment":"سداد",
-
-    "amount":"المبلغ",
-
-    "date":"التاريخ",
-
-    "account":"الحساب",
-
-    "description":"الوصف",
-
-    "interestPart":"جزء الفائدة",
-
-    "principalPart":"جزء الأصل",
-
-    "addDebt":"إضافة دين",
-
-    "editDebt":"تعديل الدين",
-
-    "addMovement":"إضافة حركة",
-
-    "errorSave":"تعذّر حفظ الدين.",
-
-    "errorDelete":"تعذّر حذف الدين.",
-
-    "errorHasMovements":"احذف حركات هذا الدين أولاً.",
-
-    "errorMovement":"تعذّر حفظ الحركة.",
-
-    "errorAccountHasDebt":"هذا الحساب عليه حركات دين ولا يمكن حذفه.",
-
-    "errorDebtRecord":"هذا السجل تابع لدين. عدّله من صفحة الدين.",
-
-    "category":"دين"
-
-  },
-
-  "buttons":{
-    "moreOptions":"خيارات إضافية",
-    "addAccount":"إنشاء حساب",
-    "createIncomse":"دخل حديد",
-    "updateAccount":"تحديث الحساب",
-    "createExpense":"مصروف جديدد",
-    "createSchedule":"جدولة التحويلات",
-    "createTransaction":"عملية جديدة",
-    "createTransfer":"تحويل جديد",
-    "updateExpense":"تحديث المصروف",
-    "updateIncomse":"تحديث الدخل",
-    "updateSchedule":"تحديث الجدول",
-    "updateTransaction":"تحديث المعامله",
-    "updateTransfer":"تحديث التحويل",
-    "updating":"يتم تحديث",
-    "loading":"جار التحميل",
-    "add":"إضافة",
-    "cancel":"الغاء",
-    "edit":"تعديل",
-    "delete":"حذف",
-    "save":"حفظ",
-    "close":"اغلاق",
-    "ok":"موافق",
-    "active":"نشط",
-    "archived":"ارشفة",
-    "confirmDelete":"تأكيد الحذف",
-    "confirm":"تأكيد",
-    "yes":"نعم",
-    "no":"لا",
-    "pause":"ايقاف",
-    "resume":"استئناف"
-  },
-  "currency":{
-    "usd":"USD",
-    "eur":"EUR",
-    "sek":"SEK",
-    "aed":"AED",
-    "trt":"TRY",
-    "sar":"SAR",
-    "gbp":"GBP",
-    "jpy":"JPY"
-  },
-  "transactionDetails":
-  {
-    "debtIn":"دين داخل",
-    "debtOut":"دين خارج",
-    "amount":"المبلغ",
-    "account":"الحساب",
-    "sourceAccount":"الحساب المصدر",
-    "destinationAccount":"الحساب المستهدف",
-    "date":"التاريخ",
-    "description":"الوصف",
-    "type":"النوع",
-    "category":"الفئة",
-    "status":"الحالة",
-    "actions":"الإجراءات",
-    "transaction":"المعاملة",
-    "incomse":"دخل",
-    "expense":"مصروف",
-    "inTransfer":"تحويل وارد",
-    "outTransfer":"تحويل صادر",
-    "details":"تفاصيل"
-  },
-  "updateTransfer":
-  {
-    "title":"تحديث التحويل",
-    "sourceAccount":"الحساب المصدر",
-    "destinationAccount":"الحساب المستهدف",
-    "amountSent":"المبلغ المرسل",
-    "exchangeRate":"نسبة exc",
-    "amountReceived":"المبلغ المستلم",
-    "description":"الوصف",
-    "date":"التاريخ",
-    "status":"الحالة",
-    "createdAt":"تاريخ الانشاء",
-    "updatedAt":"تاريخ التحديث",
-    "actions":"الإجراءات"
-    
+  "updateTransfer": {
+    "title": "تحديث التحويل",
+    "sourceAccount": "الحساب المصدر",
+    "destinationAccount": "الحساب المستهدف",
+    "amountSent": "المبلغ المرسل",
+    "exchangeRate": "سعر الصرف",
+    "amountReceived": "المبلغ المستلم",
+    "description": "الوصف",
+    "date": "التاريخ",
+    "status": "الحالة",
+    "createdAt": "تاريخ الانشاء",
+    "updatedAt": "تاريخ التحديث",
+    "actions": "الإجراءات"
   },
   "languageSelector": {
     "label": "تغيير اللغة"
@@ -601,6 +528,30 @@
   "report": {
     "fromDate": "من تاريخ",
     "toDate": "إلى تاريخ",
-    "search": "بحث"
+    "search": "بحث",
+    "title": "التقرير"
+  },
+  "dashboard": {
+    "loading": "جاري تحميل الرصيد...",
+    "error": "تعذّر تحميل الرصيد",
+    "noData": "لا توجد بيانات رصيد بعد",
+    "overview": "نظرة عامة",
+    "balanceTrend": "تطور الرصيد",
+    "currencies": "عملات"
+  },
+  "viewAccounts": {
+    "title": "الحسابات"
+  },
+  "successConfirmation": {
+    "title": "تم"
+  },
+  "greeting": {
+    "morning": "صباح الخير",
+    "afternoon": "مساء الخير",
+    "evening": "مساء الخير",
+    "welcome": "مرحباً بعودتك"
+  },
+  "TransactionInfo": {
+    "title": "تفاصيل المعاملة"
   }
 }

@@ -37,12 +37,12 @@ const SchedulesComponent = ({ schedules }) => {
     queryFn: getAccounts,
   });
   if (isAccountsLoading) {
-    return <div>{i18n.t("loading")}</div>;
+    return <div>{i18n.t("messages.loading")}</div>;
   }
   if (isAccountsError) {
     return (
       <div>
-        {i18n.t("errorLoadingAccounts")}: {accountsError.message}
+        {i18n.t("messages.errorLoadingAccounts")}: {accountsError.message}
       </div>
     );
   }
@@ -97,7 +97,7 @@ const SchedulesComponent = ({ schedules }) => {
             />
           ))
         ) : (
-          <p className={styles.emptyState}>{i18n.t("noSchedules")}</p>
+          <p className={styles.emptyState}>{i18n.t("messages.noSchedules")}</p>
         )}
       </div>
 

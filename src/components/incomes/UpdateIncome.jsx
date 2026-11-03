@@ -32,7 +32,7 @@ const UpdateIncomse = ({ isOpen, isClose, incomse }) => {
     onError: () => {
       setError({
         hasError: true,
-        message: i18n.t("message.errorUpdateIncomse"),
+        message: i18n.t("messages.errorUpdateIncomse"),
       });
     },
   });
@@ -53,7 +53,7 @@ const UpdateIncomse = ({ isOpen, isClose, incomse }) => {
             });
           }
         } catch (err) {
-          console.error(i18n.t("message.errorFetchIncomse"), err);
+          console.error(i18n.t("messages.errorLoadingIncomse"), err);
         }
       }
     };
@@ -112,7 +112,7 @@ const UpdateIncomse = ({ isOpen, isClose, incomse }) => {
             <div className={styles.inputContainer}>
               <p>{i18n.t("updateIncomse.createdAt")}:</p>
               <Datepicker
-                placeholder={i18n.t("placeholder.createdAt")}
+                placeholder={i18n.t("placeholder.date")}
                 name="createdAt"
                 value={incomseData.createdAt}
                 onChange={(date) => {
@@ -138,7 +138,7 @@ const UpdateIncomse = ({ isOpen, isClose, incomse }) => {
                 variant="primary"
                 text={
                   nutation.isPending
-                    ? i18n.t("message.loading")
+                    ? i18n.t("buttons.loading")
                     : i18n.t("buttons.updateIncomse")
                 }
                 type="submit"

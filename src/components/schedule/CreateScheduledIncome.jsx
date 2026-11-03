@@ -40,7 +40,7 @@ const CreateScheduledIncome = ({
     onError: () => {
       setError({
         hasError: true,
-        message: i18n.t("errorCreateIncomse"),
+        message: i18n.t("messages.errorCreateIncomse"),
       });
     },
   });
@@ -81,12 +81,12 @@ const CreateScheduledIncome = ({
     if (!incomeData.amountSend || parseFloat(incomeData.amountSend) <= 0) {
       setError({
         hasError: true,
-        message: i18n.t("errorCreateIncomse"),
+        message: i18n.t("messages.errorCreateIncomse"),
       });
       return false;
     }
     if (!incomeData.category) {
-      setError({ hasError: true, message: i18n.t("categoryRequired") });
+      setError({ hasError: true, message: i18n.t("messages.categoryRequired") });
       return false;
     }
     return true;
@@ -150,7 +150,7 @@ const CreateScheduledIncome = ({
 
           <div className={styles.inputContainer}>
             <FormInput
-              label={i18n.t("CreateScheduledIncome.amountSend")}
+              label={i18n.t("CreateScheduledIncome.amount")}
               name="amountSend"
               type="number"
               value={incomeData.amountSend}

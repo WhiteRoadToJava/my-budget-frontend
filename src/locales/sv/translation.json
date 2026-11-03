@@ -46,14 +46,14 @@
     "errorText": "Vi kunde inte aktivera ditt konto just nu. Försök igen senare."
   },
   "menu": {
-    "debts":"Skulder",
+    "debts": "Skulder",
     "overview": "Översikt",
     "accounts": "Konton",
     "expenses": "Utgifter",
     "incomes": "Inkomster",
     "transactions": "Transaktioner",
     "schedule": "Planering",
-    "reports":"reporter",
+    "reports": "reporter",
     "calendar": "Kalender",
     "settings": "Inställningar"
   },
@@ -110,480 +110,409 @@
   },
   "terminal": {
     "terminal": "Välkommen resenär, till det stora",
-    "terminlaTow": "och ibland förvirrande",
-    "terminalThree": "universum av programmering."
+    "terminalThree": "universum av programmering.",
+    "terminalTwo": "och ibland förvirrande"
   },
   "accountsPage": {
     "buttonText": "Lägg till konto",
     "searchInput": "Sök"
   },
   "accountInfo": {
-    "totaBalance": "Total balance",
-    "NumberOFAccounts": "Number of accounts",
-    "lastUpdate": "Last update"
+    "totaBalance": "Totalt saldo",
+    "NumberOFAccounts": "Antal konton",
+    "lastUpdate": "Senast uppdaterad"
   },
   "messages": {
-    "errorUpdateTransfer":"Det gick inte att uppdatera överföringen. Försök igen.",
+    "errorUpdateTransfer": "Det gick inte att uppdatera överföringen. Försök igen.",
     "success": "Ett återställningslänk har skickats till",
-    "loadingError": "Error loading transactions: ",
-    "loading":"Laddar transaktioner...",
-    "loadingSchedule":"Laddar planering...",
-    "loadingAccounts":"Laddar konton...",
-    "errorLoadingIncomse":"Failed to loading incomse. Please try again.",
-    "errorLoadingExpenses":"Failed to loading expenses. Please try again.",
-    "errorLoadingSchedule":"Failed to loading schedule. Please try again.", 
-    "errorLoadingTransactions":"Failed to loading transactions. Please try again.",
-    "errorLoadingTransfers":"Failed to loading transfers. Please try again.",
-    "errorCreateAccount":"Failed to create account. Please try again.",
-    "errorCreateIncomse":"Failed to create incomse. Please try again.",
-    "errorCreateExpense":"Failed to create expense. Please try again.",
-    "errorCreateSchedule":"Failed to create schedule. Please try again.",
-    "errorCreateTransaction":"Failed to create transaction. Please try again.",
-    "errorCreateTransfer":"Failed to create transfer. Please try again.",
-
-    "errorDeleteAccount":"Failed to delete account. Please try again.",
-    "errorDeleteIncomse":"Failed to delete incomse. Please try again.",
-    "errorDeleteExpenses":"Failed to delete expenses. Please try again.",
-    "errorDeleteSchedule":"Det gick inte att ta bort schemat. Försök igen.",
-    "errorDeleteTransactions":"Failed to delete transactions. Please try again.",
-    "errorDeleteTransfers":"Failed to delete transfers. Please try again",
-    "errorUpdateAccount":"Failed to update account. Please try again.",
-    "errorUpdateIncomse":"Failed to update incomse. Please try again.",
-    "errorUpdateExpenses":"Failed to update expenses. Please try again.",
-    "errorUpdateSchedule":"Det gick inte att uppdatera schemat. Försök igen.",
-    "errorUpdateTransactions":"Failed to update transactions. Please try again.",
-    "errorUpdateTransfers":"Failed to update transfers. Please try again.",
-    "invalidCredentials": "Login failed. Please try again.",
-    "noData": "No data found.",
-    "noOption":"No option selected.",
-
-    "amoutRequired":"Amount is required",
-    "amountless":"Amount must be greater than zero.",
-    "accountRequired":"Välj både käll- och mottagarkonto.",
-    "logoutError":"Failed to logout. Please try again.",
-    "no_data_available":"No data available.",
-    "search_error":"Failed to search. Please try again.",
-
-
-    "nameRequired": "Name is required",
-    "balanceRequired": "Balance is required",
-    "currencyRequired": "Currency is required",
-    "typeRequired": "Type is required",
-    "descriptionRequired": "Description is required",
-    "categoryRequired": "Category is required",
-    "dateRequired": "Date is required",
-    "deleteConfirmation":"Are you sure you want to delete this item? This action cannot be undone."
+    "loadingError": "Fel vid laddning av transaktioner: ",
+    "loading": "Laddar transaktioner...",
+    "loadingSchedule": "Laddar planering...",
+    "loadingAccounts": "Laddar konton...",
+    "errorLoadingIncomse": "Det gick inte att ladda inkomster. Försök igen.",
+    "errorLoadingExpenses": "Det gick inte att ladda utgifter. Försök igen.",
+    "errorLoadingSchedule": "Det gick inte att ladda schemat. Försök igen.",
+    "errorLoadingTransactions": "Det gick inte att ladda transaktioner. Försök igen.",
+    "errorLoadingTransfers": "Det gick inte att ladda överföringar. Försök igen.",
+    "errorCreateAccount": "Det gick inte att skapa kontot. Försök igen.",
+    "errorCreateIncomse": "Det gick inte att skapa inkomsten. Försök igen.",
+    "errorCreateExpense": "Det gick inte att skapa utgiften. Försök igen.",
+    "errorCreateSchedule": "Det gick inte att skapa schemat. Försök igen.",
+    "errorCreateTransaction": "Det gick inte att skapa transaktionen. Försök igen.",
+    "errorCreateTransfer": "Det gick inte att skapa överföringen. Försök igen.",
+    "errorDeleteAccount": "Det gick inte att ta bort kontot. Försök igen.",
+    "errorDeleteIncomse": "Det gick inte att ta bort inkomsten. Försök igen.",
+    "errorDeleteExpenses": "Det gick inte att ta bort utgiften. Försök igen.",
+    "errorDeleteSchedule": "Det gick inte att ta bort schemat. Försök igen.",
+    "errorDeleteTransactions": "Det gick inte att ta bort transaktionen. Försök igen.",
+    "errorDeleteTransfers": "Failed to delete transfers. Please try again",
+    "errorUpdateAccount": "Det gick inte att uppdatera kontot. Försök igen.",
+    "errorUpdateIncomse": "Det gick inte att uppdatera inkomsten. Försök igen.",
+    "errorUpdateExpenses": "Det gick inte att uppdatera utgiften. Försök igen.",
+    "errorUpdateSchedule": "Det gick inte att uppdatera schemat. Försök igen.",
+    "errorUpdateTransactions": "Det gick inte att uppdatera transaktionen. Försök igen.",
+    "errorUpdateTransfers": "Det gick inte att uppdatera överföringen. Försök igen.",
+    "invalidCredentials": "Inloggningen misslyckades. Försök igen.",
+    "noData": "Inga data hittades.",
+    "noOption": "Inget alternativ valt.",
+    "amoutRequired": "Belopp krävs",
+    "amountless": "Beloppet måste vara större än noll.",
+    "accountRequired": "Välj både käll- och mottagarkonto.",
+    "logoutError": "Det gick inte att logga ut. Försök igen.",
+    "no_data_available": "Inga data tillgängliga.",
+    "search_error": "Sökningen misslyckades. Försök igen.",
+    "nameRequired": "Namn krävs",
+    "balanceRequired": "Saldo krävs",
+    "currencyRequired": "Valuta krävs",
+    "typeRequired": "Typ krävs",
+    "descriptionRequired": "Beskrivning krävs",
+    "categoryRequired": "Kategori krävs",
+    "dateRequired": "Datum krävs",
+    "deleteConfirmation": "Är du säker på att du vill ta bort detta? Det går inte att ångra.",
+    "errorLoadingAccounts": "Det gick inte att ladda kontona.",
+    "noSchedules": "Inga scheman än.",
+    "errorSameAccountTransfer": "Från- och tillkonto måste vara olika."
   },
   "incomses": {
-    "title": "Incomses",
-    "totolBalance": "Total balance:",
-    "numberOfIncomses": "Number of incomses:",
-    "lastUpdate": "Last update"
+    "title": "Inkomster",
+    "totolBalance": "Totalt saldo:",
+    "numberOfIncomses": "Antal inkomster:",
+    "lastUpdate": "Senast uppdaterad"
   },
   "expenses": {
-    "title": "Expenses",
+    "title": "Utgifter",
     "totolBalance": "Total balance:",
     "numberOfExpenses": "Number of expenses:",
     "lastUpdate": "Last update"
   },
-  "userDashboard":{
-    "title":"konton"
+  "userDashboard": {
+    "title": "konton"
   },
-  "viewTransations":{
-    "title":"Transaktioner"
+  "viewTransations": {
+    "title": "Transaktioner"
   },
-  "account":{
-    "accountdeleted":"Raderat konto",
-    "totalBalance":"Total balance:",
-    "date":"Datum",
-    "category":"",
-    "type":"Type",
-    "amount":"Summa",
-    "noTransactions":"Ingen transaktion hittad."
+  "account": {
+    "accountdeleted": "Raderat konto",
+    "totalBalance": "Totalt saldo",
+    "date": "Datum",
+    "category": "Kategori",
+    "type": "Typ",
+    "amount": "Summa",
+    "noTransactions": "Ingen transaktion hittad."
   },
-  "accounts":{
-    "name":"Namn",
-    "amount":"Belopp",
-    "currency":"Valuta",
-    "type":"Typ",
-    "actions":"Handlar",
-    "archivedAccounts":"Arkivera konton"
+  "accounts": {
+    "name": "Namn",
+    "amount": "Belopp",
+    "currency": "Valuta",
+    "type": "Typ",
+    "actions": "Handlar",
+    "archivedAccounts": "Arkivera konton"
   },
-  "createAccount":{
-    "title":"Skapa konto",
-    "name":"Namn",
-    "balance":"Saldo",
-    "currency":"Valuta",
-    "description":"Beskrivning",
-    "type":"Typ"
+  "createAccount": {
+    "title": "Skapa konto",
+    "name": "Namn",
+    "balance": "Saldo",
+    "currency": "Valuta",
+    "description": "Beskrivning",
+    "type": "Typ"
   },
-  "createExpense":{
-    "title":"Skapa utgift",
-    "name":"Namn",
-    "amount":"Belopp",
-    "currency":"Valuta",
-    "description":"Beskrivning",
-    "category":"Kategori"
+  "createExpense": {
+    "title": "Skapa utgift",
+    "name": "Namn",
+    "amount": "Belopp",
+    "currency": "Valuta",
+    "description": "Beskrivning",
+    "category": "Kategori"
   },
-  "updateAccount":{
-    "title":"Uppdatera konto",
-    "name":"Namn",
-    "balance":"Saldo",
-    "currency":"Valuta",
-    "type":"Typ"
+  "updateAccount": {
+    "title": "Uppdatera konto",
+    "name": "Namn",
+    "balance": "Saldo",
+    "currency": "Valuta",
+    "type": "Typ"
   },
-  "createIncomse":{
-    "title":"Skapa inkomst",
-    "amount":"Belopp",
-    "description":"Beskrivning",
-    "date":"Datum",
-    "category":"Kategori",
-    "name":"Namn"
+  "createIncomse": {
+    "title": "Skapa inkomst",
+    "amount": "Belopp",
+    "description": "Beskrivning",
+    "date": "Datum",
+    "category": "Kategori",
+    "name": "Namn"
   },
-  "createSchedule":{
-    "title":"Skapa planering",
-    "sourceAmount":"Källabelopp",
-    "destinationAmount":"Destinationbelopp",
-    "sourceAccount":"Källakonto",
-    "destinationAccount":"Destinationkonto",
-    "date":"Datum",
-    "category":"Kategori",
-    "description":"Beskrivning",
-    "interval":"Interval",
-    "name":"Namn",
-    "amount":"Belopp",
-    "currency":"Valuta",
-    "type":"Typ",
-    "status":"Status",
-    "nextExecutionDate":"Nästa körning"
+  "createSchedule": {
+    "title": "Skapa planering",
+    "sourceAmount": "Källabelopp",
+    "destinationAmount": "Destinationbelopp",
+    "sourceAccount": "Källakonto",
+    "destinationAccount": "Destinationkonto",
+    "date": "Datum",
+    "category": "Kategori",
+    "description": "Beskrivning",
+    "interval": "Intervall",
+    "name": "Namn",
+    "amount": "Belopp",
+    "currency": "Valuta",
+    "type": "Typ",
+    "status": "Status",
+    "nextExecutionDate": "Nästa körning"
   },
-  "placeholder":{
-    "search":"Sök...",
-    "sourceAccount":"Välj källkonto",
-    "destinationAccount":"Välj destinationkonto",
-    "interval":"Välj interval",
-    "category":"Välj kategori",
-    "type":"Välj typ",
-    "status":"Välj status",
-    "name":"Ange namn",
-    "amount":"Ange belopp",
-    "currency":"Välj valuta",
-    "description":"Ange beskrivning",
-    "date":"Välj datum",
-    "balance":"Ange saldo",
-    "nextExecutionDate":"Välj nästa körning"
+  "placeholder": {
+    "search": "Sök...",
+    "sourceAccount": "Välj källkonto",
+    "destinationAccount": "Välj destinationkonto",
+    "interval": "Välj interval",
+    "category": "Välj kategori",
+    "type": "Välj typ",
+    "status": "Välj status",
+    "name": "Ange namn",
+    "amount": "Ange belopp",
+    "currency": "Välj valuta",
+    "description": "Ange beskrivning",
+    "date": "Välj datum",
+    "balance": "Ange saldo",
+    "nextExecutionDate": "Välj nästa körning"
   },
-  "CreateScheduledIncome":{
-    "title":"Skapa planerad inkomst",
-    "sourceAccount":"Källakonto",
-    "amountSend":"Belopp att skicka",
-    "interval":"Interval",
-    "nextExecutionDate":"Nästa körning",
-    "category":"Kategori",
-    "description":"Beskrivning",
-    "name":"Namn"
+  "CreateScheduledIncome": {
+    "title": "Skapa planerad inkomst",
+    "sourceAccount": "Källakonto",
+    "amountSend": "Belopp att skicka",
+    "interval": "Intervall",
+    "nextExecutionDate": "Nästa körning",
+    "category": "Kategori",
+    "description": "Beskrivning",
+    "name": "Namn",
+    "amount": "Belopp"
   },
-  "scheduleInfo":{
-    "typeIncome":"Inkomst",
-    "typeExpense":"Utgift",
-    "typeTransfer":"Överföring",
-    "typeDebtPayment":"Skuldbetalning",
-    "active":"Aktiv",
-    "paused":"Pausad",
-    "title":"Planering",
-    "amount":"Belopp",
-    "account":"Konto",
-    "sourceAccount":"Källakonto",
-    "destinationAccount":"Destinationkonto",
-    "date":"Datum",
-    "description":"Beskrivning",
-    "type":"Typ",
-    "category":"Kategori",
-    "status":"Status",
-    "nextExecutionDate":"Nästa körning",
-    "actions":"Handlar",
-    "interval":"Interval"
+  "scheduleInfo": {
+    "typeIncome": "Inkomst",
+    "typeExpense": "Utgift",
+    "typeTransfer": "Överföring",
+    "typeDebtPayment": "Skuldbetalning",
+    "active": "Aktiv",
+    "paused": "Pausad",
+    "title": "Planering",
+    "amount": "Belopp",
+    "account": "Konto",
+    "sourceAccount": "Källakonto",
+    "destinationAccount": "Destinationkonto",
+    "date": "Datum",
+    "description": "Beskrivning",
+    "type": "Typ",
+    "category": "Kategori",
+    "status": "Status",
+    "nextExecutionDate": "Nästa körning",
+    "actions": "Handlar",
+    "interval": "Intervall",
+    "name": "Namn",
+    "currency": "Valuta"
   },
-  "createTransaction":{
-
+  "createTransaction": {},
+  "createTransfer": {
+    "title": "Skapa överföring",
+    "sourceAccount": "Källakonto",
+    "destinationAccount": "Destinationkonto",
+    "amountSent": "Belopp att skicka",
+    "exchangeRate": "Växelkurs",
+    "amountReceived": "Belopp att mottaga",
+    "description": "Beskrivning",
+    "date": "Datum"
   },
-  "createTransfer":{
-    "title":"Skapa överföring",
-    "sourceAccount":"Källakonto",
-    "destinationAccount":"Destinationkonto",
-    "amountSent":"Belopp att skicka",
-    "exchangeRate":"Växelkurs",
-    "amountReceived":"Belopp att mottaga",
-    "description":"Beskrivning",
-    "date":"Datum"
+  "updateExpense": {
+    "title": "Uppdatera utgift",
+    "category": "Kategori",
+    "description": "Beskrivning",
+    "amount": "Belopp",
+    "currency": "Valuta",
+    "name": "Namn",
+    "createdAt": "Skapad",
+    "updatedAt": "Uppdaterad"
   },
-  "updateExpense":{
-    "title":"Uppdatera utgift",
-    "category":"Kategori",
-    "description":"Beskrivning",
-    "amount":"Belopp",
-    "currency":"Valuta",
-    "name":"Namn",
-    "createdAt":"Skapad",
-    "updatedAt":"Uppdaterad"
+  "updateIncomse": {
+    "title": "Uppdatera inkomst",
+    "amount": "Belopp",
+    "description": "Beskrivning",
+    "date": "Datum",
+    "category": "Kategori",
+    "name": "Namn",
+    "createdAt": "Skapad",
+    "updatedAt": "Uppdaterad"
   },
-  "updateIncomse":{
-    "title":"Uppdatera inkomst",
-    "amount":"Belopp",
-    "description":"Beskrivning",
-    "date":"Datum",
-    "category":"Kategori",
-    "name":"Namn",
-    "createdAt":"Skapad",
-    "updatedAt":"Uppdaterad"
+  "updateSchedule": {},
+  "updateTransaction": {},
+  "debts": {
+    "recurringPayment": "Återkommande betalning",
+    "recurringPayments": "Återkommande betalningar",
+    "noRecurringPayments": "Inga återkommande betalningar.",
+    "recurringPaymentHint": "En återbetalning läggs till automatiskt varje period, aldrig mer än det som är kvar. Schemat stannar när skulden är betald.",
+    "interval": "Varje",
+    "intervalDaily": "Dag",
+    "intervalWeekly": "Vecka",
+    "intervalMonthly": "Månad",
+    "intervalYearly": "År",
+    "firstPaymentDate": "Första betalning",
+    "nextPayment": "Nästa: {{date}}",
+    "paymentFinished": "Avslutad",
+    "errorSchedule": "Det gick inte att skapa den återkommande betalningen.",
+    "openDebt": "Öppna skuld",
+    "lockedHint": "Riktning och valuta kan inte ändras efter att transaktioner lagts till.",
+    "remainingHint": "Kvar i dag: {{amount}} {{currency}}",
+    "noAccountInCurrency": "Du har inget aktivt konto i {{currency}}.",
+    "validation": {
+      "intervalRequired": "Välj hur ofta.",
+      "noPastDate": "Första betalningen kan inte vara i det förflutna.",
+      "nameRequired": "Namn krävs.",
+      "directionRequired": "Välj riktning.",
+      "currencyRequired": "Välj valuta.",
+      "rateRange": "Räntan måste vara mellan 0 och 100.",
+      "startDateRequired": "Välj startdatum.",
+      "noFutureDate": "Datumet kan inte vara i framtiden.",
+      "typeRequired": "Välj typ.",
+      "amountPositive": "Beloppet måste vara större än noll.",
+      "dateRequired": "Välj datum.",
+      "beforeStart": "Datumet är före skuldens start.",
+      "accountRequired": "Välj konto.",
+      "repaymentTooBig": "Återbetalningen är större än skulden.",
+      "lockedAfterMovements": "Riktning och valuta kan inte ändras efter att transaktioner lagts till.",
+      "accountArchived": "Kontot är arkiverat.",
+      "currencyMismatch": "Kontot måste ha samma valuta som skulden."
+    },
+    "type": "Typ",
+    "interestPaid": "Betald ränta",
+    "asOf": "Beräknat {{date}}",
+    "recorded": "registrerad",
+    "deleteMovement": "Ta bort transaktion",
+    "errorDeleteMovement": "Det gick inte att ta bort transaktionen.",
+    "summary": "Sammanfattning",
+    "all": "Alla",
+    "net": "Netto",
+    "settled": "Betald",
+    "noMatch": "Inga skulder i den här gruppen.",
+    "ratePerYear": "{{rate}} % / år",
+    "title": "Skulder",
+    "detailsTitle": "Skulddetaljer",
+    "empty": "Inga skulder än.",
+    "loading": "Laddar skulder...",
+    "loadError": "Det gick inte att ladda skulderna.",
+    "notFound": "Skulden hittades inte.",
+    "backToList": "Tillbaka till skulder",
+    "owedByMe": "Jag är skyldig",
+    "owedToMe": "Skyldig mig",
+    "name": "Namn",
+    "counterparty": "Motpart",
+    "direction": "Riktning",
+    "currency": "Valuta",
+    "annualRate": "Årsränta (%)",
+    "compounding": "Ränta läggs till",
+    "compoundingNone": "Aldrig",
+    "compoundingMonthly": "Månadsvis",
+    "compoundingYearly": "Årsvis",
+    "startDate": "Startdatum",
+    "note": "Anteckning",
+    "countInflowsAsIncome": "Registrera inbetalningar som inkomst",
+    "countOutflowsAsExpense": "Registrera utbetalningar som utgift",
+    "principal": "Kapital",
+    "accruedInterest": "Ränta",
+    "totalOwed": "Kvar att betala",
+    "totalDisbursed": "Totalt lånat / utlånat",
+    "totalRepaid": "Totalt återbetalt",
+    "movements": "Transaktioner",
+    "noMovements": "Inga transaktioner än.",
+    "disbursement": "Nytt belopp",
+    "repayment": "Återbetalning",
+    "amount": "Belopp",
+    "date": "Datum",
+    "account": "Konto",
+    "description": "Beskrivning",
+    "interestPart": "Räntedel",
+    "principalPart": "Kapitaldel",
+    "addDebt": "Lägg till skuld",
+    "editDebt": "Redigera skuld",
+    "addMovement": "Lägg till transaktion",
+    "errorSave": "Det gick inte att spara skulden.",
+    "errorDelete": "Det gick inte att ta bort skulden.",
+    "errorHasMovements": "Ta bort skuldens transaktioner först.",
+    "errorMovement": "Det gick inte att spara transaktionen.",
+    "errorAccountHasDebt": "Kontot har skuldtransaktioner och kan inte tas bort.",
+    "errorDebtRecord": "Posten hör till en skuld. Redigera den från skuldsidan.",
+    "category": "Skuld"
   },
-  "updateSchedule":{
-
+  "buttons": {
+    "moreOptions": "Fler alternativ",
+    "add": "Lägg till",
+    "addAccount": "Skapa konto",
+    "updateAccount": "Uppdatera konto",
+    "createIncomse": "Skapa inkomst",
+    "createExpense": "Skapa utgift",
+    "loadingSchdule": "Laddar planering...",
+    "createSchedule": "Skapa planering",
+    "createTransaction": "Skapa transaktion",
+    "createTransfer": "Skapa överföring",
+    "updateExpense": "Uppdatera utgift",
+    "updateIncomse": "Uppdatera inkomst",
+    "updateSchedule": "Uppdatera planering",
+    "updateTransaction": "Uppdatera transaktion",
+    "updateTransfer": "Uppdatera överföring",
+    "updating": "Uppdaterar",
+    "loading": "Laddar",
+    "edit": "Ändra",
+    "delete": "Ta bort",
+    "cancel": "Avbryt",
+    "save": "Spara",
+    "close": "Stäng",
+    "ok": "OK",
+    "active": "Aktiv",
+    "archived": "ِArkivera",
+    "confirmDelete": "Bekräfta borttagning",
+    "confirm": "Bekräfta",
+    "yes": "Ja",
+    "no": "Nej",
+    "pause": "Pausa",
+    "resume": "Återuppta",
+    "processing": "Bearbetar..."
   },
-  "updateTransaction":{
-
+  "currency": {
+    "usd": "USD",
+    "eur": "EUR",
+    "sek": "SEK",
+    "aed": "AED",
+    "trt": "TRY",
+    "sar": "SAR",
+    "gbp": "GBP",
+    "jpy": "JPY"
   },
-
-  "debts":{
-
-    "recurringPayment":"Återkommande betalning",
-
-    "recurringPayments":"Återkommande betalningar",
-
-    "noRecurringPayments":"Inga återkommande betalningar.",
-
-    "recurringPaymentHint":"En återbetalning läggs till automatiskt varje period, aldrig mer än det som är kvar. Schemat stannar när skulden är betald.",
-
-    "interval":"Varje",
-
-    "intervalDaily":"Dag",
-
-    "intervalWeekly":"Vecka",
-
-    "intervalMonthly":"Månad",
-
-    "intervalYearly":"År",
-
-    "firstPaymentDate":"Första betalning",
-
-    "nextPayment":"Nästa: {{date}}",
-
-    "paymentFinished":"Avslutad",
-
-    "errorSchedule":"Det gick inte att skapa den återkommande betalningen.",
-
-    "openDebt":"Öppna skuld",
-
-    "lockedHint":"Riktning och valuta kan inte ändras efter att transaktioner lagts till.",
-
-    "remainingHint":"Kvar i dag: {{amount}} {{currency}}",
-
-    "noAccountInCurrency":"Du har inget aktivt konto i {{currency}}.",
-
-    "validation":{
-
-      "intervalRequired":"Välj hur ofta.",
-
-      "noPastDate":"Första betalningen kan inte vara i det förflutna.","nameRequired": "Namn krävs.", "directionRequired": "Välj riktning.", "currencyRequired": "Välj valuta.", "rateRange": "Räntan måste vara mellan 0 och 100.", "startDateRequired": "Välj startdatum.", "noFutureDate": "Datumet kan inte vara i framtiden.", "typeRequired": "Välj typ.", "amountPositive": "Beloppet måste vara större än noll.", "dateRequired": "Välj datum.", "beforeStart": "Datumet är före skuldens start.", "accountRequired": "Välj konto.", "repaymentTooBig": "Återbetalningen är större än skulden.", "lockedAfterMovements": "Riktning och valuta kan inte ändras efter att transaktioner lagts till.", "accountArchived": "Kontot är arkiverat.", "currencyMismatch": "Kontot måste ha samma valuta som skulden."},
-
-    "type":"Typ",
-
-    "interestPaid":"Betald ränta",
-
-    "asOf":"Beräknat {{date}}",
-
-    "recorded":"registrerad",
-
-    "deleteMovement":"Ta bort transaktion",
-
-    "errorDeleteMovement":"Det gick inte att ta bort transaktionen.",
-
-    "summary":"Sammanfattning",
-
-    "all":"Alla",
-
-    "net":"Netto",
-
-    "settled":"Betald",
-
-    "noMatch":"Inga skulder i den här gruppen.",
-
-    "ratePerYear":"{{rate}} % / år",
-
-    "title":"Skulder",
-
-    "detailsTitle":"Skulddetaljer",
-
-    "empty":"Inga skulder än.",
-
-    "loading":"Laddar skulder...",
-
-    "loadError":"Det gick inte att ladda skulderna.",
-
-    "notFound":"Skulden hittades inte.",
-
-    "backToList":"Tillbaka till skulder",
-
-    "owedByMe":"Jag är skyldig",
-
-    "owedToMe":"Skyldig mig",
-
-    "name":"Namn",
-
-    "counterparty":"Motpart",
-
-    "direction":"Riktning",
-
-    "currency":"Valuta",
-
-    "annualRate":"Årsränta (%)",
-
-    "compounding":"Ränta läggs till",
-
-    "compoundingNone":"Aldrig",
-
-    "compoundingMonthly":"Månadsvis",
-
-    "compoundingYearly":"Årsvis",
-
-    "startDate":"Startdatum",
-
-    "note":"Anteckning",
-
-    "countInflowsAsIncome":"Registrera inbetalningar som inkomst",
-
-    "countOutflowsAsExpense":"Registrera utbetalningar som utgift",
-
-    "principal":"Kapital",
-
-    "accruedInterest":"Ränta",
-
-    "totalOwed":"Kvar att betala",
-
-    "totalDisbursed":"Totalt lånat / utlånat",
-
-    "totalRepaid":"Totalt återbetalt",
-
-    "movements":"Transaktioner",
-
-    "noMovements":"Inga transaktioner än.",
-
-    "disbursement":"Nytt belopp",
-
-    "repayment":"Återbetalning",
-
-    "amount":"Belopp",
-
-    "date":"Datum",
-
-    "account":"Konto",
-
-    "description":"Beskrivning",
-
-    "interestPart":"Räntedel",
-
-    "principalPart":"Kapitaldel",
-
-    "addDebt":"Lägg till skuld",
-
-    "editDebt":"Redigera skuld",
-
-    "addMovement":"Lägg till transaktion",
-
-    "errorSave":"Det gick inte att spara skulden.",
-
-    "errorDelete":"Det gick inte att ta bort skulden.",
-
-    "errorHasMovements":"Ta bort skuldens transaktioner först.",
-
-    "errorMovement":"Det gick inte att spara transaktionen.",
-
-    "errorAccountHasDebt":"Kontot har skuldtransaktioner och kan inte tas bort.",
-
-    "errorDebtRecord":"Posten hör till en skuld. Redigera den från skuldsidan.",
-
-    "category":"Skuld"
-
+  "transactionDetails": {
+    "debtIn": "Skuld in",
+    "debtOut": "Skuld ut",
+    "amount": "Belopp",
+    "account": "Konto",
+    "sourceAccount": "Källakonto",
+    "destinationAccount": "Destinationkonto",
+    "date": "Datum",
+    "description": "Beskrivning",
+    "type": "Typ",
+    "category": "Kategori",
+    "status": "Status",
+    "actions": "Handlar",
+    "transaction": "Transaktion",
+    "incomse": "Inkomst",
+    "expense": "Utgift",
+    "inTransfer": "Inkommen överföring",
+    "outTransfer": "Utgående överföring",
+    "details": "Detaljer"
   },
-
-  "buttons":{
-    "moreOptions":"Fler alternativ",
-    "add":"Lägg till",
-    "addAccount":"Skapa konto",
-    "updateAccount":"Uppdatera konto",
-    "createIncomse":"Skapa inkomst",
-    "createExpense":"Skapa utgift",
-    "loadingSchdule":"Laddar planering...",
-    "createSchedule":"Skapa planering",
-    "createTransaction":"Skapa transaktion",
-    "createTransfer":"Skapa överföring",
-    "updateExpense":"Uppdatera utgift",
-    "updateIncomse":"Uppdatera inkomst",
-    "updateSchedule":"Uppdatera planering",
-    "updateTransaction":"Uppdatera transaktion",
-    "updateTransfer":"Uppdatera överföring",
-    "updating":"Uppdaterar",
-    "loading":"Laddar",
-    "edit":"Ändra",
-    "delete":"Ta bort",
-    "cancel":"Avbryt",
-    "save":"Spara",
-    "close":"Stäng",
-    "ok":"OK",
-    "active":"Aktiv",
-    "archived":"ِArkivera",
-    "confirmDelete":"Bekräfta borttagning",
-    "confirm":"Bekräfta",
-    "yes":"Ja",
-    "no":"Nej",
-    "pause":"Pausa",
-    "resume":"Återuppta"
-  },
-  "currency":{
-    "usd":"USD",
-    "eur":"EUR",
-    "sek":"SEK",
-    "aed":"AED",
-    "trt":"TRY",
-    "sar":"SAR",
-    "gbp":"GBP",
-    "jpy":"JPY"
-  },
-  "transactionDetails":
-  {
-    "debtIn":"Skuld in",
-    "debtOut":"Skuld ut",
-    "amount":"Belopp",
-    "account":"Konto",
-    "sourceAccount":"Källakonto",
-    "destinationAccount":"Destinationkonto",
-    "date":"Datum",
-    "description":"Beskrivning",
-    "type":"Typ",
-    "category":"Kategori",
-    "status":"Status",
-    "actions":"Handlar",
-    "transaction":"Transaktion",
-    "incomse":"Inkomst",
-    "expense":"Utgift",
-    "inTransfer":"Inkommen överföring",
-    "outTransfer":"Utgående överföring",
-    "details":"Detaljer"
-  },
-  "updateTransfer":
-  {
-    "title":"Uppdatera överföring",
-    "sourceAccount":"Källakonto",
-    "destinationAccount":"Destinationkonto",
-    "amountSent":"Summa skickad",
-    "exchangeRate":"Växelkurs",
-    "amountReceived":"Summa mottagen",
-    "description":"Beskrivning",
-    "date":"Datum",
-    "status":"Status",
-    "createdAt":"Skapad",
-    "updatedAt":"Uppdaterad",
-    "actions":"Handlar"
+  "updateTransfer": {
+    "title": "Uppdatera överföring",
+    "sourceAccount": "Källakonto",
+    "destinationAccount": "Destinationkonto",
+    "amountSent": "Summa skickad",
+    "exchangeRate": "Växelkurs",
+    "amountReceived": "Summa mottagen",
+    "description": "Beskrivning",
+    "date": "Datum",
+    "status": "Status",
+    "createdAt": "Skapad",
+    "updatedAt": "Uppdaterad",
+    "actions": "Handlar"
   },
   "languageSelector": {
     "label": "Byt språk"
@@ -591,6 +520,30 @@
   "report": {
     "fromDate": "Från datum",
     "toDate": "Till datum",
-    "search": "Sök"
+    "search": "Sök",
+    "title": "Rapport"
+  },
+  "dashboard": {
+    "loading": "Laddar saldo...",
+    "error": "Det gick inte att ladda saldot",
+    "noData": "Inga saldodata än",
+    "overview": "Översikt",
+    "balanceTrend": "Saldoutveckling",
+    "currencies": "valutor"
+  },
+  "viewAccounts": {
+    "title": "Konton"
+  },
+  "successConfirmation": {
+    "title": "Klart"
+  },
+  "greeting": {
+    "morning": "God morgon",
+    "afternoon": "God eftermiddag",
+    "evening": "God kväll",
+    "welcome": "Välkommen tillbaka"
+  },
+  "TransactionInfo": {
+    "title": "Transaktionsdetaljer"
   }
 }

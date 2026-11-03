@@ -131,7 +131,7 @@ const CreateTransfer = ({ isOpen, isClose, accounts, currentAccount }) => {
     if (transferData.sourceAccount.id === transferData.destinationAccount.id) {
       return setError({
         hasError: true,
-        message: i18n.t("masseges.transferSameAccount"),
+        message: i18n.t("messages.errorSameAccountTransfer"),
       });
     }
     const payload = {
