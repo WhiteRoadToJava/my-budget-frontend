@@ -115,7 +115,19 @@
   },
   "accountsPage": {
     "buttonText": "إضافة حساب",
-    "searchInput": "بحث"
+    "searchInput": "بحث",
+    "title": "الحسابات",
+    "activeTab": "النشطة ({{count}})",
+    "archivedTab": "المؤرشفة ({{count}})",
+    "activeCount": "{{count}} حسابات نشطة",
+    "sinceOpening": "منذ الافتتاح",
+    "empty": "لا توجد حسابات بعد. أضف حساباً لتبدأ متابعة أموالك.",
+    "archivedEmpty": "لا توجد حسابات مؤرشفة.",
+    "noMatch": "لا توجد حسابات تطابق \"{{query}}\".",
+    "types": {
+      "NORMAL": "شخصي",
+      "COMPANY": "تجاري"
+    }
   },
   "accountInfo": {
     "totaBalance": "الرصيد الكلي",

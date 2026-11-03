@@ -1,106 +1,94 @@
-import React, { useEffect, useState } from "react";
+import React, { useMemo, useState } from "react";
 import Row from "./AccountRow";
-import styles from "../../styles/components/accounts/accounts.module.scss";
-import AccountsInfo from "./AccountsInfo";
+import styles from "../../styles/components/accounts/accountsList.module.scss";
 import Button from "../btns/Button";
 import PlusIcon from "../icons/btns/PlusIcon";
 import CreateAccount from "./CreateAccount";
 import SearchInput from "../inputs/SearchInput";
+import { formatNumber } from "../../utils/formating";
+import { searchAccounts, splitAccounts, totalsByCurrency } from "../../utils/accounts/accountList";
 import i18n from "../../configuration/i18n";
 
 const AccountComponent = ({ accounts }) => {
   const [openCreateAccount, setOpenCreateAccount] = useState(false);
-  const [activeAccounts, setActiveAccounts] = useState([]);
-  const [archivedAccounts, setArchivedAccounts] = useState([]);
-  const [showArchivedAccounts, setShowArchivedAccounts] = useState(false);
+  const [tab, setTab] = useState("active");
+  const [query, setQuery] = useState("");
 
-  useEffect(() => {
-    const fetchAccounts = () => {
-      if (accounts) {
-        const accountsData = accounts.accounts;
-        setActiveAccounts(
-          accountsData.filter((account) => account.status[0] === "ACTIVE"),
-        );
-        setArchivedAccounts(
-          accountsData.filter((account) => account.status[0] === "ARCHIVED"),
-        );
-      }
-    };
-    fetchAccounts();
-  }, [accounts]);
-  // Assuming fetchAccounts is a function that retrieves accounts data
+  // derived from the data: no copies in state that can drift
+  const { active, archived } = useMemo(() => splitAccounts(accounts?.accounts), [accounts]);
+  const totals = useMemo(() => totalsByCurrency(active), [active]);
+  const visible = searchAccounts(tab === "active" ? active : archived, query);
 
-  const handleOnSearch = (value) => {
-    const filteredAccounts = accounts?.accounts?.filter((account) =>
-      account.name.toLowerCase().includes(value.toLowerCase()),
-    );
-    setActiveAccounts(filteredAccounts || []);
-  };
+  const emptyText =
+    query.trim()
+      ? i18n.t("accountsPage.noMatch", { query: query.trim() })
+      : tab === "active"
+        ? i18n.t("accountsPage.empty")
+        : i18n.t("accountsPage.archivedEmpty");
 
   return (
-    <div className={styles.accountContainer}>
-      <h2 className={styles.accountTitle}>Accounts</h2>
-      <AccountsInfo accounts={accounts} />
-      <div className={styles.divider}></div>
-      <div className={styles.accountHeader}>
-        <div>
-          <Button
-            text={i18n.t("accountsPage.buttonText")}
-            type="button"
-            variant="primary"
-            Icon={PlusIcon}
-            onClick={() => setOpenCreateAccount(true)}
-          />
-        </div>
-        <div>
-          <SearchInput
-            onChange={(e) => handleOnSearch(e.target.value)}
-            placeholder={i18n.t("accountsPage.searchInput")}
-          />
-        </div>
-      </div>
-      <div className={styles.rowtitle}>
-        <p className={styles.headerItem}>{i18n.t("accounts.name")}</p>
-        <p className={styles.headerItem}>{i18n.t("accounts.amount")}</p>
-        <p className={styles.headerItem}>{i18n.t("accounts.currency")}</p>
-        <p className={styles.headerItem}>{i18n.t("accounts.type")}</p>
-        <p className={styles.headerItem}>{i18n.t("accounts.actions")}</p>
-      </div>
-      <div className={styles.accountBody}>
-        {activeAccounts.map((account) => (
-          <Row key={account.id} account={account} />
-        ))}
-      </div>
-
-      <div className={styles.accountSearch}>
-        <CreateAccount
-          isOpen={openCreateAccount}
-          isClose={() => setOpenCreateAccount(false)}
+    <div className={styles.page}>
+      <div className={styles.header}>
+        <h2 className={styles.title}>{i18n.t("accountsPage.title")}</h2>
+        <Button
+          text={i18n.t("accountsPage.buttonText")}
+          type="button"
+          variant="primary"
+          Icon={PlusIcon}
+          onClick={() => setOpenCreateAccount(true)}
         />
       </div>
-      <div className={styles.archivedAccountsContainer}>
-        <p
-          className={styles.archivedAccountsTitle}
-          onClick={() => setShowArchivedAccounts(!showArchivedAccounts)}
-        >
-          {i18n.t("accounts.archivedAccounts")}
-        </p>
 
-        {showArchivedAccounts ? (
-          <div className={styles.archivedAccounts}>
-            {archivedAccounts.length > 0 &&
-              archivedAccounts.map((accounts) => (
-                <Row key={accounts.id} account={accounts} />
-              ))}
-          </div>
-        ):(
-            <div className={styles.divider}></div>
-          )}
+      {totals.length > 0 && (
+        <section className={styles.balances} aria-label={i18n.t("accountInfo.totaBalance")}>
+          {totals.map((t) => (
+            <p key={t.currency} className={styles.balance}>
+              <span className={`${styles.balanceAmount} ${t.total < 0 ? styles.negative : ""}`}>
+                {formatNumber(t.total)}
+              </span>
+              <span className={styles.balanceCurrency}>{t.currency}</span>
+            </p>
+          ))}
+          <p className={styles.count}>
+            {i18n.t("accountsPage.activeCount", { count: active.length })}
+          </p>
+        </section>
+      )}
+
+      <div className={styles.toolbar}>
+        <div className={styles.search}>
+          <SearchInput
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder={i18n.t("accountsPage.searchInput")}
+            aria-label={i18n.t("accountsPage.searchInput")}
+          />
+        </div>
+        <div className={styles.tabs} role="tablist">
+          <button type="button" role="tab" className={styles.tab}
+            aria-selected={tab === "active"} onClick={() => setTab("active")}>
+            {i18n.t("accountsPage.activeTab", { count: active.length })}
+          </button>
+          <button type="button" role="tab" className={styles.tab}
+            aria-selected={tab === "archived"} onClick={() => setTab("archived")}>
+            {i18n.t("accountsPage.archivedTab", { count: archived.length })}
+          </button>
+        </div>
       </div>
+
+      {visible.length > 0 ? (
+        <ul className={styles.list}>
+          {visible.map((account) => (
+            <Row key={account.id} account={account} />
+          ))}
+        </ul>
+      ) : (
+        <p className={styles.empty}>{emptyText}</p>
+      )}
+
+      <CreateAccount isOpen={openCreateAccount} isClose={() => setOpenCreateAccount(false)} />
     </div>
   );
 };
 
 export default AccountComponent;
-
-// Example menu items, you can customize this as needed

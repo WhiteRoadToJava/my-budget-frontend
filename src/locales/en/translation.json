@@ -115,7 +115,19 @@
   },
   "accountsPage": {
     "buttonText": "Add Account",
-    "searchInput": "Search"
+    "searchInput": "Search",
+    "title": "Accounts",
+    "activeTab": "Active ({{count}})",
+    "archivedTab": "Archived ({{count}})",
+    "activeCount": "{{count}} active accounts",
+    "sinceOpening": "since opening",
+    "empty": "You have no accounts yet. Add one to start tracking your money.",
+    "archivedEmpty": "No archived accounts.",
+    "noMatch": "No accounts match \"{{query}}\".",
+    "types": {
+      "NORMAL": "Personal",
+      "COMPANY": "Business"
+    }
   },
   "accountInfo": {
     "totaBalance": "Total balance",

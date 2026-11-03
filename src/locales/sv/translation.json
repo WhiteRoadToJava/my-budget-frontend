@@ -115,7 +115,19 @@
   },
   "accountsPage": {
     "buttonText": "Lägg till konto",
-    "searchInput": "Sök"
+    "searchInput": "Sök",
+    "title": "Konton",
+    "activeTab": "Aktiva ({{count}})",
+    "archivedTab": "Arkiverade ({{count}})",
+    "activeCount": "{{count}} aktiva konton",
+    "sinceOpening": "sedan start",
+    "empty": "Du har inga konton än. Lägg till ett för att börja följa dina pengar.",
+    "archivedEmpty": "Inga arkiverade konton.",
+    "noMatch": "Inga konton matchar \"{{query}}\".",
+    "types": {
+      "NORMAL": "Privat",
+      "COMPANY": "Företag"
+    }
   },
   "accountInfo": {
     "totaBalance": "Totalt saldo",
