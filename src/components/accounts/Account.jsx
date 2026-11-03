@@ -1,153 +1,116 @@
-import React, { useState, useMemo, useEffect } from "react";
-import styles from "../../styles/components/accounts/account.module.scss";
-import Row from "./TransactionRow";
-import { getAccountById, getAccounts, getAllAccountTransactions } from "../../api/accountService";
+import React, { useMemo, useState } from "react";
+import { Link } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import { getAccounts, getAllAccountTransactions } from "../../api/accountService";
 import Button from "../btns/Button";
+import PlusIcon from "../icons/btns/PlusIcon";
 import CreateIncome from "../incomes/CreateIncome";
 import CreateExpense from "../expenses/CreateExpense";
-import ToogleMenu from "../elements/ToggleMenu";
-import { useQuery } from "@tanstack/react-query";
-import TransactionInfo from "../transactions/TransactionInfo";
 import CreateTransfer from "../transfers/CreateTransfer";
+import TransactionInfo from "../transactions/TransactionInfo";
+import TransactionList from "../transactions/TransactionList";
+import TransactionFilters from "../transactions/TransactionFilters";
+import { filterTransactions } from "../../utils/transactions/transactionList";
+import { changeSinceOpening } from "../../utils/accounts/accountList";
+import { findCategory } from "../../assiets/categories/assits";
+import { categoryName } from "../../utils/transactionTypes";
+import { formatNumber } from "../../utils/formating";
+import styles from "../../styles/components/transactions/transactionsPage.module.scss";
 import i18n from "../../configuration/i18n";
+
+const nameOfCategory = (t) => categoryName(findCategory(t.category, t.type));
 
 const Account = ({ account }) => {
   const [isCreateIncomeOpen, setIsCreateIncomeOpen] = useState(false);
   const [isCreateExpenseOpen, setIsCreateExpenseOpen] = useState(false);
-  const [selectedTransaction, setSelectedTransaction] = useState(null);
   const [isCreateTransfer, setIsCreateTransfer] = useState(false);
-  const [totalBalance, setTotalBalance] = useState(account.totalBalance || 0);
+  const [selected, setSelected] = useState(null);
+  const [type, setType] = useState("all");
+  const [query, setQuery] = useState("");
 
-  const {
-    data: transactions = [],
-    isLoading: isTxLoading,
-    isError: isTxError,
-    error: txError,
-  } = useQuery({
+  const { data: transactions = [], isLoading, isError } = useQuery({
     queryKey: ["transactions", account.id],
     queryFn: () => getAllAccountTransactions(account),
-    select: (data) =>
-      [...data].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)),
   });
 
-  const { data: accounts = [] } = useQuery({
-    queryKey: ["accounts"],
-    queryFn: getAccounts,
-  });
-const handleTotalBalance = async () => {
-  const accountData = await getAccountById(account.id);
-  if (!accountData) return;
-  setTotalBalance(accountData.totalBalance);
-};
-  useEffect(() => {
-    // Deliberate: re-fetches the account's server-computed total balance
-    // whenever the transactions list changes. Not a pure prop->state sync,
-    // so it can't be computed during render. Candidate for a react-query
-    // refactor (tracked separately) instead of this eslint-disable long term.
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    handleTotalBalance();
-  }, [transactions]);
-  
-  const months = useMemo(() => {
-    const seen = new Set();
-    const result = [];
-    transactions.forEach((t) => {
-      const date = new Date(t.createdAt);
-      const key = `${date.getFullYear()}-${date.getMonth()}`;
-      if (!seen.has(key)) {
-        seen.add(key);
-        result.push({
-          key,
-          label: date.toLocaleString("default", { month: "long", year: "numeric" }),
-        });
-      }
-    });
-    return result;
-  }, [transactions]);
+  // every change invalidates ["accounts"], so the balance shown here stays current
+  // without fetching the account again by hand
+  const { data: accounts = [] } = useQuery({ queryKey: ["accounts"], queryFn: getAccounts });
+  const current = accounts?.accounts?.find((a) => a.id === account.id) ?? account;
+  const total = Number(current.totalBalance ?? 0);
+  const change = changeSinceOpening(current);
+  const typeKey = `accountsPage.types.${current.type}`;
 
-  const handleTransactionClick = (transaction) => {
-    setSelectedTransaction(transaction);
-  };
-
-  if (isTxLoading) return <div>{i18n.t("messages.loading")}</div>;
-  if (isTxError) {
-    return (
-      <div>
-        {i18n.t("messages.loadingError")} {txError.message}
-      </div>
-    );
-  }
-
-  const buttonMenuItems = [
-    <Button key="inc" variant="primary" text={i18n.t("buttons.createIncomse")} onClick={() => setIsCreateIncomeOpen(true)} />,
-    <Button key="exp" variant="cancel" text={i18n.t("buttons.createExpense")} onClick={() => setIsCreateExpenseOpen(true)} />,
-    <Button key="tra" variant="blue" text={i18n.t("buttons.createTransfer")} onClick={() => setIsCreateTransfer(true)} />,
-  ];
+  const visible = useMemo(
+    () => filterTransactions(transactions, { type, query, categoryName: nameOfCategory }),
+    [transactions, type, query],
+  );
 
   return (
-    <div className={styles.accountContainer}>
-      <h2 className={styles.accountTitle}>{account.name}</h2>
-      <div className={styles.divider}></div>
-      <div className={styles.totalBalanceContainer}>
-        {i18n.t("account.totalBalance")}{" "}
-        <span
-          className={styles.totalBalance}
-          data-balance={totalBalance < 0 ? "negative" : "positive"}
-        >
-          {Number(totalBalance).toFixed(2)}
-        </span>
-      </div>
+    <div className={styles.page}>
+      <Link className={styles.back} to="/user/accounts">{i18n.t("transactionsPage.backToAccounts")}</Link>
 
-      <div className={styles.transactionsContainer}>
-        <div className={styles.rowTitle}>
-          <p>{i18n.t("account.amount")}</p>
-          <p>{i18n.t("account.category")}</p>
-          <p>{i18n.t("account.date")}</p>
-          <p>{i18n.t("account.type")}</p>
+      <div className={styles.accountHeader}>
+        <div>
+          <h2 className={styles.title}>{current.name}</h2>
+          <p className={styles.accountType}>
+            {i18n.exists(typeKey) ? i18n.t(typeKey) : current.type}
+          </p>
         </div>
-
-        {months.length > 0 ? (
-          months.map(({ key, label }) => (
-            <div key={key}>
-              <h3 className={styles.monthHeader}>{label}</h3>
-              {transactions
-                .filter((t) => {
-                  const d = new Date(t.createdAt);
-                  return `${d.getFullYear()}-${d.getMonth()}` === key;
-                })
-                .map((transaction) => (
-                  <Row
-                    key={transaction.id}
-                    transaction={transaction}
-                    onClick={() => handleTransactionClick(transaction)}
-                  />
-                ))}
-            </div>
-          ))
-        ) : (
-          <p>{i18n.t("account.noTransactions")}</p>
-        )}
+        <p className={styles.balance}>
+          <span className={`${styles.balanceAmount} ${total < 0 ? styles.negative : ""}`}>
+            {formatNumber(total)}
+            <span className={styles.balanceCurrency}>{current.currency}</span>
+          </span>
+          <span className={styles.change}>
+            {change >= 0 ? "+" : "−"}
+            {formatNumber(Math.abs(change))} {i18n.t("accountsPage.sinceOpening")}
+          </span>
+        </p>
       </div>
 
-      <div className={styles.buttonContainer}>
-        <ToogleMenu menuList={buttonMenuItems} position="bottom" />
+      <div className={styles.actions}>
+        <Button variant="primary" Icon={PlusIcon} text={i18n.t("buttons.createIncomse")}
+          onClick={() => setIsCreateIncomeOpen(true)} />
+        <Button variant="cancel" Icon={PlusIcon} text={i18n.t("buttons.createExpense")}
+          onClick={() => setIsCreateExpenseOpen(true)} />
+        <Button variant="blue" text={i18n.t("buttons.createTransfer")}
+          onClick={() => setIsCreateTransfer(true)} />
       </div>
 
-      <CreateIncome isOpen={isCreateIncomeOpen} isClose={() => setIsCreateIncomeOpen(false)} account={account} />
-      <CreateExpense isOpen={isCreateExpenseOpen} isClose={() => setIsCreateExpenseOpen(false)} account={account} />
-      <TransactionInfo
-        isOpen={!!selectedTransaction}
-        onClose={() => setSelectedTransaction(null)}
-        transaction={selectedTransaction || {}}
-        currentAccount={account}
-        accounts={accounts}
-        transactions={transactions}
-      />
+      <TransactionFilters type={type} onTypeChange={setType} query={query} onQueryChange={setQuery} />
+
+      {isLoading ? (
+        <p>{i18n.t("messages.loading")}</p>
+      ) : isError ? (
+        <p>{i18n.t("messages.errorLoadingTransactions")}</p>
+      ) : (
+        <TransactionList
+          transactions={visible}
+          onSelect={setSelected}
+          emptyText={
+            type !== "all" || query.trim()
+              ? i18n.t("transactionsPage.noMatch")
+              : i18n.t("account.noTransactions")
+          }
+        />
+      )}
+
+      <CreateIncome isOpen={isCreateIncomeOpen} isClose={() => setIsCreateIncomeOpen(false)} account={current} />
+      <CreateExpense isOpen={isCreateExpenseOpen} isClose={() => setIsCreateExpenseOpen(false)} account={current} />
       <CreateTransfer
         isOpen={isCreateTransfer}
         isClose={() => setIsCreateTransfer(false)}
         accounts={accounts}
-        currentAccount={account}
+        currentAccount={current}
+      />
+      <TransactionInfo
+        isOpen={!!selected}
+        onClose={() => setSelected(null)}
+        transaction={selected || {}}
+        currentAccount={current}
+        accounts={accounts}
+        transactions={transactions}
       />
     </div>
   );

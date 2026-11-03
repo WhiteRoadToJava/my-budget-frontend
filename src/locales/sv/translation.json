@@ -557,5 +557,21 @@
   },
   "TransactionInfo": {
     "title": "Transaktionsdetaljer"
+  },
+  "transactionsPage": {
+    "title": "Transaktioner",
+    "search": "Sök transaktioner",
+    "filters": {
+      "all": "Alla",
+      "income": "Inkomster",
+      "expense": "Utgifter",
+      "transfer": "Överföringar",
+      "debt": "Skulder"
+    },
+    "toAccount": "Till {{name}}",
+    "fromAccount": "Från {{name}}",
+    "empty": "Inga transaktioner än. Lägg till en inkomst eller utgift från ett konto.",
+    "noMatch": "Inga transaktioner matchar filtren.",
+    "backToAccounts": "Alla konton"
   }
 }

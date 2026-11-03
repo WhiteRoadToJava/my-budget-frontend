@@ -570,5 +570,21 @@
   },
   "successConfirmation": {
     "title": "Done"
+  },
+  "transactionsPage": {
+    "title": "Transactions",
+    "search": "Search transactions",
+    "filters": {
+      "all": "All",
+      "income": "Income",
+      "expense": "Expenses",
+      "transfer": "Transfers",
+      "debt": "Debts"
+    },
+    "toAccount": "To {{name}}",
+    "fromAccount": "From {{name}}",
+    "empty": "No transactions yet. Add an income or an expense from an account.",
+    "noMatch": "No transactions match these filters.",
+    "backToAccounts": "All accounts"
   }
 }

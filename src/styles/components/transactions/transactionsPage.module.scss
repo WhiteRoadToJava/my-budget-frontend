@@ -1,0 +1,96 @@
+@use "../../variables" as variable;
+
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  width: 100%;
+  max-width: 820px;
+  padding: 1.5rem;
+  box-sizing: border-box;
+
+  @media (max-width: 640px) {
+    padding: 1rem;
+    gap: 1rem;
+  }
+}
+
+.title {
+  margin: 0;
+  font-size: variable.$font-xl;
+}
+
+/* ---------- account page header ---------- */
+
+.back {
+  color: variable.$color-blue;
+  text-decoration: none;
+  font-size: variable.$font-sm;
+
+  &:hover,
+  &:focus-visible {
+    color: variable.$color-blue-hover;
+    text-decoration: underline;
+  }
+}
+
+.accountHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid variable.$color-border;
+}
+
+.accountType {
+  margin: 0.2rem 0 0;
+  color: variable.$color-text-muted;
+  font-size: variable.$font-sm;
+}
+
+.balance {
+  margin: 0;
+  text-align: end;
+
+  @media (max-width: 640px) {
+    text-align: start;
+    width: 100%;
+  }
+}
+
+.balanceAmount {
+  display: block;
+  font-size: variable.$font-3xl;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+
+  @media (max-width: 640px) {
+    font-size: variable.$font-xxl;
+  }
+}
+
+.balanceCurrency {
+  margin-inline-start: 0.4rem;
+  color: variable.$color-text-muted;
+  font-size: variable.$font-md;
+  font-weight: 400;
+}
+
+.negative {
+  color: variable.$color-error;
+}
+
+.change {
+  color: variable.$color-text-muted;
+  font-size: variable.$font-sm;
+}
+
+.actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
