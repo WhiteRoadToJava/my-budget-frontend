@@ -24,6 +24,9 @@
   &[data-type="out-transfer"] {
     border-left-color: variable.$color-blue;
   }
+  &[data-type="DEBT_PAYMENT"] {
+    border-left-color: variable.$color-purple;
+  }
   &[ data-active="false"]{
     opacity: 0.55;
   }
