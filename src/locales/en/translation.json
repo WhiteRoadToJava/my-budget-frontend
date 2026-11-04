@@ -330,7 +330,9 @@
     "type": "Type",
     "status": "Status",
     "nextExecutionDate": "Next Execution Date",
-    "actions": "Actions"
+    "actions": "Actions",
+    "amountReceived": "Amount received",
+    "pausedNote": "Paused: it will not run until you resume it."
   },
   "TransactionInfo": {
     "title": "Transaction Details",
@@ -532,7 +534,8 @@
     "expense": "Expense",
     "inTransfer": "Incomming Transfer",
     "outTransfer": "Outgoing Transfer",
-    "details": "details"
+    "details": "details",
+    "openImage": "Open the receipt image"
   },
   "updateTransfer": {
     "title": "Update Transfer",

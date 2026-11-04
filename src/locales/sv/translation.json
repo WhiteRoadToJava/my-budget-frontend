@@ -316,7 +316,9 @@
     "actions": "Handlar",
     "interval": "Intervall",
     "name": "Namn",
-    "currency": "Valuta"
+    "currency": "Valuta",
+    "amountReceived": "Mottaget belopp",
+    "pausedNote": "Pausad: den körs inte förrän du återupptar den."
   },
   "createTransaction": {},
   "createTransfer": {
@@ -510,7 +512,8 @@
     "expense": "Utgift",
     "inTransfer": "Inkommen överföring",
     "outTransfer": "Utgående överföring",
-    "details": "Detaljer"
+    "details": "Detaljer",
+    "openImage": "Öppna kvittobilden"
   },
   "updateTransfer": {
     "title": "Uppdatera överföring",
