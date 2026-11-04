@@ -49,8 +49,6 @@
     "debts": "Debts",
     "overview": "Overview",
     "accounts": "Accounts",
-    "expenses": "Expenses",
-    "incomes": "Incomes",
     "transactions": "Transactions",
     "schedule": "Schedule",
     "reports": "reports",
@@ -184,15 +182,6 @@
     "deleteConfirmation": "Are you sure you want to delete this item? This action cannot be undone.",
     "errorLoadingAccounts": "Unable to load accounts.",
     "noSchedules": "No schedules yet."
-  },
-  "incomses": {
-    "title": "Incomes",
-    "totolBalance": "Total balance:",
-    "numberOfIncomses": "Number of incomes:",
-    "lastUpdate": "Last update"
-  },
-  "expenses": {
-    "title": "Expenses"
   },
   "userDashboard": {
     "title": "accounts"

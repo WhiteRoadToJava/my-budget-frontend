@@ -8,8 +8,6 @@ import i18n from "../../configuration/i18n.js";
 export const getUserMenuItems = () => [   // ← now a function
   { label: i18n.t("menu.overview"),     icon: <Home />,         link: "/user/" },
   { label: i18n.t("menu.accounts"),     icon: <FileCode />,     link: "/user/accounts" },
-  { label: i18n.t("menu.expenses"),     icon: <FileCode />,     link: "/user/expenses" },
-  { label: i18n.t("menu.incomes"),      icon: <FileCode />,     link: "/user/incomes" },
   { label: i18n.t("menu.transactions"), icon: <FileCode />,     link: "/user/transactions" },
   { label: i18n.t("menu.debts"),        icon: <Database />,     link: "/user/debts" },
   { label: i18n.t("menu.schedule"),     icon: <Calendar />,     link: "/user/schedule" },

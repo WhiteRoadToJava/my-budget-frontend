@@ -5,8 +5,6 @@ import ForgotPassword from "./pages/auth/ForgotPassword.jsx";
 import Dashboard from "./pages/admin/Dashboard.jsx"
 import { AuthProvider } from "./contexts/AuthContext.jsx";
 import { UserProvider } from "./contexts/UserContext.jsx";
-import Expense from "./pages/user/expenses/Expense.jsx";
-import Income from "./pages/user/incomes/Income.jsx";
 import UserDashboard from "./pages/user/UserDashboard.jsx";
 import ProtectedRoute from "./components/routing/ProtectedRoute.jsx";
 import AdminLayout from "./components/admin/AdminLayout.jsx";
@@ -67,8 +65,6 @@ function App() {
                 <Route element={<UserLayout />}>
                   <Route path="/user" element={<UserDashboard />} />
                   <Route path="/user/accounts" element={<Account />} />
-                  <Route path="/user/expenses" element={<Expense />} />
-                  <Route path="/user/incomes" element={<Income />} />
 
                   <Route
                     path="/user/calendar"
