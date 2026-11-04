@@ -223,10 +223,17 @@
   "createAccount": {
     "title": "Skapa konto",
     "name": "Namn",
-    "balance": "Saldo",
+    "balance": "Startsaldo",
     "currency": "Valuta",
     "description": "Beskrivning",
-    "type": "Typ"
+    "type": "Typ",
+    "subtitle": "Lägg till ett bankkonto, kort eller kontanter du vill följa.",
+    "namePlaceholder": "t.ex. Vardagskonto",
+    "typeNormalHint": "Dina egna pengar",
+    "typeCompanyHint": "Ett företag eller gemensamma pengar",
+    "balanceHint": "Vad kontot har i dag. Lämna tomt för ett nytt, tomt konto.",
+    "balanceInvalid": "Ange saldot som ett tal.",
+    "errorExists": "Du har redan ett konto med det namnet."
   },
   "createExpense": {
     "title": "Skapa utgift",

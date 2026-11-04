@@ -223,10 +223,17 @@
   "createAccount": {
     "title": "إنشاء حساب",
     "name": "الاسم",
-    "balance": "الرصيد",
+    "balance": "الرصيد الافتتاحي",
     "currency": "العملة",
     "description": "الوصف",
-    "type": "النوع"
+    "type": "النوع",
+    "subtitle": "أضف حساباً بنكياً أو بطاقة أو نقداً تريد متابعته.",
+    "namePlaceholder": "مثلاً: الحساب اليومي",
+    "typeNormalHint": "أموالك الشخصية",
+    "typeCompanyHint": "لعمل تجاري أو أموال مشتركة",
+    "balanceHint": "المبلغ الموجود في الحساب اليوم. اتركه فارغاً لحساب جديد.",
+    "balanceInvalid": "أدخل الرصيد كرقم.",
+    "errorExists": "لديك حساب بهذا الاسم مسبقاً."
   },
   "createExpense": {
     "title": "مصروف جديد",
@@ -476,11 +483,11 @@
     "updating": "يتم تحديث",
     "loading": "جار التحميل",
     "add": "إضافة",
-    "cancel": "الغاء",
+    "cancel": "إلغاء",
     "edit": "تعديل",
     "delete": "حذف",
     "save": "حفظ",
-    "close": "اغلاق",
+    "close": "إغلاق",
     "ok": "موافق",
     "active": "نشط",
     "archived": "ارشفة",

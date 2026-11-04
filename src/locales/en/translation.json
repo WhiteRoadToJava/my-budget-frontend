@@ -226,10 +226,17 @@
   "createAccount": {
     "title": "Create Account",
     "name": "Name",
-    "balance": "Balance",
+    "balance": "Opening balance",
     "currency": "Currency",
     "description": "Description",
-    "type": "Type"
+    "type": "Type",
+    "subtitle": "Add a bank account, card or cash you want to keep track of.",
+    "namePlaceholder": "e.g. Everyday account",
+    "typeNormalHint": "Your own money",
+    "typeCompanyHint": "A business or shared money",
+    "balanceHint": "What the account holds today. Leave it empty for a new, empty account.",
+    "balanceInvalid": "Enter the balance as a number.",
+    "errorExists": "You already have an account with this name."
   },
   "createExpense": {
     "title": "Create Expense",

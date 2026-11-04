@@ -1,0 +1,184 @@
+@use "../../variables" as variable;
+
+/* Same frame as the details sheets: dialog on desktop, bottom sheet on phones. */
+
+.sheet {
+  position: relative;
+  width: min(480px, calc(100vw - 2rem));
+  max-height: 90vh;
+  overflow-y: auto;
+  background: variable.$surface-2;
+  border: 1px solid variable.$color-border;
+  border-radius: variable.$radius-large;
+  box-shadow: variable.$shadow-card;
+
+  @media (max-width: 640px) {
+    position: fixed;
+    inset: auto 0 0 0;
+    width: 100%;
+    max-height: 92vh;
+    border-radius: variable.$radius-large variable.$radius-large 0 0;
+  }
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding: 1.5rem;
+
+  @media (max-width: 640px) {
+    padding: 1.25rem 1rem calc(1rem + env(safe-area-inset-bottom));
+  }
+}
+
+.header {
+  padding-inline-end: 2rem; /* room for the close button */
+}
+
+.title {
+  margin: 0;
+  font-size: variable.$font-lg;
+}
+
+.subtitle {
+  margin: 0.3rem 0 0;
+  color: variable.$color-text-muted;
+  font-size: variable.$font-sm;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.label {
+  font-size: variable.$font-sm;
+  color: variable.$color-text-gray;
+}
+
+.hint {
+  margin: 0;
+  color: variable.$color-text-muted;
+  font-size: variable.$font-xs;
+}
+
+/* ---------- choice cards (radio) ---------- */
+
+.choices {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem;
+  margin: 0;
+  padding: 0;
+  border: none;
+
+  legend {
+    margin-bottom: 0.35rem;
+    padding: 0;
+    font-size: variable.$font-sm;
+    color: variable.$color-text-gray;
+  }
+}
+
+.choice {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  padding: 0.75rem 0.9rem;
+  background: variable.$surface-1;
+  border: 1px solid variable.$color-border;
+  border-radius: variable.$radius-md;
+  cursor: pointer;
+
+  input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  &:has(input:checked) {
+    border-color: variable.$color-tennis;
+    background: variable.$surface-3;
+  }
+
+  &:has(input:focus-visible) {
+    box-shadow: variable.$shadow-glow;
+  }
+}
+
+.choiceTitle {
+  font-weight: 700;
+}
+
+.choiceHint {
+  color: variable.$color-text-muted;
+  font-size: variable.$font-xs;
+}
+
+/* ---------- money input ---------- */
+
+.money {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  padding: 0.4rem 0.9rem;
+  background: variable.$surface-1;
+  border: 1px solid variable.$color-border;
+  border-radius: variable.$radius-md;
+
+  &:focus-within {
+    border-color: variable.$color-tennis;
+    box-shadow: variable.$shadow-glow;
+  }
+
+  input {
+    flex: 1;
+    min-width: 0;
+    padding: 0.2rem 0;
+    background: none;
+    border: none;
+    outline: none;
+    color: variable.$color-text;
+    font: inherit;
+    font-size: variable.$font-xxl;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+
+    &::placeholder {
+      color: variable.$color-text-muted;
+    }
+  }
+}
+
+.moneyCurrency {
+  color: variable.$color-text-muted;
+  font-size: variable.$font-md;
+}
+
+.error {
+  margin: 0;
+  padding: 0.65rem 0.85rem;
+  color: variable.$color-error;
+  background: rgba(255, 107, 120, 0.1);
+  border: 1px solid rgba(255, 107, 120, 0.25);
+  border-radius: variable.$radius-xs;
+  font-size: variable.$font-sm;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+
+  @media (max-width: 640px) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    > * {
+      width: 100%;
+    }
+  }
+}
