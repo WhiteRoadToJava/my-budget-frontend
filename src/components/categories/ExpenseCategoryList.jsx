@@ -4,10 +4,12 @@ import { expenseCategoryList } from "../../assiets/categories/assits";
 import FormInput from "../inputs/FormInput";
 import { onEnterOrSpace } from "../../utils/accessibility";
 
-const ExpenseCategoryList = ({ expenseItem }) => {
+const ExpenseCategoryList = ({ expenseItem, value }) => {
   const list = expenseCategoryList || [];
   const [isOpen, setIsOpen] = useState(false);
-  const [category, setCategory] = useState(null);
+  const [category, setCategory] = useState(
+    () => list.find((item) => item.id === Number(value)) ?? null,
+  );
   const handleChooseCategory = (id) => {
     if (expenseItem) {
       expenseItem(id);
