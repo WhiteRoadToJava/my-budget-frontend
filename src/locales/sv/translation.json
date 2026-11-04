@@ -49,8 +49,6 @@
     "debts": "Skulder",
     "overview": "Översikt",
     "accounts": "Konton",
-    "expenses": "Utgifter",
-    "incomes": "Inkomster",
     "transactions": "Transaktioner",
     "schedule": "Planering",
     "reports": "reporter",
@@ -184,18 +182,6 @@
     "errorLoadingAccounts": "Det gick inte att ladda kontona.",
     "noSchedules": "Inga scheman än.",
     "errorSameAccountTransfer": "Från- och tillkonto måste vara olika."
-  },
-  "incomses": {
-    "title": "Inkomster",
-    "totolBalance": "Totalt saldo:",
-    "numberOfIncomses": "Antal inkomster:",
-    "lastUpdate": "Senast uppdaterad"
-  },
-  "expenses": {
-    "title": "Utgifter",
-    "totolBalance": "Total balance:",
-    "numberOfExpenses": "Number of expenses:",
-    "lastUpdate": "Last update"
   },
   "userDashboard": {
     "title": "konton"

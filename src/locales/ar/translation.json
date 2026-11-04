@@ -49,8 +49,6 @@
     "debts": "الديون",
     "overview": "نظرة عامة",
     "accounts": "الحسابات",
-    "expenses": "المصاريف",
-    "incomes": "الإيرادات",
     "transactions": "المعاملات",
     "schedule": "جدولة التحويلات",
     "reports": "التقارير",
@@ -184,18 +182,6 @@
     "errorLoadingAccounts": "تعذّر تحميل الحسابات.",
     "noSchedules": "لا توجد جداول بعد.",
     "errorSameAccountTransfer": "يجب أن يكون حساب المصدر مختلفاً عن حساب الوجهة."
-  },
-  "incomses": {
-    "title": "الإيرادات",
-    "totolBalance": "الرصيد الكلي:",
-    "numberOfIncomses": "عدد الإيرادات:",
-    "lastUpdate": "آخر تحديث"
-  },
-  "expenses": {
-    "title": "المصاريف",
-    "totolBalance": "الرصيد الكلي:",
-    "numberOfExpenses": "عدد المصروفات:",
-    "lastUpdate": "آخر تحديث"
   },
   "userDashboard": {
     "title": "الحسابات"
