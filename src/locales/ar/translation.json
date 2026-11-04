@@ -356,7 +356,9 @@
     "type": "النوع",
     "status": "الحالة",
     "nextExecutionDate": "التاريخ القادم",
-    "actions": "الإجراءات"
+    "actions": "الإجراءات",
+    "amountReceived": "المبلغ المستلَم",
+    "pausedNote": "متوقف مؤقتاً: لن يُنفَّذ حتى تستأنفه."
   },
   "updateSchedule": {},
   "updateTransaction": {},
@@ -518,7 +520,8 @@
     "expense": "مصروف",
     "inTransfer": "تحويل وارد",
     "outTransfer": "تحويل صادر",
-    "details": "تفاصيل"
+    "details": "تفاصيل",
+    "openImage": "فتح صورة الإيصال"
   },
   "updateTransfer": {
     "title": "تحديث التحويل",
