@@ -592,5 +592,39 @@
     "summaryTitle": "Vad överföringen gör",
     "negative": "En avgift kan inte vara negativ.",
     "title": "Avgifter (valfritt)"
+  },
+  "share": {
+    "button": "Dela",
+    "title": "Dela kontoutdrag",
+    "subtitle": "Välj en period för att ta med transaktionerna. Kontrollera texten innan du skickar.",
+    "period": "Period",
+    "presets": {
+      "none": "Bara saldo",
+      "thisMonth": "Den här månaden",
+      "lastMonth": "Förra månaden",
+      "custom": "Välj datum"
+    },
+    "from": "Från",
+    "to": "Till",
+    "invalidPeriod": "Startdatumet måste vara före slutdatumet.",
+    "preview": "Förhandsvisning",
+    "copy": "Kopiera",
+    "copied": "Kopierat. Klistra in i WhatsApp eller Messenger.",
+    "send": "Dela",
+    "whatsapp": "Öppna WhatsApp",
+    "statementFor": "Kontoutdrag: {{name}}",
+    "currency": "Valuta",
+    "moneyIn": "In",
+    "moneyOut": "Ut",
+    "balanceAtEnd": "Saldo i slutet av perioden",
+    "currentBalance": "Aktuellt saldo",
+    "transactions": "Transaktioner",
+    "noTransactions": "Inga transaktioner under perioden.",
+    "theyOweUs": "Ni är skyldiga oss",
+    "weOweThem": "Vi är skyldiga er",
+    "transferIn": "Inkommande överföring",
+    "transferOut": "Utgående överföring",
+    "transferFee": "Överföringsavgift",
+    "sentFrom": "Skickat från www.mybudget.win"
   }
 }

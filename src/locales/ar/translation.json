@@ -600,5 +600,39 @@
     "summaryTitle": "أثر هذا التحويل",
     "negative": "لا يمكن أن تكون العمولة سالبة.",
     "title": "العمولات (اختياري)"
+  },
+  "share": {
+    "button": "مشاركة",
+    "title": "مشاركة كشف الحساب",
+    "subtitle": "اختر فترة لإضافة المعاملات. راجع النص قبل الإرسال.",
+    "period": "الفترة",
+    "presets": {
+      "none": "الرصيد فقط",
+      "thisMonth": "هذا الشهر",
+      "lastMonth": "الشهر الماضي",
+      "custom": "اختيار التاريخ"
+    },
+    "from": "من",
+    "to": "إلى",
+    "invalidPeriod": "يجب أن يكون تاريخ البداية قبل تاريخ النهاية.",
+    "preview": "معاينة الرسالة",
+    "copy": "نسخ",
+    "copied": "تم النسخ. الصقه في واتساب أو ماسنجر.",
+    "send": "مشاركة",
+    "whatsapp": "فتح واتساب",
+    "statementFor": "كشف حساب: {{name}}",
+    "currency": "العملة",
+    "moneyIn": "الداخل",
+    "moneyOut": "الخارج",
+    "balanceAtEnd": "الرصيد في نهاية الفترة",
+    "currentBalance": "الرصيد الحالي",
+    "transactions": "المعاملات",
+    "noTransactions": "لا توجد معاملات في هذه الفترة.",
+    "theyOweUs": "لنا عندكم",
+    "weOweThem": "لكم عندنا",
+    "transferIn": "تحويل وارد",
+    "transferOut": "تحويل صادر",
+    "transferFee": "عمولة تحويل",
+    "sentFrom": "أُرسل من www.mybudget.win"
   }
 }
