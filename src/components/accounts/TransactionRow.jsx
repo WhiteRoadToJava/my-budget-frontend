@@ -5,7 +5,7 @@ import { formatNumber } from "../../utils/formating";
 import { findCategory } from "../../assiets/categories/assits";
 import transferIcon from "../../assiets/categories/icons/currency.svg";
 import { categoryName, typeLabelKey } from "../../utils/transactionTypes";
-import { isIncoming, otherAccountName } from "../../utils/transactions/transactionList";
+import { isIncoming, isTransferFee, otherAccountName } from "../../utils/transactions/transactionList";
 import { dateFnsLocale } from "../../utils/dates";
 import { onEnterOrSpace } from "../../utils/accessibility";
 import i18n from "../../configuration/i18n";
@@ -20,10 +20,16 @@ const Row = ({ transaction, onClick, showAccount = false }) => {
   );
   const incoming = isIncoming(transaction);
   const other = otherAccountName(transaction);
-  const isTransfer = transaction.type === "in-transfer" || transaction.type === "out-transfer";
+  const isFee = isTransferFee(transaction);
+  const isTransfer = transaction.type === "in-transfer" || transaction.type === "out-transfer" || isFee;
   const typeKey = typeLabelKey(transaction.type);
 
-  const title = isTransfer
+  const title = isFee
+    ? i18n.t("transactionsPage.transferFee", {
+        from: transaction.sourceAccount?.name ?? i18n.t("account.accountdeleted"),
+        to: transaction.destinationAccount?.name ?? i18n.t("account.accountdeleted"),
+      })
+    : isTransfer
     ? i18n.t(incoming ? "transactionsPage.fromAccount" : "transactionsPage.toAccount", {
         name: other || i18n.t("account.accountdeleted"),
       })

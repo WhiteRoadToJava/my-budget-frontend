@@ -41,6 +41,8 @@ const DELETE_ERROR_KEY = {
   expense: "messages.errorDeleteExpenses",
   "in-transfer": "messages.errorDeleteTransfers",
   "out-transfer": "messages.errorDeleteTransfers",
+  "transfer-fee-in": "messages.errorDeleteTransfers",
+  "transfer-fee-out": "messages.errorDeleteTransfers",
 };
 
 const DELETE_FN = {
@@ -48,6 +50,36 @@ const DELETE_FN = {
   expense: deleteExpense,
   "in-transfer": deleteTransfer,
   "out-transfer": deleteTransfer,
+  // a fee row belongs to its transfer: deleting it deletes the transfer
+  "transfer-fee-in": deleteTransfer,
+  "transfer-fee-out": deleteTransfer,
+};
+
+// amounts, rate and fees of a transfer, each with the currency of its account
+const money = (amount, account) =>
+  `${formatNumber(Number(amount ?? 0))} ${account?.currency ?? ""}`.trim();
+
+const feeText = (fee, direction, account) =>
+  `${money(fee, account)} · ${i18n.t(direction === "CREDIT" ? "transferFees.credit" : "transferFees.charge")}` +
+  ` · ${account?.name ?? i18n.t("account.accountdeleted")}`;
+
+const transferBreakdown = (t) => {
+  if (!t) return [];
+  return [
+    { label: i18n.t("transactionDetails.amountSent"), value: money(t.amountSent, t.sourceAccount) },
+    Number(t.exChangeRate ?? 1) !== 1 && {
+      label: i18n.t("transactionDetails.exchangeRate"), value: String(t.exChangeRate),
+    },
+    { label: i18n.t("transactionDetails.amountReceived"), value: money(t.amountReceived, t.destinationAccount) },
+    t.sendFee > 0 && {
+      label: i18n.t("transactionDetails.sendFee"),
+      value: feeText(t.sendFee, t.sendFeeDirection, t.sendFeeAccount),
+    },
+    t.receiveFee > 0 && {
+      label: i18n.t("transactionDetails.receiveFee"),
+      value: feeText(t.receiveFee, t.receiveFeeDirection, t.receiveFeeAccount),
+    },
+  ].filter(Boolean);
 };
 
 const TransactionInfo = ({ isOpen, onClose, accounts, transaction }) => {
@@ -63,7 +95,15 @@ const TransactionInfo = ({ isOpen, onClose, accounts, transaction }) => {
   });
 
   const type = transaction?.type;
-  const isTransfer = type === "in-transfer" || type === "out-transfer";
+  const isFee = type === "transfer-fee-in" || type === "transfer-fee-out";
+  // fee rows are part of a transfer: same edit, delete and details
+  const isTransfer = type === "in-transfer" || type === "out-transfer" || isFee;
+  // the full transfer (rate and fees are not in the list row)
+  const { data: fullTransfer } = useQuery({
+    queryKey: ["transfer", transaction?.id],
+    queryFn: () => getTransferById(transaction.id),
+    enabled: !!isOpen && isTransfer && !!transaction?.id,
+  });
   const isDebtRecord = belongsToDebt(transaction);
   const incoming = isIncoming(transaction);
   const category = findCategory(transaction?.category, type);
@@ -133,7 +173,12 @@ const TransactionInfo = ({ isOpen, onClose, accounts, transaction }) => {
       : incoming
         ? "in"
         : "out";
-  const title = isTransfer
+  const title = isFee
+    ? i18n.t("transactionsPage.transferFee", {
+        from: transaction?.sourceAccount?.name || i18n.t("account.accountdeleted"),
+        to: transaction?.destinationAccount?.name || i18n.t("account.accountdeleted"),
+      })
+    : isTransfer
     ? i18n.t(
         incoming
           ? "transactionsPage.fromAccount"
@@ -167,6 +212,7 @@ const TransactionInfo = ({ isOpen, onClose, accounts, transaction }) => {
         ? null
         : format(date, "d MMMM yyyy", { locale }),
     },
+    ...transferBreakdown(fullTransfer),
     {
       label: i18n.t("transactionDetails.description"),
       value: transaction?.description,

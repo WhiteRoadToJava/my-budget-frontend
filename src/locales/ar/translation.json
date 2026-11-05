@@ -516,7 +516,14 @@
     "details": "تفاصيل",
     "openImage": "فتح صورة الإيصال",
     "errorDuplicate": "تعذر فتح نسخة. خاول مرة اخرى",
-    "duplicate":"تكرار"
+    "duplicate": "تكرار",
+    "transferFeeIn": "عمولة تحويل (لنا)",
+    "transferFeeOut": "عمولة تحويل (علينا)",
+    "amountSent": "المبلغ المرسَل",
+    "amountReceived": "المبلغ المستلَم",
+    "exchangeRate": "سعر الصرف",
+    "sendFee": "عمولة الإرسال",
+    "receiveFee": "عمولة الاستلام"
   },
   "updateTransfer": {
     "title": "تحديث التحويل",
@@ -578,6 +585,20 @@
     "fromAccount": "من {{name}}",
     "empty": "لا توجد معاملات بعد. أضف دخلاً أو مصروفاً من أحد الحسابات.",
     "noMatch": "لا توجد معاملات تطابق هذه الفلاتر.",
-    "backToAccounts": "كل الحسابات"
+    "backToAccounts": "كل الحسابات",
+    "transferFee": "عمولة: {{from}} ← {{to}}"
+  },
+  "transferFees": {
+    "sendFee": "عمولة الإرسال",
+    "receiveFee": "عمولة الاستلام",
+    "amount": "المبلغ",
+    "charge": "علينا",
+    "credit": "لنا",
+    "account": "الحساب",
+    "sameAsSource": "حساب المصدر",
+    "sameAsDestination": "حساب الوجهة",
+    "summaryTitle": "أثر هذا التحويل",
+    "negative": "لا يمكن أن تكون العمولة سالبة.",
+    "title": "العمولات (اختياري)"
   }
 }

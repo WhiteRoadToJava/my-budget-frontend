@@ -11,6 +11,8 @@ const TYPE_LABELS = {
   "out-transfer": "transactionDetails.outTransfer",
   "debt-in": "transactionDetails.debtIn",
   "debt-out": "transactionDetails.debtOut",
+  "transfer-fee-in": "transactionDetails.transferFeeIn",
+  "transfer-fee-out": "transactionDetails.transferFeeOut",
 };
 
 // the category lists hold English names; the Debt category is translated

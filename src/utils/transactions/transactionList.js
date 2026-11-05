@@ -1,6 +1,6 @@
 // Pure helpers for transaction lists: direction, grouping by month, filters.
 
-const INCOMING = new Set(["incomse", "in-transfer", "debt-in"]);
+const INCOMING = new Set(["incomse", "in-transfer", "debt-in", "transfer-fee-in"]);
 
 export const isIncoming = (t) => INCOMING.has(t?.type);
 
@@ -38,7 +38,7 @@ export const TYPE_FILTERS = {
   all: () => true,
   income: (t) => t.type === "incomse",
   expense: (t) => t.type === "expense",
-  transfer: (t) => t.type === "in-transfer" || t.type === "out-transfer",
+  transfer: (t) => t.type === "in-transfer" || t.type === "out-transfer" || t.type?.startsWith("transfer-fee"),
   debt: (t) => t.type === "debt-in" || t.type === "debt-out" || t.category === "Debt",
 };
 
@@ -60,6 +60,9 @@ export const filterTransactions = (transactions = [], { type = "all", query = ""
 };
 
 // the account on the other side of a transfer, seen from the given account
+// the row is only a fee paid from or into an account that is neither side
+export const isTransferFee = (t) => t?.type === "transfer-fee-in" || t?.type === "transfer-fee-out";
+
 export const otherAccountName = (t) => {
   if (t.type === "out-transfer") return t.destinationAccount?.name;
   if (t.type === "in-transfer") return t.sourceAccount?.name;

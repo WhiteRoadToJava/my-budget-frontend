@@ -9,6 +9,14 @@ import { getTransferById, updateTransfer } from "../../api/transferServce.js";
 import i18n from "../../configuration/i18n.js";
 import Datepicker from "../inputs/Datepicker.jsx";
 import { ImagePicker } from "../ImagePicker.jsx";
+import TransferFeesFields from "./TransferFeesFields";
+import TransferSummary from "./TransferSummary";
+import { emptyFees, feesFromTransfer, feesToRequest, validateFees } from "../../utils/transactions/transferFees";
+
+const FEE_FIELDS = [
+  "sendFee", "sendFeeDirection", "sendFeeAccount",
+  "receiveFee", "receiveFeeDirection", "receiveFeeAccount",
+];
 
 const UpdateTransfer = ({ isOpen, isClose, accounts, transfer }) => {
   const queryClient = useQueryClient();
@@ -28,13 +36,18 @@ const UpdateTransfer = ({ isOpen, isClose, accounts, transfer }) => {
   });
   const [imageUrls, setImageUrls] = useState(null);
   const [error, setError] = useState({ hasError: false, message: "" });
+  const [fees, setFees] = useState(emptyFees());
 
   useEffect(() => {
     const fetchTransferData = async () => {
     if (isOpen && transfer) {
       const tranferIncomingFromServer  = await getTransferById(transfer.id);
+      // the fees live in their own state; drop them from the transfer fields
+      const fields = { ...tranferIncomingFromServer };
+      for (const key of FEE_FIELDS) delete fields[key];
+      setFees(feesFromTransfer(tranferIncomingFromServer));
       setTransferData({
-        ...tranferIncomingFromServer,
+        ...fields,
         sourceAccount: tranferIncomingFromServer.sourceAccount || { id: "" },
         destinationAccount: tranferIncomingFromServer.destinationAccount || { id: "" },
         amountSent: tranferIncomingFromServer.amountSent || 0,
@@ -121,17 +134,21 @@ useEffect(() => {
       });
     }
 
+    const feeError = validateFees(fees);
+    if (feeError) {
+      return setError({ hasError: true, message: i18n.t(feeError) });
+    }
     mutation.mutate({
       ...transferData,
       amountSent: Number(transferData.amountSent),
       exChangeRate: Number(transferData.exChangeRate),
       amountReceived: Number(transferData.amountReceived),
-      
+      ...feesToRequest(fees),
     });
   };
 
   return (
-    <Modal isOpen={isOpen} onRequestClose={isClose}>
+    <Modal isOpen={isOpen} onClose={isClose}>
       <div className={styles.formContainer}>
         <h2>{i18n.t("updateTransfer.title")}</h2>
         <form onSubmit={handleSubmit}>
@@ -178,6 +195,16 @@ useEffect(() => {
             type="number"
             value={transferData.amountReceived}
             onChange={handleInputChange}
+          />
+
+          <TransferFeesFields fees={fees} onChange={setFees} accounts={accountsList} />
+          <TransferSummary
+            sourceId={transferData.sourceAccount?.id}
+            destinationId={transferData.destinationAccount?.id}
+            amountSent={transferData.amountSent}
+            amountReceived={transferData.amountReceived}
+            fees={fees}
+            accounts={accountsList}
           />
 
           <FormInput

@@ -508,7 +508,14 @@
     "details": "Detaljer",
     "openImage": "Öppna kvittobilden",
     "errorDuplicate": "Det gick inte att öppna kopian. Försök igen",
-    "duplicate": "Duplicera"
+    "duplicate": "Duplicera",
+    "transferFeeIn": "Överföringsavgift (in)",
+    "transferFeeOut": "Överföringsavgift (ut)",
+    "amountSent": "Skickat belopp",
+    "amountReceived": "Mottaget belopp",
+    "exchangeRate": "Växelkurs",
+    "sendFee": "Avgift vid sändning",
+    "receiveFee": "Avgift vid mottagning"
   },
   "updateTransfer": {
     "title": "Uppdatera överföring",
@@ -570,6 +577,20 @@
     "fromAccount": "Från {{name}}",
     "empty": "Inga transaktioner än. Lägg till en inkomst eller utgift från ett konto.",
     "noMatch": "Inga transaktioner matchar filtren.",
-    "backToAccounts": "Alla konton"
+    "backToAccounts": "Alla konton",
+    "transferFee": "Avgift: {{from}} → {{to}}"
+  },
+  "transferFees": {
+    "sendFee": "Avgift vid sändning",
+    "receiveFee": "Avgift vid mottagning",
+    "amount": "Belopp",
+    "charge": "Vi betalar",
+    "credit": "Vi får",
+    "account": "Konto",
+    "sameAsSource": "Från-konto",
+    "sameAsDestination": "Till-konto",
+    "summaryTitle": "Vad överföringen gör",
+    "negative": "En avgift kan inte vara negativ.",
+    "title": "Avgifter (valfritt)"
   }
 }
