@@ -29,6 +29,8 @@ describe("drafts", () => {
     expect(transferDraft(transfer)).toEqual({
       sourceAccount: { id: "a1" }, destinationAccount: { id: "a2" },
       amountSent: 100, exChangeRate: 11.2, amountReceived: 1120, description: "Rent share",
+      fees: { sendFee: "", sendFeeDirection: "CHARGE", sendFeeAccountId: "",
+        receiveFee: "", receiveFeeDirection: "CHARGE", receiveFeeAccountId: "" },
     });
   });
 });

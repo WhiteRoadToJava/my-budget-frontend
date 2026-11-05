@@ -1,4 +1,5 @@
 import {belongsToDebt} from "../transactionTypes";
+import { feesFromTransfer } from "./transferFees";
 
 const isTransferType = (type) => type === "in-transfer" || type === "out-transfer";
 
@@ -21,4 +22,5 @@ export const transferDraft = (transfer) => ({
     exChangeRate: transfer.exChangeRate ?? 0,
     amountReceived: transfer.amountReceived ?? 0,
     description: transfer.description ?? "",
+    fees: feesFromTransfer(transfer),
 });

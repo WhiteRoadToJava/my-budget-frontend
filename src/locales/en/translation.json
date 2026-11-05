@@ -533,8 +533,14 @@
     "details": "details",
     "openImage": "Open the receipt image",
     "errorDuplicate": "Could not open the copy. Try again",
-    "duplicate":"Duplicate"
-    
+    "duplicate": "Duplicate",
+    "transferFeeIn": "Transfer fee (in)",
+    "transferFeeOut": "Transfer fee (out)",
+    "amountSent": "Amount sent",
+    "amountReceived": "Amount received",
+    "exchangeRate": "Exchange rate",
+    "sendFee": "Sending fee",
+    "receiveFee": "Receiving fee"
   },
   "updateTransfer": {
     "title": "Update Transfer",
@@ -587,6 +593,20 @@
     "fromAccount": "From {{name}}",
     "empty": "No transactions yet. Add an income or an expense from an account.",
     "noMatch": "No transactions match these filters.",
-    "backToAccounts": "All accounts"
+    "backToAccounts": "All accounts",
+    "transferFee": "Fee: {{from}} → {{to}}"
+  },
+  "transferFees": {
+    "sendFee": "Sending fee",
+    "receiveFee": "Receiving fee",
+    "amount": "Amount",
+    "charge": "We pay",
+    "credit": "We receive",
+    "account": "Account",
+    "sameAsSource": "Source account",
+    "sameAsDestination": "Destination account",
+    "summaryTitle": "What this transfer does",
+    "negative": "A fee can not be negative.",
+    "title": "Fees (optional)"
   }
 }
