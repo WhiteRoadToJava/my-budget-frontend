@@ -507,7 +507,7 @@
     "outTransfer": "Utgående överföring",
     "details": "Detaljer",
     "openImage": "Öppna kvittobilden",
-    "errorDuplicat": "Det gick inte att öppna kopian. Försök igen",
+    "errorDuplicate": "Det gick inte att öppna kopian. Försök igen",
     "duplicate": "Duplicera"
   },
   "updateTransfer": {

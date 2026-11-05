@@ -515,7 +515,7 @@
     "outTransfer": "تحويل صادر",
     "details": "تفاصيل",
     "openImage": "فتح صورة الإيصال",
-    "rrorDuplicate": "تعذر فتح نسخة. خاول مرة اخرى",
+    "errorDuplicate": "تعذر فتح نسخة. خاول مرة اخرى",
     "duplicate":"تكرار"
   },
   "updateTransfer": {

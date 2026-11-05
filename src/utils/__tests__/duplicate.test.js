@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { canDuplicate, incomeExpenseDraft, transferDraft } from "../transaction/duplicate.js";
+import { canDuplicate, incomeExpenseDraft, transferDraft } from "../transactions/duplicate.js";
 
 const acc = { id: "a1", name: "Main" };
 
