@@ -10,6 +10,7 @@ import CreateTransfer from "../transfers/CreateTransfer";
 import TransactionInfo from "../transactions/TransactionInfo";
 import TransactionList from "../transactions/TransactionList";
 import TransactionFilters from "../transactions/TransactionFilters";
+import ShareStatement from "./ShareStatement";
 import { filterTransactions } from "../../utils/transactions/transactionList";
 import { changeSinceOpening } from "../../utils/accounts/accountList";
 import { findCategory } from "../../assiets/categories/assits";
@@ -24,6 +25,7 @@ const Account = ({ account }) => {
   const [isCreateIncomeOpen, setIsCreateIncomeOpen] = useState(false);
   const [isCreateExpenseOpen, setIsCreateExpenseOpen] = useState(false);
   const [isCreateTransfer, setIsCreateTransfer] = useState(false);
+  const [isShareOpen, setIsShareOpen] = useState(false);
   const [selected, setSelected] = useState(null);
   const [type, setType] = useState("all");
   const [query, setQuery] = useState("");
@@ -76,6 +78,8 @@ const Account = ({ account }) => {
           onClick={() => setIsCreateExpenseOpen(true)} />
         <Button variant="blue" text={i18n.t("buttons.createTransfer")}
           onClick={() => setIsCreateTransfer(true)} />
+        <Button variant="secondary" text={i18n.t("share.button")}
+          onClick={() => setIsShareOpen(true)} disabled={isLoading} />
       </div>
 
       <TransactionFilters type={type} onTypeChange={setType} query={query} onQueryChange={setQuery} />
@@ -103,6 +107,12 @@ const Account = ({ account }) => {
         isClose={() => setIsCreateTransfer(false)}
         accounts={accounts}
         currentAccount={current}
+      />
+      <ShareStatement
+        isOpen={isShareOpen}
+        onClose={() => setIsShareOpen(false)}
+        account={current}
+        transactions={transactions}
       />
       <TransactionInfo
         isOpen={!!selected}

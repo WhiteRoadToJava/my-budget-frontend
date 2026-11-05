@@ -608,5 +608,39 @@
     "summaryTitle": "What this transfer does",
     "negative": "A fee can not be negative.",
     "title": "Fees (optional)"
+  },
+  "share": {
+    "button": "Share",
+    "title": "Share account statement",
+    "subtitle": "Choose a period to include the transactions. Check the text before you send it.",
+    "period": "Period",
+    "presets": {
+      "none": "Balance only",
+      "thisMonth": "This month",
+      "lastMonth": "Last month",
+      "custom": "Choose dates"
+    },
+    "from": "From",
+    "to": "To",
+    "invalidPeriod": "The start date must be before the end date.",
+    "preview": "Message preview",
+    "copy": "Copy",
+    "copied": "Copied. Paste it in WhatsApp or Messenger.",
+    "send": "Share",
+    "whatsapp": "Open WhatsApp",
+    "statementFor": "Statement: {{name}}",
+    "currency": "Currency",
+    "moneyIn": "Money in",
+    "moneyOut": "Money out",
+    "balanceAtEnd": "Balance at the end of the period",
+    "currentBalance": "Current balance",
+    "transactions": "Transactions",
+    "noTransactions": "No transactions in this period.",
+    "theyOweUs": "You owe us",
+    "weOweThem": "We owe you",
+    "transferIn": "Incoming transfer",
+    "transferOut": "Outgoing transfer",
+    "transferFee": "Transfer fee",
+    "sentFrom": "Sent from www.mybudget.win"
   }
 }
