@@ -531,7 +531,10 @@
     "inTransfer": "Incomming Transfer",
     "outTransfer": "Outgoing Transfer",
     "details": "details",
-    "openImage": "Open the receipt image"
+    "openImage": "Open the receipt image",
+    "errorDuplicate": "Could not open the copy. Try again",
+    "duplicate":"Duplicate"
+    
   },
   "updateTransfer": {
     "title": "Update Transfer",

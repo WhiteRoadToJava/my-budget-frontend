@@ -11,11 +11,11 @@ import {incomseCategoryList} from "../../assiets/categories/assits"
 import IncomeCategoryList from "../categories/IncomeCategoryList.jsx";
 
 
-const CreateIncomse = ({ isOpen, isClose, account }) => {
+const CreateIncomse = ({ isOpen, isClose, account, initialData }) => {
   const queryClient = useQueryClient();
   const [incomseData, setIncomseData] = useState({
-    category: "",
-    amount: "",
+    category: initialData?.category ?? "",
+    amount: initialData?.amount ?? "",
     inage: null,
   });
   const [imageUrls, setImageUrls] = useState(null);
@@ -78,7 +78,7 @@ const CreateIncomse = ({ isOpen, isClose, account }) => {
   }
   return (
     <div className={styles.createIncomseContainer}>
-      <Modal isOpen={isOpen} onRequestClose={isClose}>
+      <Modal isOpen={isOpen} onClose={isClose}>
         <div className={styles.formContainer}>
         <h2>{i18n.t("createIncomse.title")}</h2>
         <form>
@@ -93,7 +93,7 @@ const CreateIncomse = ({ isOpen, isClose, account }) => {
             />
           </div>
           <div>
-            <IncomeCategoryList incomseItem={handleCategoryChange} />
+            <IncomeCategoryList incomseItem={handleCategoryChange} value={incomseData.category} />
           </div>
           <div>
             <ImagePicker onImageChange={setImageUrls} />

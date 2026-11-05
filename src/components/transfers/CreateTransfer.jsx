@@ -9,7 +9,7 @@ import { createTransfer } from "../../api/transferServce.js";
 import i18n from "../../configuration/i18n.js";
 import { ImagePicker } from "../ImagePicker.jsx";
 
-const CreateTransfer = ({ isOpen, isClose, accounts, currentAccount }) => {
+const CreateTransfer = ({ isOpen, isClose, accounts, currentAccount, initialData }) => {
   const queryClient = useQueryClient();
   const [transferData, setTransferData] = useState({
     sourceAccount: { id: "" },
@@ -18,24 +18,22 @@ const CreateTransfer = ({ isOpen, isClose, accounts, currentAccount }) => {
     exChangeRate: 1,
     amountReceived: 0,
     description: "",
-    category: "transfer", // أضفتها لتطابق طلبك السابق
+    ...initialData,
+    category: "transfer",
     image: null,
   });
   const [imageUrls, setImageUrls] = useState(null);
 
   const [error, setError] = useState({ hasError: false, message: "" });
 
-  // استخراج الأسماء من المصفوفة بشكل آمن
   const accountsList = accounts?.accounts || [];
 
-  // دالة مساعدة للحصول على اسم الحساب من الـ ID المخزن (لأغراض التصفية)
   const getAccountNameById = (id) =>
     accountsList.find((acc) => acc.id === id)?.name;
   const sourceName = getAccountNameById(transferData.sourceAccount.id);
   const destinationName = getAccountNameById(
     transferData.destinationAccount.id,
   );
-  // القوائم المصفاة
   const filteredSourceList = accountsList
     .filter((acc) => acc.name !== destinationName)
     .map((acc) => acc.name);
@@ -46,13 +44,11 @@ const CreateTransfer = ({ isOpen, isClose, accounts, currentAccount }) => {
     const { name, value } = e.target;
     let updatedData = { ...transferData };
     if (name === "sourceAccount" || name === "destinationAccount") {
-      // البحث عن الحساب بالاسم للحصول على الـ ID
       const selectedAccount = accountsList.find((acc) => acc.name === value);
       updatedData[name] = { id: selectedAccount ? selectedAccount.id : "" };
     } else {
       updatedData[name] = value;
     }
-    // حساب المبلغ المستلم تلقائياً
     if (name === "amountSent") {
       const sent =
         name === "amountSent" ? Number(value) : Number(updatedData.amountSent);
@@ -86,7 +82,7 @@ const CreateTransfer = ({ isOpen, isClose, accounts, currentAccount }) => {
       }
     };
     selectCurrentAccount();
-  }, [isOpen, currentAccount]);
+  }, [isOpen, currentAccount, initialData]);
 
   const mutation = useMutation({
     mutationFn: (data) => createTransfer(data),
@@ -127,7 +123,6 @@ const CreateTransfer = ({ isOpen, isClose, accounts, currentAccount }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // التحقق من أن الحسابين مختلفين باستخدام الـ ID
     if (transferData.sourceAccount.id === transferData.destinationAccount.id) {
       return setError({
         hasError: true,
@@ -147,7 +142,7 @@ const CreateTransfer = ({ isOpen, isClose, accounts, currentAccount }) => {
     transferData.destinationAccount.id,
   );
   return (
-    <Modal isOpen={isOpen} onRequestClose={isClose}>
+    <Modal isOpen={isOpen} onClose={isClose}>
       <div className={styles.formContainer}>
         <h2>{i18n.t("createTransfer.title")}</h2>
         <form onSubmit={handleSubmit}>

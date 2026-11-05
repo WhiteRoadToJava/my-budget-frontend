@@ -4,10 +4,12 @@ import { incomseCategoryList } from "../../assiets/categories/assits";
 import FormInput from "../inputs/FormInput";
 import { onEnterOrSpace } from "../../utils/accessibility";
 
-const IncomeCategoryList = ({ incomseItem }) => {
+const IncomeCategoryList = ({ incomseItem, value }) => {
   const list = incomseCategoryList || [];
   const [isOpen, setIsOpen] = useState(false);
-  const [category, setCategory] = useState(null); 
+  const [category, setCategory] = useState(
+    () => list.find((item) => item.id === Number(value)) ?? null,
+  ); 
   const handleChooseCategory = (id) => {
     if (incomseItem) {
       incomseItem(id);

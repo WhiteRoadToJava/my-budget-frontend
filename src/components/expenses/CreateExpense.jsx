@@ -10,12 +10,12 @@ import { ImagePicker } from "../ImagePicker";
 import { expenseCategoryList } from "../../assiets/categories/assits";
 import ExpenseCategoryList from "../categories/ExpenseCategoryList";
 
-const CreateExpense = ({ isOpen, isClose, account }) => {
+const CreateExpense = ({ isOpen, isClose, account, initialData }) => {
   const queryClient = useQueryClient();
 
   const [expenseData, setExpenseData] = useState({
-    category: "",
-    amount: "",
+    category: initialData?.category ?? "",
+    amount: initialData?.amount ?? "",
     image: null,
   });
   const [imageUrls, setImageUrls] = useState(null);
@@ -28,11 +28,11 @@ const CreateExpense = ({ isOpen, isClose, account }) => {
       queryClient.invalidateQueries({ queryKey: ["transactions"] });
       queryClient.invalidateQueries({ queryKey: ["accounts"] });
 
-      isClose(); // إغلاق المودال
+      isClose();
       setExpenseData({
         category: "",
         amount: "",
-      }); // تصغير البيانات
+      });
     },
     onError: () => {
       setError({
@@ -51,14 +51,14 @@ const CreateExpense = ({ isOpen, isClose, account }) => {
   const handleCreateExpense = async (e) => {
     e.preventDefault();
     if (!handleValidation()) return;
-    const filnalExpenseData = {
+    const finalExpenseData = {
       ...expenseData,
       account: { id: account?.id || "" },
       image: imageUrls || null,
     };
     // 3. تنفيذ الـ Mutation
-    setExpenseData(filnalExpenseData);
-    mutation.mutate(filnalExpenseData);
+    setExpenseData(finalExpenseData);
+    mutation.mutate(finalExpenseData);
   };
 
   const handleValidation = () => {
@@ -83,7 +83,7 @@ const CreateExpense = ({ isOpen, isClose, account }) => {
 
   return (
     <div className={styles.createExpenseContainer}>
-      <Modal isOpen={isOpen} onRequestClose={isClose}>
+      <Modal isOpen={isOpen} onClose={isClose}>
         <div className={styles.formContainer}>
           <h2>{i18n.t("createExpense.title")}</h2>
           <form onSubmit={handleCreateExpense}>
