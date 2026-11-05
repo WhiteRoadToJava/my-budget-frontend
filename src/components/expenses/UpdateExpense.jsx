@@ -8,12 +8,14 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import i18n from "../../configuration/i18n";
 import Datepicker from "../inputs/Datepicker";
 import { ImagePicker } from "../ImagePicker";
+import ExpenseCategoryList from "../categories/ExpenseCategoryList";
 
 const UpdateExpense = ({ isOpen, isClose, expense }) => {
   const [expwnseData, setExpenseData] = useState({
     account: { id: "" },
     category: "",
     amount: "",
+    description: "",
     createdAt: "",
     image: null,
   });
@@ -47,6 +49,7 @@ const UpdateExpense = ({ isOpen, isClose, expense }) => {
               account: { id: data.account?.id || "" },
               category: data.category || "",
               amount: data.amount || "",
+              description: data.description || "",
               image: data.image || null,
             });
           }
@@ -103,11 +106,20 @@ useEffect(() => {
               />
             </div>
             <div>
-              <FormInput
-                label={i18n.t("updateExpense.category")}
-                placeholder={i18n.t("placeholder.category")}
-                name="category"
+              {/* the category list reads its value once: remount it when the expense is loaded */}
+              <ExpenseCategoryList
+                key={expwnseData.id ?? "loading"}
+                expenseItem={(id) => setExpenseData((prev) => ({ ...prev, category: id }))}
                 value={expwnseData.category}
+              />
+            </div>
+            <div className={styles.inputContainer}>
+              <FormInput
+                label={i18n.t("updateExpense.description")}
+                placeholder={i18n.t("placeholder.description")}
+                name="description"
+                type="text"
+                value={expwnseData.description}
                 onChange={handleInputChange}
               />
             </div>

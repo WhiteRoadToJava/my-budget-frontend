@@ -8,12 +8,14 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import i18n from "../../configuration/i18n";
 import Datepicker from "../inputs/Datepicker";
 import { ImagePicker } from "../ImagePicker";
+import IncomeCategoryList from "../categories/IncomeCategoryList";
 
 const UpdateIncomse = ({ isOpen, isClose, incomse }) => {
   const [incomseData, setIncomseData] = useState({
     account: { id: "" },
     category: "",
     amount: "",
+    description: "",
     createdAt: "",
     image: null,
   });
@@ -48,6 +50,7 @@ const UpdateIncomse = ({ isOpen, isClose, incomse }) => {
               account: { id: data.account?.id || "" },
               category: data.category || "",
               amount: data.amount || "",
+              description: data.description || "",
               createdAt: data.createdAt || "",
               image: data.image || null,
             });
@@ -101,11 +104,20 @@ const UpdateIncomse = ({ isOpen, isClose, incomse }) => {
               />
             </div>
             <div>
-              <FormInput
-                label={i18n.t("createIncomse.category")}
-                placeholder={i18n.t("placeholder.category")}
-                name="category"
+              {/* the category list reads its value once: remount it when the income is loaded */}
+              <IncomeCategoryList
+                key={incomseData.id ?? "loading"}
+                incomseItem={(id) => setIncomseData((prev) => ({ ...prev, category: id }))}
                 value={incomseData.category}
+              />
+            </div>
+            <div className={styles.inputContainer}>
+              <FormInput
+                label={i18n.t("updateIncomse.description")}
+                placeholder={i18n.t("placeholder.description")}
+                name="description"
+                type="text"
+                value={incomseData.description}
                 onChange={handleInputChange}
               />
             </div>

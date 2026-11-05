@@ -15,7 +15,7 @@ const CreateExpense = ({ isOpen, isClose, account, initialData }) => {
 
   const [expenseData, setExpenseData] = useState({
     category: initialData?.category ?? "",
-    amount: initialData?.amount ?? "",
+    amount: initialData?.amount ?? "",    description: initialData?.description ?? "",
     image: null,
   });
   const [imageUrls, setImageUrls] = useState(null);
@@ -32,6 +32,7 @@ const CreateExpense = ({ isOpen, isClose, account, initialData }) => {
       setExpenseData({
         category: "",
         amount: "",
+        description: "",
       });
     },
     onError: () => {
@@ -98,7 +99,17 @@ const CreateExpense = ({ isOpen, isClose, account, initialData }) => {
               />
             </div>
             <div>
-              <ExpenseCategoryList expenseItem={handleCategoryChange} />
+              <ExpenseCategoryList expenseItem={handleCategoryChange} value={expenseData.category} />
+            </div>
+            <div className={styles.inputContainer}>
+              <FormInput
+                label={i18n.t("createExpense.description")}
+                placeholder={i18n.t("placeholder.description")}
+                name="description"
+                type="text"
+                value={expenseData.description}
+                onChange={handleInputChange}
+              />
             </div>
             <div>
               {error.hasError && (

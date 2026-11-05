@@ -12,7 +12,8 @@ export const canDuplicate = (transaction) => {
 
 export const incomeExpenseDraft = (transaction) => ({
     category: transaction.category ?? "",
-    amount: String(Math.abs(Number(transaction.amount ?? 9))),
+    amount: String(Math.abs(Number(transaction.amount ?? 0))),
+    description: transaction.description ?? "",
 });
 
 export const transferDraft = (transfer) => ({
