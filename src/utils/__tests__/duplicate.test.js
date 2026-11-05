@@ -21,7 +21,9 @@ describe("canDuplicate", () => {
 
 describe("drafts", () => {
   it("copies category and amount of an income or expense", () => {
-    expect(incomeExpenseDraft({ category: "3", amount: 250.5 })).toEqual({ category: "3", amount: "250.5" });
+    expect(incomeExpenseDraft({ category: "3", amount: 250.5, description: "Lunch" }))
+      .toEqual({ category: "3", amount: "250.5", description: "Lunch" });
+    expect(incomeExpenseDraft({ category: "3", amount: 10 }).description).toBe("");
   });
 
   it("copies the full transfer", () => {

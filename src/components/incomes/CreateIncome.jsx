@@ -16,6 +16,7 @@ const CreateIncomse = ({ isOpen, isClose, account, initialData }) => {
   const [incomseData, setIncomseData] = useState({
     category: initialData?.category ?? "",
     amount: initialData?.amount ?? "",
+    description: initialData?.description ?? "",
     inage: null,
   });
   const [imageUrls, setImageUrls] = useState(null);
@@ -28,7 +29,7 @@ const CreateIncomse = ({ isOpen, isClose, account, initialData }) => {
       queryClient.invalidateQueries({ queryKey: ["accounts"] });
 
       isClose();
-      setIncomseData({ category: "", amount: "" });
+      setIncomseData({ category: "", amount: "", description: "" });
     },
     onError: () => {
       setError({
@@ -94,6 +95,16 @@ const CreateIncomse = ({ isOpen, isClose, account, initialData }) => {
           </div>
           <div>
             <IncomeCategoryList incomseItem={handleCategoryChange} value={incomseData.category} />
+          </div>
+          <div className={styles.inputContainer}>
+            <FormInput
+              label={i18n.t("createIncomse.description")}
+              placeholder={i18n.t("placeholder.description")}
+              name="description"
+              type="text"
+              value={incomseData.description}
+              onChange={handleInputChange}
+            />
           </div>
           <div>
             <ImagePicker onImageChange={setImageUrls} />
