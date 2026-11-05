@@ -150,7 +150,6 @@ export const buildAccountStatement = ({
     const from = format(parseISO(period.from), "d MMM yyyy", { locale });
     const to = format(parseISO(period.to), "d MMM yyyy", { locale });
     const endsToday = period.to >= day(today);
-    getTotalBalance(totalIn);
 
     lines.push(
       `${t("share.period")}: ${from} – ${to}`,
