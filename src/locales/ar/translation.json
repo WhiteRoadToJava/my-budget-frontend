@@ -549,12 +549,7 @@
     "title": "التقرير"
   },
   "dashboard": {
-    "loading": "جاري تحميل الرصيد...",
-    "error": "تعذّر تحميل الرصيد",
-    "noData": "لا توجد بيانات رصيد بعد",
-    "overview": "نظرة عامة",
-    "balanceTrend": "تطور الرصيد",
-    "currencies": "عملات"
+    "overview": "نظرة عامة"
   },
   "viewAccounts": {
     "title": "الحسابات"
@@ -634,5 +629,19 @@
     "transferOut": "تحويل صادر",
     "transferFee": "عمولة تحويل",
     "sentFrom": "أُرسل من www.mybudget.win"
+  },
+  "overview": {
+    "balances": "الأرصدة",
+    "thisMonth": "هذا الشهر",
+    "net": "الصافي",
+    "noActivity": "لا يوجد نشاط بعد.",
+    "cashFlow": "الداخل والخارج، آخر 6 أشهر",
+    "topExpenses": "أكبر المصاريف هذا الشهر",
+    "noExpenses": "لا توجد مصاريف هذا الشهر.",
+    "recent": "آخر المعاملات",
+    "viewAll": "عرض الكل",
+    "upcoming": "القادم خلال 7 أيام",
+    "nothingUpcoming": "لا شيء مخطط للأيام السبعة القادمة.",
+    "error": "تعذّر تحميل الصفحة الرئيسية."
   }
 }

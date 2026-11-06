@@ -566,12 +566,7 @@
     "title": "Report"
   },
   "dashboard": {
-    "loading": "Loading balance...",
-    "error": "Unable to load balance",
-    "noData": "No balance data yet",
-    "overview": "Overview",
-    "balanceTrend": "Balance trend",
-    "currencies": "currencies"
+    "overview": "Overview"
   },
   "viewAccounts": {
     "title": "Accounts"
@@ -642,5 +637,19 @@
     "transferOut": "Outgoing transfer",
     "transferFee": "Transfer fee",
     "sentFrom": "Sent from www.mybudget.win"
+  },
+  "overview": {
+    "balances": "Balances",
+    "thisMonth": "This month",
+    "net": "Net",
+    "noActivity": "No activity yet.",
+    "cashFlow": "Money in and out, last 6 months",
+    "topExpenses": "Biggest expenses this month",
+    "noExpenses": "No expenses this month.",
+    "recent": "Latest transactions",
+    "viewAll": "View all",
+    "upcoming": "Coming in the next 7 days",
+    "nothingUpcoming": "Nothing planned for the next 7 days.",
+    "error": "Could not load the overview."
   }
 }
