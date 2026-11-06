@@ -541,12 +541,7 @@
     "title": "Rapport"
   },
   "dashboard": {
-    "loading": "Laddar saldo...",
-    "error": "Det gick inte att ladda saldot",
-    "noData": "Inga saldodata än",
-    "overview": "Översikt",
-    "balanceTrend": "Saldoutveckling",
-    "currencies": "valutor"
+    "overview": "Översikt"
   },
   "viewAccounts": {
     "title": "Konton"
@@ -626,5 +621,19 @@
     "transferOut": "Utgående överföring",
     "transferFee": "Överföringsavgift",
     "sentFrom": "Skickat från www.mybudget.win"
+  },
+  "overview": {
+    "balances": "Saldon",
+    "thisMonth": "Den här månaden",
+    "net": "Netto",
+    "noActivity": "Ingen aktivitet än.",
+    "cashFlow": "In och ut, senaste 6 månaderna",
+    "topExpenses": "Största utgifterna den här månaden",
+    "noExpenses": "Inga utgifter den här månaden.",
+    "recent": "Senaste transaktionerna",
+    "viewAll": "Visa alla",
+    "upcoming": "Kommande 7 dagar",
+    "nothingUpcoming": "Inget planerat de kommande 7 dagarna.",
+    "error": "Det gick inte att ladda översikten."
   }
 }

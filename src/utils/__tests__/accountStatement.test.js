@@ -52,13 +52,20 @@ describe("balance wording", () => {
 describe("buildAccountStatement", () => {
   it("without a period: name, currency and current balance only", () => {
     const text = buildAccountStatement({ account, transactions: tx, period: null, language: "en", t, today });
-    expect(text.split("\n")).toEqual([
+    expect(text.split("\n").slice(0, 5)).toEqual([
       "📊 share.statementFor(Ali)",
       "share.currency: SEK",
       "share.currentBalance: share.theyOweUs 1,200.00",
       "",
       "— share.sentFrom",
     ]);
+  });
+
+  it("ends with a green bar for a positive balance and a red one for a negative", () => {
+    const green = buildAccountStatement({ account, transactions: [], period: null, language: "en", t, today });
+    const red = buildAccountStatement({ account: { ...account, totalBalance: -5 }, transactions: [], period: null, language: "en", t, today });
+    expect(green.trimEnd().endsWith("🟩")).toBe(true);
+    expect(red.trimEnd().endsWith("🟥")).toBe(true);
   });
 
   it("with a past period: totals, both balances and the transactions", () => {
