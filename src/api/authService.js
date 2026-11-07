@@ -1,11 +1,8 @@
 import api from "./axios";
+// errors are thrown to the page, which shows the server's message
 export const updatePassword = async (requestBody) => {
-  try {
-    const response = await api.post("/auth/update-password", requestBody);
-    return response;
-  } catch (error) {
-    console.error("Update password error:", error);
-  }
+  const response = await api.post("/auth/update-password", requestBody);
+  return response;
 };
 
 export const activateAccount = async (token) => {
@@ -30,11 +27,15 @@ export const forgotPassword = async (username, language) =>{
   return response.data;
 }
 
+// Saves the new password chosen from the emailed link (reset or admin invitation).
+// It must call /auth/reset-password and wait for the answer: calling
+// /auth/forgot-password only sent another email, and without await every
+// attempt looked successful while nothing was saved.
 export const resetPassword = async (token, newPassword, confirmPassword) => {
-  const response = api.post("/auth/forgot-password",{
-  token,
-  newPassword,
-  confirmPassword
-  })
-return response.data;
-}
+  const response = await api.post("/auth/reset-password", {
+    token,
+    newPassword,
+    confirmPassword,
+  });
+  return response.data;
+};
