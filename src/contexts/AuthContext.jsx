@@ -2,6 +2,7 @@ import { createContext, useState, useEffect } from "react";
 import api from "../api/axios";
 import { useContext } from "react";
 import { getUser } from "../api/userService";
+import { useQueryClient } from "@tanstack/react-query";
 
 export const AuthContext = createContext();
 
@@ -12,6 +13,7 @@ export const AuthProvider = ({ children }) => {
 
   // State to track loading status of authentication check, holla koll på loading state medans vi kollar auth satus.
   const [loading, setLoading] = useState(true);
+  const queryClient = useQueryClient();
 
  const checkAuthStatus = async () => {
   try {
@@ -68,15 +70,21 @@ export const AuthProvider = ({ children }) => {
   }
 };
 
+  // The server clears its cookie, but the token is also kept in localStorage and
+  // sent as a Bearer header: without removing it here, reloading the page signed
+  // the user straight back in. The local cleanup runs even when the request fails.
+  // The language choice is kept on purpose.
   const logout = async () => {
     try {
       await api.post("/auth/logout");
-      setCurrentUser(null);
     } catch (error) {
-      console.error(
-        "Error during logout:",
-        error.response?.data || error.message,
-      );
+      console.error("Error during logout:", error.response?.data || error.message);
+    } finally {
+      localStorage.removeItem("token");
+      localStorage.removeItem("profiles");
+      // cached accounts and transactions must not be shown to the next person
+      queryClient.clear();
+      setCurrentUser(null);
     }
   };
 
