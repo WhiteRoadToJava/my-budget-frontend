@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import AuthLanguageBar from "../../components/auth/AuthLanguageBar";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import Button from "../../components/btns/Button";
 import LoadingSpinner from "../../components/displays/LoadingSpinner.jsx";
@@ -38,6 +39,7 @@ export default function ActivateAccount() {
 
   return (
     <div className={layout.authLayout}>
+      <AuthLanguageBar />
       <div className={styles.formContainer}>
         {status === "loading" && (
           <>

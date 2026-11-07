@@ -20,8 +20,8 @@ import SchedulePage from "./pages/user/SchedulePage.jsx";
 import CalendarPage from "./pages/user/CalendarPage.jsx";
 import ActivateAccount from "./pages/auth/ActivateAccount.jsx";
 import UserLayout from "./components/user/UserLayout.jsx";
-import i18n from "./configuration/i18n.js";
-import { useEffect } from "react";
+// initialises i18next (saved language, Arabic for a first visit) before the first render
+import "./configuration/i18n.js";
 import ResetPassword from "./pages/auth/ResetPassword.jsx";
 import ReportPage from "./pages/user/ReportPage.jsx";
 import DebtsPage from "./pages/user/debts/DebtsPage.jsx";
@@ -32,11 +32,6 @@ import DebtDetailsPage from "./pages/user/debts/DebtDetailsPage.jsx";
 
 
 function App() {
-  useEffect(() => {
-    // "sw" was stored by an older version of the language selector
-    const stored = localStorage.getItem("language") || "en";
-    i18n.changeLanguage(stored === "sw" ? "sv" : stored);
-  }, []);
   
   return (
     <div className="App">

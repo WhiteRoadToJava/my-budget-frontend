@@ -763,5 +763,25 @@
     "reject": "رفض",
     "rejectReason": "السبب، سيراه المستخدم",
     "pendingRequests": "دفعات بانتظار الموافقة: {{count}}"
+  },
+  "nav": {
+    "userMenu": "قائمة الحساب",
+    "nameSeparator": "، ",
+    "trialDays": "تجربة · متبقٍ {{count}} يوم",
+    "daysLeft": "متبقٍ {{count}} يوم",
+    "renew": "جدّد الآن",
+    "readOnly": "قراءة فقط",
+    "trialDays_zero": "تجربة · اليوم الأخير",
+    "trialDays_one": "تجربة · متبقٍ يوم واحد",
+    "trialDays_two": "تجربة · متبقٍ يومان",
+    "trialDays_few": "تجربة · متبقٍ {{count}} أيام",
+    "trialDays_many": "تجربة · متبقٍ {{count}} يوماً",
+    "trialDays_other": "تجربة · متبقٍ {{count}} يوم",
+    "daysLeft_zero": "اليوم الأخير",
+    "daysLeft_one": "متبقٍ يوم واحد",
+    "daysLeft_two": "متبقٍ يومان",
+    "daysLeft_few": "متبقٍ {{count}} أيام",
+    "daysLeft_many": "متبقٍ {{count}} يوماً",
+    "daysLeft_other": "متبقٍ {{count}} يوم"
   }
 }

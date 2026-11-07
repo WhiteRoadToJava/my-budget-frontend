@@ -751,5 +751,15 @@
     "rejectReason": "Orsak, användaren ser den",
     "pendingRequests": "{{count}} betalningar väntar på godkännande",
     "pendingRequests_one": "1 betalning väntar på godkännande"
+  },
+  "nav": {
+    "userMenu": "Kontomeny",
+    "nameSeparator": ", ",
+    "trialDays": "Provperiod · {{count}} dagar kvar",
+    "trialDays_one": "Provperiod · 1 dag kvar",
+    "daysLeft": "{{count}} dagar kvar",
+    "daysLeft_one": "1 dag kvar",
+    "renew": "Förnya nu",
+    "readOnly": "Endast läsning"
   }
 }

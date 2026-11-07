@@ -1,6 +1,7 @@
 @use "../../variables" as variable;
 
 .authLayout {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -11,4 +12,11 @@
     radial-gradient(circle at 15% 20%, rgba(214, 255, 65, 0.08), transparent 24rem),
     radial-gradient(circle at 85% 80%, rgba(90, 169, 255, 0.1), transparent 26rem),
     variable.$primaryBg;
+}
+/* language choice in the top corner (follows the reading direction) */
+.languageBar {
+  position: absolute;
+  top: 1rem;
+  inset-inline-end: 1rem;
+  z-index: 10;
 }

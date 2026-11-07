@@ -767,5 +767,15 @@
     "rejectReason": "Reason, the user will see it",
     "pendingRequests": "{{count}} payments waiting for approval",
     "pendingRequests_one": "1 payment waiting for approval"
+  },
+  "nav": {
+    "userMenu": "Account menu",
+    "nameSeparator": ", ",
+    "trialDays": "Trial · {{count}} days left",
+    "trialDays_one": "Trial · 1 day left",
+    "daysLeft": "{{count}} days left",
+    "daysLeft_one": "1 day left",
+    "renew": "Renew now",
+    "readOnly": "Read only"
   }
 }
