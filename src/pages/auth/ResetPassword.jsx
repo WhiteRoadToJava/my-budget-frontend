@@ -16,6 +16,8 @@ import form from "../../styles/auth/resetPassword.module.scss";
 export default function ResetPassword() {
   const [searchParams] = useSearchParams();
   const token = searchParams.get("token");
+  // the link in an admin invitation: same page, "choose" instead of "reset"
+  const isInvite = searchParams.get("invite") === "1";
   const navigate = useNavigate();
 
   const [newPassword, setNewPassword] = useState("");
@@ -67,7 +69,7 @@ export default function ResetPassword() {
         {status === "form" && (
           <>
             <div className={styles.header}>
-              <p>{i18n.t("resetPassword.header")}</p>
+              <p>{i18n.t(isInvite ? "resetPassword.inviteHeader" : "resetPassword.header")}</p>
             </div>
             <form className={form.form} onSubmit={handleSubmit} noValidate>
               <input
@@ -121,9 +123,9 @@ export default function ResetPassword() {
         {status === "success" && (
           <>
             <div className={styles.header}>
-              <p>{i18n.t("resetPassword.successTitle")}</p>
+              <p>{i18n.t(isInvite ? "resetPassword.inviteSuccessTitle" : "resetPassword.successTitle")}</p>
             </div>
-            <p className={styles.message}>{i18n.t("resetPassword.successText")}</p>
+            <p className={styles.message}>{i18n.t(isInvite ? "resetPassword.inviteSuccessText" : "resetPassword.successText")}</p>
             <div className={styles.btnGroup}>
               <Button
                 variant="primary"
