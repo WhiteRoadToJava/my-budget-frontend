@@ -1,4 +1,5 @@
 
+import AuthLanguageBar from "../../components/auth/AuthLanguageBar";
 
 import { useState } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
@@ -61,6 +62,7 @@ export default function ResetPassword() {
 
   return (
     <div className={layout.authLayout}>
+      <AuthLanguageBar />
       <div className={styles.formContainer}>
         {status === "form" && (
           <>
