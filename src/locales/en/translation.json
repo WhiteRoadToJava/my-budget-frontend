@@ -789,6 +789,18 @@
       "active": "Active",
       "resend": "Send the invitation again",
       "resent": "A new invitation was sent."
+    },
+    "delete": {
+      "zone": "Delete user",
+      "explain": "Deletes the account and all its data: accounts, transactions, transfers, schedules, debts, payment requests and receipt images. The subscription payment history is kept. This can not be undone.",
+      "button": "Delete this user",
+      "title": "Delete the user permanently?",
+      "warning": "All of this user's data will be deleted and can not be restored.",
+      "typeEmail": "Type {{email}} to confirm",
+      "confirm": "Delete permanently",
+      "done": "{{email}} and all their data were deleted. The subscription payment history was kept.",
+      "typeHint": "Type it by hand; pasting is turned off.",
+      "noPaste": "Pasting is turned off here. Type the email by hand."
     }
   },
   "nav": {

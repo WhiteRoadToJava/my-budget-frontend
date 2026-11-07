@@ -773,6 +773,18 @@
       "active": "Aktiv",
       "resend": "Skicka inbjudan igen",
       "resent": "En ny inbjudan har skickats."
+    },
+    "delete": {
+      "zone": "Ta bort användare",
+      "explain": "Tar bort kontot och all dess data: konton, transaktioner, överföringar, scheman, skulder, betalningsförfrågningar och kvittobilder. Historiken över abonnemangsbetalningar sparas. Det går inte att ångra.",
+      "button": "Ta bort användaren",
+      "title": "Ta bort användaren permanent?",
+      "warning": "All användarens data tas bort och kan inte återställas.",
+      "typeEmail": "Skriv {{email}} för att bekräfta",
+      "confirm": "Ta bort permanent",
+      "done": "{{email}} och all deras data har tagits bort. Historiken över abonnemangsbetalningar sparades.",
+      "typeHint": "Skriv den för hand; inklistring är avstängd.",
+      "noPaste": "Inklistring är avstängd här. Skriv e-postadressen för hand."
     }
   },
   "nav": {

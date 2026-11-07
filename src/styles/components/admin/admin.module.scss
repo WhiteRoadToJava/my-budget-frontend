@@ -267,3 +267,8 @@
   border-radius: variable.$radius-xs;
   font: inherit;
 }
+
+/* the delete card on the user page */
+.danger {
+  border-color: rgba(255, 107, 120, 0.35);
+}

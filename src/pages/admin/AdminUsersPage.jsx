@@ -1,5 +1,5 @@
 import React, { useDeferredValue, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useQuery, keepPreviousData } from "@tanstack/react-query";
 import { getUserStats, searchUsers } from "../../api/subscriptionService";
 import StatusBadge from "../../components/admin/StatusBadge";
@@ -23,6 +23,8 @@ const PAGE_SIZE = 20;
 
 const AdminUsersPage = () => {
   const navigate = useNavigate();
+  // set by the user page after deleting someone
+  const deletedUser = useLocation().state?.deleted;
   const [text, setText] = useState("");
   const [filter, setFilter] = useState("");
   const [page, setPage] = useState(0);
@@ -42,6 +44,9 @@ const AdminUsersPage = () => {
   return (
     <div className={styles.page}>
       <h2 className={styles.title}>{i18n.t("admin.usersTitle")}</h2>
+      {deletedUser && (
+        <p className={styles.muted} role="status">{i18n.t("admin.delete.done", { email: deletedUser })}</p>
+      )}
 
       <div className={styles.stats} role="group" aria-label={i18n.t("admin.filters")}>
         {STAT_FILTERS.map((s) => (
