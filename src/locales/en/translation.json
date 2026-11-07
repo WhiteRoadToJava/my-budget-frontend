@@ -659,7 +659,31 @@
     "bannerGrace": "Your subscription ended on {{date}}. Renew within a few days to keep adding transactions.",
     "bannerExpired": "Your subscription ended on {{date}}. You can still see all your data, but you can not add or change anything until you renew.",
     "renew": "Renew on WhatsApp",
-    "whatsappMessage": "Hi, I would like to renew my MyBudget subscription."
+    "whatsappMessage": "Hi, I would like to renew my MyBudget subscription.",
+    "title": "My subscription",
+    "state": "Status",
+    "noEndDate": "No end date",
+    "lastDay": "Last day with full access",
+    "howToPay": "How to pay",
+    "howToPayText": "Pay with Sham Cash, Syriatel Cash, MTN Cash, a bank transfer or in cash.\nThen send the transaction number below, or write to us on WhatsApp.",
+    "iPaid": "I have paid",
+    "paidFor": "I paid for",
+    "send": "Send for approval",
+    "sent": "Sent. You will see the answer here.",
+    "sendError": "Could not send. Try again.",
+    "alreadyPending": "Your payment is waiting for approval.",
+    "myRequests": "My payments",
+    "requestStatus": {
+      "PENDING": "Waiting",
+      "APPROVED": "Approved",
+      "REJECTED": "Rejected"
+    },
+    "validation": {
+      "monthsRequired": "Choose how many months.",
+      "methodRequired": "Choose how you paid.",
+      "referenceRequired": "Write the transaction or receipt number.",
+      "amountInvalid": "Enter a valid amount."
+    }
   },
   "admin": {
     "menuUsers": "Users",
@@ -732,6 +756,16 @@
       "amountInvalid": "Enter a valid amount.",
       "currencyRequired": "Choose the currency."
     },
-    "whatsappMessage": "Hi {{name}}, your MyBudget subscription ends on {{date}}."
+    "whatsappMessage": "Hi {{name}}, your MyBudget subscription ends on {{date}}.",
+    "menuRequests": "Payment requests",
+    "requestsTitle": "Payment requests",
+    "requestsHint": "Check each transaction number in the payment app before approving.",
+    "noRequests": "No payments waiting.",
+    "approve": "Approve ({{count}} months)",
+    "approve_one": "Approve (1 month)",
+    "reject": "Reject",
+    "rejectReason": "Reason, the user will see it",
+    "pendingRequests": "{{count}} payments waiting for approval",
+    "pendingRequests_one": "1 payment waiting for approval"
   }
 }

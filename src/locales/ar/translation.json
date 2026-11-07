@@ -651,7 +651,31 @@
     "bannerGrace": "انتهى اشتراكك في {{date}}. جدّده خلال أيام لتستمر في إضافة المعاملات.",
     "bannerExpired": "انتهى اشتراكك في {{date}}. ما زلت ترى كل بياناتك، لكن لا يمكنك الإضافة أو التعديل حتى تجدّد.",
     "renew": "التجديد عبر واتساب",
-    "whatsappMessage": "مرحباً، أريد تجديد اشتراكي في MyBudget."
+    "whatsappMessage": "مرحباً، أريد تجديد اشتراكي في MyBudget.",
+    "title": "اشتراكي",
+    "state": "الحالة",
+    "noEndDate": "بلا تاريخ انتهاء",
+    "lastDay": "آخر يوم بكامل الصلاحيات",
+    "howToPay": "طريقة الدفع",
+    "howToPayText": "ادفع عبر شام كاش أو سيريتل كاش أو MTN كاش أو تحويل بنكي أو نقداً.\nثم أرسل رقم العملية في الأسفل، أو راسلنا على واتساب.",
+    "iPaid": "دفعت",
+    "paidFor": "دفعت مقابل",
+    "send": "إرسال للموافقة",
+    "sent": "تم الإرسال. سترى الرد هنا.",
+    "sendError": "تعذّر الإرسال. حاول مرة أخرى.",
+    "alreadyPending": "دفعتك بانتظار الموافقة.",
+    "myRequests": "مدفوعاتي",
+    "requestStatus": {
+      "PENDING": "بانتظار الموافقة",
+      "APPROVED": "مقبولة",
+      "REJECTED": "مرفوضة"
+    },
+    "validation": {
+      "monthsRequired": "اختر عدد الأشهر.",
+      "methodRequired": "اختر طريقة الدفع.",
+      "referenceRequired": "اكتب رقم العملية أو الإيصال.",
+      "amountInvalid": "أدخل مبلغاً صحيحاً."
+    }
   },
   "admin": {
     "menuUsers": "المستخدمون",
@@ -726,6 +750,18 @@
       "currencyRequired": "اختر العملة."
     },
     "whatsappMessage": "مرحباً {{name}}، ينتهي اشتراكك في MyBudget بتاريخ {{date}}.",
-    "months_few": "{{count}} أشهر"
+    "months_few": "{{count}} أشهر",
+    "menuRequests": "طلبات الدفع",
+    "requestsTitle": "طلبات الدفع",
+    "requestsHint": "تحقّق من رقم كل عملية في تطبيق الدفع قبل الموافقة.",
+    "noRequests": "لا توجد دفعات بانتظار الموافقة.",
+    "approve": "موافقة ({{count}} أشهر)",
+    "approve_one": "موافقة (شهر واحد)",
+    "approve_two": "موافقة (شهران)",
+    "approve_many": "موافقة ({{count}} شهراً)",
+    "approve_few": "موافقة ({{count}} أشهر)",
+    "reject": "رفض",
+    "rejectReason": "السبب، سيراه المستخدم",
+    "pendingRequests": "دفعات بانتظار الموافقة: {{count}}"
   }
 }

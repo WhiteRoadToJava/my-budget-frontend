@@ -37,3 +37,33 @@ export const setUserEnabled = async (userId, enabled) => {
   const response = await api.patch(`/admin/users/${userId}/enabled`, { enabled });
   return response.data;
 };
+
+// ---------- payment requests ("I have paid") ----------
+
+// request: { months, method, amount, currency, reference, note }
+export const createPaymentRequest = async (request) => {
+  const response = await api.post("/user/subscription/payment-requests", request);
+  return response.data;
+};
+
+export const getMyPaymentRequests = async () => {
+  const response = await api.get("/user/subscription/payment-requests");
+  return response.data;
+};
+
+export const getPendingPaymentRequests = async () => {
+  const response = await api.get("/admin/payment-requests");
+  return response.data;
+};
+
+// decision (optional): { months } or { until }, and adminNote
+export const approvePaymentRequest = async (requestId, decision = {}) => {
+  const response = await api.post(`/admin/payment-requests/${requestId}/approve`, decision);
+  return response.data;
+};
+
+// decision: { adminNote } = the reason the user will see
+export const rejectPaymentRequest = async (requestId, adminNote) => {
+  const response = await api.post(`/admin/payment-requests/${requestId}/reject`, { adminNote });
+  return response.data;
+};

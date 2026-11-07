@@ -10,6 +10,8 @@ import ProtectedRoute from "./components/routing/ProtectedRoute.jsx";
 import AdminLayout from "./components/admin/AdminLayout.jsx";
 import AdminUsersPage from "./pages/admin/AdminUsersPage.jsx";
 import AdminUserPage from "./pages/admin/AdminUserPage.jsx";
+import AdminRequestsPage from "./pages/admin/AdminRequestsPage.jsx";
+import SubscriptionPage from "./pages/user/SubscriptionPage.jsx";
 import Account from "./pages/user/accounts/Account.jsx";
 import AccountsPage from "./pages/user/AccountsPage.jsx";
 import SettingPage from "./pages/user/setting/SettingPage.jsx";
@@ -61,6 +63,7 @@ function App() {
                   <Route path="/admin" element={<AdminUsersPage />} />
                   <Route path="/admin/users" element={<AdminUsersPage />} />
                   <Route path="/admin/users/:userId" element={<AdminUserPage />} />
+                  <Route path="/admin/requests" element={<AdminRequestsPage />} />
                   <Route path="/admin/*" element={<Dashboard />} />
                   <Route path="/admin/dashboard" element={<Dashboard />} />
                 </Route>
@@ -68,6 +71,7 @@ function App() {
               <Route element={<ProtectedRoute requiredRoles={["USER"]} />}>
                 <Route element={<UserLayout />}>
                   <Route path="/user" element={<UserDashboard />} />
+                  <Route path="/user/subscription" element={<SubscriptionPage />} />
                   <Route path="/user/accounts" element={<Account />} />
 
                   <Route
