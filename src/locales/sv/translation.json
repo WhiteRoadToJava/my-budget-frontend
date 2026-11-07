@@ -643,7 +643,31 @@
     "bannerGrace": "Ditt abonnemang slutade {{date}}. Förnya inom några dagar för att fortsätta lägga till transaktioner.",
     "bannerExpired": "Ditt abonnemang slutade {{date}}. Du ser fortfarande all din data, men kan inte lägga till eller ändra något förrän du förnyar.",
     "renew": "Förnya via WhatsApp",
-    "whatsappMessage": "Hej, jag vill förnya mitt MyBudget-abonnemang."
+    "whatsappMessage": "Hej, jag vill förnya mitt MyBudget-abonnemang.",
+    "title": "Mitt abonnemang",
+    "state": "Status",
+    "noEndDate": "Inget slutdatum",
+    "lastDay": "Sista dagen med full åtkomst",
+    "howToPay": "Så betalar du",
+    "howToPayText": "Betala med Sham Cash, Syriatel Cash, MTN Cash, banköverföring eller kontant.\nSkicka sedan transaktionsnumret nedan, eller skriv till oss på WhatsApp.",
+    "iPaid": "Jag har betalat",
+    "paidFor": "Jag betalade för",
+    "send": "Skicka för godkännande",
+    "sent": "Skickat. Du ser svaret här.",
+    "sendError": "Det gick inte att skicka. Försök igen.",
+    "alreadyPending": "Din betalning väntar på godkännande.",
+    "myRequests": "Mina betalningar",
+    "requestStatus": {
+      "PENDING": "Väntar",
+      "APPROVED": "Godkänd",
+      "REJECTED": "Avvisad"
+    },
+    "validation": {
+      "monthsRequired": "Välj antal månader.",
+      "methodRequired": "Välj hur du betalade.",
+      "referenceRequired": "Skriv transaktions- eller kvittonumret.",
+      "amountInvalid": "Ange ett giltigt belopp."
+    }
   },
   "admin": {
     "menuUsers": "Användare",
@@ -716,6 +740,16 @@
       "amountInvalid": "Ange ett giltigt belopp.",
       "currencyRequired": "Välj valuta."
     },
-    "whatsappMessage": "Hej {{name}}, ditt MyBudget-abonnemang slutar {{date}}."
+    "whatsappMessage": "Hej {{name}}, ditt MyBudget-abonnemang slutar {{date}}.",
+    "menuRequests": "Betalningsförfrågningar",
+    "requestsTitle": "Betalningsförfrågningar",
+    "requestsHint": "Kontrollera varje transaktionsnummer i betalappen innan du godkänner.",
+    "noRequests": "Inga betalningar väntar.",
+    "approve": "Godkänn ({{count}} månader)",
+    "approve_one": "Godkänn (1 månad)",
+    "reject": "Avvisa",
+    "rejectReason": "Orsak, användaren ser den",
+    "pendingRequests": "{{count}} betalningar väntar på godkännande",
+    "pendingRequests_one": "1 betalning väntar på godkännande"
   }
 }

@@ -58,3 +58,25 @@ export const toExtendRequest = ({ months, until, method, amount, currency, refer
   reference: reference?.trim() || null,
   note: note?.trim() || null,
 });
+
+// methods a user can choose when telling the admin they paid (not a free extension)
+export const USER_PAYMENT_METHODS = PAYMENT_METHODS.filter((m) => m !== "FREE");
+
+export const validatePaymentRequest = ({ months, method, reference, amount }) => {
+  if (!months) return "subscription.validation.monthsRequired";
+  if (!method) return "subscription.validation.methodRequired";
+  if (!reference?.trim()) return "subscription.validation.referenceRequired";
+  if (amount !== "" && amount != null && (Number.isNaN(Number(amount)) || Number(amount) < 0)) {
+    return "subscription.validation.amountInvalid";
+  }
+  return null;
+};
+
+export const toPaymentRequest = ({ months, method, amount, currency, reference, note }) => ({
+  months,
+  method,
+  amount: amount === "" || amount == null ? null : Number(amount),
+  currency: amount === "" || amount == null ? null : currency,
+  reference: reference.trim(),
+  note: note?.trim() || null,
+});

@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { Link } from "react-router-dom";
 import { format } from "date-fns";
 import { getMySubscription } from "../../api/subscriptionService";
 import { SUPPORT_WHATSAPP, bannerFor, whatsappLink } from "../../utils/subscription/subscription";
@@ -37,11 +38,14 @@ const SubscriptionBanner = () => {
   return (
     <div className={styles.banner} data-tone={banner.tone} role={banner.tone === "error" ? "alert" : "status"}>
       <p className={styles.text}>{i18n.t(banner.key, values)}</p>
-      {link && (
-        <a className={styles.action} href={link} target="_blank" rel="noopener noreferrer">
-          {i18n.t("subscription.renew")}
-        </a>
-      )}
+      <span style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>
+        <Link className={styles.action} to="/user/subscription">{i18n.t("subscription.iPaid")}</Link>
+        {link && (
+          <a className={styles.action} href={link} target="_blank" rel="noopener noreferrer">
+            {i18n.t("subscription.renew")}
+          </a>
+        )}
+      </span>
     </div>
   );
 };

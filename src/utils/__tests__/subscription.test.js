@@ -1,6 +1,7 @@
 import { describe, it, expect } from "vitest";
 import {
   whatsappLink, bannerFor, isSubscriptionExpired, validateExtension, toExtendRequest,
+  validatePaymentRequest, toPaymentRequest, USER_PAYMENT_METHODS,
 } from "../subscription/subscription";
 
 describe("whatsappLink", () => {
@@ -63,5 +64,27 @@ describe("isSubscriptionExpired", () => {
   it("recognises the 402 answer", () => {
     expect(isSubscriptionExpired({ response: { status: 402 } })).toBe(true);
     expect(isSubscriptionExpired({ response: { status: 400 } })).toBe(false);
+  });
+});
+
+describe("payment request form", () => {
+  const base = { months: 3, method: "SHAM_CASH", amount: "150000", currency: "SYP", reference: " TX-9 ", note: " " };
+
+  it("needs months, a method and the transaction number", () => {
+    expect(validatePaymentRequest(base)).toBeNull();
+    expect(validatePaymentRequest({ ...base, months: null })).toBe("subscription.validation.monthsRequired");
+    expect(validatePaymentRequest({ ...base, method: "" })).toBe("subscription.validation.methodRequired");
+    expect(validatePaymentRequest({ ...base, reference: "  " })).toBe("subscription.validation.referenceRequired");
+    expect(validatePaymentRequest({ ...base, amount: "-5" })).toBe("subscription.validation.amountInvalid");
+  });
+
+  it("builds the request", () => {
+    expect(toPaymentRequest(base)).toEqual({
+      months: 3, method: "SHAM_CASH", amount: 150000, currency: "SYP", reference: "TX-9", note: null,
+    });
+  });
+
+  it("users can not choose a free extension", () => {
+    expect(USER_PAYMENT_METHODS).not.toContain("FREE");
   });
 });

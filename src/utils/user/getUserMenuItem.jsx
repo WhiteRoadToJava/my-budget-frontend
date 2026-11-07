@@ -11,6 +11,7 @@ export const getUserMenuItems = () => [   // ← now a function
   { label: i18n.t("menu.transactions"), icon: <FileCode />,     link: "/user/transactions" },
   { label: i18n.t("menu.debts"),        icon: <Database />,     link: "/user/debts" },
   { label: i18n.t("menu.schedule"),     icon: <Calendar />,     link: "/user/schedule" },
+  { label: i18n.t("subscription.title"),  icon: <SettingsIcon />, link: "/user/subscription" },
   { label: i18n.t("menu.calendar"),     icon: <Calendar />,     link: "/user/calendar" },
   { label: i18n.t("menu.reports"),      icon: <FileCode />,     link: "/user/accounts/search" },
   { label: i18n.t("menu.settings"),     icon: <SettingsIcon />, link: "/user/settings" },

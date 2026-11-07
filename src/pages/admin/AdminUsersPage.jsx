@@ -1,5 +1,5 @@
 import React, { useDeferredValue, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useQuery, keepPreviousData } from "@tanstack/react-query";
 import { getUserStats, searchUsers } from "../../api/subscriptionService";
 import StatusBadge from "../../components/admin/StatusBadge";
@@ -52,6 +52,12 @@ const AdminUsersPage = () => {
           </button>
         ))}
       </div>
+
+      {stats?.pendingRequests > 0 && (
+        <Link className={styles.back} to="/admin/requests">
+          {i18n.t("admin.pendingRequests", { count: stats.pendingRequests })}
+        </Link>
+      )}
 
       <div className={styles.search}>
         <SearchInput
