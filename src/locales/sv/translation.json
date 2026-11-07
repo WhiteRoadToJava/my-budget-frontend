@@ -21,7 +21,10 @@
     "invalidTitle": "Länken är inte giltig",
     "invalidText": "Länken har redan använts eller är felaktig. Begär en ny.",
     "requestNew": "Begär en ny länk",
-    "errorGeneric": "Något gick fel. Försök igen."
+    "errorGeneric": "Något gick fel. Försök igen.",
+    "inviteHeader": "Välj ditt lösenord",
+    "inviteSuccessTitle": "Ditt konto är klart",
+    "inviteSuccessText": "Du kan nu logga in med din e-postadress och lösenordet du valde."
   },
   "activation": {
     "checkEmailTitle": "Kontrollera din e-post",
@@ -750,7 +753,27 @@
     "reject": "Avvisa",
     "rejectReason": "Orsak, användaren ser den",
     "pendingRequests": "{{count}} betalningar väntar på godkännande",
-    "pendingRequests_one": "1 betalning väntar på godkännande"
+    "pendingRequests_one": "1 betalning väntar på godkännande",
+    "admins": {
+      "title": "Administratörer",
+      "invite": "Lägg till administratör",
+      "inviteHint": "Den nya administratören får ett mejl med en länk för att välja lösenord och loggar sedan in med e-postadressen.",
+      "email": "E-post",
+      "emailLanguage": "Mejlets språk",
+      "firstName": "Förnamn",
+      "lastName": "Efternamn",
+      "phone": "Telefon",
+      "send": "Skicka inbjudan",
+      "sent": "Inbjudan skickad till {{email}}.",
+      "exists": "Det finns redan en användare med den e-postadressen.",
+      "invalidEmail": "Ange en giltig e-postadress.",
+      "nameRequired": "Ange förnamnet.",
+      "list": "Alla administratörer",
+      "pending": "Inbjudan skickad",
+      "active": "Aktiv",
+      "resend": "Skicka inbjudan igen",
+      "resent": "En ny inbjudan har skickats."
+    }
   },
   "nav": {
     "userMenu": "Kontomeny",

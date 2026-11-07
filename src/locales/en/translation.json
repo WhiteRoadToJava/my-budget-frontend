@@ -21,7 +21,10 @@
     "invalidTitle": "This link is not valid",
     "invalidText": "The link was already used or is incorrect. Request a new one.",
     "requestNew": "Request a new link",
-    "errorGeneric": "Something went wrong. Please try again."
+    "errorGeneric": "Something went wrong. Please try again.",
+    "inviteHeader": "Choose your password",
+    "inviteSuccessTitle": "Your account is ready",
+    "inviteSuccessText": "You can now sign in with your email address and the password you chose."
   },
   "activation": {
     "checkEmailTitle": "Check your email",
@@ -766,7 +769,27 @@
     "reject": "Reject",
     "rejectReason": "Reason, the user will see it",
     "pendingRequests": "{{count}} payments waiting for approval",
-    "pendingRequests_one": "1 payment waiting for approval"
+    "pendingRequests_one": "1 payment waiting for approval",
+    "admins": {
+      "title": "Admins",
+      "invite": "Add an admin",
+      "inviteHint": "The new admin receives an email with a link to choose a password, then signs in with this email address.",
+      "email": "Email",
+      "emailLanguage": "Language of the email",
+      "firstName": "First name",
+      "lastName": "Last name",
+      "phone": "Phone",
+      "send": "Send invitation",
+      "sent": "Invitation sent to {{email}}.",
+      "exists": "A user with this email already exists.",
+      "invalidEmail": "Enter a valid email address.",
+      "nameRequired": "Enter the first name.",
+      "list": "All admins",
+      "pending": "Invitation sent",
+      "active": "Active",
+      "resend": "Send the invitation again",
+      "resent": "A new invitation was sent."
+    }
   },
   "nav": {
     "userMenu": "Account menu",

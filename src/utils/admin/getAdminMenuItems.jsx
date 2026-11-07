@@ -5,4 +5,5 @@ import i18n from "../../configuration/i18n";
 export const getAdminMenuItems = () => [
   { label: i18n.t("admin.menuUsers"), icon: <Home />, link: "/admin/users" },
   { label: i18n.t("admin.menuRequests"), icon: <Home />, link: "/admin/requests" },
+  { label: i18n.t("admin.admins.title"), icon: <Home />, link: "/admin/admins" },
 ];
