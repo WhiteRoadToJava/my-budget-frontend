@@ -67,3 +67,9 @@ export const rejectPaymentRequest = async (requestId, adminNote) => {
   const response = await api.post(`/admin/payment-requests/${requestId}/reject`, { adminNote });
   return response.data;
 };
+
+// deletes the user and all their data; confirmEmail must be the user's email
+export const deleteUser = async (userId, confirmEmail) => {
+  const response = await api.delete(`/admin/users/${userId}`, { data: { confirmEmail } });
+  return response.data;
+};

@@ -5,6 +5,7 @@ import { format } from "date-fns";
 import { getUserSubscription, setUserEnabled } from "../../api/subscriptionService";
 import StatusBadge from "../../components/admin/StatusBadge";
 import ExtendSubscriptionModal from "../../components/admin/ExtendSubscriptionModal";
+import DeleteUserModal from "../../components/admin/DeleteUserModal";
 import Button from "../../components/btns/Button";
 import { whatsappLink } from "../../utils/subscription/subscription";
 import { formatMoney } from "../../utils/accounts/accountStatement";
@@ -16,6 +17,7 @@ const AdminUserPage = () => {
   const { userId } = useParams();
   const queryClient = useQueryClient();
   const [extendMonths, setExtendMonths] = useState(undefined); // undefined = closed
+  const [deleting, setDeleting] = useState(false);
 
   const { data, isLoading, isError } = useQuery({
     queryKey: ["admin", "user", userId],
@@ -128,6 +130,16 @@ const AdminUserPage = () => {
           </div>
         )}
       </section>
+
+      <section className={`${styles.card} ${styles.danger}`} aria-labelledby="admin-danger">
+        <h3 id="admin-danger" className={styles.cardTitle}>{i18n.t("admin.delete.zone")}</h3>
+        <p className={styles.muted} style={{ margin: 0 }}>{i18n.t("admin.delete.explain")}</p>
+        <div className={styles.actions}>
+          <Button variant="delete-outlined" text={i18n.t("admin.delete.button")} onClick={() => setDeleting(true)} />
+        </div>
+      </section>
+
+      {deleting && <DeleteUserModal user={user} onClose={() => setDeleting(false)} />}
 
       {extendMonths !== undefined && (
         <ExtendSubscriptionModal
