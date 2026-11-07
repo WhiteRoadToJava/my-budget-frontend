@@ -30,6 +30,10 @@ api.interceptors.request.use(
 api.interceptors.response.use(
   (response) => response, // إذا نجح الطلب مرره كما هو
   (error) => {
+    // read-only mode: the subscription has ended; the banner listens and shows why
+    if (error.response?.status === 402) {
+      window.dispatchEvent(new CustomEvent("subscription-expired"));
+    }
     if (error.response && (error.response.status === 401 || error.response.status === 403)) {
       const isOnLoginPage = window.location.pathname.startsWith('/auth/login')
         || window.location.pathname.startsWith('/login');

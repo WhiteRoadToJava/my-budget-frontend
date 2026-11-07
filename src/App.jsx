@@ -8,6 +8,8 @@ import { UserProvider } from "./contexts/UserContext.jsx";
 import UserDashboard from "./pages/user/UserDashboard.jsx";
 import ProtectedRoute from "./components/routing/ProtectedRoute.jsx";
 import AdminLayout from "./components/admin/AdminLayout.jsx";
+import AdminUsersPage from "./pages/admin/AdminUsersPage.jsx";
+import AdminUserPage from "./pages/admin/AdminUserPage.jsx";
 import Account from "./pages/user/accounts/Account.jsx";
 import AccountsPage from "./pages/user/AccountsPage.jsx";
 import SettingPage from "./pages/user/setting/SettingPage.jsx";
@@ -56,9 +58,11 @@ function App() {
 
               <Route element={<ProtectedRoute requiredRoles={["ADMIN"]} />}>
                 <Route element={<AdminLayout />}>
+                  <Route path="/admin" element={<AdminUsersPage />} />
+                  <Route path="/admin/users" element={<AdminUsersPage />} />
+                  <Route path="/admin/users/:userId" element={<AdminUserPage />} />
                   <Route path="/admin/*" element={<Dashboard />} />
                   <Route path="/admin/dashboard" element={<Dashboard />} />
-                  <Route path="/admin/courses" element={<div>Courses</div>} />
                 </Route>
               </Route>
               <Route element={<ProtectedRoute requiredRoles={["USER"]} />}>

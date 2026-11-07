@@ -4,6 +4,7 @@ import Sidebar from "../sidebar/Sidebar.jsx";
 import { getUserMenuItems } from "../../utils/user/getUserMenuItem.jsx";
 import i18n from "../../configuration/i18n.js";
 import NavBar from "../NavBar.jsx";
+import SubscriptionBanner from "./SubscriptionBanner.jsx";
 import styles from "../../styles/layout/layout.module.scss";
 
 const UserLayout = () => {
@@ -53,6 +54,7 @@ const UserLayout = () => {
             />
           </header>
           <main className={styles.mainContent}>
+            <SubscriptionBanner />
             <Outlet />
           </main>
         </div>
