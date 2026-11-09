@@ -4,8 +4,6 @@ import FormInput from "../inputs/FormInput";
 import DropDown from "../elements/DropDown";
 import AmountWithCurrency from "../inputs/AmountWithCurrency";
 import { firstCurrency, hasCurrency, pocketsOf } from "../../utils/accounts/pockets";
-import CurrencySelect from "../inputs/CurrencySelect";
-import sheet from "../../styles/components/forms/formSheet.module.scss";
 import Button from "../btns/Button";
 import styles from "../../styles/components/schedule/createdScheduledTransfer.module.scss";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
@@ -193,16 +191,18 @@ const CreateScheduledTransfer = ({ isOpen, isClose, accounts }) => {
 
         {/* the receiving currency, and the rate between two currencies */}
         <div className={styles.inputContainer}>
-          <div className={sheet.field}>
-            <span className={sheet.label}>{i18n.t("createTransfer.amountReceived")}</span>
-            <div className={sheet.money}>
-              <input type="number" readOnly aria-label={i18n.t("createTransfer.amountReceived")}
-                value={Number(transferData.amountSend || 0) * (sameCurrency ? 1 : Number(transferData.exChangeRate || 0))} />
-              <CurrencySelect currencies={currenciesOf(destinationAccount)} value={destinationCurrency}
-                label={i18n.t("createTransfer.amountReceived")}
-                onChange={(code) => setTransferData((prev) => ({ ...prev, destinationCurrency: code }))} />
-            </div>
-          </div>
+          {destinationAccount && (
+            <AmountWithCurrency
+              label={i18n.t("createTransfer.amountReceived")}
+              name="amountReceived"
+              value={Number(transferData.amountSend || 0) * (sameCurrency ? 1 : Number(transferData.exChangeRate || 0))}
+              readOnly
+              account={destinationAccount}
+              currency={destinationCurrency}
+              onCurrencyChange={(code) => setTransferData((prev) => ({ ...prev, destinationCurrency: code }))}
+              showAvailable={false}
+            />
+          )}
         </div>
 
         {!sameCurrency && (

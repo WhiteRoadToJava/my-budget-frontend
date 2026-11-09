@@ -1,0 +1,74 @@
+@use "../variables" as variable;
+
+/* An amount with its currency, looking like FormInput (same label, border and size) */
+.field {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 35rem;
+}
+
+.label {
+  color: variable.$color-text;
+  margin-bottom: 5px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.row {
+  display: flex;
+  align-items: stretch;
+  gap: 0.5rem;
+
+  input {
+    flex: 1;
+    min-width: 0;
+    background-color: variable.$primaryBg;
+    border: 1px solid variable.$color-jet;
+    padding: 8px;
+    border-radius: variable.$radius-xs;
+    outline: none;
+    color: variable.$color-text;
+    font: inherit;
+
+    &:focus {
+      border-color: variable.$color-tennis;
+    }
+
+    &[readonly] {
+      color: variable.$color-text-muted;
+    }
+  }
+}
+
+.select {
+  min-width: 5.5rem;
+  padding: 0 8px;
+  background-color: variable.$primaryBg;
+  border: 1px solid variable.$color-jet;
+  border-radius: variable.$radius-xs;
+  color: variable.$color-text;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+
+  &:focus {
+    outline: none;
+    border-color: variable.$color-tennis;
+  }
+}
+
+.code {
+  display: inline-flex;
+  align-items: center;
+  min-width: 3.5rem;
+  justify-content: center;
+  color: variable.$color-text-muted;
+  font-weight: 600;
+}
+
+.hint {
+  margin: 4px 0 0;
+  color: variable.$color-text-muted;
+  font-size: 12px;
+}
