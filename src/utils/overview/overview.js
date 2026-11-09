@@ -2,6 +2,7 @@
 // amounts in different currencies are never added together.
 import { addDays, addMonths, format, startOfDay, startOfMonth } from "date-fns";
 import { signedAmount } from "../transactions/transactionList";
+import { pocketsOf, transactionCurrency } from "../accounts/pockets";
 
 const round2 = (n) => Math.round(n * 100) / 100;
 
@@ -12,7 +13,7 @@ const dateOf = (t) => {
   return Number.isNaN(d.getTime()) ? null : d;
 };
 
-export const currencyOf = (t) => t?.sourceAccount?.currency ?? "";
+export const currencyOf = (t) => transactionCurrency(t);
 
 // Money that really came in or went out. A transfer between two of your
 // accounts moves nothing in or out, so it is left out; its fees are kept.
@@ -82,6 +83,6 @@ export const upcomingSchedules = (schedules = [], days = 7, today = new Date()) 
 // currencies of the user's active accounts, the most used first
 export const accountCurrencies = (accounts = []) => {
   const counts = {};
-  for (const a of accounts) if (a.currency) counts[a.currency] = (counts[a.currency] ?? 0) + 1;
+  for (const a of accounts) for (const p of pocketsOf(a)) counts[p.currency] = (counts[p.currency] ?? 0) + 1;
   return Object.keys(counts).sort((a, b) => counts[b] - counts[a] || a.localeCompare(b));
 };

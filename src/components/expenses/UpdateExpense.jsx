@@ -4,7 +4,10 @@ import FormInput from "../../components/inputs/FormInput";
 import styles from "../../styles/components/incomes/createIncome.module.scss";
 import Button from "../../components/btns/Button";
 import { updateExpense, getExpenseById } from "../../api/expenseService";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { getAccounts } from "../../api/accountService";
+import AmountWithCurrency from "../inputs/AmountWithCurrency";
+import { firstCurrency } from "../../utils/accounts/pockets";
 import i18n from "../../configuration/i18n";
 import Datepicker from "../inputs/Datepicker";
 import { ImagePicker } from "../ImagePicker";
@@ -22,6 +25,9 @@ const UpdateExpense = ({ isOpen, isClose, expense }) => {
   const [imageUrls, setImageUrls] = useState(null);
   const [error, setError] = useState({ hasError: false, message: "" });
   const queryClient = useQueryClient();
+  // the record's account, for the currencies it can be in
+  const { data: accountsData } = useQuery({ queryKey: ["accounts"], queryFn: getAccounts });
+  const recordAccount = accountsData?.accounts?.find((a) => a.id === expwnseData.account?.id);
   const nutation = useMutation({
     mutationFn: (data) => updateExpense(expense.id, data),
     onSuccess: () => {
@@ -49,6 +55,8 @@ const UpdateExpense = ({ isOpen, isClose, expense }) => {
               account: { id: data.account?.id || "" },
               category: data.category || "",
               amount: data.amount || "",
+              // the record keeps its currency; without it the backend would move it to the account's first one
+              currency: data.currency,
               description: data.description || "",
               image: data.image || null,
             });
@@ -96,13 +104,15 @@ useEffect(() => {
           <h2>{i18n.t("updateExpense.title")}</h2>
           <form>
             <div className={styles.inputContainer}>
-              <FormInput
+              <AmountWithCurrency
                 label={i18n.t("updateExpense.amount")}
                 placeholder={i18n.t("placeholder.amount")}
-                name="amount"
-                type="number"
                 value={expwnseData.amount}
                 onChange={handleInputChange}
+                account={recordAccount}
+                currency={expwnseData.currency || firstCurrency(recordAccount)}
+                onCurrencyChange={(code) => setExpenseData((prev) => ({ ...prev, currency: code }))}
+                showAvailable={false}
               />
             </div>
             <div>

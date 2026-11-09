@@ -1,3 +1,4 @@
+import { pocketsOf } from "./pockets";
 // Pure helpers for the accounts page: split, search, totals and change since opening.
 
 export const isArchived = (account) =>
@@ -26,9 +27,12 @@ const round2 = (n) => Math.round(n * 100) / 100;
 // totals of the given accounts per currency (different currencies can not be added)
 export const totalsByCurrency = (accounts = []) => {
   const totals = {};
+  // every currency of every account
   for (const a of accounts) {
-    const currency = a.currency || "—";
-    totals[currency] = round2((totals[currency] ?? 0) + Number(a.totalBalance ?? 0));
+    for (const p of pocketsOf(a)) {
+      const currency = p.currency || "—";
+      totals[currency] = round2((totals[currency] ?? 0) + Number(p.totalBalance ?? 0));
+    }
   }
   return Object.entries(totals)
     .map(([currency, total]) => ({ currency, total }))

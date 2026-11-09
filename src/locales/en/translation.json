@@ -605,7 +605,8 @@
     "sameAsDestination": "Destination account",
     "summaryTitle": "What this transfer does",
     "negative": "A fee can not be negative.",
-    "title": "Fees (optional)"
+    "title": "Fees (optional)",
+    "fromAccount": "Fee from account: {{name}}"
   },
   "share": {
     "button": "Share",
@@ -812,5 +813,21 @@
     "daysLeft_one": "1 day left",
     "renew": "Renew now",
     "readOnly": "Read only"
+  },
+  "currencies": {
+    "add": "Add currency",
+    "addTitle": "New currency in {{name}}",
+    "addHint": "Each currency has its own balance and transactions. Move money between currencies with a transfer.",
+    "allAdded": "Every available currency is already in this account.",
+    "exists": "This currency is already in the account.",
+    "saveError": "Could not save. Try again.",
+    "remove": "Remove {{currency}}",
+    "hasTransactions": "This currency has transactions. It can only be removed when it has none.",
+    "count": "{{count}} currencies",
+    "count_one": "1 currency",
+    "samePocket": "Choose two different accounts, or two different currencies of the same account.",
+    "exchangeTitle": "Exchange currency",
+    "available": "Available",
+    "rateRequired": "Enter the exchange rate."
   }
 }

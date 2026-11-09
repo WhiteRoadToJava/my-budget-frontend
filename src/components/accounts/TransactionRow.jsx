@@ -8,6 +8,7 @@ import { categoryName, typeLabelKey } from "../../utils/transactionTypes";
 import { isIncoming, isTransferFee, otherAccountName } from "../../utils/transactions/transactionList";
 import { dateFnsLocale } from "../../utils/dates";
 import { onEnterOrSpace } from "../../utils/accessibility";
+import { transactionCurrency } from "../../utils/accounts/pockets";
 import i18n from "../../configuration/i18n";
 
 // One transaction: what it was (category or other account), where and when,
@@ -36,7 +37,7 @@ const Row = ({ transaction, onClick, showAccount = false }) => {
     : categoryName(category) || (typeKey ? i18n.t(typeKey) : transaction.type);
 
   const accountName = showAccount ? transaction.sourceAccount?.name : null;
-  const currency = transaction.sourceAccount?.currency ?? "";
+  const currency = transactionCurrency(transaction);
   const date = new Date(transaction.createdAt);
   const validDate = !Number.isNaN(date.getTime());
 

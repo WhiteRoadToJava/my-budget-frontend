@@ -7,6 +7,7 @@ import DeleteConfirmation from "../modals/DeleteConfirmation";
 import { deleteAccount, updateAccountStatus } from "../../api/accountService";
 import { formatNumber } from "../../utils/formating";
 import { changeSinceOpening, isArchived } from "../../utils/accounts/accountList";
+import { pocketsOf } from "../../utils/accounts/pockets";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import UpdateAccount from "./UpdateAccount";
 import i18n from "../../configuration/i18n";
@@ -23,6 +24,9 @@ const Row = ({ account }) => {
   const archived = isArchived(account);
   const change = changeSinceOpening(account);
   const total = Number(account.totalBalance ?? 0);
+  // an account in several currencies shows one line per currency
+  const pockets = pocketsOf(account);
+  const several = pockets.length > 1;
   const typeKey = `accountsPage.types.${account.type}`;
   const typeLabel = i18n.exists(typeKey) ? i18n.t(typeKey) : account.type;
 
@@ -72,17 +76,32 @@ const Row = ({ account }) => {
             <span className={styles.type}>{typeLabel}</span>
           </span>
 
-          <span className={styles.change}>
-            <span className={change > 0 ? styles.up : change < 0 ? styles.down : undefined}>
-              {signed(change)}
-            </span>{" "}
-            {i18n.t("accountsPage.sinceOpening")}
-          </span>
+          {several ? (
+            <span className={styles.change}>{i18n.t("currencies.count", { count: pockets.length })}</span>
+          ) : (
+            <span className={styles.change}>
+              <span className={change > 0 ? styles.up : change < 0 ? styles.down : undefined}>
+                {signed(change)}
+              </span>{" "}
+              {i18n.t("accountsPage.sinceOpening")}
+            </span>
+          )}
 
-          <span className={`${styles.amount} ${total < 0 ? styles.negative : ""}`}>
-            {formatNumber(total)}
-            <span className={styles.currency}>{account.currency}</span>
-          </span>
+          {several ? (
+            <span className={styles.amounts}>
+              {pockets.map((p) => (
+                <span key={p.currency} className={`${styles.amount} ${Number(p.totalBalance) < 0 ? styles.negative : ""}`}>
+                  {formatNumber(Number(p.totalBalance ?? 0))}
+                  <span className={styles.currency}>{p.currency}</span>
+                </span>
+              ))}
+            </span>
+          ) : (
+            <span className={`${styles.amount} ${total < 0 ? styles.negative : ""}`}>
+              {formatNumber(total)}
+              <span className={styles.currency}>{account.currency}</span>
+            </span>
+          )}
         </button>
 
         <div className={styles.menu}>

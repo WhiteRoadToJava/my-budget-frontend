@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import Modal from "../modals/Modal";
 import FormInput from "../../components/inputs/FormInput";
+import AmountWithCurrency from "../inputs/AmountWithCurrency";
+import { firstCurrency } from "../../utils/accounts/pockets";
 import styles from "../../styles/components/incomes/createIncome.module.scss";
 import Button from "../../components/btns/Button";
 import { addIncomse } from "../../api/incomseService";
@@ -11,7 +13,8 @@ import {incomseCategoryList} from "../../assiets/categories/assits"
 import IncomeCategoryList from "../categories/IncomeCategoryList.jsx";
 
 
-const CreateIncomse = ({ isOpen, isClose, account, initialData }) => {
+// currency: the currency of the account the money is in (empty = the account's first one)
+const CreateIncomse = ({ isOpen, isClose, account, initialData, currency }) => {
   const queryClient = useQueryClient();
   const [incomseData, setIncomseData] = useState({
     category: initialData?.category ?? "",
@@ -47,9 +50,13 @@ const CreateIncomse = ({ isOpen, isClose, account, initialData }) => {
     nutation.mutate({
       ...incomseData,
       account: { id: account?.id || "" },
+      currency: chosenCurrency,
       image: imageUrls || null,
     });
   };
+
+  // the currency next to the amount: picked here, else the tab's, else the account's first
+  const chosenCurrency = incomseData.currency || currency || initialData?.currency || firstCurrency(account);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -84,13 +91,14 @@ const CreateIncomse = ({ isOpen, isClose, account, initialData }) => {
         <h2>{i18n.t("createIncomse.title")}</h2>
         <form>
           <div className={styles.inputContainer}>
-            <FormInput
+            <AmountWithCurrency
               label={i18n.t("createIncomse.amount")}
               placeholder={i18n.t("placeholder.amount")}
-              name="amount"
-              type="number"
               value={incomseData.amount}
               onChange={handleInputChange}
+              account={account}
+              currency={chosenCurrency}
+              onCurrencyChange={(code) => setIncomseData((prev) => ({ ...prev, currency: code }))}
             />
           </div>
           <div>

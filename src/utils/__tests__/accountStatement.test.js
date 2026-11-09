@@ -100,4 +100,18 @@ describe("buildAccountStatement", () => {
     });
     expect(text).toContain("share.noTransactions");
   });
+
+  it("a statement of one currency keeps only that currency", () => {
+    const wallet = { name: "Wallet", currency: "SYP", totalBalance: 0,
+      balances: [{ currency: "SYP", openingBalance: 0, totalBalance: 0 }, { currency: "USD", openingBalance: 0, totalBalance: 40 }] };
+    const rows = [
+      { id: "u", type: "incomse", category: "1", amount: 40, currency: "USD", createdAt: "2026-10-05T10:00:00" },
+      { id: "s", type: "incomse", category: "1", amount: 99, currency: "SYP", createdAt: "2026-10-06T10:00:00" },
+    ];
+    const text = buildAccountStatement({ account: wallet, transactions: rows, currency: "USD",
+      period: { from: "2026-10-01", to: "2026-10-31" }, language: "en", t, today });
+    expect(text).toContain("share.currency: USD");
+    expect(text).toContain("share.moneyIn: + 40.00");
+    expect(text).not.toContain("99.00");
+  });
 });

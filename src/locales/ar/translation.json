@@ -597,7 +597,8 @@
     "sameAsDestination": "حساب الوجهة",
     "summaryTitle": "أثر هذا التحويل",
     "negative": "لا يمكن أن تكون العمولة سالبة.",
-    "title": "العمولات (اختياري)"
+    "title": "العمولات (اختياري)",
+    "fromAccount": "العمولة من حساب: {{name}}"
   },
   "share": {
     "button": "مشاركة",
@@ -818,5 +819,24 @@
     "daysLeft_few": "متبقٍ {{count}} أيام",
     "daysLeft_many": "متبقٍ {{count}} يوماً",
     "daysLeft_other": "متبقٍ {{count}} يوم"
+  },
+  "currencies": {
+    "add": "إضافة عملة",
+    "addTitle": "عملة جديدة في {{name}}",
+    "addHint": "لكل عملة رصيدها ومعاملاتها. انقل المال بين العملات بتحويل.",
+    "allAdded": "كل العملات المتاحة موجودة في هذا الحساب.",
+    "exists": "هذه العملة موجودة في الحساب.",
+    "saveError": "تعذّر الحفظ. حاول مرة أخرى.",
+    "remove": "إزالة {{currency}}",
+    "hasTransactions": "لهذه العملة معاملات، فلا يمكن إزالتها إلا إذا لم يبقَ لها أي معاملة.",
+    "count": "{{count}} عملات",
+    "count_one": "عملة واحدة",
+    "count_two": "عملتان",
+    "count_many": "{{count}} عملة",
+    "count_other": "{{count}} عملة",
+    "samePocket": "اختر حسابين مختلفين، أو عملتين مختلفتين في نفس الحساب.",
+    "exchangeTitle": "صرف عملة",
+    "available": "المتاح",
+    "rateRequired": "أدخل سعر الصرف."
   }
 }

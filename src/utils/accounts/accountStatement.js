@@ -17,6 +17,7 @@ import { signedAmount, isTransferFee } from "../transactions/transactionList";
 import { findCategory } from "../../assiets/categories/assits";
 import { categoryName, typeLabelKey } from "../transactionTypes";
 import { dateFnsLocale } from "../dates";
+import { firstCurrency, pocketOf, transactionCurrency } from "./pockets";
 
 // ---------- periods ----------
 
@@ -115,16 +116,21 @@ export const buildAccountStatement = ({
   language = "en",
   t,
   today = new Date(),
+  currency: wantedCurrency,
 }) => {
   const locale = dateFnsLocale(language);
-  const current = Number(account?.totalBalance ?? 0);
+  // one currency of the account: its balance and only its transactions
+  const currency = wantedCurrency ?? firstCurrency(account);
+  const current = Number(pocketOf(account, currency)?.totalBalance ?? account?.totalBalance ?? 0);
+  // a row without any currency (old data) belongs to the account's only currency
+  transactions = transactions.filter((tr) => !currency || !transactionCurrency(tr) || transactionCurrency(tr) === currency);
   const lines = [
     `📊 ${t("share.statementFor", { name: account?.name ?? "" })}`,
   ];
 
   if (!isValidPeriod(period)) {
     lines.push(
-      `${t("share.currency")}: ${account?.currency ?? ""}`,
+      `${t("share.currency")}: ${currency ?? ""}`,
       `${t("share.currentBalance")}: ${balancePhrase(current, language, t)}`,
     );
   } else {
@@ -153,7 +159,7 @@ export const buildAccountStatement = ({
 
     lines.push(
       `${t("share.period")}: ${from} – ${to}`,
-      `${t("share.currency")}: ${account?.currency ?? ""}`,
+      `${t("share.currency")}: ${currency ?? ""}`,
       "",
       `${t("share.moneyIn")}: + ${formatMoney(totalIn, language)}`,
       `${t("share.moneyOut")}: − ${formatMoney(totalOut, language)}`,

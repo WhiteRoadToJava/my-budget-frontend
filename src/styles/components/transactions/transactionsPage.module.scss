@@ -94,3 +94,54 @@
   gap: 0.5rem;
   flex-wrap: wrap;
 }
+
+/* ---------- currencies of the account ---------- */
+
+.currencyTabs {
+  display: flex;
+  gap: 0.4rem;
+  overflow-x: auto;
+  padding-bottom: 0.25rem;
+}
+
+.currencyTab {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.1rem;
+  min-width: 6.5rem;
+  padding: 0.5rem 0.85rem;
+  color: variable.$color-text-gray;
+  background: variable.$surface-1;
+  border: 1px solid variable.$color-border;
+  border-radius: variable.$radius-md;
+  font: inherit;
+  cursor: pointer;
+  white-space: nowrap;
+
+  &[aria-selected="true"] {
+    color: variable.$color-text;
+    background: variable.$surface-3;
+    border-color: variable.$color-tennis;
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: variable.$shadow-glow;
+  }
+}
+
+.currencyCode {
+  font-weight: 700;
+}
+
+.currencyAmount {
+  font-size: variable.$font-xs;
+  font-variant-numeric: tabular-nums;
+}
+
+.currencyError {
+  margin: 0;
+  color: variable.$color-error;
+  font-size: variable.$font-sm;
+}

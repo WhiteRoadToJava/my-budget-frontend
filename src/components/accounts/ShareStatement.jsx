@@ -11,7 +11,7 @@ const PRESETS = ["none", "thisMonth", "lastMonth", "custom"];
 
 // Preview of the account statement and the ways to send it.
 // Nothing leaves the app until the user presses a button.
-const ShareStatementForm = ({ onClose, account, transactions }) => {
+const ShareStatementForm = ({ onClose, account, transactions, currency }) => {
   const [preset, setPreset] = useState("none");
   const [range, setRange] = useState({ from: "", to: "" });
   const [copied, setCopied] = useState(false);
@@ -23,13 +23,14 @@ const ShareStatementForm = ({ onClose, account, transactions }) => {
     () => buildAccountStatement({
       account,
       transactions,
+      currency,
       period: preset === "custom" && !isValidPeriod(range) ? null : period,
       language: i18n.language,
       t: (key, values) => i18n.t(key, values),
     }),
     // period is rebuilt from preset and range on every render
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [account, transactions, preset, range.from, range.to],
+    [account, transactions, currency, preset, range.from, range.to],
   );
 
   const canShare = typeof navigator !== "undefined" && typeof navigator.share === "function";
@@ -119,7 +120,8 @@ const ShareStatementForm = ({ onClose, account, transactions }) => {
 };
 
 // rendered only while open, so every opening starts without a period
-const ShareStatement = ({ isOpen, onClose, account, transactions }) =>
-  isOpen ? <ShareStatementForm onClose={onClose} account={account} transactions={transactions} /> : null;
+// currency: the statement of one currency of the account (the account's first when not given)
+const ShareStatement = ({ isOpen, onClose, account, transactions, currency }) =>
+  isOpen ? <ShareStatementForm onClose={onClose} account={account} transactions={transactions} currency={currency} /> : null;
 
 export default ShareStatement;
