@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import Modal from "../modals/Modal";
 import FormInput from "../inputs/FormInput";
 import DropDown from "../elements/DropDown";
+import AmountWithCurrency from "../inputs/AmountWithCurrency";
+import { firstCurrency } from "../../utils/accounts/pockets";
 import Button from "../btns/Button";
 import styles from "../../styles/components/schedule/createdScheduledIncome.module.scss";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
@@ -57,6 +59,7 @@ const CreateScheduledIncome = ({
 
   // Fix 3: Use correct state field 'sourceAccountId'
   const selectedSourceName = getAccountNameById(incomeData.sourceAccountId);
+  const sourceAccount = accountsList.find((a) => a.id === incomeData.sourceAccountId);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -72,6 +75,8 @@ const CreateScheduledIncome = ({
     setIncomeData((prev) => ({
       ...prev,
       sourceAccountId: selectedAccount?.id || "",
+      // a new account starts in its first currency
+      sourceCurrency: firstCurrency(selectedAccount),
     }));
     setError({ hasError: false, message: "" });
   };
@@ -149,12 +154,15 @@ const CreateScheduledIncome = ({
           </div>
 
           <div className={styles.inputContainer}>
-            <FormInput
+            <AmountWithCurrency
               label={i18n.t("CreateScheduledIncome.amount")}
               name="amountSend"
-              type="number"
               value={incomeData.amountSend}
               onChange={handleInputChange}
+              account={sourceAccount}
+              currency={incomeData.sourceCurrency || firstCurrency(sourceAccount)}
+              onCurrencyChange={(code) => setIncomeData((prev) => ({ ...prev, sourceCurrency: code }))}
+              showAvailable={false}
             />
           </div>
           <div className={styles.inputContainer}>

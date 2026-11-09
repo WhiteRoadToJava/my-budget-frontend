@@ -2,9 +2,12 @@
 // same balance effects the backend computes (TransferEffects), for the summary.
 //
 // Each fee has an amount, a direction (CHARGE = علينا, taken from its account;
-// CREDIT = لنا, added to it) and an account. An empty account id means
-// "the account on the fee's side": the source for the send fee, the
-// destination for the receive fee.
+// CREDIT = لنا, added to it) and a currency of its side's account: the send fee
+// is paid from the sending account, the receive fee from the receiving one.
+// An empty currency means the side's currency.
+//
+// Transfers saved before could have a fee on a third account: that account is
+// kept (sendFeeAccountId / receiveFeeAccountId) and sent back unchanged.
 
 export const FEE_DIRECTIONS = [
   { value: "CHARGE", label: "transferFees.charge" },
@@ -15,9 +18,11 @@ export const emptyFees = () => ({
   sendFee: "",
   sendFeeDirection: "CHARGE",
   sendFeeAccountId: "",
+  sendFeeCurrency: "",
   receiveFee: "",
   receiveFeeDirection: "CHARGE",
   receiveFeeAccountId: "",
+  receiveFeeCurrency: "",
 });
 
 // from a transfer returned by the backend (find-transfer)
@@ -28,9 +33,11 @@ export const feesFromTransfer = (transfer) => {
     sendFee: transfer?.sendFee ? String(transfer.sendFee) : "",
     sendFeeDirection: transfer?.sendFeeDirection ?? "CHARGE",
     sendFeeAccountId: sideOrOther(transfer?.sendFeeAccount, transfer?.sourceAccount),
+    sendFeeCurrency: transfer?.sendFeeCurrency ?? "",
     receiveFee: transfer?.receiveFee ? String(transfer.receiveFee) : "",
     receiveFeeDirection: transfer?.receiveFeeDirection ?? "CHARGE",
     receiveFeeAccountId: sideOrOther(transfer?.receiveFeeAccount, transfer?.destinationAccount),
+    receiveFeeCurrency: transfer?.receiveFeeCurrency ?? "",
   };
 };
 
@@ -39,14 +46,17 @@ const amountOf = (value) => {
   return value === "" || value === null || value === undefined || Number.isNaN(n) ? 0 : n;
 };
 
-// the fee fields of TransferRequest
-export const feesToRequest = (fees) => ({
+// the fee fields of TransferRequest; sides: { sourceCurrency, destinationCurrency }
+// (a fee without its own currency is in its side's currency)
+export const feesToRequest = (fees, sides = {}) => ({
   sendFee: amountOf(fees.sendFee),
   sendFeeDirection: fees.sendFeeDirection,
   sendFeeAccount: fees.sendFeeAccountId ? { id: fees.sendFeeAccountId } : null,
+  sendFeeCurrency: fees.sendFeeCurrency || (fees.sendFeeAccountId ? undefined : sides.sourceCurrency),
   receiveFee: amountOf(fees.receiveFee),
   receiveFeeDirection: fees.receiveFeeDirection,
   receiveFeeAccount: fees.receiveFeeAccountId ? { id: fees.receiveFeeAccountId } : null,
+  receiveFeeCurrency: fees.receiveFeeCurrency || (fees.receiveFeeAccountId ? undefined : sides.destinationCurrency),
 });
 
 export const validateFees = (fees) => {
@@ -62,17 +72,30 @@ const round2 = (n) => Math.round(n * 100) / 100;
 
 const signed = (fee, direction) => (direction === "CREDIT" ? 1 : -1) * amountOf(fee);
 
-// [{ accountId, amount }] in the order source, destination, fee accounts;
-// amounts on the same account are added; zero effects are left out
-export const transferEffects = ({ sourceId, destinationId, amountSent, amountReceived, fees }) => {
+// [{ accountId, currency, amount }] per pocket (account + currency), in the order source,
+// destination, fee pockets; amounts on the same pocket are added; zero effects are left out.
+// A fee is in its chosen currency, else its side's; an old fee on a third account without
+// a currency is in that account's first currency (feeCurrencyOf), like the backend does.
+export const transferEffects = ({
+  sourceId, sourceCurrency = "", destinationId, destinationCurrency = "",
+  amountSent, amountReceived, fees, feeCurrencyOf = () => "",
+}) => {
   const effects = new Map();
-  const add = (id, amount) => {
+  const add = (id, currency, amount) => {
     if (!id || amount === 0) return;
-    effects.set(id, round2((effects.get(id) ?? 0) + amount));
+    const key = `${id}|${currency}`;
+    effects.set(key, { accountId: id, currency, amount: round2((effects.get(key)?.amount ?? 0) + amount) });
   };
-  add(sourceId, -amountOf(amountSent));
-  add(destinationId, amountOf(amountReceived));
-  add(fees.sendFeeAccountId || sourceId, signed(fees.sendFee, fees.sendFeeDirection));
-  add(fees.receiveFeeAccountId || destinationId, signed(fees.receiveFee, fees.receiveFeeDirection));
-  return [...effects].map(([accountId, amount]) => ({ accountId, amount }));
+  const feePocket = (feeAccountId, feeCurrency, sideId, sideCurrency) => {
+    if (!feeAccountId || feeAccountId === sideId) return [sideId, feeCurrency || sideCurrency];
+    return [feeAccountId, feeCurrency || feeCurrencyOf(feeAccountId)];
+  };
+
+  add(sourceId, sourceCurrency, -amountOf(amountSent));
+  add(destinationId, destinationCurrency, amountOf(amountReceived));
+  add(...feePocket(fees.sendFeeAccountId, fees.sendFeeCurrency, sourceId, sourceCurrency),
+    signed(fees.sendFee, fees.sendFeeDirection));
+  add(...feePocket(fees.receiveFeeAccountId, fees.receiveFeeCurrency, destinationId, destinationCurrency),
+    signed(fees.receiveFee, fees.receiveFeeDirection));
+  return [...effects.values()];
 };

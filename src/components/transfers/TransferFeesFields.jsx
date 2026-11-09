@@ -1,80 +1,65 @@
 import React from "react";
-import FormInput from "../inputs/FormInput";
-import DropDown from "../elements/DropDown";
+import CurrencySelect from "../inputs/CurrencySelect";
+import sheet from "../../styles/components/forms/formSheet.module.scss";
 import styles from "../../styles/components/transfers/transferFees.module.scss";
 import { FEE_DIRECTIONS } from "../../utils/transactions/transferFees";
+import { pocketsOf } from "../../utils/accounts/pockets";
 import i18n from "../../configuration/i18n";
 
-// One fee: amount, علينا / لنا, and the account (empty = the account on its side).
-const FeeFieldset = ({ prefix, legend, sideLabel, fees, onChange, accounts }) => {
+// One fee: amount in a currency of its side's account (default: the side's currency),
+// and علينا / لنا. An old transfer may have its fee on a third account: it is kept and named.
+const FeeFieldset = ({ prefix, legend, fees, onChange, sideAccount, sideCurrency, accounts }) => {
   const amountKey = `${prefix}Fee`;
   const directionKey = `${prefix}FeeDirection`;
-  const accountKey = `${prefix}FeeAccountId`;
+  const currencyKey = `${prefix}FeeCurrency`;
+  const otherAccount = fees[`${prefix}FeeAccountId`]
+    ? accounts.find((a) => a.id === fees[`${prefix}FeeAccountId`])
+    : null;
   const set = (key, value) => onChange({ ...fees, [key]: value });
 
-  const accountNames = [sideLabel, ...accounts.map((a) => a.name)];
-  const chosen = accounts.find((a) => a.id === fees[accountKey]);
+  // the currencies of the account the fee is paid from
+  const feeAccount = otherAccount ?? sideAccount;
+  const currencies = pocketsOf(feeAccount).map((p) => p.currency);
+  const currency = fees[currencyKey] || (otherAccount ? currencies[0] : sideCurrency) || "";
 
   return (
     <fieldset className={styles.fee}>
       <legend>{legend}</legend>
 
-      <FormInput
-        label={i18n.t("transferFees.amount")}
-        name={amountKey}
-        type="number"
-        min="0"
-        step="0.01"
-        placeholder="0"
-        value={fees[amountKey]}
-        onChange={(e) => set(amountKey, e.target.value)}
-      />
+      <div className={sheet.field}>
+        <label className={sheet.label} htmlFor={`${prefix}-fee`}>{i18n.t("transferFees.amount")}</label>
+        <div className={sheet.money}>
+          <input id={`${prefix}-fee`} type="number" inputMode="decimal" min="0" step="0.01" placeholder="0"
+            value={fees[amountKey]} onChange={(e) => set(amountKey, e.target.value)} />
+          <CurrencySelect currencies={currencies} value={currency} label={legend}
+            onChange={(code) => set(currencyKey, code)} />
+        </div>
+        {otherAccount && (
+          <p className={sheet.available}>{i18n.t("transferFees.fromAccount", { name: otherAccount.name })}</p>
+        )}
+      </div>
 
       <div className={styles.directions} role="radiogroup" aria-label={legend}>
         {FEE_DIRECTIONS.map((d) => (
           <label key={d.value} className={styles.direction}>
-            <input
-              type="radio"
-              name={directionKey}
-              value={d.value}
-              checked={fees[directionKey] === d.value}
-              onChange={() => set(directionKey, d.value)}
-            />
+            <input type="radio" name={directionKey} value={d.value}
+              checked={fees[directionKey] === d.value} onChange={() => set(directionKey, d.value)} />
             {i18n.t(d.label)}
           </label>
         ))}
       </div>
-
-      <DropDown
-        label={i18n.t("transferFees.account")}
-        name={accountKey}
-        list={accountNames}
-        value={chosen ? chosen.name : sideLabel}
-        onChange={(e) => set(accountKey, accounts.find((a) => a.name === e.target.value)?.id ?? "")}
-      />
     </fieldset>
   );
 };
 
-// fees: see utils/transactions/transferFees.js; accounts: the user's accounts
-const TransferFeesFields = ({ fees, onChange, accounts }) => (
+// fees: see utils/transactions/transferFees.js; the send fee is paid from the sending
+// account, the receive fee from the receiving one
+const TransferFeesFields = ({ fees, onChange, sourceAccount, sourceCurrency, destinationAccount, destinationCurrency, accounts = [] }) => (
   <div className={styles.fees}>
-    <FeeFieldset
-      prefix="send"
-      legend={i18n.t("transferFees.sendFee")}
-      sideLabel={i18n.t("transferFees.sameAsSource")}
-      fees={fees}
-      onChange={onChange}
-      accounts={accounts}
-    />
-    <FeeFieldset
-      prefix="receive"
-      legend={i18n.t("transferFees.receiveFee")}
-      sideLabel={i18n.t("transferFees.sameAsDestination")}
-      fees={fees}
-      onChange={onChange}
-      accounts={accounts}
-    />
+    <FeeFieldset prefix="send" legend={i18n.t("transferFees.sendFee")} fees={fees} onChange={onChange}
+      sideAccount={sourceAccount} sideCurrency={sourceCurrency} accounts={accounts} />
+    <FeeFieldset prefix="receive" legend={i18n.t("transferFees.receiveFee")} fees={fees} onChange={onChange}
+      sideAccount={destinationAccount} sideCurrency={destinationCurrency} accounts={accounts} />
   </div>
 );
 

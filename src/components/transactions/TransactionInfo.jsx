@@ -31,7 +31,7 @@ import {
 } from "../../utils/transactions/transactionList";
 import { formatNumber } from "../../utils/formating";
 import { dateFnsLocale } from "../../utils/dates";
-import { transactionCurrency } from "../../utils/accounts/pockets";
+import { firstCurrency, transactionCurrency } from "../../utils/accounts/pockets";
 import i18n from "../../configuration/i18n";
 import CreateExpense from "../expenses/CreateExpense";
 import CreateIncomse from "../incomes/CreateIncome";
@@ -56,29 +56,30 @@ const DELETE_FN = {
   "transfer-fee-out": deleteTransfer,
 };
 
-// amounts, rate and fees of a transfer, each with the currency of its account
-const money = (amount, account) =>
-  `${formatNumber(Number(amount ?? 0))} ${account?.currency ?? ""}`.trim();
+// amounts, rate and fees of a transfer, each in the currency of its side
+// (a transfer from before the currencies: the account's first currency)
+const money = (amount, currency, account) =>
+  `${formatNumber(Number(amount ?? 0))} ${currency ?? firstCurrency(account) ?? ""}`.trim();
 
-const feeText = (fee, direction, account) =>
-  `${money(fee, account)} · ${i18n.t(direction === "CREDIT" ? "transferFees.credit" : "transferFees.charge")}` +
+const feeText = (fee, direction, currency, account) =>
+  `${money(fee, currency, account)} · ${i18n.t(direction === "CREDIT" ? "transferFees.credit" : "transferFees.charge")}` +
   ` · ${account?.name ?? i18n.t("account.accountdeleted")}`;
 
 const transferBreakdown = (t) => {
   if (!t) return [];
   return [
-    { label: i18n.t("transactionDetails.amountSent"), value: money(t.amountSent, t.sourceAccount) },
+    { label: i18n.t("transactionDetails.amountSent"), value: money(t.amountSent, t.sourceCurrency, t.sourceAccount) },
     Number(t.exChangeRate ?? 1) !== 1 && {
       label: i18n.t("transactionDetails.exchangeRate"), value: String(t.exChangeRate),
     },
-    { label: i18n.t("transactionDetails.amountReceived"), value: money(t.amountReceived, t.destinationAccount) },
+    { label: i18n.t("transactionDetails.amountReceived"), value: money(t.amountReceived, t.destinationCurrency, t.destinationAccount) },
     t.sendFee > 0 && {
       label: i18n.t("transactionDetails.sendFee"),
-      value: feeText(t.sendFee, t.sendFeeDirection, t.sendFeeAccount),
+      value: feeText(t.sendFee, t.sendFeeDirection, t.sendFeeCurrency, t.sendFeeAccount),
     },
     t.receiveFee > 0 && {
       label: i18n.t("transactionDetails.receiveFee"),
-      value: feeText(t.receiveFee, t.receiveFeeDirection, t.receiveFeeAccount),
+      value: feeText(t.receiveFee, t.receiveFeeDirection, t.receiveFeeCurrency, t.receiveFeeAccount),
     },
   ].filter(Boolean);
 };

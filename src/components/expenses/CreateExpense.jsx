@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import Modal from "../modals/Modal";
 import FormInput from "../../components/inputs/FormInput";
+import AmountWithCurrency from "../inputs/AmountWithCurrency";
+import { firstCurrency } from "../../utils/accounts/pockets";
 import styles from "../../styles/components/expenses/createExpense.module.scss";
 import Button from "../../components/btns/Button";
 import { addExpense } from "../../api/expenseService";
@@ -44,6 +46,9 @@ const CreateExpense = ({ isOpen, isClose, account, initialData, currency }) => {
     },
   });
 
+  // the currency next to the amount: picked here, else the tab's, else the account's first
+  const chosenCurrency = expenseData.currency || currency || initialData?.currency || firstCurrency(account);
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setExpenseData({ ...expenseData, [name]: value });
@@ -56,7 +61,7 @@ const CreateExpense = ({ isOpen, isClose, account, initialData, currency }) => {
     const finalExpenseData = {
       ...expenseData,
       account: { id: account?.id || "" },
-      currency: currency || initialData?.currency || undefined,
+      currency: chosenCurrency,
       image: imageUrls || null,
     };
     // 3. تنفيذ الـ Mutation
@@ -91,14 +96,15 @@ const CreateExpense = ({ isOpen, isClose, account, initialData, currency }) => {
           <h2>{i18n.t("createExpense.title")}</h2>
           <form onSubmit={handleCreateExpense}>
             <div className={styles.inputContainer}>
-              <FormInput
-                label={i18n.t("createExpense.amount")}
-                placeholder={i18n.t("placeholder.amount")}
-                name="amount"
-                type="number"
-                value={expenseData.amount}
-                onChange={handleInputChange}
-              />
+              <AmountWithCurrency
+              label={i18n.t("createExpense.amount")}
+              placeholder={i18n.t("placeholder.amount")}
+              value={expenseData.amount}
+              onChange={handleInputChange}
+              account={account}
+              currency={chosenCurrency}
+              onCurrencyChange={(code) => setExpenseData((prev) => ({ ...prev, currency: code }))}
+            />
             </div>
             <div>
               <ExpenseCategoryList expenseItem={handleCategoryChange} value={expenseData.category} />

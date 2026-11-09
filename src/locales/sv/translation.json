@@ -589,7 +589,8 @@
     "sameAsDestination": "Till-konto",
     "summaryTitle": "Vad överföringen gör",
     "negative": "En avgift kan inte vara negativ.",
-    "title": "Avgifter (valfritt)"
+    "title": "Avgifter (valfritt)",
+    "fromAccount": "Avgiften från kontot: {{name}}"
   },
   "share": {
     "button": "Dela",
@@ -807,6 +808,10 @@
     "remove": "Ta bort {{currency}}",
     "hasTransactions": "Valutan har transaktioner. Den kan bara tas bort när den inte har några.",
     "count": "{{count}} valutor",
-    "count_one": "1 valuta"
+    "count_one": "1 valuta",
+    "samePocket": "Välj två olika konton, eller två olika valutor i samma konto.",
+    "exchangeTitle": "Växla valuta",
+    "available": "Tillgängligt",
+    "rateRequired": "Ange växelkursen."
   }
 }

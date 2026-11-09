@@ -11,6 +11,7 @@ import Datepicker from "../inputs/Datepicker.jsx";
 import { ImagePicker } from "../ImagePicker.jsx";
 import TransferFeesFields from "./TransferFeesFields";
 import TransferSummary from "./TransferSummary";
+import { firstCurrency } from "../../utils/accounts/pockets";
 import { emptyFees, feesFromTransfer, feesToRequest, validateFees } from "../../utils/transactions/transferFees";
 
 const FEE_FIELDS = [
@@ -69,8 +70,13 @@ const UpdateTransfer = ({ isOpen, isClose, accounts, transfer }) => {
   };
 
   // both account fields are read-only in this form, so only their names are needed
-  const currentSourceLabel = getAccountNameById(transferData.sourceAccount);
-  const currentDestLabel = getAccountNameById(transferData.destinationAccount);
+  // each side with its currency (a transfer from before the currencies: the account's first)
+  const sourceAccountData = accountsList.find((a) => a.id === transferData.sourceAccount?.id);
+  const destinationAccountData = accountsList.find((a) => a.id === transferData.destinationAccount?.id);
+  const sourceCurrency = transferData.sourceCurrency || firstCurrency(sourceAccountData);
+  const destinationCurrency = transferData.destinationCurrency || firstCurrency(destinationAccountData);
+  const currentSourceLabel = `${getAccountNameById(transferData.sourceAccount)} · ${sourceCurrency}`;
+  const currentDestLabel = `${getAccountNameById(transferData.destinationAccount)} · ${destinationCurrency}`;
 
   // 3. معالج المدخلات الديناميكي
   const handleInputChange = (e) => {
@@ -127,7 +133,8 @@ useEffect(() => {
   const handleSubmit = (e) => {
     e.preventDefault();
     
-    if (transferData.sourceAccount.id === transferData.destinationAccount.id) {
+    // the same account is fine in two currencies (an exchange), not twice the same currency
+    if (transferData.sourceAccount.id === transferData.destinationAccount.id && sourceCurrency === destinationCurrency) {
       return setError({
         hasError: true,
         message: i18n.t("messages.errorSameAccountTransfer"),
@@ -143,7 +150,9 @@ useEffect(() => {
       amountSent: Number(transferData.amountSent),
       exChangeRate: Number(transferData.exChangeRate),
       amountReceived: Number(transferData.amountReceived),
-      ...feesToRequest(fees),
+      sourceCurrency,
+      destinationCurrency,
+      ...feesToRequest(fees, { sourceCurrency, destinationCurrency }),
     });
   };
 
@@ -197,10 +206,14 @@ useEffect(() => {
             onChange={handleInputChange}
           />
 
-          <TransferFeesFields fees={fees} onChange={setFees} accounts={accountsList} />
+          <TransferFeesFields fees={fees} onChange={setFees} accounts={accountsList}
+            sourceAccount={sourceAccountData} sourceCurrency={sourceCurrency}
+            destinationAccount={destinationAccountData} destinationCurrency={destinationCurrency} />
           <TransferSummary
             sourceId={transferData.sourceAccount?.id}
+            sourceCurrency={sourceCurrency}
             destinationId={transferData.destinationAccount?.id}
+            destinationCurrency={destinationCurrency}
             amountSent={transferData.amountSent}
             amountReceived={transferData.amountReceived}
             fees={fees}

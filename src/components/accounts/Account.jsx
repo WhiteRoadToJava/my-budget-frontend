@@ -155,6 +155,7 @@ const Account = ({ account }) => {
         isClose={() => setIsCreateTransfer(false)}
         accounts={accounts}
         currentAccount={current}
+        currentCurrency={currency}
       />
       <ShareStatement
         isOpen={isShareOpen}

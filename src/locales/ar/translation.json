@@ -597,7 +597,8 @@
     "sameAsDestination": "حساب الوجهة",
     "summaryTitle": "أثر هذا التحويل",
     "negative": "لا يمكن أن تكون العمولة سالبة.",
-    "title": "العمولات (اختياري)"
+    "title": "العمولات (اختياري)",
+    "fromAccount": "العمولة من حساب: {{name}}"
   },
   "share": {
     "button": "مشاركة",
@@ -832,6 +833,10 @@
     "count_one": "عملة واحدة",
     "count_two": "عملتان",
     "count_many": "{{count}} عملة",
-    "count_other": "{{count}} عملة"
+    "count_other": "{{count}} عملة",
+    "samePocket": "اختر حسابين مختلفين، أو عملتين مختلفتين في نفس الحساب.",
+    "exchangeTitle": "صرف عملة",
+    "available": "المتاح",
+    "rateRequired": "أدخل سعر الصرف."
   }
 }

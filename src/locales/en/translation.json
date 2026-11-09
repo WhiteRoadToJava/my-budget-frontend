@@ -605,7 +605,8 @@
     "sameAsDestination": "Destination account",
     "summaryTitle": "What this transfer does",
     "negative": "A fee can not be negative.",
-    "title": "Fees (optional)"
+    "title": "Fees (optional)",
+    "fromAccount": "Fee from account: {{name}}"
   },
   "share": {
     "button": "Share",
@@ -823,6 +824,10 @@
     "remove": "Remove {{currency}}",
     "hasTransactions": "This currency has transactions. It can only be removed when it has none.",
     "count": "{{count}} currencies",
-    "count_one": "1 currency"
+    "count_one": "1 currency",
+    "samePocket": "Choose two different accounts, or two different currencies of the same account.",
+    "exchangeTitle": "Exchange currency",
+    "available": "Available",
+    "rateRequired": "Enter the exchange rate."
   }
 }

@@ -4,7 +4,10 @@ import FormInput from "../../components/inputs/FormInput";
 import styles from "../../styles/components/incomes/createIncome.module.scss";
 import Button from "../../components/btns/Button";
 import { updateIncomse, getIncomseById } from "../../api/incomseService";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { getAccounts } from "../../api/accountService";
+import AmountWithCurrency from "../inputs/AmountWithCurrency";
+import { firstCurrency } from "../../utils/accounts/pockets";
 import i18n from "../../configuration/i18n";
 import Datepicker from "../inputs/Datepicker";
 import { ImagePicker } from "../ImagePicker";
@@ -22,6 +25,9 @@ const UpdateIncomse = ({ isOpen, isClose, incomse }) => {
   const [imageUrls, setImageUrls] = useState(null);
   const [error, setError] = useState({ hasError: false, message: "" });
   const queryClient = useQueryClient();
+  // the record's account, for the currencies it can be in
+  const { data: accountsData } = useQuery({ queryKey: ["accounts"], queryFn: getAccounts });
+  const recordAccount = accountsData?.accounts?.find((a) => a.id === incomseData.account?.id);
   const nutation = useMutation({
     mutationFn: (data) => updateIncomse(incomse.id, data),
     onSuccess: () => {
@@ -96,13 +102,15 @@ const UpdateIncomse = ({ isOpen, isClose, incomse }) => {
           <h2>{i18n.t("updateIncomse.title")}</h2>
           <form>
             <div className={styles.inputContainer}>
-              <FormInput
+              <AmountWithCurrency
                 label={i18n.t("createIncomse.amount")}
                 placeholder={i18n.t("placeholder.amount")}
-                name="amount"
-                type="number"
                 value={incomseData.amount}
                 onChange={handleInputChange}
+                account={recordAccount}
+                currency={incomseData.currency || firstCurrency(recordAccount)}
+                onCurrencyChange={(code) => setIncomseData((prev) => ({ ...prev, currency: code }))}
+                showAvailable={false}
               />
             </div>
             <div>

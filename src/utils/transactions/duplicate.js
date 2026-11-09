@@ -24,5 +24,7 @@ export const transferDraft = (transfer) => ({
     exChangeRate: transfer.exChangeRate ?? 0,
     amountReceived: transfer.amountReceived ?? 0,
     description: transfer.description ?? "",
+    sourceCurrency: transfer.sourceCurrency,
+    destinationCurrency: transfer.destinationCurrency,
     fees: feesFromTransfer(transfer),
 });

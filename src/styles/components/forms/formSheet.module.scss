@@ -182,3 +182,27 @@
     }
   }
 }
+
+/* the currency next to an amount, when the account has several */
+.moneySelect {
+  padding: 0.15rem 0.35rem;
+  color: variable.$color-text;
+  background: variable.$surface-3;
+  border: 1px solid variable.$color-border;
+  border-radius: variable.$radius-xs;
+  font: inherit;
+  font-size: variable.$font-md;
+  cursor: pointer;
+
+  &:focus-visible {
+    outline: none;
+    border-color: variable.$color-tennis;
+  }
+}
+
+/* "available: 300 USD" under an amount */
+.available {
+  margin: 0.25rem 0 0;
+  color: variable.$color-text-muted;
+  font-size: variable.$font-xs;
+}
