@@ -148,13 +148,8 @@ const Account = ({ account }) => {
         />
       )}
 
-      {/* mounted only while open: a fresh form each time, in the currency of the open tab */}
-      {isCreateIncomeOpen && (
-        <CreateIncome isOpen isClose={() => setIsCreateIncomeOpen(false)} account={current} currency={currency} />
-      )}
-      {isCreateExpenseOpen && (
-        <CreateExpense isOpen isClose={() => setIsCreateExpenseOpen(false)} account={current} currency={currency} />
-      )}
+      <CreateIncome isOpen={isCreateIncomeOpen} isClose={() => setIsCreateIncomeOpen(false)} account={current} currency={currency} />
+      <CreateExpense isOpen={isCreateExpenseOpen} isClose={() => setIsCreateExpenseOpen(false)} account={current} currency={currency} />
       <CreateTransfer
         isOpen={isCreateTransfer}
         isClose={() => setIsCreateTransfer(false)}
