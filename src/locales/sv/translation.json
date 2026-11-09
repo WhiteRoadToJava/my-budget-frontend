@@ -796,5 +796,17 @@
     "daysLeft_one": "1 dag kvar",
     "renew": "Förnya nu",
     "readOnly": "Endast läsning"
+  },
+  "currencies": {
+    "add": "Lägg till valuta",
+    "addTitle": "Ny valuta i {{name}}",
+    "addHint": "Varje valuta har sitt eget saldo och sina transaktioner. Flytta pengar mellan valutor med en överföring.",
+    "allAdded": "Alla tillgängliga valutor finns redan i kontot.",
+    "exists": "Valutan finns redan i kontot.",
+    "saveError": "Det gick inte att spara. Försök igen.",
+    "remove": "Ta bort {{currency}}",
+    "hasTransactions": "Valutan har transaktioner. Den kan bara tas bort när den inte har några.",
+    "count": "{{count}} valutor",
+    "count_one": "1 valuta"
   }
 }

@@ -49,6 +49,8 @@ const UpdateExpense = ({ isOpen, isClose, expense }) => {
               account: { id: data.account?.id || "" },
               category: data.category || "",
               amount: data.amount || "",
+              // the record keeps its currency; without it the backend would move it to the account's first one
+              currency: data.currency,
               description: data.description || "",
               image: data.image || null,
             });

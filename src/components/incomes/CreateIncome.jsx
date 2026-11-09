@@ -11,7 +11,8 @@ import {incomseCategoryList} from "../../assiets/categories/assits"
 import IncomeCategoryList from "../categories/IncomeCategoryList.jsx";
 
 
-const CreateIncomse = ({ isOpen, isClose, account, initialData }) => {
+// currency: the currency of the account the money is in (empty = the account's first one)
+const CreateIncomse = ({ isOpen, isClose, account, initialData, currency }) => {
   const queryClient = useQueryClient();
   const [incomseData, setIncomseData] = useState({
     category: initialData?.category ?? "",
@@ -47,6 +48,7 @@ const CreateIncomse = ({ isOpen, isClose, account, initialData }) => {
     nutation.mutate({
       ...incomseData,
       account: { id: account?.id || "" },
+      currency: currency || initialData?.currency || undefined,
       image: imageUrls || null,
     });
   };

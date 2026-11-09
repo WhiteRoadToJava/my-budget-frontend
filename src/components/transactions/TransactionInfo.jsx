@@ -31,6 +31,7 @@ import {
 } from "../../utils/transactions/transactionList";
 import { formatNumber } from "../../utils/formating";
 import { dateFnsLocale } from "../../utils/dates";
+import { transactionCurrency } from "../../utils/accounts/pockets";
 import i18n from "../../configuration/i18n";
 import CreateExpense from "../expenses/CreateExpense";
 import CreateIncomse from "../incomes/CreateIncome";
@@ -108,7 +109,7 @@ const TransactionInfo = ({ isOpen, onClose, accounts, transaction }) => {
   const incoming = isIncoming(transaction);
   const category = findCategory(transaction?.category, type);
   const typeKey = typeLabelKey(type);
-  const currency = transaction?.sourceAccount?.currency ?? "";
+  const currency = transactionCurrency(transaction);
   const date = new Date(transaction?.createdAt);
   const locale = dateFnsLocale(i18n.language);
 

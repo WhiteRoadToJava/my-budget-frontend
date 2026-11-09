@@ -1,3 +1,4 @@
+import { hasCurrency } from "../accounts/pockets";
 // Pure helpers for the debt forms: options, conversion to/from the API
 // and validation. Validation returns an i18n key (or null) so it mirrors
 // the backend rules (DebtService) and can be unit tested.
@@ -114,7 +115,7 @@ export const validateMovementForm = (form, { startDate, remaining } = {}, today 
 export const usableAccounts = (accounts = [], currency) =>
   accounts.filter(
     (a) =>
-      a.currency === currency &&
+      hasCurrency(a, currency) &&
       !(Array.isArray(a.status) && a.status.includes("ARCHIVED")),
   );
 

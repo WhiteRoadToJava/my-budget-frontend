@@ -10,7 +10,8 @@ import { ImagePicker } from "../ImagePicker";
 import { expenseCategoryList } from "../../assiets/categories/assits";
 import ExpenseCategoryList from "../categories/ExpenseCategoryList";
 
-const CreateExpense = ({ isOpen, isClose, account, initialData }) => {
+// currency: the currency of the account the money is in (empty = the account's first one)
+const CreateExpense = ({ isOpen, isClose, account, initialData, currency }) => {
   const queryClient = useQueryClient();
 
   const [expenseData, setExpenseData] = useState({
@@ -55,6 +56,7 @@ const CreateExpense = ({ isOpen, isClose, account, initialData }) => {
     const finalExpenseData = {
       ...expenseData,
       account: { id: account?.id || "" },
+      currency: currency || initialData?.currency || undefined,
       image: imageUrls || null,
     };
     // 3. تنفيذ الـ Mutation

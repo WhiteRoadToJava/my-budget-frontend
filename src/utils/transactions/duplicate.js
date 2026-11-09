@@ -14,6 +14,7 @@ export const incomeExpenseDraft = (transaction) => ({
     category: transaction.category ?? "",
     amount: String(Math.abs(Number(transaction.amount ?? 0))),
     description: transaction.description ?? "",
+    currency: transaction.currency,
 });
 
 export const transferDraft = (transfer) => ({
