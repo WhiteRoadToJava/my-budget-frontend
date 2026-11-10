@@ -829,5 +829,10 @@
     "exchangeTitle": "Exchange currency",
     "available": "Available",
     "rateRequired": "Enter the exchange rate."
+  },
+    "dropDown": {
+    "search": "Search...",
+    "searchAccount": "Search for an account",
+    "noResults": "No results"
   }
 }

@@ -813,5 +813,10 @@
     "exchangeTitle": "Växla valuta",
     "available": "Tillgängligt",
     "rateRequired": "Ange växelkursen."
+  },
+    "dropDown": {
+    "search": "Sök...",
+    "searchAccount": "Sök efter ett konto",
+    "noResults": "Inga träffar"
   }
 }

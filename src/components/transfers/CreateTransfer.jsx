@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import Modal from "../modals/Modal";
 import FormInput from "../inputs/FormInput";
-import DropDown from "../elements/DropDown";
+import SearchableDropDown  from "../elements/SearchableDropDown.jsx";
 import Button from "../btns/Button";
 import { ImagePicker } from "../ImagePicker.jsx";
 import TransferFeesFields from "./TransferFeesFields";
@@ -161,22 +161,24 @@ const TransferForm = ({ onClose, accounts, currentAccount, currentCurrency, init
         </header>
 
         <div className={styles.route}>
-          <DropDown
+          <SearchableDropDown
             label={i18n.t("createTransfer.sourceAccount")}
             placeholder={i18n.t("placeholder.sourceAccount")}
             list={names()}
             name="sourceAccount"
             value={source?.name ?? ""}
             onChange={(e) => chooseAccount("sourceAccount", e.target.value)}
+            searchPlaceholder={i18n.t("dropDown.searchAccount")}
           />
           <span className={styles.arrow} aria-hidden="true">→</span>
-          <DropDown
+          <SearchableDropDown
             label={i18n.t("createTransfer.destinationAccount")}
             placeholder={i18n.t("placeholder.destinationAccount")}
             list={names()}
             name="destinationAccount"
             value={destination?.name ?? ""}
             onChange={(e) => chooseAccount("destinationAccount", e.target.value)}
+            searchPlaceholder={i18n.t("dropDown.searchAccount")}
           />
         </div>
 
