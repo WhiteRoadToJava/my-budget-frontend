@@ -17,7 +17,8 @@ export const currencyOf = (t) => transactionCurrency(t);
 
 // Money that really came in or went out. A transfer between two of your
 // accounts moves nothing in or out, so it is left out; its fees are kept.
-export const isRealFlow = (t) => t?.type !== "in-transfer" && t?.type !== "out-transfer";
+// transfers between own accounts and cancelled transactions are no money in or out
+export const isRealFlow = (t) => t?.type !== "in-transfer" && t?.type !== "out-transfer" && t?.cancelled !== true;
 
 // { [currency]: { in, out, net } } for the month of `month`
 export const monthTotals = (transactions = [], month = new Date()) => {
@@ -60,7 +61,7 @@ export const topExpenseCategories = (transactions = [], currency, nameOf, month 
   const sums = {};
   for (const t of transactions) {
     const date = dateOf(t);
-    if (!date || t.type !== "expense" || currencyOf(t) !== currency || monthKeyOf(date) !== key) continue;
+    if (!date || t.type !== "expense" || t.cancelled === true || currencyOf(t) !== currency || monthKeyOf(date) !== key) continue;
     const name = nameOf(t) || "—";
     sums[name] = round2((sums[name] ?? 0) + Math.abs(Number(t.amount ?? 0)));
   }

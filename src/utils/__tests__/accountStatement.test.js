@@ -114,4 +114,18 @@ describe("buildAccountStatement", () => {
     expect(text).toContain("share.moneyIn: + 40.00");
     expect(text).not.toContain("99.00");
   });
+
+  it("a cancelled transaction is struck through and counts in no total", () => {
+    const account = { name: "Cash", currency: "SEK", totalBalance: 100 };
+    const rows = [
+      { id: "k", type: "incomse", category: "1", amount: 100, createdAt: "2026-10-05T10:00:00" },
+      { id: "x", type: "expense", category: "2", amount: 40, createdAt: "2026-10-06T10:00:00",
+        cancelled: true, cancelReason: "returned" },
+    ];
+    const text = buildAccountStatement({ account, transactions: rows,
+      period: { from: "2026-10-01", to: "2026-10-31" }, language: "en", t, today });
+    expect(text).toMatch(/~.*40\.00~ {2}\(cancel\.cancelled\)/);
+    expect(text).toContain("cancel.reason: returned");
+    expect(text).toContain("share.moneyOut: − 0.00");
+  });
 });

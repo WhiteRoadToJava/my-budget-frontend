@@ -45,6 +45,7 @@ const Row = ({ transaction, onClick, showAccount = false }) => {
     <div
       className={styles.row}
       data-type={transaction.type}
+      data-cancelled={transaction.cancelled ? "true" : undefined}
       onClick={onClick}
       role="button"
       tabIndex={0}
@@ -55,7 +56,10 @@ const Row = ({ transaction, onClick, showAccount = false }) => {
       </span>
 
       <span className={styles.main}>
-        <span className={styles.title}>{title}</span>
+        <span className={styles.title}>
+          {title}
+          {transaction.cancelled && <span className={styles.cancelledBadge}>{i18n.t("cancel.cancelled")}</span>}
+        </span>
         <span className={styles.meta}>
           {accountName && <span>{accountName}</span>}
           {typeKey && !isTransfer && transaction.type.startsWith("debt") && (

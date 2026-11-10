@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
 import {
-  isIncoming, signedAmount, groupByMonth, filterTransactions, otherAccountName,
+  isIncoming, signedAmount, countedAmount, groupByMonth, filterTransactions, otherAccountName,
 } from "../transactions/transactionList";
 
 const t = (id, type, amount, createdAt, extra = {}) => ({ id, type, amount, createdAt, ...extra });
@@ -57,5 +57,27 @@ describe("otherAccountName", () => {
     expect(otherAccountName(list[2])).toBe("Savings");
     expect(otherAccountName({ type: "in-transfer", sourceAccount: { name: "Main" } })).toBe("Main");
     expect(otherAccountName(list[0])).toBeUndefined();
+  });
+});
+
+describe("cancelled transactions", () => {
+  const rows = [
+    { id: "a", type: "incomse", amount: 100, createdAt: "2026-11-02T10:00:00" },
+    { id: "b", type: "expense", amount: 40, createdAt: "2026-11-03T10:00:00", cancelled: true },
+    { id: "c", type: "expense", amount: 10, createdAt: "2026-11-04T10:00:00" },
+  ];
+
+  it("stay in the month but count in no total", () => {
+    const [month] = groupByMonth(rows);
+    expect(month.items).toHaveLength(3);
+    expect(month.totalIn).toBe(100);
+    expect(month.totalOut).toBe(10);
+    expect(countedAmount(rows[1])).toBe(0);
+    expect(signedAmount(rows[1])).toBe(-40);
+  });
+
+  it("can be hidden", () => {
+    expect(filterTransactions(rows, { hideCancelled: true }).map((t) => t.id)).toEqual(["a", "c"]);
+    expect(filterTransactions(rows).map((t) => t.id)).toEqual(["a", "b", "c"]);
   });
 });

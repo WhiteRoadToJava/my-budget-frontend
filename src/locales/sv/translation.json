@@ -814,9 +814,26 @@
     "available": "Tillgängligt",
     "rateRequired": "Ange växelkursen."
   },
-    "dropDown": {
+  "dropDown": {
     "search": "Sök...",
     "searchAccount": "Sök efter ett konto",
     "noResults": "Inga träffar"
+  },
+  "cancel": {
+    "cancelled": "annullerad",
+    "action": "Annullera transaktionen",
+    "title": "Annullera transaktionen?",
+    "explain": "Den finns kvar i historiken, överstruken, och pengarna går tillbaka. Du kan återställa den senare.",
+    "explainTransfer": "Den finns kvar i historiken, överstruken. Beloppen och avgifterna går tillbaka. Du kan återställa den senare.",
+    "reason": "Orsak",
+    "optional": "valfritt",
+    "reasonPlaceholder": "t.ex. överföringen kom tillbaka",
+    "confirm": "Annullera",
+    "restore": "Återställ",
+    "note": "Annullerad: räknas inte i något saldo eller total. Återställ den för att ändra den.",
+    "cancelledOn": "Annullerad",
+    "hide": "Dölj annullerade",
+    "error": "Det gick inte att annullera. Försök igen.",
+    "restoreError": "Det gick inte att återställa. Försök igen."
   }
 }

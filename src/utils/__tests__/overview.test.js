@@ -66,3 +66,13 @@ describe("overview numbers", () => {
     expect(accountCurrencies([sek, usd, sek, { currency: "EUR" }])).toEqual(["SEK", "EUR", "USD"]);
   });
 });
+
+describe("cancelled transactions in the overview", () => {
+  it("are no money in or out", () => {
+    const rows = [
+      { type: "expense", amount: 50, createdAt: "2026-11-05T10:00:00", currency: "SEK" },
+      { type: "expense", amount: 70, createdAt: "2026-11-06T10:00:00", currency: "SEK", cancelled: true },
+    ];
+    expect(monthTotals(rows, new Date("2026-11-15")).SEK).toEqual({ in: 0, out: 50, net: -50 });
+  });
+});
