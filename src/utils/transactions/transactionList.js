@@ -7,6 +7,12 @@ export const isIncoming = (t) => INCOMING.has(t?.type);
 // amount with the sign of its effect on the account
 export const signedAmount = (t) => (isIncoming(t) ? 1 : -1) * Math.abs(Number(t?.amount ?? 0));
 
+// a cancelled transaction stays in the lists but moves no balance
+export const isCancelled = (t) => t?.cancelled === true;
+
+// what the row adds to a total: nothing when it is cancelled
+export const countedAmount = (t) => (isCancelled(t) ? 0 : signedAmount(t));
+
 const round2 = (n) => Math.round(n * 100) / 100;
 
 const timeOf = (t) => {
@@ -27,7 +33,7 @@ export const groupByMonth = (transactions = []) => {
     if (!groups.has(key)) groups.set(key, { key, items: [], totalIn: 0, totalOut: 0 });
     const g = groups.get(key);
     g.items.push(t);
-    const amount = signedAmount(t);
+    const amount = countedAmount(t);
     if (amount >= 0) g.totalIn = round2(g.totalIn + amount);
     else g.totalOut = round2(g.totalOut - amount);
   }
@@ -43,11 +49,12 @@ export const TYPE_FILTERS = {
 };
 
 // text search over what the row shows: description, category name, account names
-export const filterTransactions = (transactions = [], { type = "all", query = "", categoryName } = {}) => {
+export const filterTransactions = (transactions = [], { type = "all", query = "", categoryName, hideCancelled = false } = {}) => {
   const matchesType = TYPE_FILTERS[type] ?? TYPE_FILTERS.all;
   const q = query.trim().toLowerCase();
   return transactions.filter((t) => {
     if (!matchesType(t)) return false;
+    if (hideCancelled && isCancelled(t)) return false;
     if (!q) return true;
     const text = [
       t.description,

@@ -207,3 +207,28 @@
   color: variable.$color-text-muted;
   font-size: variable.$font-xs;
 }
+
+/* "(optional)" next to a label */
+.optional {
+  color: variable.$color-text-muted;
+  font-weight: 400;
+}
+
+/* a few lines of text, like the reason of a cancellation */
+.textarea {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 0.6rem 0.75rem;
+  background: variable.$surface-1;
+  border: 1px solid variable.$color-border;
+  border-radius: variable.$radius-md;
+  color: variable.$color-text;
+  font: inherit;
+  resize: vertical;
+
+  &:focus {
+    outline: none;
+    border-color: variable.$color-tennis;
+    box-shadow: variable.$shadow-glow;
+  }
+}

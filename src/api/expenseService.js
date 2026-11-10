@@ -36,3 +36,14 @@ export const deleteExpense = async (expenseId) => {
     throw error;
   }
 };
+// cancelled: kept in the history, its money taken back; reason is optional
+export const cancelExpense = async (id, reason) => {
+  const response = await api.patch(`/user/expense/cancel/${id}`, { reason: reason || null });
+  return response.data;
+};
+
+// counted again
+export const restoreExpense = async (id) => {
+  const response = await api.patch(`/user/expense/restore/${id}`);
+  return response.data;
+};

@@ -123,3 +123,25 @@
     display: none;
   }
 }
+
+/* ---------- a cancelled transaction: still listed, counts in nothing ---------- */
+
+.row[data-cancelled="true"] {
+  opacity: 0.6;
+
+  .amount {
+    text-decoration: line-through;
+    color: variable.$color-text-muted;
+  }
+}
+
+.cancelledBadge {
+  margin-inline-start: 0.5rem;
+  padding: 0.05rem 0.45rem;
+  border: 1px solid variable.$color-border-strong;
+  border-radius: variable.$radius-pill;
+  color: variable.$color-text-muted;
+  font-size: variable.$font-xs;
+  font-weight: 600;
+  vertical-align: middle;
+}

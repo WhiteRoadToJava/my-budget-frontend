@@ -13,7 +13,7 @@ import {
   parseISO,
   startOfMonth,
 } from "date-fns";
-import { signedAmount, isTransferFee } from "../transactions/transactionList";
+import { countedAmount, isCancelled, signedAmount, isTransferFee } from "../transactions/transactionList";
 import { findCategory } from "../../assiets/categories/assits";
 import { categoryName, typeLabelKey } from "../transactionTypes";
 import { dateFnsLocale } from "../dates";
@@ -73,7 +73,7 @@ export const balanceAt = (currentBalance, transactions, lastDay) =>
     transactions
       .filter((t) => (dayOf(t) ?? "") > lastDay)
       .reduce(
-        (balance, t) => balance - signedAmount(t),
+        (balance, t) => balance - countedAmount(t),
         Number(currentBalance ?? 0),
       ),
   );
@@ -99,11 +99,16 @@ const transactionLines = (transaction, language, t) => {
     locale: dateFnsLocale(language),
   });
   const sign = amount >= 0 ? "+" : "−";
+  const text = `${labelOf(transaction, t)}  ${sign} ${formatMoney(amount, language)}`;
+  // a cancelled one is struck through (~text~ in WhatsApp) and counts in no total
   const lines = [
-    `• ${date}  ${labelOf(transaction, t)}  ${sign} ${formatMoney(amount, language)}`,
+    isCancelled(transaction)
+      ? `• ${date}  ~${text}~  (${t("cancel.cancelled")})`
+      : `• ${date}  ${text}`,
   ];
   const description = transaction.description?.trim();
   if (description) lines.push(`   ${description}`);
+  if (isCancelled(transaction) && transaction.cancelReason) lines.push(`   ${t("cancel.reason")}: ${transaction.cancelReason}`);
   return lines;
 };
 
@@ -143,13 +148,13 @@ export const buildAccountStatement = ({
 
     const totalIn = round2(
       inPeriod
-        .map(signedAmount)
+        .map(countedAmount)
         .filter((a) => a > 0)
         .reduce((s, a) => s + a, 0),
     );
     const totalOut = round2(
       inPeriod
-        .map(signedAmount)
+        .map(countedAmount)
         .filter((a) => a < 0)
         .reduce((s, a) => s - a, 0),
     );

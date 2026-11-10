@@ -830,9 +830,26 @@
     "available": "Available",
     "rateRequired": "Enter the exchange rate."
   },
-    "dropDown": {
+  "dropDown": {
     "search": "Search...",
     "searchAccount": "Search for an account",
     "noResults": "No results"
+  },
+  "cancel": {
+    "cancelled": "cancelled",
+    "action": "Cancel transaction",
+    "title": "Cancel this transaction?",
+    "explain": "It stays in the history, struck through, and its money goes back. You can restore it later.",
+    "explainTransfer": "It stays in the history, struck through. The amounts and the fees go back. You can restore it later.",
+    "reason": "Reason",
+    "optional": "optional",
+    "reasonPlaceholder": "e.g. the transfer came back",
+    "confirm": "Cancel it",
+    "restore": "Restore",
+    "note": "Cancelled: it counts in no balance or total. Restore it to edit it.",
+    "cancelledOn": "Cancelled on",
+    "hide": "Hide cancelled",
+    "error": "Could not cancel. Try again.",
+    "restoreError": "Could not restore. Try again."
   }
 }
