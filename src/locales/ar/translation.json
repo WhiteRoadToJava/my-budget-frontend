@@ -838,5 +838,11 @@
     "exchangeTitle": "صرف عملة",
     "available": "المتاح",
     "rateRequired": "أدخل سعر الصرف."
+  },
+    "dropDown": {
+    "search": "بحث...",
+    "searchAccount": "ابحث عن حساب",
+    "noResults": "لا توجد نتائج"
   }
 }
+
