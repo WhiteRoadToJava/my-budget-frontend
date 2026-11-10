@@ -42,7 +42,8 @@
 }
 
 .select {
-  min-width: 5.5rem;
+  flex: 0 0 auto;
+  min-width: 4.5rem;
   padding: 0 8px;
   background-color: variable.$primaryBg;
   border: 1px solid variable.$color-jet;

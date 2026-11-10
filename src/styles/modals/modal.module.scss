@@ -8,10 +8,20 @@
   bottom: 0px;
   background-color: rgba(0, 0, 0, 0.3);
   display: flex;
-  align-items: center;
   justify-content: center;
   z-index: 1000;
   cursor: initial;
+  // a form taller than the screen scrolls (computer and phone)
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  padding: 2vh 0.75rem;
+
+  // centred when it fits, from the top when it does not (so its top is never cut off)
+  > * {
+    margin: auto 0;
+    max-width: 100%;
+  }
 }
 
 .modalContent {
