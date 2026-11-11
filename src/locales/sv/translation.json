@@ -624,7 +624,13 @@
     "transferIn": "Inkommande överföring",
     "transferOut": "Utgående överföring",
     "transferFee": "Överföringsavgift",
-    "sentFrom": "Skickat från www.mybudget.win"
+    "sentFrom": "Skickat från www.mybudget.win",
+    "pdfTitle": "Kontoutdrag som PDF",
+    "pdfDownload": "Ladda ner PDF",
+    "pdfShare": "Dela PDF",
+    "pdfPreparing": "Förbereder...",
+    "pdfError": "Det gick inte att skapa PDF:en. Försök igen.",
+    "pdfAllCurrencies": "Alla valutor"  
   },
   "overview": {
     "balances": "Saldon",

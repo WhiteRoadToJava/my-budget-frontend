@@ -640,7 +640,13 @@
     "transferIn": "Incoming transfer",
     "transferOut": "Outgoing transfer",
     "transferFee": "Transfer fee",
-    "sentFrom": "Sent from www.mybudget.win"
+    "sentFrom": "Sent from www.mybudget.win",
+    "pdfTitle": "Statement as PDF",
+    "pdfDownload": "Download PDF",
+    "pdfShare": "Share PDF",
+    "pdfPreparing": "Preparing...",
+    "pdfError": "Could not make the PDF. Try again.",
+    "pdfAllCurrencies": "All currencies"
   },
   "overview": {
     "balances": "Balances",

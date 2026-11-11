@@ -127,3 +127,24 @@ export const removeAccountCurrency = async (accountId, currency) => {
   const response = await api.delete(`/user/accounts/${accountId}/currencies/${currency}`);
   return response.data;
 };
+
+
+
+// The account statement as a PDF, made by the backend: a Blob ready to save or share.
+// period: { from: "2026-11-01", to: "2026-11-05" }; lang: ar / en / sv
+export const downloadStatementPdf = async (accountId, { currency, from, to, lang }) => {
+  try {
+    const response = await api.get(`/user/accounts/${accountId}/statement.pdf`, {
+      params: { currency, from, to, lang },
+      responseType: "blob",
+    });
+    return response.data;
+  } catch (error) {
+    // with responseType "blob" the error message is a Blob too: read it as text
+    const data = error?.response?.data;
+    if (data instanceof Blob) {
+      error.message = (await data.text()) || error.message;
+    }
+    throw error;
+  }
+};
