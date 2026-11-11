@@ -77,3 +77,11 @@
   flex-wrap: wrap;
   gap: 0.5rem;
 }
+
+.pdfOption {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: variable.$font-sm;
+  cursor: pointer;
+}

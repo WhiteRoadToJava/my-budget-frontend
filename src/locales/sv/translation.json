@@ -629,7 +629,8 @@
     "pdfDownload": "Ladda ner PDF",
     "pdfShare": "Dela PDF",
     "pdfPreparing": "Förbereder...",
-    "pdfError": "Det gick inte att skapa PDF:en. Försök igen."
+    "pdfError": "Det gick inte att skapa PDF:en. Försök igen.",
+    "pdfAllCurrencies": "Alla valutor"  
   },
   "overview": {
     "balances": "Saldon",

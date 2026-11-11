@@ -10,8 +10,11 @@ import {
 import sheet from "../../styles/components/forms/formSheet.module.scss";
 import styles from "../../styles/components/accounts/shareStatement.module.scss";
 import i18n from "../../configuration/i18n";
-import { pdfPeriod, statementFileName } from "../../utils/accounts/statementPdf";
-import { firstCurrency } from "../../utils/accounts/pockets";
+import {
+  pdfPeriod,
+  statementFileName,
+} from "../../utils/accounts/statementPdf";
+import { firstCurrency, pocketsOf } from "../../utils/accounts/pockets";
 import { downloadStatementPdf } from "../../api/accountService";
 const PRESETS = ["none", "thisMonth", "lastMonth", "custom"];
 
@@ -23,6 +26,7 @@ const ShareStatementForm = ({ onClose, account, transactions, currency }) => {
   const [copied, setCopied] = useState(false);
   const [pdfBusy, setPdfBusy] = useState(false);
   const [pdfError, setPdfError] = useState(null);
+  const [allCurrencies, setAllCurrencies] = useState(false);
 
   const period = preset === "custom" ? range : periodPreset(preset);
   const customInvalid =
@@ -63,21 +67,23 @@ const ShareStatementForm = ({ onClose, account, transactions, currency }) => {
     }
   };
 
-
-    // ---------- the PDF statement (made by the backend) ----------
+  // ---------- the PDF statement (made by the backend) ----------
 
   const pdfRange = pdfPeriod(preset, range, transactions);
   const statementCurrency = currency || firstCurrency(account);
+  // one PDF with every currency of the account (a section each), when it has several
+  const severalCurrencies = pocketsOf(account).length > 1;
+  const pdfCurrency =
+    severalCurrencies && allCurrencies ? "ALL" : statementCurrency;
 
   const makePdf = async () => {
     const blob = await downloadStatementPdf(account.id, {
-      currency: statementCurrency,
+      currency: pdfCurrency,
       from: pdfRange.from,
       to: pdfRange.to,
       lang: i18n.language,
     });
-    const name = statementFileName(account.name, statementCurrency, pdfRange);
-    return new File([blob], name, { type: "application/pdf" });
+    const name = statementFileName(account.name, pdfCurrency === "ALL" ? i18n.t("share.pdfAllCurrencies") : pdfCurrency, pdfRange);    return new File([blob], name, { type: "application/pdf" });
   };
   const withPdf = async (action) => {
     if (!pdfRange) return;
@@ -105,12 +111,14 @@ const ShareStatementForm = ({ onClose, account, transactions, currency }) => {
       setTimeout(() => URL.revokeObjectURL(url), 1000);
     });
   // on phones: the share sheet with the file (WhatsApp, mail...)
-  const canSharePdf = typeof navigator !== "undefined" && typeof navigator.canShare === "function"
-    && navigator.canShare({ files: [new File([""], "x.pdf", { type: "application/pdf" })] });
-  const sharePdf = () => withPdf((file) => navigator.share({ files: [file], title: file.name }));
-
-
-  
+  const canSharePdf =
+    typeof navigator !== "undefined" &&
+    typeof navigator.canShare === "function" &&
+    navigator.canShare({
+      files: [new File([""], "x.pdf", { type: "application/pdf" })],
+    });
+  const sharePdf = () =>
+    withPdf((file) => navigator.share({ files: [file], title: file.name }));
 
   const openWhatsApp = () =>
     window.open(
@@ -194,18 +202,46 @@ const ShareStatementForm = ({ onClose, account, transactions, currency }) => {
             {i18n.t("share.copied")}
           </p>
         )}
-        
+
         <div className={styles.pdf}>
           <span className={sheet.label}>{i18n.t("share.pdfTitle")}</span>
+                    {severalCurrencies && (
+            <label className={styles.pdfOption}>
+              <input
+                type="checkbox"
+                checked={allCurrencies}
+                onChange={(e) => setAllCurrencies(e.target.checked)}
+              />
+              {i18n.t("share.pdfAllCurrencies")}
+            </label>
+          )}
           <div className={styles.pdfActions}>
-            <Button variant="secondary" type="button" disabled={pdfBusy || !pdfRange}
-              text={pdfBusy ? i18n.t("share.pdfPreparing") : i18n.t("share.pdfDownload")} onClick={downloadPdf} />
+            <Button
+              variant="secondary"
+              type="button"
+              disabled={pdfBusy || !pdfRange}
+              text={
+                pdfBusy
+                  ? i18n.t("share.pdfPreparing")
+                  : i18n.t("share.pdfDownload")
+              }
+              onClick={downloadPdf}
+            />
             {canSharePdf && (
-              <Button variant="secondary" type="button" disabled={pdfBusy || !pdfRange}
-                text={i18n.t("share.pdfShare")} onClick={sharePdf} />
+              <Button
+                variant="secondary"
+                type="button"
+                disabled={pdfBusy || !pdfRange}
+                text={i18n.t("share.pdfShare")}
+                onClick={sharePdf}
+              />
             )}
           </div>
-          {pdfError && <p className={sheet.error} role="alert">{pdfError}</p>}
+          {pdfError && (
+            <p className={sheet.error} role="alert">
+              {pdfError}
+            </p>
+          )}
         </div>
 
         <div className={sheet.actions}>

@@ -645,7 +645,8 @@
     "pdfDownload": "Download PDF",
     "pdfShare": "Share PDF",
     "pdfPreparing": "Preparing...",
-    "pdfError": "Could not make the PDF. Try again."
+    "pdfError": "Could not make the PDF. Try again.",
+    "pdfAllCurrencies": "All currencies"
   },
   "overview": {
     "balances": "Balances",

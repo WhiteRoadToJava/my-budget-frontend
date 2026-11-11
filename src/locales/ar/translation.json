@@ -637,7 +637,8 @@
     "pdfDownload": "تحميل PDF",
     "pdfShare": "مشاركة PDF",
     "pdfPreparing": "جارٍ التحضير...",
-    "pdfError": "تعذّر إنشاء ملف PDF. حاول مرة أخرى."
+    "pdfError": "تعذّر إنشاء ملف PDF. حاول مرة أخرى.",
+       "pdfAllCurrencies": "كل العملات" 
   },
   "overview": {
     "balances": "الأرصدة",
