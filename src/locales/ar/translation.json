@@ -632,7 +632,12 @@
     "transferIn": "تحويل وارد",
     "transferOut": "تحويل صادر",
     "transferFee": "عمولة تحويل",
-    "sentFrom": "أُرسل من www.mybudget.win"
+    "sentFrom": "أُرسل من www.mybudget.win",
+    "pdfTitle": "كشف الحساب PDF",
+    "pdfDownload": "تحميل PDF",
+    "pdfShare": "مشاركة PDF",
+    "pdfPreparing": "جارٍ التحضير...",
+    "pdfError": "تعذّر إنشاء ملف PDF. حاول مرة أخرى."
   },
   "overview": {
     "balances": "الأرصدة",

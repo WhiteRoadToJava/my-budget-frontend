@@ -60,3 +60,20 @@
   color: variable.$color-success;
   font-size: variable.$font-sm;
 }
+
+
+/* ---------- the PDF statement ---------- */
+
+.pdf {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid variable.$color-border;
+}
+
+.pdfActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}

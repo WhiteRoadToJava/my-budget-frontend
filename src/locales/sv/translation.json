@@ -601,7 +601,12 @@
       "none": "Bara saldo",
       "thisMonth": "Den här månaden",
       "lastMonth": "Förra månaden",
-      "custom": "Välj datum"
+      "custom": "Välj datum",
+      "pdfTitle": "Kontoutdrag som PDF",
+      "pdfDownload": "Ladda ner PDF",
+      "pdfShare": "Dela PDF",
+      "pdfPreparing": "Förbereder...",
+      "pdfError": "Det gick inte att skapa PDF:en. Försök igen."
     },
     "from": "Från",
     "to": "Till",
