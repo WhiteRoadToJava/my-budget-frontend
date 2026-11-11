@@ -83,7 +83,12 @@ const ShareStatementForm = ({ onClose, account, transactions, currency }) => {
       to: pdfRange.to,
       lang: i18n.language,
     });
-    const name = statementFileName(account.name, pdfCurrency === "ALL" ? i18n.t("share.pdfAllCurrencies") : pdfCurrency, pdfRange);    return new File([blob], name, { type: "application/pdf" });
+    const name = statementFileName(
+      account.name,
+      pdfCurrency === "ALL" ? i18n.t("share.pdfAllCurrencies") : pdfCurrency,
+      pdfRange,
+    );
+    return new File([blob], name, { type: "application/pdf" });
   };
   const withPdf = async (action) => {
     if (!pdfRange) return;
@@ -205,7 +210,7 @@ const ShareStatementForm = ({ onClose, account, transactions, currency }) => {
 
         <div className={styles.pdf}>
           <span className={sheet.label}>{i18n.t("share.pdfTitle")}</span>
-                    {severalCurrencies && (
+          {severalCurrencies && (
             <label className={styles.pdfOption}>
               <input
                 type="checkbox"
