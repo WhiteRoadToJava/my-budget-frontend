@@ -601,12 +601,7 @@
       "none": "Bara saldo",
       "thisMonth": "Den här månaden",
       "lastMonth": "Förra månaden",
-      "custom": "Välj datum",
-      "pdfTitle": "Kontoutdrag som PDF",
-      "pdfDownload": "Ladda ner PDF",
-      "pdfShare": "Dela PDF",
-      "pdfPreparing": "Förbereder...",
-      "pdfError": "Det gick inte att skapa PDF:en. Försök igen."
+      "custom": "Välj datum"
     },
     "from": "Från",
     "to": "Till",
@@ -629,7 +624,12 @@
     "transferIn": "Inkommande överföring",
     "transferOut": "Utgående överföring",
     "transferFee": "Överföringsavgift",
-    "sentFrom": "Skickat från www.mybudget.win"
+    "sentFrom": "Skickat från www.mybudget.win",
+    "pdfTitle": "Kontoutdrag som PDF",
+    "pdfDownload": "Ladda ner PDF",
+    "pdfShare": "Dela PDF",
+    "pdfPreparing": "Förbereder...",
+    "pdfError": "Det gick inte att skapa PDF:en. Försök igen."
   },
   "overview": {
     "balances": "Saldon",

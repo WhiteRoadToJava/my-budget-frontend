@@ -617,12 +617,7 @@
       "none": "Balance only",
       "thisMonth": "This month",
       "lastMonth": "Last month",
-      "custom": "Choose dates",
-      "pdfTitle": "Statement as PDF",
-      "pdfDownload": "Download PDF",
-      "pdfShare": "Share PDF",
-      "pdfPreparing": "Preparing...",
-      "pdfError": "Could not make the PDF. Try again."
+      "custom": "Choose dates"
     },
     "from": "From",
     "to": "To",
@@ -645,7 +640,12 @@
     "transferIn": "Incoming transfer",
     "transferOut": "Outgoing transfer",
     "transferFee": "Transfer fee",
-    "sentFrom": "Sent from www.mybudget.win"
+    "sentFrom": "Sent from www.mybudget.win",
+    "pdfTitle": "Statement as PDF",
+    "pdfDownload": "Download PDF",
+    "pdfShare": "Share PDF",
+    "pdfPreparing": "Preparing...",
+    "pdfError": "Could not make the PDF. Try again."
   },
   "overview": {
     "balances": "Balances",
