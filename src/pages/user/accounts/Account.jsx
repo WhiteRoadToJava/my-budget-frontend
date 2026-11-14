@@ -10,8 +10,7 @@ const Account = () => {
   const { 
     data: accounts = [], 
     isLoading, 
-    isError, 
-    error 
+    isError,
   } = useQuery({
     queryKey: ["accounts"], 
     queryFn: getAccounts, 

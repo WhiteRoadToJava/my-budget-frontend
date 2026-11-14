@@ -1,7 +1,7 @@
 export default function sortingTransactions(data) {
-  const trnnsactions = data || [];
+  const transactions = data || [];
 
-    return [...trnnsactions].sort(
+    return [...transactions].sort(
       (a, b) => new Date(b.createdAt) - new Date(a.createdAt),
     );
 };

@@ -7,21 +7,23 @@
     "dev": "vite --host 0.0.0.0",
     "build": "vite build",
     "lint": "eslint .",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "preview": "vite preview --host 0.0.0.0 --port $PORT",
     "start": "serve -s dist -l $PORT"
   },
   "dependencies": {
-    "@tanstack/react-query": "^5.95.2",
-    "axios": "^1.13.6",
-    "date-fns": "^4.1.0",
-    "i18next": "^26.0.8",
+    "@tanstack/react-query": "^5.101.2",
+    "axios": "^1.18.1",
+    "date-fns": "^4.4.0",
+    "i18next": "^26.3.6",
     "prop-types": "^15.8.1",
-    "react": "^19.2.0",
-    "react-dom": "^19.2.4",
-    "react-i18next": "^17.0.6",
-    "react-router-dom": "^7.13.1",
-    "recharts": "^3.8.1",
-    "sass": "^1.98.0",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7",
+    "react-i18next": "^17.0.9",
+    "react-router-dom": "^7.18.1",
+    "recharts": "^3.9.2",
+    "sass": "^1.101.0",
     "serve": "^14.2.6"
   },
   "devDependencies": {
@@ -33,6 +35,7 @@
     "eslint-plugin-react-hooks": "^7.0.1",
     "eslint-plugin-react-refresh": "^0.4.24",
     "globals": "^16.5.0",
-    "vite": "^7.3.1"
+    "vite": "^7.3.1",
+    "vitest": "^4.1.11"
   }
 }

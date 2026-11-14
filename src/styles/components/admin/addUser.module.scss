@@ -1,0 +1,25 @@
+@use "../../variables" as variable;
+
+.formContainer {
+  background-color: variable.$color-gray-medium;
+  padding: variable.$padding-base;
+  border-radius: variable.$radius-small;
+  width: 100%;
+  max-width: 400px;
+}
+.title{
+  padding: 20px;
+}
+
+.inputContainer{
+  padding-bottom: 20px
+}
+
+.buttonContainer{
+  display: flex;
+  gap: 20px;
+}
+.errorMessage{
+  color: variable.$color-error;
+  padding-bottom: 20px;
+}

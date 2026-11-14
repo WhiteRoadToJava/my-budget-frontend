@@ -1,10 +1,9 @@
-version: '3.8'
-
 services:
   frontend:
     build: .
     ports:
       - "3000:3000"
     environment:
-      - VITE_API_URL=http://localhost:8080
+      - VITE_API_URL=http://192.168.0.108:8080
+      - PORT=3000 
     restart: unless-stopped

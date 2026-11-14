@@ -4,6 +4,7 @@ import UpdateUser from "../../../components/user/setting/UpdateUser";
 import styles from "../../../styles/pages/setting/settingPage.module.scss";
 import { getUser } from "../../../api/userService";
 import UserDetails from "../../../components/user/setting/UserDetails";
+import { onEnterOrSpace } from "../../../utils/accessibility";
 
 const SettingPage = () => {
   const [upadatePassword, setUpadatePassword] = useState(false);
@@ -48,12 +49,18 @@ const SettingPage = () => {
           <div
             className={styles.switch}
             onClick={() => handleSwitchOnClick("updatePassword")}
+            role="button"
+            tabIndex={0}
+            onKeyDown={onEnterOrSpace(() => handleSwitchOnClick("updatePassword"))}
           >
             <p>Update Password</p>
           </div>
           <div
             className={styles.switch}
             onClick={() => handleSwitchOnClick("updateProfile")}
+            role="button"
+            tabIndex={0}
+            onKeyDown={onEnterOrSpace(() => handleSwitchOnClick("updateProfile"))}
           >
             <p>Update Profile</p>
           </div>

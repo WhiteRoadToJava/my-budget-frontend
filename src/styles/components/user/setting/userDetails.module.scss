@@ -13,7 +13,7 @@
   height: 530px;
   padding: 2rem 4rem;
   border: 2px solid variable.$color-stroke;
-  border-radius: 25px;
+  border-radius: variable.$radius-large;
 }
 .details {
   padding: 30px;

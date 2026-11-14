@@ -10,6 +10,9 @@ export default function Button({
   paddingSize,
   borderSize,
   type = "button",
+  Icon,
+  iconPosition = "start",
+  iconProps = {},
 }) {
   const classNames = `${styles.btn} ${styles[variant] || styles.primary}`;
 
@@ -19,6 +22,23 @@ export default function Button({
     ...(paddingSize ? { padding: paddingSize } : {}),
   };
 
+  // icon size follows the button's font size so it always matches, unless
+  // the caller explicitly overrides it via iconProps.
+  let iconSize = iconProps.width;
+  if (!iconSize && fontSize) {
+    const sizeValue = parseFloat(fontSize);
+    if (!isNaN(sizeValue)) iconSize = Math.max(7, sizeValue * 0.6);
+  }
+
+  const icon = Icon ? (
+    <Icon
+      className={styles.icon}
+      width={iconSize}
+      height={iconSize}
+      {...iconProps}
+    />
+  ) : null;
+
   return (
     <button
       type={type}
@@ -27,7 +47,9 @@ export default function Button({
       disabled={disabled}
       style={buttonStyle}
     >
+      {iconPosition === "start" && icon}
       {text}
+      {iconPosition === "end" && icon}
     </button>
   );
 }
@@ -52,4 +74,7 @@ Button.propTypes = {
   ]).isRequired,
   onClick: PropTypes.func,
   disabled: PropTypes.bool,
+  Icon: PropTypes.elementType,
+  iconPosition: PropTypes.oneOf(["start", "end"]),
+  iconProps: PropTypes.object,
 };

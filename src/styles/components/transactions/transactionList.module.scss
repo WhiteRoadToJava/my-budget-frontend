@@ -1,0 +1,56 @@
+@use "../../variables" as variable;
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.month {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.monthHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid variable.$color-border;
+}
+
+.monthTitle {
+  margin: 0;
+  font-size: variable.$font-md;
+}
+
+.monthTotals {
+  display: flex;
+  gap: 0.9rem;
+  margin: 0;
+  font-size: variable.$font-sm;
+  font-variant-numeric: tabular-nums;
+}
+
+.in {
+  color: variable.$color-success;
+}
+
+.out {
+  color: variable.$color-text-gray;
+}
+
+.items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.empty {
+  color: variable.$color-text-muted;
+}

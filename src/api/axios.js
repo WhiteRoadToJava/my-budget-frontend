@@ -1,8 +1,17 @@
 import axios from 'axios';
 
+if (import.meta.env.DEV && !import.meta.env.VITE_API_URL) {
+  console.warn(
+    '[axios] VITE_API_URL is not set. Copy .env.example to .env.local and set it, or requests will fail.'
+  );
+}
 
 const api = axios.create({
+<<<<<<< HEAD
   baseURL: "https://mybudget-production-4794.up.railway.app",
+=======
+  baseURL: import.meta.env.VITE_API_URL,
+>>>>>>> dev
   withCredentials: true,
   headers: {
     'Content-Type': 'application/json',
@@ -25,11 +34,23 @@ api.interceptors.request.use(
 api.interceptors.response.use(
   (response) => response, // إذا نجح الطلب مرره كما هو
   (error) => {
+    // read-only mode: the subscription has ended; the banner listens and shows why
+    if (error.response?.status === 402) {
+      window.dispatchEvent(new CustomEvent("subscription-expired"));
+    }
     if (error.response && (error.response.status === 401 || error.response.status === 403)) {
-      console.warn("Auth error or Forbidden, redirecting to login...");
-      localStorage.removeItem('token');
-      localStorage.removeItem('user');
-      window.location.href = '/login';
+      const isOnLoginPage = window.location.pathname.startsWith('/auth/login')
+        || window.location.pathname.startsWith('/login');
+
+      // لا نعيد التوجيه إذا كان الطلب الفاشل هو نفسه فحص تسجيل الدخول
+      // أو إذا كان المستخدم في صفحة تسجيل الدخول أصلاً، لتفادي حلقة إعادة توجيه
+      const isAuthCheckRequest = error.config?.url?.includes('/auth/check');
+
+      if (!isOnLoginPage && !isAuthCheckRequest) {
+        localStorage.removeItem('token');
+        localStorage.removeItem('profiles');
+        window.location.href = '/auth/login';
+      }
     }
     return Promise.reject(error);
   }

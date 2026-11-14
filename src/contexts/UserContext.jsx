@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect, useContext } from "react";
+import { createContext, useState, useEffect } from "react";
 import api from "../api/axios";
 import {useAuth} from "../hooks/useAuth.jsx";
 

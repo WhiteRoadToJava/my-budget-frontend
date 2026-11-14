@@ -98,3 +98,32 @@ export const updateAccountStatus = async (accountId, status) => {
   }
 };
 
+
+export const getUserAllTransactions = async () => {
+  try {
+    const response = await api.get("/user/accounts/user-all-transactions");
+    return response.data;
+
+  } catch (error) {
+    console.error("Error fetching user transactions:", error);
+    throw error;
+  }
+};
+
+// ---------- currencies of an account ----------
+
+export const addAccountCurrency = async (accountId, currency, openingBalance) => {
+  const response = await api.post(`/user/accounts/${accountId}/currencies`, { currency, openingBalance });
+  return response.data;
+};
+
+export const setCurrencyOpeningBalance = async (accountId, currency, openingBalance) => {
+  const response = await api.patch(`/user/accounts/${accountId}/currencies/${currency}`, { openingBalance });
+  return response.data;
+};
+
+// refused (409) while the currency has transactions, and for the last currency
+export const removeAccountCurrency = async (accountId, currency) => {
+  const response = await api.delete(`/user/accounts/${accountId}/currencies/${currency}`);
+  return response.data;
+};

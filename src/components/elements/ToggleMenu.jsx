@@ -1,53 +1,46 @@
-import React, { useState, useEffect, useRef} from 'react'
+import React, { useState } from 'react'
+import Modal from "../modals/Modal";
 import styles from "../../styles/components/elements/ToggleMenu.module.scss";
+import i18n from "../../configuration/i18n";
 
-
-
-
-const ToggleMenu = ({ menuList , position}) => {
+const ToggleMenu = ({ menuList }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const menuRef = useRef(null);
-
-
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (menuRef.current && !menuRef.current.contains(event.target)) {
-        setIsOpen(false);
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
 
   return (
-    <div className={styles.toggleMenuContainer} ref={menuRef}>
+    <>
       {/* زر النقاط الثلاث */}
-      <div 
-        className={styles.dotsTrigger} 
-        onClick={() => setIsOpen(!isOpen)}
+      <button
+        type="button"
+        className={styles.dotsTrigger}
+        onClick={() => setIsOpen(true)}
+        aria-haspopup="dialog"
+        aria-label={i18n.t("buttons.moreOptions")}
       >
         <div className={styles.dot}></div>
         <div className={styles.dot}></div>
         <div className={styles.dot}></div>
-      </div>
+      </button>
 
-      {/* القائمة المنسدلة */}
-      {isOpen && (
-        <div className={styles.menu} data-position={position}>
+      {/* نافذة الخيارات */}
+      <Modal
+        isOpen={isOpen}
+        onClose={() => setIsOpen(false)}
+        className={styles.optionsModal}
+      >
+        <div role="menu" className={styles.optionsList}>
           {menuList.map((item, index) => (
-            <div 
-              key={index} 
-              className={styles.menuItem}
-              onClick={() => {
-                setIsOpen(false);
-              }}
+            <div
+              key={index}
+              role="menuitem"
+              className={styles.optionItem}
+              onClick={() => setIsOpen(false)}
             >
               {item}
             </div>
           ))}
         </div>
-      )}
-    </div>
+      </Modal>
+    </>
   );
 };
 

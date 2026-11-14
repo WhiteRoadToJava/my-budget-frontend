@@ -1,0 +1,100 @@
+@use "../../variables" as variable;
+
+.fees {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  margin: 0.5rem 0 1rem;
+
+  @media (max-width: 640px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.fee {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0.75rem;
+  background: variable.$surface-1;
+  border: 1px solid variable.$color-border;
+  border-radius: variable.$radius-md;
+
+  legend {
+    padding: 0 0.25rem;
+    font-size: variable.$font-sm;
+    color: variable.$color-text-gray;
+  }
+}
+
+.directions {
+  display: inline-flex;
+  padding: 3px;
+  background: variable.$surface-2;
+  border: 1px solid variable.$color-border;
+  border-radius: variable.$radius-pill;
+}
+
+.direction {
+  position: relative;
+  padding: 0.25rem 0.8rem;
+  border-radius: variable.$radius-pill;
+  color: variable.$color-text-gray;
+  font-size: variable.$font-sm;
+  cursor: pointer;
+
+  input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  &:has(input:checked) {
+    background: variable.$surface-3;
+    color: variable.$color-text;
+  }
+
+  &:has(input:focus-visible) {
+    box-shadow: variable.$shadow-glow;
+  }
+}
+
+/* ---------- summary ---------- */
+
+.summary {
+  margin: 0 0 1rem;
+  padding: 0.75rem 0.9rem;
+  border: 1px dashed variable.$color-border-strong;
+  border-radius: variable.$radius-md;
+}
+
+.summaryTitle {
+  margin: 0 0 0.4rem;
+  font-size: variable.$font-sm;
+  color: variable.$color-text-gray;
+}
+
+.summaryList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+
+  li {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+.in {
+  color: variable.$color-success;
+}
+
+.out {
+  color: variable.$color-text;
+}

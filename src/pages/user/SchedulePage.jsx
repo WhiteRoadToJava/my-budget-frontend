@@ -2,7 +2,7 @@ import React from 'react'
 
 import { getAllSchedule } from '../../api/scheduleService'
 import { useQuery } from '@tanstack/react-query'
-import Schedule from '../../components/schedule/Schedule';
+import Schedule from '../../components/schedule/SchedulesComponent';
 import i18n from '../../configuration/i18n';
 
 function SchedulePage() {

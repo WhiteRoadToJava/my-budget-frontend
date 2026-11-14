@@ -1,0 +1,38 @@
+@use "../../variables" as variable;
+
+.banner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin: 0 0 1rem;
+  padding: 0.7rem 1rem;
+  border: 1px solid variable.$color-border;
+  border-inline-start: 4px solid variable.$color-blue;
+  border-radius: variable.$radius-md;
+  background: variable.$surface-1;
+  font-size: variable.$font-sm;
+
+  &[data-tone="warning"] { border-inline-start-color: variable.$color-fire; }
+  &[data-tone="error"] { border-inline-start-color: variable.$color-error; }
+}
+
+.text {
+  margin: 0;
+}
+
+.action {
+  padding: 0.35rem 0.9rem;
+  color: variable.$color-black;
+  background: variable.$color-tennis;
+  border-radius: variable.$radius-pill;
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: variable.$shadow-glow;
+  }
+}

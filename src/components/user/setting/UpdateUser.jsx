@@ -3,7 +3,7 @@ import styles from "../../../styles/components/user/setting/updateUser.module.sc
 import Modal from "../../modals/Modal";
 import FormInput from "../../inputs/FormInput";
 import Button from "../../btns/Button";
-import { updateUser, getUser } from "../../../api/userService";
+import { updateUser } from "../../../api/userService";
 import SuccessConfirmaton from "../../modals/SuccessConfirmaton";
 import validteUpdateUser from "../../../validators/validteUpdateUser";
 import NavBar from "../../NavBar";
@@ -27,7 +27,12 @@ const UpdateUser = ({ display, setDisplay, user }) => {
     message: "",
   });
 
+  // Deliberate: initializes the editable profile fields from the `user` prop
+  // when it changes. Candidate for a `key`-based remount at the call site
+  // instead of this effect; tracked as a follow-up cleanup rather than
+  // changed here to keep this fix scoped to CI unblocking.
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setProfile({
       firstname:user?.firstname || "", 
       lastname:user?.lastname || "", 

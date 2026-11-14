@@ -29,3 +29,12 @@ export const getAllSchedule = async () => {
     throw error;
   }
 };
+export const updateSchedule = async (scheduleId, scheduleData) => {
+  try {
+    const response = await api.patch(`/user/schedules/${scheduleId}/update-schedule`, scheduleData);
+    return response.data;
+  } catch (error) {
+    console.error(`Error updating schedule with ID ${scheduleId}:`, error);
+    throw error;
+  }
+};

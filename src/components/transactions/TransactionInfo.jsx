@@ -1,245 +1,352 @@
 import React, { useState } from "react";
-import Modal from "../modals/Modal";
-import styles from "../../styles/components/transactions/transactionInfo.module.scss";
+import { format } from "date-fns";
+import { useMutation, useQueryClient, useQuery } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
+import DetailsSheet from "../details/DetailsSheet";
+import detailsStyles from "../../styles/components/details/detailsSheet.module.scss";
 import Button from "../btns/Button";
-import ToggleMenu from "../elements/ToggleMenu";
 import UpdateTransfer from "../transfers/UpdateTransfer";
-import UpdateIncomse from "../imcomses/UpdateIncomse";
+import UpdateIncome from "../incomes/UpdateIncome";
 import UpdateExpense from "../expenses/UpdateExpense";
 import DeleteConfimation from "../modals/DeleteConfirmation";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { deleteIncomse } from "../../api/incomseService";
 import { deleteExpense } from "../../api/expenseService";
-import { deleteTransfer } from "../../api/transferServce";
+import { deleteTransfer, getTransferById } from "../../api/transferServce";
+import { getAccounts } from "../../api/accountService";
+import {
+  canDuplicate,
+  incomeExpenseDraft,
+  transferDraft,
+} from "../../utils/transactions/duplicate.js";
+import { findCategory } from "../../assiets/categories/assits";
+import transferIcon from "../../assiets/categories/icons/currency.svg";
+import {
+  belongsToDebt,
+  categoryName,
+  typeLabelKey,
+} from "../../utils/transactionTypes";
+import {
+  isIncoming,
+  otherAccountName,
+} from "../../utils/transactions/transactionList";
+import { formatNumber } from "../../utils/formating";
+import { dateFnsLocale } from "../../utils/dates";
+import { firstCurrency, transactionCurrency } from "../../utils/accounts/pockets";
 import i18n from "../../configuration/i18n";
+import CreateExpense from "../expenses/CreateExpense";
+import CreateIncomse from "../incomes/CreateIncome";
+import CreateTransfer from "../transfers/CreateTransfer";
+
+const DELETE_ERROR_KEY = {
+  incomse: "messages.errorDeleteIncomse",
+  expense: "messages.errorDeleteExpenses",
+  "in-transfer": "messages.errorDeleteTransfers",
+  "out-transfer": "messages.errorDeleteTransfers",
+  "transfer-fee-in": "messages.errorDeleteTransfers",
+  "transfer-fee-out": "messages.errorDeleteTransfers",
+};
+
+const DELETE_FN = {
+  incomse: deleteIncomse,
+  expense: deleteExpense,
+  "in-transfer": deleteTransfer,
+  "out-transfer": deleteTransfer,
+  // a fee row belongs to its transfer: deleting it deletes the transfer
+  "transfer-fee-in": deleteTransfer,
+  "transfer-fee-out": deleteTransfer,
+};
+
+// amounts, rate and fees of a transfer, each in the currency of its side
+// (a transfer from before the currencies: the account's first currency)
+const money = (amount, currency, account) =>
+  `${formatNumber(Number(amount ?? 0))} ${currency ?? firstCurrency(account) ?? ""}`.trim();
+
+const feeText = (fee, direction, currency, account) =>
+  `${money(fee, currency, account)} · ${i18n.t(direction === "CREDIT" ? "transferFees.credit" : "transferFees.charge")}` +
+  ` · ${account?.name ?? i18n.t("account.accountdeleted")}`;
+
+const transferBreakdown = (t) => {
+  if (!t) return [];
+  return [
+    { label: i18n.t("transactionDetails.amountSent"), value: money(t.amountSent, t.sourceCurrency, t.sourceAccount) },
+    Number(t.exChangeRate ?? 1) !== 1 && {
+      label: i18n.t("transactionDetails.exchangeRate"), value: String(t.exChangeRate),
+    },
+    { label: i18n.t("transactionDetails.amountReceived"), value: money(t.amountReceived, t.destinationCurrency, t.destinationAccount) },
+    t.sendFee > 0 && {
+      label: i18n.t("transactionDetails.sendFee"),
+      value: feeText(t.sendFee, t.sendFeeDirection, t.sendFeeCurrency, t.sendFeeAccount),
+    },
+    t.receiveFee > 0 && {
+      label: i18n.t("transactionDetails.receiveFee"),
+      value: feeText(t.receiveFee, t.receiveFeeDirection, t.receiveFeeCurrency, t.receiveFeeAccount),
+    },
+  ].filter(Boolean);
+};
 
 const TransactionInfo = ({ isOpen, onClose, accounts, transaction }) => {
   const queryClient = useQueryClient();
-  const [openUpdateTransfer, setOpenUpdateTransfer] = useState(false);
-  const [openUpdateIncomse, setOpenUpdateIncomse] = useState(false);
-  const [openConfirmDelete, setOpenConfirmDelete] = useState(false);
-  const [updateExpense, setUpdateExpense] = useState(false);
-  const [error, setError] = useState({ hasError: false, message: "" });
-  const sourceAccountName = transaction?.sourceAccount?.name;
-  const destinationAccountName = transaction?.destinationAccount?.name;
+  const navigate = useNavigate();
+  const [editOpen, setEditOpen] = useState(false);
+  const [confirmDelete, setConfirmDelete] = useState(false);
+  const [error, setError] = useState(null);
+  const [duplicate, setDuplicate] = useState(null);
+  const { data: accountsData } = useQuery({
+    queryKey: ["accounts"],
+    queryFn: getAccounts,
+  });
+
+  const type = transaction?.type;
+  const isFee = type === "transfer-fee-in" || type === "transfer-fee-out";
+  // fee rows are part of a transfer: same edit, delete and details
+  const isTransfer = type === "in-transfer" || type === "out-transfer" || isFee;
+  // the full transfer (rate and fees are not in the list row)
+  const { data: fullTransfer } = useQuery({
+    queryKey: ["transfer", transaction?.id],
+    queryFn: () => getTransferById(transaction.id),
+    enabled: !!isOpen && isTransfer && !!transaction?.id,
+  });
+  const isDebtRecord = belongsToDebt(transaction);
+  const incoming = isIncoming(transaction);
+  const category = findCategory(transaction?.category, type);
+  const typeKey = typeLabelKey(type);
+  const currency = transactionCurrency(transaction);
+  const date = new Date(transaction?.createdAt);
+  const locale = dateFnsLocale(i18n.language);
+
+  const close = () => {
+    setError(null);
+    onClose();
+  };
 
   const deleteMutation = useMutation({
-    mutationFn: (incomseId) => deleteIncomse(incomseId),
+    mutationFn: () => DELETE_FN[type](transaction.id),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["transactions"] });
       queryClient.invalidateQueries({ queryKey: ["accounts"] });
-      onClose();
-      setOpenConfirmDelete(false);
+      setConfirmDelete(false);
+      close();
     },
-    onError: () => {
-      setError({
-        hasError: true,
-        message: i18n.t("masseges.errorDeleteIncomse", {
-          defaultMessage: "Failed to delete incomse. Please try again.",
-        }),
-      });
-    },
-  });
-  const deleteExpenseMutation = useMutation({
-    mutationFn: (expenseId) => deleteExpense(expenseId),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["transactions"] });
-      queryClient.invalidateQueries({ queryKey: ["accounts"] });
-      onClose();
-      setOpenConfirmDelete(false);
-    },
-    onError: () => {
-      setError({
-        hasError: true,
-        message: i18n.t("masseges.errorDeleteExpense"),
-        defaultMessage: "Failed to delete expense. Please try again.",
-      });
+    onError: (err) => {
+      setConfirmDelete(false);
+      // 409: the record was created by a debt movement and can only change from the debt page
+      setError(
+        i18n.t(
+          err?.response?.status === 409
+            ? "debts.errorDebtRecord"
+            : DELETE_ERROR_KEY[type],
+        ),
+      );
     },
   });
-  const deleteTransferMutation = useMutation({
-    mutationFn: (transferId) => deleteTransfer(transferId),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["transactions"] });
-      queryClient.invalidateQueries({ queryKey: ["accounts"] });
-      onClose();
-      setOpenConfirmDelete(false);
-    },
-    onError: () => {
-      setError({
-        hasError: true,
-        message: i18n.t("masseges.errorDeleteTransfers"),
-        defaultMessage: "Failed to delete transfer. Please try again.",
+  const startDuplicate = async () => {
+    setError(null);
+    if (!isTransfer) {
+      setDuplicate({ type, data: incomeExpenseDraft(transaction) });
+      return;
+    }
+    try {
+      const transfer = await queryClient.fetchQuery({
+        queryKey: ["transfer", transaction.id],
+        queryFn: () => getTransferById(transaction.id),
       });
-    },
-  });
-  const handleUpdate = () => {
-    const type = transaction && transaction?.type;
-    switch (type) {
-      case "incomse":
-        setOpenUpdateIncomse(true);
-        break;
-      case "expense":
-        setUpdateExpense(true);
-        break;
-      case "in-transfer":
-        setOpenUpdateTransfer(true);
-        break;
-      case "out-transfer":
-        setOpenUpdateTransfer(true);
-        break;
-      default:
-        break;
+      setDuplicate({ type: "transfer", data: transferDraft(transfer) });
+    } catch {
+      setError(i18n.t("transactionDetails.errorDuplicate"));
     }
   };
 
-  const handleDelete = async () => {
-    const incomseId = transaction && transaction?.id;
-    const type = transaction && transaction?.type;
-    switch (type) {
-      case "incomse":
-        deleteMutation.mutate(incomseId);
-        break;
-      case "expense":
-        deleteExpenseMutation.mutate(incomseId);
-        break;
-      case "in-transfer":
-        deleteTransferMutation.mutate(incomseId);
-        break;
-      case "out-transfer":
-        deleteTransferMutation.mutate(incomseId);
-        break;
-      default:
-        break;
-    }
+  const endDuplicate = () => {
+    setDuplicate(null);
+    close();
   };
 
-  const buttonMenuItems = [
-    <Button
-      key="edit"
-      text={i18n.t("buttons.edit", {
-        defaultMessage: "Edit",
-      })}
-      type="button"
-      onClick={handleUpdate}
-    />,
-    <Button
-      key="delete"
-      variant="delete"
-      text={i18n.t("buttons.delete", {
-        defaultMessage: "Delete",
-      })}
-      type="button"
-      onClick={() => setOpenConfirmDelete(true)}
-    />,
-    <Button
-      key="close"
-      variant="cancel"
-      text={i18n.t("buttons.close", {
-        defaultMessage: "Close",
-      })}
-      type="button"
-      onClick={onClose}
-    />,
-  ];
+  const openDebt = () => {
+    close();
+    navigate(
+      transaction?.debtId ? `/user/debts/${transaction.debtId}` : "/user/debts",
+    );
+  };
+
+  const tone = isDebtRecord
+    ? "debt"
+    : isTransfer
+      ? "transfer"
+      : incoming
+        ? "in"
+        : "out";
+  const title = isFee
+    ? i18n.t("transactionsPage.transferFee", {
+        from: transaction?.sourceAccount?.name || i18n.t("account.accountdeleted"),
+        to: transaction?.destinationAccount?.name || i18n.t("account.accountdeleted"),
+      })
+    : isTransfer
+    ? i18n.t(
+        incoming
+          ? "transactionsPage.fromAccount"
+          : "transactionsPage.toAccount",
+        {
+          name:
+            otherAccountName(transaction) || i18n.t("account.accountdeleted"),
+        },
+      )
+    : categoryName(category) || (typeKey ? i18n.t(typeKey) : "");
+
+  const fields = [
+    !isTransfer && {
+      label: i18n.t("transactionDetails.account"),
+      value: transaction?.sourceAccount?.name,
+    },
+    isTransfer && {
+      label: i18n.t("transactionDetails.sourceAccount"),
+      value:
+        transaction?.sourceAccount?.name || i18n.t("account.accountdeleted"),
+    },
+    isTransfer && {
+      label: i18n.t("transactionDetails.destinationAccount"),
+      value:
+        transaction?.destinationAccount?.name ||
+        i18n.t("account.accountdeleted"),
+    },
+    {
+      label: i18n.t("transactionDetails.date"),
+      value: Number.isNaN(date.getTime())
+        ? null
+        : format(date, "d MMMM yyyy", { locale }),
+    },
+    ...transferBreakdown(fullTransfer),
+    {
+      label: i18n.t("transactionDetails.description"),
+      value: transaction?.description,
+    },
+  ].filter(Boolean);
+
+  const actions = isDebtRecord
+    ? [
+        <Button
+          key="open-debt"
+          text={i18n.t("debts.openDebt")}
+          type="button"
+          onClick={openDebt}
+        />,
+      ]
+    : [
+        <Button
+          key="delete"
+          variant="delete-outlined"
+          text={i18n.t("buttons.delete")}
+          type="button"
+          onClick={() => setConfirmDelete(true)}
+          disabled={deleteMutation.isPending}
+        />,
+        canDuplicate(transaction) && (
+          <Button
+            key="duplicate"
+            variant="secondary"
+            text={i18n.t("transactionDetails.duplicate")}
+            type="button"
+            onClick={startDuplicate}
+          />
+        ),
+        <Button
+          key="edit"
+          variant="primary"
+          text={i18n.t("buttons.edit")}
+          type="button"
+          onClick={() => setEditOpen(true)}
+        />,
+      ].filter(Boolean);
+
+  const hasImage = transaction?.image?.url;
+
   return (
     <>
-      <Modal isOpen={isOpen} onClose={onClose}>
-        <div className={styles.transactionContainer}>
-          <div className={styles.transactionTitle} data-type={transaction.type}>
-            <h2 className={styles.transactionTitleText}>
-              {i18n.t("transactionDetails.transaction")} {
-              transaction.type === "incomse" ? i18n.t("transactionDetails.incomse") : transaction.type === "expense" ? i18n.t("transactionDetails.expense") : transaction.type === "in-transfer" ? i18n.t("transactionDetails.inTransfer") : transaction.type === "out-transfer" ? i18n.t("transactionDetails.outTransfer") : ""}{" "} {i18n.t("transactionDetails.details")}
-            </h2>
-          </div>
+      <DetailsSheet
+        isOpen={isOpen}
+        onClose={close}
+        tone={tone}
+        icon={isTransfer ? transferIcon : category?.icon}
+        kicker={typeKey ? i18n.t(typeKey) : ""}
+        title={title}
+        amount={`${incoming ? "+" : "−"}${formatNumber(Math.abs(Number(transaction?.amount ?? 0)))} ${currency}`}
+        note={isDebtRecord ? i18n.t("debts.errorDebtRecord") : null}
+        fields={fields}
+        error={error}
+        actions={actions}
+      >
+        {hasImage && (
+          <button
+            type="button"
+            className={detailsStyles.image}
+            onClick={() =>
+              window.open(transaction.image.url, "_blank", "noopener")
+            }
+            aria-label={i18n.t("transactionDetails.openImage")}
+          >
+            <img src={transaction.image.url} alt="" />
+          </button>
+        )}
+      </DetailsSheet>
 
-          <div className={styles.divider}></div>
-
-          <div className={styles.menuContainer}>
-            <ToggleMenu menuList={buttonMenuItems} />
-          </div>
-          <p className={styles.transactionDetail}>
-            <strong>{i18n.t("transactionDetails.amount")}:</strong>{" "}
-            {transaction?.amount
-              ? Number(transaction.amount).toFixed(2)
-              : "0.00"}{" "}
-            {transaction.currency}
-          </p>
-
-          {transaction.type === "in-transfer" ||
-          transaction.type === "out-transfer" ? (
-            <>
-              <p className={styles.transactionDetail}>
-                <strong>{i18n.t("transactionDetails.sourceAccount")}:</strong>{" "}
-                {sourceAccountName}
-              </p>
-              <p className={styles.transactionDetail}>
-                <strong>
-                  {i18n.t("transactionDetails.destinationAccount")}:
-                </strong>{" "}
-                {destinationAccountName}
-              </p>
-            </>
-          ) : (
-            <p className={styles.transactionDetail}>
-              <strong>{i18n.t("transactionDetails.account")}:</strong>{" "}
-              {sourceAccountName}
-            </p>
-          )}
-          <p className={styles.transactionDetail}>
-            <strong>{i18n.t("transactionDetails.date")}:</strong>{" "}
-            {new Date(transaction.createdAt).toLocaleDateString()}
-          </p>
-          <p className={styles.transactionDetail}>
-            <strong>{i18n.t("transactionDetails.description")}:</strong>{" "}
-            {transaction.description}
-          </p>
-          <div>
-            {error.hasError && <p style={{ color: "red" }}>{error.message}</p>}
-          </div>
-          <div className={styles.buttonContainer}>
-            <Button
-              text={i18n.t("buttons.close")}
-              variant="cancel"
-              onClick={onClose}
-            />
-          </div>
-        </div>
-      </Modal>
-      {transaction &&
-      (transaction.type === "in-transfer" ||
-        transaction.type === "out-transfer") ? (
+      {isTransfer && (
         <UpdateTransfer
-          isOpen={openUpdateTransfer}
+          isOpen={editOpen}
           isClose={() => {
-            setOpenUpdateTransfer(false);
-            onClose(false);
+            setEditOpen(false);
+            close();
           }}
           accounts={accounts}
           transfer={transaction}
         />
-      ) : transaction.type === "expense" ? (
+      )}
+      {type === "expense" && (
         <UpdateExpense
-          isOpen={updateExpense}
+          isOpen={editOpen}
           isClose={() => {
-            setOpenUpdateIncomse(false);
-            onClose(false);
+            setEditOpen(false);
+            close();
           }}
           expense={transaction}
         />
-      ) : (
-        <UpdateIncomse
-          isOpen={openUpdateIncomse}
+      )}
+      {type === "incomse" && (
+        <UpdateIncome
+          isOpen={editOpen}
           isClose={() => {
-            setOpenUpdateIncomse(false);
-            onClose(false);
+            setEditOpen(false);
+            close();
           }}
           incomse={transaction}
         />
       )}
+      {duplicate?.type === "incomse" && (
+        <CreateIncomse
+          isOpen
+          isClose={endDuplicate}
+          account={transaction.sourceAccount}
+          initialData={duplicate.data}
+        />
+      )}
+      {duplicate?.type === "expense" && (
+        <CreateExpense
+          isOpen
+          isClose={endDuplicate}
+          account={transaction.sourceAccount}
+          initialData={duplicate.data}
+        />
+      )}
+      {duplicate?.type === "transfer" && (
+        <CreateTransfer
+          isOpen
+          isClose={endDuplicate}
+          accounts={accountsData}
+          initialData={duplicate.data}
+        />
+      )}
       <DeleteConfimation
-        isOpen={openConfirmDelete}
-        onClose={() => setOpenConfirmDelete(false)}
-        onDelete={handleDelete}
+        isOpen={confirmDelete}
+        onClose={() => setConfirmDelete(false)}
+        onDelete={() => deleteMutation.mutate()}
       />
     </>
   );

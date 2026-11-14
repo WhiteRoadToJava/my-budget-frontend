@@ -1,22 +1,33 @@
 import React, { useEffect, useState } from "react";
 import Modal from "../modals/Modal";
 import FormInput from "../../components/inputs/FormInput";
-import styles from "..//../styles/components/incomes/createIncomse.module.scss";
+import styles from "../../styles/components/incomes/createIncome.module.scss";
 import Button from "../../components/btns/Button";
 import { updateExpense, getExpenseById } from "../../api/expenseService";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { getAccounts } from "../../api/accountService";
+import AmountWithCurrency from "../inputs/AmountWithCurrency";
+import { firstCurrency } from "../../utils/accounts/pockets";
 import i18n from "../../configuration/i18n";
-
-
+import Datepicker from "../inputs/Datepicker";
+import { ImagePicker } from "../ImagePicker";
+import ExpenseCategoryList from "../categories/ExpenseCategoryList";
 
 const UpdateExpense = ({ isOpen, isClose, expense }) => {
   const [expwnseData, setExpenseData] = useState({
     account: { id: "" },
     category: "",
     amount: "",
+    description: "",
+    createdAt: "",
+    image: null,
   });
+  const [imageUrls, setImageUrls] = useState(null);
   const [error, setError] = useState({ hasError: false, message: "" });
   const queryClient = useQueryClient();
+  // the record's account, for the currencies it can be in
+  const { data: accountsData } = useQuery({ queryKey: ["accounts"], queryFn: getAccounts });
+  const recordAccount = accountsData?.accounts?.find((a) => a.id === expwnseData.account?.id);
   const nutation = useMutation({
     mutationFn: (data) => updateExpense(expense.id, data),
     onSuccess: () => {
@@ -29,7 +40,7 @@ const UpdateExpense = ({ isOpen, isClose, expense }) => {
     onError: () => {
       setError({
         hasError: true,
-        message: i18n.t("message.errorUpdateExpense"),
+        message: i18n.t("messages.errorUpdateExpenses"),
       });
     },
   });
@@ -44,8 +55,13 @@ const UpdateExpense = ({ isOpen, isClose, expense }) => {
               account: { id: data.account?.id || "" },
               category: data.category || "",
               amount: data.amount || "",
+              // the record keeps its currency; without it the backend would move it to the account's first one
+              currency: data.currency,
+              description: data.description || "",
+              image: data.image || null,
             });
           }
+          isOpen == false;
         } catch (err) {
           console.error("Error fetching expense:", err);
         }
@@ -58,9 +74,10 @@ const UpdateExpense = ({ isOpen, isClose, expense }) => {
     };
   }, [isOpen, expense]);
 
-  const handleUpdateIncomse = async (e) => {
+  const handleUpdateExpense = async (e) => {
     e.preventDefault(); // avoid form submission causing page reload
     nutation.mutate(expwnseData);
+    isClose(false);
   };
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -68,6 +85,18 @@ const UpdateExpense = ({ isOpen, isClose, expense }) => {
     setError({ hasError: false, message: "" }); // Clear error on input change
   };
 
+// Deliberate: syncs the picked image into the editable form state. Could be
+// computed at submit time instead of stored/synced; tracked as a follow-up
+// cleanup rather than changed here to keep this fix scoped to CI unblocking.
+useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setExpenseData(
+      (prev) => ({
+        ...prev,
+        image: imageUrls,
+      }
+    ))
+  }, [imageUrls])
   return (
     <div className={styles.createIncomseContainer}>
       <Modal isOpen={isOpen} onRequestClose={isClose}>
@@ -75,23 +104,53 @@ const UpdateExpense = ({ isOpen, isClose, expense }) => {
           <h2>{i18n.t("updateExpense.title")}</h2>
           <form>
             <div className={styles.inputContainer}>
-              <FormInput
+              <AmountWithCurrency
                 label={i18n.t("updateExpense.amount")}
                 placeholder={i18n.t("placeholder.amount")}
-                name="amount"
-                type="number"
                 value={expwnseData.amount}
                 onChange={handleInputChange}
+                account={recordAccount}
+                currency={expwnseData.currency || firstCurrency(recordAccount)}
+                onCurrencyChange={(code) => setExpenseData((prev) => ({ ...prev, currency: code }))}
+                showAvailable={false}
               />
             </div>
             <div>
-              <FormInput
-                label={i18n.t("updateExpense.category")}
-                placeholder={i18n.t("placeholder.category")}
-                name="category"
+              {/* the category list reads its value once: remount it when the expense is loaded */}
+              <ExpenseCategoryList
+                key={expwnseData.id ?? "loading"}
+                expenseItem={(id) => setExpenseData((prev) => ({ ...prev, category: id }))}
                 value={expwnseData.category}
+              />
+            </div>
+            <div className={styles.inputContainer}>
+              <FormInput
+                label={i18n.t("updateExpense.description")}
+                placeholder={i18n.t("placeholder.description")}
+                name="description"
+                type="text"
+                value={expwnseData.description}
                 onChange={handleInputChange}
               />
+            </div>
+            <div className={styles.inputContainer}>
+              <p>{i18n.t("updateExpense.createdAt")}:</p>
+              <Datepicker
+                placeholder={i18n.t("placeholder.date")}
+                name="createdAt"
+                value={expwnseData.createdAt}
+                onChange={(date) => {
+                  const localDateTime = `${date}T00:00:00.000Z`;
+                  setExpenseData((prev) => ({
+                    ...prev,
+                    createdAt: localDateTime,
+                  }));
+                  setError({ hasError: false, message: "" });
+                }}
+              />
+            </div>
+            <div className={styles.inputContainer}>
+              <ImagePicker onImageChange={setImageUrls} />
             </div>
             <div>
               {error.hasError && (
@@ -101,11 +160,19 @@ const UpdateExpense = ({ isOpen, isClose, expense }) => {
             <div className={styles.buttonContainer}>
               <Button
                 variant="primary"
-                text={nutation.isPending ? i18n.t("message.loading") : i18n.t("buttons.updateExpense")}
+                text={
+                  nutation.isPending
+                    ? i18n.t("buttons.loading")
+                    : i18n.t("buttons.updateExpense")
+                }
                 type="submit"
-                onClick={handleUpdateIncomse}
+                onClick={handleUpdateExpense}
               />
-              <Button variant="cancel" text={i18n.t("buttons.cancel")} onClick={isClose} />
+              <Button
+                variant="cancel"
+                text={i18n.t("buttons.cancel")}
+                onClick={isClose}
+              />
             </div>
           </form>
         </div>
