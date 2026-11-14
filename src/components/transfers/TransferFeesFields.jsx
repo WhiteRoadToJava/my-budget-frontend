@@ -1,6 +1,5 @@
 import React from "react";
-import CurrencySelect from "../inputs/CurrencySelect";
-import sheet from "../../styles/components/forms/formSheet.module.scss";
+import AmountWithCurrency from "../inputs/AmountWithCurrency";
 import styles from "../../styles/components/transfers/transferFees.module.scss";
 import { FEE_DIRECTIONS } from "../../utils/transactions/transferFees";
 import { pocketsOf } from "../../utils/accounts/pockets";
@@ -26,18 +25,17 @@ const FeeFieldset = ({ prefix, legend, fees, onChange, sideAccount, sideCurrency
     <fieldset className={styles.fee}>
       <legend>{legend}</legend>
 
-      <div className={sheet.field}>
-        <label className={sheet.label} htmlFor={`${prefix}-fee`}>{i18n.t("transferFees.amount")}</label>
-        <div className={sheet.money}>
-          <input id={`${prefix}-fee`} type="number" inputMode="decimal" min="0" step="0.01" placeholder="0"
-            value={fees[amountKey]} onChange={(e) => set(amountKey, e.target.value)} />
-          <CurrencySelect currencies={currencies} value={currency} label={legend}
-            onChange={(code) => set(currencyKey, code)} />
-        </div>
-        {otherAccount && (
-          <p className={sheet.available}>{i18n.t("transferFees.fromAccount", { name: otherAccount.name })}</p>
-        )}
-      </div>
+      <AmountWithCurrency
+        label={i18n.t("transferFees.amount")}
+        name={`${prefix}Fee`}
+        value={fees[amountKey]}
+        onChange={(e) => set(amountKey, e.target.value)}
+        account={feeAccount}
+        currency={currency}
+        onCurrencyChange={(code) => set(currencyKey, code)}
+        showAvailable={false}
+        hint={otherAccount ? i18n.t("transferFees.fromAccount", { name: otherAccount.name }) : undefined}
+      />
 
       <div className={styles.directions} role="radiogroup" aria-label={legend}>
         {FEE_DIRECTIONS.map((d) => (

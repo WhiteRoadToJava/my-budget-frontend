@@ -632,7 +632,13 @@
     "transferIn": "تحويل وارد",
     "transferOut": "تحويل صادر",
     "transferFee": "عمولة تحويل",
-    "sentFrom": "أُرسل من www.mybudget.win"
+    "sentFrom": "أُرسل من www.mybudget.win",
+    "pdfTitle": "كشف الحساب PDF",
+    "pdfDownload": "تحميل PDF",
+    "pdfShare": "مشاركة PDF",
+    "pdfPreparing": "جارٍ التحضير...",
+    "pdfError": "تعذّر إنشاء ملف PDF. حاول مرة أخرى.",
+       "pdfAllCurrencies": "كل العملات" 
   },
   "overview": {
     "balances": "الأرصدة",
@@ -838,5 +844,27 @@
     "exchangeTitle": "صرف عملة",
     "available": "المتاح",
     "rateRequired": "أدخل سعر الصرف."
+  },
+  "dropDown": {
+    "search": "بحث...",
+    "searchAccount": "ابحث عن حساب",
+    "noResults": "لا توجد نتائج"
+  },
+  "cancel": {
+    "cancelled": "ملغاة",
+    "action": "إلغاء المعاملة",
+    "title": "إلغاء هذه المعاملة؟",
+    "explain": "تبقى في السجل مشطوبة، ويعود مبلغها إلى الحساب. يمكنك استرجاعها لاحقاً.",
+    "explainTransfer": "تبقى في السجل مشطوبة، وتعود المبالغ والعمولات. يمكنك استرجاعها لاحقاً.",
+    "reason": "السبب",
+    "optional": "اختياري",
+    "reasonPlaceholder": "مثلاً: أعيدت الحوالة",
+    "confirm": "إلغاؤها",
+    "restore": "استرجاع",
+    "note": "ملغاة: لا تُحسب في أي رصيد أو مجموع. استرجعها لتعديلها.",
+    "cancelledOn": "أُلغيت في",
+    "hide": "إخفاء الملغاة",
+    "error": "تعذّر الإلغاء. حاول مرة أخرى.",
+    "restoreError": "تعذّر الاسترجاع. حاول مرة أخرى."
   }
 }

@@ -30,6 +30,7 @@ const Account = ({ account }) => {
   const [isShareOpen, setIsShareOpen] = useState(false);
   const [selected, setSelected] = useState(null);
   const [type, setType] = useState("all");
+  const [hideCancelled, setHideCancelled] = useState(false);
   const [query, setQuery] = useState("");
   const [addingCurrency, setAddingCurrency] = useState(false);
   const [removingCurrency, setRemovingCurrency] = useState(false);
@@ -73,7 +74,7 @@ const Account = ({ account }) => {
 
   // the rows of the chosen currency (a row without currency is from before: the account's only one)
   const inCurrency = transactions.filter((t) => !transactionCurrency(t) || transactionCurrency(t) === currency);
-  const visible = filterTransactions(inCurrency, { type, query, categoryName: nameOfCategory });
+  const visible = filterTransactions(inCurrency, { type, query, categoryName: nameOfCategory, hideCancelled });
 
   return (
     <div className={styles.page}>
@@ -130,7 +131,8 @@ const Account = ({ account }) => {
         )}
       </div>
 
-      <TransactionFilters type={type} onTypeChange={setType} query={query} onQueryChange={setQuery} />
+      <TransactionFilters type={type} onTypeChange={setType} query={query} onQueryChange={setQuery}
+        hideCancelled={hideCancelled} onHideCancelledChange={setHideCancelled} />
 
       {isLoading ? (
         <p>{i18n.t("messages.loading")}</p>

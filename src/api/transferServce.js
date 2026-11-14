@@ -40,3 +40,15 @@ export const deleteTransfer= async(transferId) => {
 };
 
 
+
+// cancelled: kept in the history, its money taken back; reason is optional
+export const cancelTransfer = async (id, reason) => {
+  const response = await api.patch(`/user/transfer/cancel/${id}`, { reason: reason || null });
+  return response.data;
+};
+
+// counted again
+export const restoreTransfer = async (id) => {
+  const response = await api.patch(`/user/transfer/restore/${id}`);
+  return response.data;
+};

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import Modal from "../modals/Modal";
 import FormInput from "../inputs/FormInput";
-import DropDown from "../elements/DropDown";
+import SearchableDropDown  from "../elements/SearchableDropDown.jsx";
 import Button from "../btns/Button";
 import { ImagePicker } from "../ImagePicker.jsx";
 import TransferFeesFields from "./TransferFeesFields";
@@ -10,6 +10,7 @@ import TransferSummary from "./TransferSummary";
 import { createTransfer } from "../../api/transferServce.js";
 import { emptyFees, feesToRequest, validateFees } from "../../utils/transactions/transferFees";
 import CurrencySelect from "../inputs/CurrencySelect";
+import AmountWithCurrency from "../inputs/AmountWithCurrency";
 import { firstCurrency, hasCurrency, pocketOf, pocketsOf } from "../../utils/accounts/pockets";
 import { formatNumber } from "../../utils/formating";
 import sheet from "../../styles/components/forms/formSheet.module.scss";
@@ -160,22 +161,24 @@ const TransferForm = ({ onClose, accounts, currentAccount, currentCurrency, init
         </header>
 
         <div className={styles.route}>
-          <DropDown
+          <SearchableDropDown
             label={i18n.t("createTransfer.sourceAccount")}
             placeholder={i18n.t("placeholder.sourceAccount")}
             list={names()}
             name="sourceAccount"
             value={source?.name ?? ""}
             onChange={(e) => chooseAccount("sourceAccount", e.target.value)}
+            searchPlaceholder={i18n.t("dropDown.searchAccount")}
           />
           <span className={styles.arrow} aria-hidden="true">→</span>
-          <DropDown
+          <SearchableDropDown
             label={i18n.t("createTransfer.destinationAccount")}
             placeholder={i18n.t("placeholder.destinationAccount")}
             list={names()}
             name="destinationAccount"
             value={destination?.name ?? ""}
             onChange={(e) => chooseAccount("destinationAccount", e.target.value)}
+            searchPlaceholder={i18n.t("dropDown.searchAccount")}
           />
         </div>
 
@@ -205,26 +208,19 @@ const TransferForm = ({ onClose, accounts, currentAccount, currentCurrency, init
         </div>
 
         {/* what arrives, in a currency of the receiving account; the rate only between two currencies */}
-        <div className={sheet.field}>
-          <label className={sheet.label} htmlFor="transfer-received">
-            {i18n.t("createTransfer.amountReceived")}
-          </label>
-          <div className={sheet.money}>
-            <input
-              id="transfer-received"
-              type="number"
-              inputMode="decimal"
-              min="0"
-              step="0.01"
-              placeholder="0"
-              value={sameCurrency ? transferData.amountSent : transferData.amountReceived}
-              readOnly={sameCurrency}
-              onChange={(e) => changeReceived(e.target.value)}
-            />
-            <CurrencySelect currencies={currenciesOf(destination)} value={destinationCurrency}
-              label={i18n.t("createTransfer.amountReceived")} onChange={(code) => chooseCurrency("destination", code)} />
-          </div>
-        </div>
+        {destination && (
+          <AmountWithCurrency
+            label={i18n.t("createTransfer.amountReceived")}
+            name="amountReceived"
+            value={sameCurrency ? transferData.amountSent : transferData.amountReceived}
+            onChange={(e) => changeReceived(e.target.value)}
+            readOnly={sameCurrency}
+            account={destination}
+            currency={destinationCurrency}
+            onCurrencyChange={(code) => chooseCurrency("destination", code)}
+            showAvailable={false}
+          />
+        )}
 
         {!sameCurrency && (
           <FormInput

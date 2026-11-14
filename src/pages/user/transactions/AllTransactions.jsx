@@ -15,6 +15,7 @@ const nameOfCategory = (t) => categoryName(findCategory(t.category, t.type));
 const AllTransactions = () => {
   const [selected, setSelected] = useState(null);
   const [type, setType] = useState("all");
+  const [hideCancelled, setHideCancelled] = useState(false);
   const [query, setQuery] = useState("");
 
   const { data: transactions = [], isLoading, isError } = useQuery({
@@ -24,8 +25,8 @@ const AllTransactions = () => {
   const { data: accountsData } = useQuery({ queryKey: ["accounts"], queryFn: getAccounts });
 
   const visible = useMemo(
-    () => filterTransactions(transactions, { type, query, categoryName: nameOfCategory }),
-    [transactions, type, query],
+    () => filterTransactions(transactions, { type, query, categoryName: nameOfCategory, hideCancelled }),
+    [transactions, type, query, hideCancelled],
   );
 
   if (isLoading) return <div className={styles.page}>{i18n.t("messages.loading")}</div>;
@@ -36,7 +37,8 @@ const AllTransactions = () => {
   return (
     <div className={styles.page}>
       <h2 className={styles.title}>{i18n.t("transactionsPage.title")}</h2>
-      <TransactionFilters type={type} onTypeChange={setType} query={query} onQueryChange={setQuery} />
+      <TransactionFilters type={type} onTypeChange={setType} query={query} onQueryChange={setQuery}
+        hideCancelled={hideCancelled} onHideCancelledChange={setHideCancelled} />
       <TransactionList
         transactions={visible}
         onSelect={setSelected}

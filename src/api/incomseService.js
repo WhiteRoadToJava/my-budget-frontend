@@ -38,3 +38,15 @@ export const getIncomseById = async (incomseId) => {
     throw error;
   }
 };
+
+// cancelled: kept in the history, its money taken back; reason is optional
+export const cancelIncomse = async (id, reason) => {
+  const response = await api.patch(`/user/incomse/cancel/${id}`, { reason: reason || null });
+  return response.data;
+};
+
+// counted again
+export const restoreIncomse = async (id) => {
+  const response = await api.patch(`/user/incomse/restore/${id}`);
+  return response.data;
+};

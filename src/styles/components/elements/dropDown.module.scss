@@ -1,11 +1,13 @@
 @use "../../variables" as variable;
+
 .dropDownContainer {
   position: relative; // ضروري لكي تلتصق القائمة بالمدخل
   width: 100%;
   margin-bottom: 1rem;
 
 }
-.dropDownList{
+
+.dropDownList {
   position: absolute;
   width: 100%;
   margin-bottom: 1rem;
@@ -16,15 +18,47 @@
   max-height: 250px;
   overflow-y: auto;
   background-color: variable.$color-gray-dark;
- border-bottom-left-radius: variable.$radius-small  ;
- border-bottom-right-radius: variable.$radius-small  ;
+  border-bottom-left-radius: variable.$radius-small ;
+  border-bottom-right-radius: variable.$radius-small ;
 }
-.dropDownItem{
-  padding: 10px ;
+
+.dropDownItem {
+  padding: 10px;
   cursor: pointer;
   color: variable.$color-text;
-  &:hover{
+
+  &:hover {
     background-color: variable.$color-gray-medium;
-  
+
   }
+}
+
+
+/* ---------- search inside the list (SearchableDropDown) ---------- */
+
+.search {
+  position: sticky;
+  top: 0;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 10px;
+  background-color: variable.$color-gray-dark;
+  border: none;
+  border-bottom: 1px solid variable.$color-jet;
+  color: variable.$color-text;
+  font: inherit;
+  outline: none;
+
+  &.forus{
+    border-bottom-color: variable.$color-tennis;
+  }
+}
+
+.action{
+  background-color: variable.$color-gray-medium;
+}
+
+.noData{
+  padding: 10px;
+  color: variable.$color-text-muted;
 }

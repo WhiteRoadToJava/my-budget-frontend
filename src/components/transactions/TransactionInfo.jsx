@@ -9,9 +9,10 @@ import UpdateTransfer from "../transfers/UpdateTransfer";
 import UpdateIncome from "../incomes/UpdateIncome";
 import UpdateExpense from "../expenses/UpdateExpense";
 import DeleteConfimation from "../modals/DeleteConfirmation";
-import { deleteIncomse } from "../../api/incomseService";
-import { deleteExpense } from "../../api/expenseService";
-import { deleteTransfer, getTransferById } from "../../api/transferServce";
+import { cancelIncomse, deleteIncomse, restoreIncomse } from "../../api/incomseService";
+import { cancelExpense, deleteExpense, restoreExpense } from "../../api/expenseService";
+import { cancelTransfer, deleteTransfer, getTransferById, restoreTransfer } from "../../api/transferServce";
+import CancelTransactionModal from "./CancelTransactionModal";
 import { getAccounts } from "../../api/accountService";
 import {
   canDuplicate,
@@ -36,6 +37,25 @@ import i18n from "../../configuration/i18n";
 import CreateExpense from "../expenses/CreateExpense";
 import CreateIncomse from "../incomes/CreateIncome";
 import CreateTransfer from "../transfers/CreateTransfer";
+
+// a fee row belongs to its transfer: cancelling or restoring it does it to the transfer
+const CANCEL_FN = {
+  incomse: cancelIncomse,
+  expense: cancelExpense,
+  "in-transfer": cancelTransfer,
+  "out-transfer": cancelTransfer,
+  "transfer-fee-in": cancelTransfer,
+  "transfer-fee-out": cancelTransfer,
+};
+
+const RESTORE_FN = {
+  incomse: restoreIncomse,
+  expense: restoreExpense,
+  "in-transfer": restoreTransfer,
+  "out-transfer": restoreTransfer,
+  "transfer-fee-in": restoreTransfer,
+  "transfer-fee-out": restoreTransfer,
+};
 
 const DELETE_ERROR_KEY = {
   incomse: "messages.errorDeleteIncomse",
@@ -91,6 +111,7 @@ const TransactionInfo = ({ isOpen, onClose, accounts, transaction }) => {
   const [confirmDelete, setConfirmDelete] = useState(false);
   const [error, setError] = useState(null);
   const [duplicate, setDuplicate] = useState(null);
+  const [cancelling, setCancelling] = useState(false);
   const { data: accountsData } = useQuery({
     queryKey: ["accounts"],
     queryFn: getAccounts,
@@ -139,6 +160,36 @@ const TransactionInfo = ({ isOpen, onClose, accounts, transaction }) => {
       );
     },
   });
+  const cancelled = transaction?.cancelled === true;
+
+  const refresh = () => {
+    queryClient.invalidateQueries({ queryKey: ["transactions"] });
+    queryClient.invalidateQueries({ queryKey: ["accounts"] });
+    queryClient.invalidateQueries({ queryKey: ["transfer", transaction?.id] });
+  };
+
+  const cancelMutation = useMutation({
+    mutationFn: (reason) => CANCEL_FN[type](transaction.id, reason),
+    onSuccess: () => {
+      refresh();
+      setCancelling(false);
+      close();
+    },
+    onError: () => {
+      setCancelling(false);
+      setError(i18n.t("cancel.error"));
+    },
+  });
+
+  const restoreMutation = useMutation({
+    mutationFn: () => RESTORE_FN[type](transaction.id),
+    onSuccess: () => {
+      refresh();
+      close();
+    },
+    onError: () => setError(i18n.t("cancel.restoreError")),
+  });
+
   const startDuplicate = async () => {
     setError(null);
     if (!isTransfer) {
@@ -215,6 +266,16 @@ const TransactionInfo = ({ isOpen, onClose, accounts, transaction }) => {
         : format(date, "d MMMM yyyy", { locale }),
     },
     ...transferBreakdown(fullTransfer),
+    cancelled && {
+      label: i18n.t("cancel.cancelledOn"),
+      value: transaction?.cancelledAt
+        ? format(new Date(transaction.cancelledAt), "d MMMM yyyy", { locale })
+        : null,
+    },
+    cancelled && {
+      label: i18n.t("cancel.reason"),
+      value: transaction?.cancelReason,
+    },
     {
       label: i18n.t("transactionDetails.description"),
       value: transaction?.description,
@@ -230,6 +291,26 @@ const TransactionInfo = ({ isOpen, onClose, accounts, transaction }) => {
           onClick={openDebt}
         />,
       ]
+    : cancelled
+    ? [
+        // a cancelled one can be deleted or restored; to edit it, restore it first
+        <Button
+          key="delete"
+          variant="delete-outlined"
+          text={i18n.t("buttons.delete")}
+          type="button"
+          onClick={() => setConfirmDelete(true)}
+          disabled={deleteMutation.isPending}
+        />,
+        <Button
+          key="restore"
+          variant="primary"
+          text={i18n.t("cancel.restore")}
+          type="button"
+          onClick={() => restoreMutation.mutate()}
+          disabled={restoreMutation.isPending}
+        />,
+      ]
     : [
         <Button
           key="delete"
@@ -238,6 +319,13 @@ const TransactionInfo = ({ isOpen, onClose, accounts, transaction }) => {
           type="button"
           onClick={() => setConfirmDelete(true)}
           disabled={deleteMutation.isPending}
+        />,
+        <Button
+          key="cancel"
+          variant="secondary"
+          text={i18n.t("cancel.action")}
+          type="button"
+          onClick={() => setCancelling(true)}
         />,
         canDuplicate(transaction) && (
           <Button
@@ -269,7 +357,7 @@ const TransactionInfo = ({ isOpen, onClose, accounts, transaction }) => {
         kicker={typeKey ? i18n.t(typeKey) : ""}
         title={title}
         amount={`${incoming ? "+" : "−"}${formatNumber(Math.abs(Number(transaction?.amount ?? 0)))} ${currency}`}
-        note={isDebtRecord ? i18n.t("debts.errorDebtRecord") : null}
+        note={isDebtRecord ? i18n.t("debts.errorDebtRecord") : cancelled ? i18n.t("cancel.note") : null}
         fields={fields}
         error={error}
         actions={actions}
@@ -341,6 +429,14 @@ const TransactionInfo = ({ isOpen, onClose, accounts, transaction }) => {
           isClose={endDuplicate}
           accounts={accountsData}
           initialData={duplicate.data}
+        />
+      )}
+      {cancelling && (
+        <CancelTransactionModal
+          onClose={() => setCancelling(false)}
+          onConfirm={(reason) => cancelMutation.mutate(reason)}
+          isTransfer={isTransfer}
+          isPending={cancelMutation.isPending}
         />
       )}
       <DeleteConfimation
