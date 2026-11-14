@@ -7,11 +7,7 @@ if (import.meta.env.DEV && !import.meta.env.VITE_API_URL) {
 }
 
 const api = axios.create({
-<<<<<<< HEAD
-  baseURL: "https://mybudget-production-4794.up.railway.app",
-=======
   baseURL: import.meta.env.VITE_API_URL,
->>>>>>> dev
   withCredentials: true,
   headers: {
     'Content-Type': 'application/json',
