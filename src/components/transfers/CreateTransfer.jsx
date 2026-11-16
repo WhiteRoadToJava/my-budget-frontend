@@ -117,7 +117,7 @@ const TransferForm = ({
       found = await queryClient.fetchQuery({
         queryKey: ["exchangeRate", from, to],
         queryFn: () => getLatestRate(from, to),
-        stateTime: 60_000,
+        staleTime: 60_000,
       });
     } catch {
       return;
