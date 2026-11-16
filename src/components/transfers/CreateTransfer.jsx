@@ -2,20 +2,35 @@ import React, { useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import Modal from "../modals/Modal";
 import FormInput from "../inputs/FormInput";
-import SearchableDropDown  from "../elements/SearchableDropDown.jsx";
+import SearchableDropDown from "../elements/SearchableDropDown.jsx";
 import Button from "../btns/Button";
 import { ImagePicker } from "../ImagePicker.jsx";
 import TransferFeesFields from "./TransferFeesFields";
 import TransferSummary from "./TransferSummary";
 import { createTransfer } from "../../api/transferServce.js";
-import { emptyFees, feesToRequest, validateFees } from "../../utils/transactions/transferFees";
+import {
+  emptyFees,
+  feesToRequest,
+  validateFees,
+} from "../../utils/transactions/transferFees";
 import CurrencySelect from "../inputs/CurrencySelect";
 import AmountWithCurrency from "../inputs/AmountWithCurrency";
-import { firstCurrency, hasCurrency, pocketOf, pocketsOf } from "../../utils/accounts/pockets";
+import {
+  firstCurrency,
+  hasCurrency,
+  pocketOf,
+  pocketsOf,
+} from "../../utils/accounts/pockets";
 import { formatNumber } from "../../utils/formating";
 import sheet from "../../styles/components/forms/formSheet.module.scss";
 import styles from "../../styles/components/transfers/transferForm.module.scss";
 import i18n from "../../configuration/i18n.js";
+import { getLatestRate } from "../../api/exchangeRateService.js";
+import {
+  formatRate,
+  sentFromReceived,
+} from "../../utils/transactions/exchangeRate.js";
+import { fi, tr } from "date-fns/locale";
 
 const emptyTransfer = (sourceId = "", sourceCurrency = "") => ({
   sourceAccount: { id: sourceId },
@@ -28,7 +43,8 @@ const emptyTransfer = (sourceId = "", sourceCurrency = "") => ({
   description: "",
 });
 
-const hasAnyFee = (fees) => Number(fees.sendFee) > 0 || Number(fees.receiveFee) > 0;
+const hasAnyFee = (fees) =>
+  Number(fees.sendFee) > 0 || Number(fees.receiveFee) > 0;
 
 const currenciesOf = (account) => pocketsOf(account).map((p) => p.currency);
 
@@ -43,30 +59,44 @@ const defaultReceived = (account, sentCurrency, sameAccount) => {
 // The form lives in its own component and is rendered only while open,
 // so every opening starts from the props (current account or duplicate).
 // currentCurrency: the currency tab the transfer was started from
-const TransferForm = ({ onClose, accounts, currentAccount, currentCurrency, initialData }) => {
+const TransferForm = ({
+  onClose,
+  accounts,
+  currentAccount,
+  currentCurrency,
+  initialData,
+}) => {
   const queryClient = useQueryClient();
   const accountsList = accounts?.accounts || [];
 
   // a duplicate brings its fees separately from the transfer fields
   const { fees: initialFees, ...initialTransfer } = initialData ?? {};
   const [transferData, setTransferData] = useState(() => ({
-    ...emptyTransfer(currentAccount?.id ?? "", currentCurrency || firstCurrency(currentAccount)),
+    ...emptyTransfer(
+      currentAccount?.id ?? "",
+      currentCurrency || firstCurrency(currentAccount),
+    ),
     ...initialTransfer,
   }));
   const [fees, setFees] = useState(() => initialFees ?? emptyFees());
   const [image, setImage] = useState(null);
   const [error, setError] = useState(null);
+  const [savedRate, setSavedRate] = useState(null);
 
   const accountById = (id) => accountsList.find((a) => a.id === id);
   const source = accountById(transferData.sourceAccount.id);
   const destination = accountById(transferData.destinationAccount.id);
   // the currency of each side (a duplicated or old transfer may have none: the account's first)
   const sourceCurrency = transferData.sourceCurrency || firstCurrency(source);
-  const destinationCurrency = transferData.destinationCurrency || firstCurrency(destination);
-  const sameAccount = Boolean(source && destination && source.id === destination.id);
+  const destinationCurrency =
+    transferData.destinationCurrency || firstCurrency(destination);
+  const sameAccount = Boolean(
+    source && destination && source.id === destination.id,
+  );
   const exchange = sameAccount && sourceCurrency !== destinationCurrency;
   // one currency: the rate is 1 and what arrives is what was sent
-  const sameCurrency = !source || !destination || sourceCurrency === destinationCurrency;
+  const sameCurrency =
+    !source || !destination || sourceCurrency === destinationCurrency;
   const available = pocketOf(source, sourceCurrency)?.totalBalance;
 
   const set = (changes) => {
@@ -76,40 +106,127 @@ const TransferForm = ({ onClose, accounts, currentAccount, currentCurrency, init
 
   // same currency on both sides: no rate, what arrives is what was sent
   const sameCurrencyChanges = (from, to) =>
-    from === to ? { exChangeRate: 1, amountReceived: transferData.amountSent } : {};
+    from === to
+      ? { exChangeRate: 1, amountReceived: transferData.amountSent }
+      : {};
+
+  const loadRate = async (from, to) => {
+    setSavedRate(null);
+    if (!from || !to || from === to) return;
+    let found = null;
+    try {
+      found = await queryClient.fetchQuery({
+        queryKey: ["exchangeRate", from, to],
+        queryFn: () => getLatestRate(from, to),
+        stateTime: 60_000,
+      });
+    } catch {
+      return;
+    }
+    if (!found) return;
+    const rate = Number(formatRate(found.rate));
+    setSavedRate({ ...found, rate });
+    setTransferData((prev) => {
+      if (prev.sourceCurrency !== from || prev.destinationCurrency !== to)
+        return prev;
+      if (Number(prev.amountSent) > 0) {
+        return {
+          ...prev,
+          exChangeRate: rate,
+          amountReceived: Number(prev.amountSent) * rate,
+        };
+      }
+      if (Number(prev.amountReceived) > 0) {
+        return {
+          ...prev,
+          exChangeRate: rate,
+          amountSent: sentFromReceived(prev.amountSent, rate),
+        };
+      }
+      return { ...prev, exChangeRate: rate };
+    });
+  };
 
   const chooseAccount = (side, name) => {
     const account = accountsList.find((a) => a.name === name);
-    if (side === "sourceAccount") {
+    if (side === sourceAccount) {
       const currency = firstCurrency(account);
-      set({ sourceAccount: { id: account?.id ?? "" }, sourceCurrency: currency,
-        ...sameCurrencyChanges(currency, destinationCurrency) });
+      set({
+        sourceAccount: { id: account?.id ?? "" },
+        sourceCurrency: currency,
+        destinationCurrency: destination ? destinationCurrency : "",
+        ...sameCurrencyChanges(currency, destinationCurrency),
+      });
       setFees((f) => ({ ...f, sendFeeCurrency: "" }));
+      if (destination) loadRate(currency, destinationCurrency);
     } else {
-      const currency = defaultReceived(account, sourceCurrency, account?.id === source?.id);
-      set({ destinationAccount: { id: account?.id ?? "" }, destinationCurrency: currency,
-        ...sameCurrencyChanges(sourceCurrency, currency) });
+      const currency = defaultReceived(
+        account,
+        sourceCurrency,
+        account?.id === source?.id,
+      );
+      set({
+        destinationAccount: { id: account?.id ?? "" },
+        destinationCurrency: currency,
+        sourceCurrency,
+        ...sameCurrencyChanges(sourceCurrency, currency),
+      });
       setFees((f) => ({ ...f, receiveFeeCurrency: "" }));
+      if (source) loadRate(sourceCurrency, currency);
     }
   };
 
   const chooseCurrency = (side, code) => {
     if (side === "source") {
-      set({ sourceCurrency: code, ...sameCurrencyChanges(code, destinationCurrency) });
+      set({
+        sourceCurrency: code,
+        destinationCurrency,
+        ...sameCurrencyChanges(code, destinationCurrency),
+      });
+      if (destination) loadRate(code, destinationCurrency);
     } else {
-      set({ destinationCurrency: code, ...sameCurrencyChanges(sourceCurrency, code) });
+      set({
+        destinationCurrency: code,
+        sourceCurrency,
+        ...sameCurrencyChanges(sourceCurrency, code),
+      });
+      loadRate(sourceCurrency, code);
     }
   };
 
+  // the button: keep the received amount and the rate, work out what has to be sent
+  const canComputeSent =
+    !sameCurrency &&
+    Number(transferData.amountReceived) > 0 &&
+    Number(transferData.exChangeRate) > 0;
+  const computeSent = () =>
+    set({
+      amountSent: sentFromReceived(
+        transferData.amountReceived,
+        transferData.exChangeRate,
+      ),
+    });
+
   // keep sent, rate and received consistent whichever one the user edits
   const changeSent = (value) =>
-    set({ amountSent: value, amountReceived: value === "" ? "" : Number(value) * Number(transferData.exChangeRate || 1) });
+    set({
+      amountSent: value,
+      amountReceived:
+        value === ""
+          ? ""
+          : Number(value) * Number(transferData.exChangeRate || 1),
+    });
   const changeRate = (value) =>
-    set({ exChangeRate: value, amountReceived: Number(transferData.amountSent || 0) * Number(value || 0) });
+    set({
+      exChangeRate: value,
+      amountReceived: Number(transferData.amountSent || 0) * Number(value || 0),
+    });
   const changeReceived = (value) =>
     set({
       amountReceived: value,
-      exChangeRate: Number(transferData.amountSent) ? Number(value) / Number(transferData.amountSent) : transferData.exChangeRate,
+      exChangeRate: Number(transferData.amountSent)
+        ? Number(value) / Number(transferData.amountSent)
+        : transferData.exChangeRate,
     });
 
   const mutation = useMutation({
@@ -157,7 +274,11 @@ const TransferForm = ({ onClose, accounts, currentAccount, currentCurrency, init
     <Modal isOpen onClose={onClose} className={sheet.sheet}>
       <form className={sheet.form} onSubmit={handleSubmit} noValidate>
         <header className={sheet.header}>
-          <h2 className={sheet.title}>{i18n.t(exchange ? "currencies.exchangeTitle" : "createTransfer.title")}</h2>
+          <h2 className={sheet.title}>
+            {i18n.t(
+              exchange ? "currencies.exchangeTitle" : "createTransfer.title",
+            )}
+          </h2>
         </header>
 
         <div className={styles.route}>
@@ -170,14 +291,18 @@ const TransferForm = ({ onClose, accounts, currentAccount, currentCurrency, init
             onChange={(e) => chooseAccount("sourceAccount", e.target.value)}
             searchPlaceholder={i18n.t("dropDown.searchAccount")}
           />
-          <span className={styles.arrow} aria-hidden="true">→</span>
+          <span className={styles.arrow} aria-hidden="true">
+            →
+          </span>
           <SearchableDropDown
             label={i18n.t("createTransfer.destinationAccount")}
             placeholder={i18n.t("placeholder.destinationAccount")}
             list={names()}
             name="destinationAccount"
             value={destination?.name ?? ""}
-            onChange={(e) => chooseAccount("destinationAccount", e.target.value)}
+            onChange={(e) =>
+              chooseAccount("destinationAccount", e.target.value)
+            }
             searchPlaceholder={i18n.t("dropDown.searchAccount")}
           />
         </div>
@@ -197,12 +322,17 @@ const TransferForm = ({ onClose, accounts, currentAccount, currentCurrency, init
               value={transferData.amountSent}
               onChange={(e) => changeSent(e.target.value)}
             />
-            <CurrencySelect currencies={currenciesOf(source)} value={sourceCurrency}
-              label={i18n.t("createTransfer.amountSent")} onChange={(code) => chooseCurrency("source", code)} />
+            <CurrencySelect
+              currencies={currenciesOf(source)}
+              value={sourceCurrency}
+              label={i18n.t("createTransfer.amountSent")}
+              onChange={(code) => chooseCurrency("source", code)}
+            />
           </div>
           {available !== undefined && (
             <p className={sheet.available}>
-              {i18n.t("currencies.available")}: {formatNumber(Number(available))} {sourceCurrency}
+              {i18n.t("currencies.available")}:{" "}
+              {formatNumber(Number(available))} {sourceCurrency}
             </p>
           )}
         </div>
@@ -212,7 +342,11 @@ const TransferForm = ({ onClose, accounts, currentAccount, currentCurrency, init
           <AmountWithCurrency
             label={i18n.t("createTransfer.amountReceived")}
             name="amountReceived"
-            value={sameCurrency ? transferData.amountSent : transferData.amountReceived}
+            value={
+              sameCurrency
+                ? transferData.amountSent
+                : transferData.amountReceived
+            }
             onChange={(e) => changeReceived(e.target.value)}
             readOnly={sameCurrency}
             account={destination}
@@ -220,6 +354,15 @@ const TransferForm = ({ onClose, accounts, currentAccount, currentCurrency, init
             onCurrencyChange={(code) => chooseCurrency("destination", code)}
             showAvailable={false}
           />
+        )}
+        {canComputeSent && (
+          <button
+            type="button"
+            className={styles.computeSent}
+            onClick={computeSent}
+          >
+            {i18n.t("exchangeRates.computeSent")}
+          </button>
         )}
 
         {!sameCurrency && (
@@ -232,13 +375,27 @@ const TransferForm = ({ onClose, accounts, currentAccount, currentCurrency, init
             onChange={(e) => changeRate(e.target.value)}
           />
         )}
+        {!sameCurrency && savedRate && (
+          <p className={sheet.available}>
+            {i18n.t("exchangeRates.lastUsed")}: 1 {savedRate.from} ={" "}
+            {formatRate(savedRate.rate)} {savedRate.to}
+            {" · "}
+            {String(savedRate.updatedAt ?? "").slice(0, 10)}
+          </p>
+        )}
 
         <details className={styles.fees} open={hasAnyFee(fees)}>
           <summary>{i18n.t("transferFees.title")}</summary>
           <div>
-            <TransferFeesFields fees={fees} onChange={setFees} accounts={accountsList}
-              sourceAccount={source} sourceCurrency={sourceCurrency}
-              destinationAccount={destination} destinationCurrency={destinationCurrency} />
+            <TransferFeesFields
+              fees={fees}
+              onChange={setFees}
+              accounts={accountsList}
+              sourceAccount={source}
+              sourceCurrency={sourceCurrency}
+              destinationAccount={destination}
+              destinationCurrency={destinationCurrency}
+            />
           </div>
         </details>
 
@@ -269,11 +426,20 @@ const TransferForm = ({ onClose, accounts, currentAccount, currentCurrency, init
         )}
 
         <div className={sheet.actions}>
-          <Button variant="cancel" text={i18n.t("buttons.cancel")} onClick={onClose} type="button" />
+          <Button
+            variant="cancel"
+            text={i18n.t("buttons.cancel")}
+            onClick={onClose}
+            type="button"
+          />
           <Button
             variant="primary"
             type="submit"
-            text={mutation.isPending ? i18n.t("buttons.processing") : i18n.t("buttons.createTransfer")}
+            text={
+              mutation.isPending
+                ? i18n.t("buttons.processing")
+                : i18n.t("buttons.createTransfer")
+            }
             disabled={mutation.isPending}
           />
         </div>
@@ -283,10 +449,22 @@ const TransferForm = ({ onClose, accounts, currentAccount, currentCurrency, init
 };
 
 // isOpen / isClose: same props as before, so the callers do not change
-const CreateTransfer = ({ isOpen, isClose, accounts, currentAccount, currentCurrency, initialData }) =>
+const CreateTransfer = ({
+  isOpen,
+  isClose,
+  accounts,
+  currentAccount,
+  currentCurrency,
+  initialData,
+}) =>
   isOpen ? (
-    <TransferForm onClose={isClose} accounts={accounts} currentAccount={currentAccount}
-      currentCurrency={currentCurrency} initialData={initialData} />
+    <TransferForm
+      onClose={isClose}
+      accounts={accounts}
+      currentAccount={currentAccount}
+      currentCurrency={currentCurrency}
+      initialData={initialData}
+    />
   ) : null;
 
 export default CreateTransfer;

@@ -57,6 +57,7 @@
     "reports": "reporter",
     "calendar": "Kalender",
     "settings": "Inställningar"
+    ,"exchangerates":"Växelkurser"
   },
   "sidebar": {
     "logout": "Logga ut",
@@ -841,5 +842,20 @@
     "hide": "Dölj annullerade",
     "error": "Det gick inte att annullera. Försök igen.",
     "restoreError": "Det gick inte att återställa. Försök igen."
+  },
+    "exchangeRates": {
+    "title": "Växelkurser",
+    "hint": "Den senaste kursen du använde för varje valutapar. En överföring mellan två valutor uppdaterar den automatiskt; du kan också lägga till en kurs själv.",
+    "from": "Från", "to": "Till", "rate": "Kurs", "inverse": "Omvänd", "pair": "Par",
+    "updatedAt": "Uppdaterad", "source": "Källa", "fromTransfer": "Överföring", "manual": "Manuell",
+    "add": "Spara kurs", "empty": "Inga sparade kurser än.", "loading": "Laddar...",
+    "loadError": "Det gick inte att ladda växelkurserna.",
+    "saveError": "Det gick inte att spara kursen. Försök igen.",
+    "deleteError": "Det gick inte att ta bort kursen. Försök igen.",
+    "codeError": "En valuta är en kod på tre bokstäver, t.ex. USD.",
+    "sameError": "Välj två olika valutor.",
+    "rateError": "Kursen måste vara större än noll.",
+    "computeSent": "Räkna ut skickat belopp från kursen",
+    "lastUsed": "Senast sparade kurs"
   }
 }

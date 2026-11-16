@@ -77,3 +77,21 @@
     padding: 0 0.75rem 0.25rem;
   }
 }
+
+
+/* under the received amount: work the sent amount out from it */
+.computeSent {
+  align-self: flex-start;
+  margin-top: -0.4rem;
+  padding: 0.35rem 0.8rem;
+  border: 1px solid variable.$color-border-strong;
+  border-radius: variable.$radius-pill;
+  background: transparent;
+  color: inherit;
+  font-size: variable.$font-sm;
+  cursor: pointer;
+
+  &:hover {
+    background: variable.$color-border;
+  }
+}
