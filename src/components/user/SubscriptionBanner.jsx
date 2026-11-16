@@ -15,7 +15,7 @@ const SubscriptionBanner = () => {
   const { data: info } = useQuery({
     queryKey: ["subscription"],
     queryFn: getMySubscription,
-    staleTime: 5 * 60 * 1000,
+    stateTime: 5 * 60 * 1000,
   });
 
   // a change refused with 402 means the state changed: read it again

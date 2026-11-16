@@ -30,7 +30,6 @@ import {
   formatRate,
   sentFromReceived,
 } from "../../utils/transactions/exchangeRate.js";
-import { fi, tr } from "date-fns/locale";
 
 const emptyTransfer = (sourceId = "", sourceCurrency = "") => ({
   sourceAccount: { id: sourceId },
@@ -140,7 +139,7 @@ const TransferForm = ({
         return {
           ...prev,
           exChangeRate: rate,
-          amountSent: sentFromReceived(prev.amountSent, rate),
+          amountSent: sentFromReceived(prev.amountReceived, rate),
         };
       }
       return { ...prev, exChangeRate: rate };
@@ -149,7 +148,7 @@ const TransferForm = ({
 
   const chooseAccount = (side, name) => {
     const account = accountsList.find((a) => a.name === name);
-    if (side === sourceAccount) {
+    if (side === "sourceAccount") {
       const currency = firstCurrency(account);
       set({
         sourceAccount: { id: account?.id ?? "" },

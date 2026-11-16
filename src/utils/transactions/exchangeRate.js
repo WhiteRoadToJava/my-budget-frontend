@@ -1,4 +1,4 @@
-export const formatRate = (rate) => String(Number(Number(rate).toString(6)));
+export const formatRate = (rate) => String(Number(Number(rate).toFixed(6)));
 
 export const roundMoney = (value) => Math.round(Number(value) * 100) / 100;
 

@@ -57,7 +57,7 @@
     "reports": "التقارير",
     "calendar": "التقويم",
     "settings": "الإعدادات",
-    "exchangeRates":"سعر الصرف"
+    "exchangeRates":"أسعار الصرف"
   },
   "sidebar": {
     "logout": "تسجيل الخروج",
@@ -305,7 +305,7 @@
     "sourceAccount": "الحساب المصدر",
     "destinationAccount": "الحساب المستهدف",
     "amountSent": "المبلغ المرسل",
-    "exchangeRate": "سعر الصرف",
+    "exchangeRate": "أسعار الصرف",
     "amountReceived": "المبلغ المستلم",
     "description": "الوصف",
     "date": "التاريخ"
@@ -525,7 +525,7 @@
     "transferFeeOut": "عمولة تحويل (علينا)",
     "amountSent": "المبلغ المرسَل",
     "amountReceived": "المبلغ المستلَم",
-    "exchangeRate": "سعر الصرف",
+    "exchangeRate": "أسعار الصرف",
     "sendFee": "عمولة الإرسال",
     "receiveFee": "عمولة الاستلام"
   },
@@ -534,7 +534,7 @@
     "sourceAccount": "الحساب المصدر",
     "destinationAccount": "الحساب المستهدف",
     "amountSent": "المبلغ المرسل",
-    "exchangeRate": "سعر الصرف",
+    "exchangeRate": "أسعار الصرف",
     "amountReceived": "المبلغ المستلم",
     "description": "الوصف",
     "date": "التاريخ",
@@ -844,7 +844,7 @@
     "samePocket": "اختر حسابين مختلفين، أو عملتين مختلفتين في نفس الحساب.",
     "exchangeTitle": "صرف عملة",
     "available": "المتاح",
-    "rateRequired": "أدخل سعر الصرف."
+    "rateRequired": "أدخل أسعار الصرف."
   },
   "dropDown": {
     "search": "بحث...",
@@ -889,7 +889,7 @@
     "codeError": "العملة رمز من ثلاثة أحرف، مثل USD.",
     "sameError": "اختر عملتين مختلفتين.",
     "rateError": "السعر يجب أن يكون أكبر من صفر.",
-    "computeSent": "احسب المبلغ المرسل من سعر الصرف",
+    "computeSent": "احسب المبلغ المرسل من أسعار الصرف",
     "lastUsed": "آخر سعر محفوظ"
   }
 }

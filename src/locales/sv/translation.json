@@ -57,7 +57,7 @@
     "reports": "reporter",
     "calendar": "Kalender",
     "settings": "Inställningar"
-    ,"exchangerates":"Växelkurser"
+    ,"exchangeRates":"Växelkurser"
   },
   "sidebar": {
     "logout": "Logga ut",
