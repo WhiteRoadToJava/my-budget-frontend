@@ -5,14 +5,48 @@ import SettingsIcon from "../../components/sidebar/icons/SettingsIcon";
 import Database from "../../components/icons/file_code/Database";
 import i18n from "../../configuration/i18n.js";
 
-export const getUserMenuItems = () => [   // ← now a function
-  { label: i18n.t("menu.overview"),     icon: <Home />,         link: "/user/" },
-  { label: i18n.t("menu.accounts"),     icon: <FileCode />,     link: "/user/accounts" },
-  { label: i18n.t("menu.transactions"), icon: <FileCode />,     link: "/user/transactions" },
-  { label: i18n.t("menu.debts"),        icon: <Database />,     link: "/user/debts" },
-  { label: i18n.t("menu.schedule"),     icon: <Calendar />,     link: "/user/schedule" },
-  { label: i18n.t("subscription.title"),  icon: <SettingsIcon />, link: "/user/subscription" },
-  { label: i18n.t("menu.calendar"),     icon: <Calendar />,     link: "/user/calendar" },
-  { label: i18n.t("menu.reports"),      icon: <FileCode />,     link: "/user/accounts/search" },
-  { label: i18n.t("menu.settings"),     icon: <SettingsIcon />, link: "/user/settings" },
+export const getUserMenuItems = () => [
+  // ← now a function
+  { label: i18n.t("menu.overview"), icon: <Home />, link: "/user/" },
+  {
+    label: i18n.t("menu.accounts"),
+    icon: <FileCode />,
+    link: "/user/accounts",
+  },
+  {
+    label: i18n.t("menu.transactions"),
+    icon: <FileCode />,
+    link: "/user/transactions",
+  },
+  { label: i18n.t("menu.debts"), icon: <Database />, link: "/user/debts" },
+  {
+    label: i18n.t("menu.exchangeRates"),
+    icon: <Database />,
+    link: "/user/exchange-rates",
+  },
+  {
+    label: i18n.t("menu.schedule"),
+    icon: <Calendar />,
+    link: "/user/schedule",
+  },
+  {
+    label: i18n.t("subscription.title"),
+    icon: <SettingsIcon />,
+    link: "/user/subscription",
+  },
+  {
+    label: i18n.t("menu.calendar"),
+    icon: <Calendar />,
+    link: "/user/calendar",
+  },
+  {
+    label: i18n.t("menu.reports"),
+    icon: <FileCode />,
+    link: "/user/accounts/search",
+  },
+  {
+    label: i18n.t("menu.settings"),
+    icon: <SettingsIcon />,
+    link: "/user/settings",
+  },
 ];

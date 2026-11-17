@@ -15,7 +15,7 @@ const greetingKey = (hour = new Date().getHours()) =>
 
 // shown only when it matters: trial, last week, grace days, read only
 const SubscriptionChip = () => {
-  const { data: info } = useQuery({ queryKey: ["subscription"], queryFn: getMySubscription, staleTime: 5 * 60 * 1000 });
+  const { data: info } = useQuery({ queryKey: ["subscription"], queryFn: getMySubscription, stateTime: 5 * 60 * 1000 });
   if (!info) return null;
   const { status, daysLeft } = info;
   const soon = daysLeft != null && daysLeft <= 7;

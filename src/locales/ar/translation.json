@@ -56,7 +56,8 @@
     "schedule": "جدولة التحويلات",
     "reports": "التقارير",
     "calendar": "التقويم",
-    "settings": "الإعدادات"
+    "settings": "الإعدادات",
+    "exchangeRates": "أسعار الصرف"
   },
   "sidebar": {
     "logout": "تسجيل الخروج",
@@ -304,7 +305,7 @@
     "sourceAccount": "الحساب المصدر",
     "destinationAccount": "الحساب المستهدف",
     "amountSent": "المبلغ المرسل",
-    "exchangeRate": "سعر الصرف",
+    "exchangeRate": "أسعار الصرف",
     "amountReceived": "المبلغ المستلم",
     "description": "الوصف",
     "date": "التاريخ"
@@ -524,7 +525,7 @@
     "transferFeeOut": "عمولة تحويل (علينا)",
     "amountSent": "المبلغ المرسَل",
     "amountReceived": "المبلغ المستلَم",
-    "exchangeRate": "سعر الصرف",
+    "exchangeRate": "أسعار الصرف",
     "sendFee": "عمولة الإرسال",
     "receiveFee": "عمولة الاستلام"
   },
@@ -533,7 +534,7 @@
     "sourceAccount": "الحساب المصدر",
     "destinationAccount": "الحساب المستهدف",
     "amountSent": "المبلغ المرسل",
-    "exchangeRate": "سعر الصرف",
+    "exchangeRate": "أسعار الصرف",
     "amountReceived": "المبلغ المستلم",
     "description": "الوصف",
     "date": "التاريخ",
@@ -638,7 +639,7 @@
     "pdfShare": "مشاركة PDF",
     "pdfPreparing": "جارٍ التحضير...",
     "pdfError": "تعذّر إنشاء ملف PDF. حاول مرة أخرى.",
-       "pdfAllCurrencies": "كل العملات" 
+    "pdfAllCurrencies": "كل العملات"
   },
   "overview": {
     "balances": "الأرصدة",
@@ -843,7 +844,7 @@
     "samePocket": "اختر حسابين مختلفين، أو عملتين مختلفتين في نفس الحساب.",
     "exchangeTitle": "صرف عملة",
     "available": "المتاح",
-    "rateRequired": "أدخل سعر الصرف."
+    "rateRequired": "أدخل أسعار الصرف."
   },
   "dropDown": {
     "search": "بحث...",
@@ -866,5 +867,40 @@
     "hide": "إخفاء الملغاة",
     "error": "تعذّر الإلغاء. حاول مرة أخرى.",
     "restoreError": "تعذّر الاسترجاع. حاول مرة أخرى."
+  },
+  "exchangeRates": {
+    "title": "أسعار الصرف",
+    "hint": "آخر سعر استخدمته لكل زوج عملات. التحويل بين عملتين يحدّث السعر تلقائياً، ويمكنك إضافة سعر بنفسك.",
+    "from": "من",
+    "to": "إلى",
+    "rate": "السعر",
+    "inverse": "العكسي",
+    "pair": "الزوج",
+    "updatedAt": "آخر تحديث",
+    "source": "المصدر",
+    "fromTransfer": "تحويل",
+    "manual": "يدوي",
+    "add": "حفظ السعر",
+    "empty": "لا توجد أسعار محفوظة بعد.",
+    "loading": "جار التحميل...",
+    "loadError": "تعذّر تحميل أسعار الصرف.",
+    "saveError": "تعذّر حفظ السعر. حاول مرة أخرى.",
+    "deleteError": "تعذّر حذف السعر. حاول مرة أخرى.",
+    "codeError": "العملة رمز من ثلاثة أحرف، مثل USD.",
+    "sameError": "اختر عملتين مختلفتين.",
+    "rateError": "السعر يجب أن يكون أكبر من صفر.",
+    "computeSent": "احسب المبلغ المرسل من أسعار الصرف",
+    "lastUsed": "آخر سعر محفوظ"
+  },
+  "deleteAccount": {
+    "title": "حذف الحساب نهائياً؟",
+    "warning": "سيُحذف الحساب مع كل دخله ومصاريفه وجداوله، ولا يمكن استرجاعها.",
+    "archiveHint": "تريد إخفاءه فقط؟",
+    "archiveInstead": "أرشفه بدلاً من الحذف",
+    "word": "حذف",
+    "typeLabel": "للتأكيد اكتب «{{word}}» أو اسم الحساب:",
+    "noPaste": "اكتب النص بنفسك، اللصق غير مسموح.",
+    "confirm": "حذف نهائي",
+    "notConfirmed": "لم يُحذف الحساب: نص التأكيد غير صحيح."
   }
 }
