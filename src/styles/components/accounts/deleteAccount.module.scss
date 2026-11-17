@@ -1,0 +1,37 @@
+@use "../../variables" as variable;
+
+.input{
+    width: 100%;
+    padding: 0.55rem;
+    color: variable.$color-text;
+    background: variable.$surface-1;
+    border: 1px solid variable.$color-border;
+    border-radius: variable.$color-border;
+    font: inherit;
+}
+
+&:focus{
+    outline: none;
+    border-color: variable.$color-error;
+}
+
+.name{
+    font-weight: bold;
+    color: variable.$color-text;
+
+    .alternative{
+        margin: 0;
+        font-size: variable.$font-sm;
+        color: variable.$color-text-gray;
+    }
+    button{
+        padding: 0;
+        border: none;
+        background: none;
+        color: inherit;
+        text-decoration: underline;
+        cursor: pointer;
+        font: inherit;
+    }
+    
+}

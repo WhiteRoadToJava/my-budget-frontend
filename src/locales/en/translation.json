@@ -873,5 +873,15 @@
     "rateError": "The rate must be greater than zero.",
     "computeSent": "Calculate the amount sent from the rate",
     "lastUsed": "Last saved rate"
+  },
+    "deleteAccount": {
+    "title": "Delete the account for good?",
+    "warning": "The account is deleted with all its income, expenses and schedules. This can not be undone.",
+    "archiveHint": "Only want to hide it?",
+    "archiveInstead": "Archive it instead",
+    "word": "delete",
+    "typeLabel": "To confirm, type “{{word}}” or the account name:",
+    "noPaste": "Type it yourself; pasting is not allowed.",
+    "confirm": "Delete for good"
   }
 }

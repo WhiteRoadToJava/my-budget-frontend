@@ -9,10 +9,13 @@ export const addAccount = async (accountData) => {
     throw error;
   }
 };
-export const deleteAccount = async (accountId) => {
+export const deleteAccount = async (accountId, confirm) => {
   try {
     const response = await api.delete(
       `/user/accounts/delete-account/${accountId}`,
+      {
+        data: { confirm },
+      },
     );
     return response.data;
   } catch (error) {
@@ -55,10 +58,9 @@ export const getAccountById = async (accountId) => {
 
 export const getAllAccountTransactions = async (account) => {
   try {
-    const response = await api.post(
-      "/user/accounts/allaccount-transactions",
-      {id: account.id},
-    );
+    const response = await api.post("/user/accounts/allaccount-transactions", {
+      id: account.id,
+    });
     return response.data;
   } catch (error) {
     console.error("Error fetching transactions:", error);
@@ -68,7 +70,9 @@ export const getAllAccountTransactions = async (account) => {
 
 export const getAllIncomseAndExpensesTransactions = async () => {
   try {
-    const response = await api.get("/user/accounts/all-incomse-and-expense-transactions");
+    const response = await api.get(
+      "/user/accounts/all-incomse-and-expense-transactions",
+    );
     return response.data;
   } catch (error) {
     console.error("Error fetching transactions:", error);
@@ -88,22 +92,21 @@ export const getAllTransations = async () => {
 
 export const updateAccountStatus = async (accountId, status) => {
   try {
-    const response = await api.patch(`/user/accounts/${accountId}/update-status`,
-      {status: [status]}
+    const response = await api.patch(
+      `/user/accounts/${accountId}/update-status`,
+      { status: [status] },
     );
     return response.data;
-    } catch (error) {
+  } catch (error) {
     console.error(`Error updating account status with ID ${accountId}:`, error);
     throw error;
   }
 };
 
-
 export const getUserAllTransactions = async () => {
   try {
     const response = await api.get("/user/accounts/user-all-transactions");
     return response.data;
-
   } catch (error) {
     console.error("Error fetching user transactions:", error);
     throw error;
@@ -112,32 +115,52 @@ export const getUserAllTransactions = async () => {
 
 // ---------- currencies of an account ----------
 
-export const addAccountCurrency = async (accountId, currency, openingBalance) => {
-  const response = await api.post(`/user/accounts/${accountId}/currencies`, { currency, openingBalance });
+export const addAccountCurrency = async (
+  accountId,
+  currency,
+  openingBalance,
+) => {
+  const response = await api.post(`/user/accounts/${accountId}/currencies`, {
+    currency,
+    openingBalance,
+  });
   return response.data;
 };
 
-export const setCurrencyOpeningBalance = async (accountId, currency, openingBalance) => {
-  const response = await api.patch(`/user/accounts/${accountId}/currencies/${currency}`, { openingBalance });
+export const setCurrencyOpeningBalance = async (
+  accountId,
+  currency,
+  openingBalance,
+) => {
+  const response = await api.patch(
+    `/user/accounts/${accountId}/currencies/${currency}`,
+    { openingBalance },
+  );
   return response.data;
 };
 
 // refused (409) while the currency has transactions, and for the last currency
 export const removeAccountCurrency = async (accountId, currency) => {
-  const response = await api.delete(`/user/accounts/${accountId}/currencies/${currency}`);
+  const response = await api.delete(
+    `/user/accounts/${accountId}/currencies/${currency}`,
+  );
   return response.data;
 };
 
-
-
 // The account statement as a PDF, made by the backend: a Blob ready to save or share.
 // period: { from: "2026-11-01", to: "2026-11-05" }; lang: ar / en / sv
-export const downloadStatementPdf = async (accountId, { currency, from, to, lang }) => {
+export const downloadStatementPdf = async (
+  accountId,
+  { currency, from, to, lang },
+) => {
   try {
-    const response = await api.get(`/user/accounts/${accountId}/statement.pdf`, {
-      params: { currency, from, to, lang },
-      responseType: "blob",
-    });
+    const response = await api.get(
+      `/user/accounts/${accountId}/statement.pdf`,
+      {
+        params: { currency, from, to, lang },
+        responseType: "blob",
+      },
+    );
     return response.data;
   } catch (error) {
     // with responseType "blob" the error message is a Blob too: read it as text
