@@ -152,7 +152,7 @@ const Row = ({ account }) => {
         <DeleteAccountModal
           account={account}
           onClose={() => setOpenDeleteConfirmation(false)}
-          onDelete={() => deleteMutation.mutate()}
+          onDelete={(confirm) => deleteMutation.mutate(confirm)}
           isPending={deleteMutation.isPending}
           // an active account can be archived instead: it keeps all its history
           onArchive={

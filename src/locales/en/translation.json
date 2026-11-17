@@ -882,6 +882,7 @@
     "word": "delete",
     "typeLabel": "To confirm, type “{{word}}” or the account name:",
     "noPaste": "Type it yourself; pasting is not allowed.",
-    "confirm": "Delete for good"
+    "confirm": "Delete for good",
+    "notConfirmed": "The account was not deleted: the confirmation text is wrong."
   }
 }

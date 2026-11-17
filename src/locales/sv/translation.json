@@ -866,6 +866,7 @@
     "word": "radera",
     "typeLabel": "Bekräfta genom att skriva ”{{word}}” eller kontots namn:",
     "noPaste": "Skriv själv; det går inte att klistra in.",
-    "confirm": "Radera för gott"
+    "confirm": "Radera för gott",
+    "notConfirmed": "Kontot raderades inte: bekräftelsetexten är fel."
   }
 }
