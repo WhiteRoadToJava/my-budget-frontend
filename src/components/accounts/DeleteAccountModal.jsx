@@ -16,10 +16,9 @@ const DeleteAccountModal = ({ account, onClose, onDelete, onArchive, isPending }
   const localWord = i18n.t("deleteAccount.word");
   const matches = confirmsDelete(typed, account.name, localWord);
 
-  const submit = (e) => {
-    if(matches && !isPending) onDelete(typed.trim());
+      const submit = (e) => {
     e.preventDefault();
-    if (matches && !isPending) onDelete();
+    if (matches && !isPending) onDelete(typed.trim());
   };
 
   return (

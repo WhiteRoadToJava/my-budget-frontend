@@ -37,7 +37,7 @@ const Row = ({ account }) => {
   const open = () => navigate(`/user/accounts/${account.id}`);
 
   const deleteMutation = useMutation({
-    mutationFn: () => deleteAccount(account.id, confirm),
+    mutationFn: (confirm) => deleteAccount(account.id, confirm),
     onSuccess: () => {
       setOpenDeleteConfirmation(false);
       queryClient.invalidateQueries({ queryKey: ["accounts"] });
