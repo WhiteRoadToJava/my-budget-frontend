@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Login from "./pages/auth/LoginTemp.jsx";
 import Register from "./pages/auth/Register.jsx";
 import ForgotPassword from "./pages/auth/ForgotPassword.jsx";
-import Dashboard from "./pages/admin/Dashboard.jsx"
+import Dashboard from "./pages/admin/Dashboard.jsx";
 import { AuthProvider } from "./contexts/AuthContext.jsx";
 import { UserProvider } from "./contexts/UserContext.jsx";
 import UserDashboard from "./pages/user/UserDashboard.jsx";
@@ -28,10 +28,7 @@ import ResetPassword from "./pages/auth/ResetPassword.jsx";
 import ReportPage from "./pages/user/ReportPage.jsx";
 import DebtsPage from "./pages/user/debts/DebtsPage.jsx";
 import DebtDetailsPage from "./pages/user/debts/DebtDetailsPage.jsx";
-
-
-
-
+import ExchangeRatesPage from "./pages/user/exchangeRates/ExchangeRatesPage.jsx";
 
 function App() {
   // re-renders the whole app when the language changes; most components call
@@ -40,7 +37,6 @@ function App() {
 
   return (
     <div className="App">
-
       <BrowserRouter>
         <AuthProvider>
           <UserProvider>
@@ -62,8 +58,14 @@ function App() {
                 <Route element={<AdminLayout />}>
                   <Route path="/admin" element={<AdminUsersPage />} />
                   <Route path="/admin/users" element={<AdminUsersPage />} />
-                  <Route path="/admin/users/:userId" element={<AdminUserPage />} />
-                  <Route path="/admin/requests" element={<AdminRequestsPage />} />
+                  <Route
+                    path="/admin/users/:userId"
+                    element={<AdminUserPage />}
+                  />
+                  <Route
+                    path="/admin/requests"
+                    element={<AdminRequestsPage />}
+                  />
                   <Route path="/admin/admins" element={<AdminAdminsPage />} />
                   <Route path="/admin/*" element={<Dashboard />} />
                   <Route path="/admin/dashboard" element={<Dashboard />} />
@@ -72,35 +74,35 @@ function App() {
               <Route element={<ProtectedRoute requiredRoles={["USER"]} />}>
                 <Route element={<UserLayout />}>
                   <Route path="/user" element={<UserDashboard />} />
-                  <Route path="/user/subscription" element={<SubscriptionPage />} />
+                  <Route
+                    path="/user/subscription"
+                    element={<SubscriptionPage />}
+                  />
                   <Route path="/user/accounts" element={<Account />} />
-
                   <Route
-                    path="/user/calendar"
-                    element={<CalendarPage />}
+                    path="/user/exchange-rates"
+                    element={<ExchangeRatesPage />}
                   />
-                  <Route
-                    path="/user/settings"
-                    element={<SettingPage />}
-                  />
+                  <Route path="/user/calendar" element={<CalendarPage />} />
+                  <Route path="/user/settings" element={<SettingPage />} />
                   <Route
                     path="/user/accounts/:accountId"
                     element={<AccountsPage />}
                   />
-                  <Route 
-                  path="/user/transactions"
-                  element={<AllTransactions />}
+                  <Route
+                    path="/user/transactions"
+                    element={<AllTransactions />}
                   />
-                  <Route 
-                  path="/user/schedule"
-                  element={<SchedulePage />}
-                  />
-                  <Route 
-                  path="/user/accounts/search"
-                  element={<ReportPage /> }
+                  <Route path="/user/schedule" element={<SchedulePage />} />
+                  <Route
+                    path="/user/accounts/search"
+                    element={<ReportPage />}
                   />
                   <Route path="/user/debts" element={<DebtsPage />} />
-                  <Route path="/user/debts/:debtId" element={<DebtDetailsPage />} />
+                  <Route
+                    path="/user/debts/:debtId"
+                    element={<DebtDetailsPage />}
+                  />
                 </Route>
               </Route>
             </Routes>

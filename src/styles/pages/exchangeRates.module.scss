@@ -1,0 +1,67 @@
+@use "../variables" as variable;
+
+.form {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) auto;
+  align-items: end;
+  gap: 0.75rem;
+  padding: 1rem 1.25rem;
+  background: variable.$surface-2;
+  border: 1px solid variable.$color-border;
+  border-radius: variable.$radius-md;
+
+  @media (max-width: 640px) {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  label {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    font-size: variable.$font-sm;
+    color: variable.$color-text-gray;
+  }
+
+  input {
+    padding: 0.55rem 0.7rem;
+    border: 1px solid variable.$color-border;
+    border-radius: variable.$radius-xs;
+    background: transparent;
+    color: inherit;
+  }
+}
+
+.error {
+  color: variable.$color-error;
+  margin: 0;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+
+  th,
+  td {
+    padding: 0.6rem 0.5rem;
+    border-bottom: 1px solid variable.$color-border;
+    text-align: start;
+  }
+
+  th {
+    font-size: variable.$font-sm;
+    color: variable.$color-text-gray;
+    font-weight: normal;
+  }
+}
+
+.muted {
+  color: variable.$color-text-gray;
+  font-size: variable.$font-sm;
+}
+
+.delete {
+  border: none;
+  background: transparent;
+  color: variable.$color-error;
+  cursor: pointer;
+}
