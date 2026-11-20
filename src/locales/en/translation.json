@@ -884,5 +884,9 @@
     "noPaste": "Type it yourself; pasting is not allowed.",
     "confirm": "Delete for good",
     "notConfirmed": "The account was not deleted: the confirmation text is wrong."
+  },
+    "transactionDate": {
+    "label": "Date",
+    "future": "The date can't be in the future. For a coming transaction, use a schedule."
   }
 }

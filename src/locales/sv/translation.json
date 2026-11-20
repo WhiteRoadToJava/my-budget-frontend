@@ -56,8 +56,8 @@
     "schedule": "Planering",
     "reports": "reporter",
     "calendar": "Kalender",
-    "settings": "Inställningar"
-    ,"exchangeRates":"Växelkurser"
+    "settings": "Inställningar",
+    "exchangeRates": "Växelkurser"
   },
   "sidebar": {
     "logout": "Logga ut",
@@ -631,7 +631,7 @@
     "pdfShare": "Dela PDF",
     "pdfPreparing": "Förbereder...",
     "pdfError": "Det gick inte att skapa PDF:en. Försök igen.",
-    "pdfAllCurrencies": "Alla valutor"  
+    "pdfAllCurrencies": "Alla valutor"
   },
   "overview": {
     "balances": "Saldon",
@@ -843,12 +843,21 @@
     "error": "Det gick inte att annullera. Försök igen.",
     "restoreError": "Det gick inte att återställa. Försök igen."
   },
-    "exchangeRates": {
+  "exchangeRates": {
     "title": "Växelkurser",
     "hint": "Den senaste kursen du använde för varje valutapar. En överföring mellan två valutor uppdaterar den automatiskt; du kan också lägga till en kurs själv.",
-    "from": "Från", "to": "Till", "rate": "Kurs", "inverse": "Omvänd", "pair": "Par",
-    "updatedAt": "Uppdaterad", "source": "Källa", "fromTransfer": "Överföring", "manual": "Manuell",
-    "add": "Spara kurs", "empty": "Inga sparade kurser än.", "loading": "Laddar...",
+    "from": "Från",
+    "to": "Till",
+    "rate": "Kurs",
+    "inverse": "Omvänd",
+    "pair": "Par",
+    "updatedAt": "Uppdaterad",
+    "source": "Källa",
+    "fromTransfer": "Överföring",
+    "manual": "Manuell",
+    "add": "Spara kurs",
+    "empty": "Inga sparade kurser än.",
+    "loading": "Laddar...",
     "loadError": "Det gick inte att ladda växelkurserna.",
     "saveError": "Det gick inte att spara kursen. Försök igen.",
     "deleteError": "Det gick inte att ta bort kursen. Försök igen.",
@@ -858,7 +867,7 @@
     "computeSent": "Räkna ut skickat belopp från kursen",
     "lastUsed": "Senast sparade kurs"
   },
- "deleteAccount": {
+  "deleteAccount": {
     "title": "Radera kontot för gott?",
     "warning": "Kontot raderas med alla inkomster, utgifter och scheman. Det går inte att ångra.",
     "archiveHint": "Vill du bara dölja det?",
@@ -868,5 +877,9 @@
     "noPaste": "Skriv själv; det går inte att klistra in.",
     "confirm": "Radera för gott",
     "notConfirmed": "Kontot raderades inte: bekräftelsetexten är fel."
+  },
+  "transactionDate": {
+    "label": "Datum",
+    "future": "Datumet kan inte vara i framtiden. Använd ett schema för kommande transaktioner."
   }
 }
