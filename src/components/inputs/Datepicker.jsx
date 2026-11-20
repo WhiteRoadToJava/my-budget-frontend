@@ -39,9 +39,9 @@ export default function Datepicker({ onChange, value, max }) {
     return () => document.removeEventListener("mousedown", handleOutsideClick);
   }, []);
 
-   const isDisabled = (date) => Boolean(max) && format(date, 'yyyy-MM-dd');
+  const isDisabled = (date) => Boolean(max) && format(date, "yyyy-MM-dd") > max;
   const handleDateClick = (date) => {
-    if(isDisabled(date)) return;
+    if (isDisabled(date)) return;
     onChange(format(date, "yyyy-MM-dd"));
     setShowCalendar(false);
   };

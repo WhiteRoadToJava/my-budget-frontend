@@ -11,6 +11,8 @@ import i18n from "../../configuration/i18n";
 import { ImagePicker } from "../ImagePicker";
 import { expenseCategoryList } from "../../assiets/categories/assits";
 import ExpenseCategoryList from "../categories/ExpenseCategoryList";
+import { createdAtFor, isFutureDay, todayString } from "../../utils/transactions/transactionDate.js";
+import TransactionDateField from "../inputs/TransactionDateField.jsx";
 
 // currency: the currency of the account the money is in (empty = the account's first one)
 const CreateExpense = ({ isOpen, isClose, account, initialData, currency }) => {
@@ -18,10 +20,11 @@ const CreateExpense = ({ isOpen, isClose, account, initialData, currency }) => {
 
   const [expenseData, setExpenseData] = useState({
     category: initialData?.category ?? "",
-    amount: initialData?.amount ?? "",    description: initialData?.description ?? "",
+    amount: initialData?.amount ?? "", description: initialData?.description ?? "",
     image: null,
   });
   const [imageUrls, setImageUrls] = useState(null);
+  const [date, setDate] = useState(todayString);
 
   const [error, setError] = useState({ hasError: false, message: "" });
 
@@ -32,6 +35,7 @@ const CreateExpense = ({ isOpen, isClose, account, initialData, currency }) => {
       queryClient.invalidateQueries({ queryKey: ["accounts"] });
 
       isClose();
+      setDate(todayString());
       setExpenseData({
         category: "",
         amount: "",
@@ -63,6 +67,7 @@ const CreateExpense = ({ isOpen, isClose, account, initialData, currency }) => {
       account: { id: account?.id || "" },
       currency: chosenCurrency,
       image: imageUrls || null,
+      createdAt: createdAtFor(date),
     };
     // 3. تنفيذ الـ Mutation
     setExpenseData(finalExpenseData);
@@ -82,12 +87,12 @@ const CreateExpense = ({ isOpen, isClose, account, initialData, currency }) => {
   };
 
 
-    const handleCategoryChange = (id) => {
-      const category = expenseCategoryList.find((item) => item.id === id);
-      if (category) {
-        setExpenseData({ ...expenseData, category: category.id });
-      }
+  const handleCategoryChange = (id) => {
+    const category = expenseCategoryList.find((item) => item.id === id);
+    if (category) {
+      setExpenseData({ ...expenseData, category: category.id });
     }
+  }
 
   return (
     <div className={styles.createExpenseContainer}>
@@ -97,18 +102,20 @@ const CreateExpense = ({ isOpen, isClose, account, initialData, currency }) => {
           <form onSubmit={handleCreateExpense}>
             <div className={styles.inputContainer}>
               <AmountWithCurrency
-              label={i18n.t("createExpense.amount")}
-              placeholder={i18n.t("placeholder.amount")}
-              value={expenseData.amount}
-              onChange={handleInputChange}
-              account={account}
-              currency={chosenCurrency}
-              onCurrencyChange={(code) => setExpenseData((prev) => ({ ...prev, currency: code }))}
-            />
+                label={i18n.t("createExpense.amount")}
+                placeholder={i18n.t("placeholder.amount")}
+                value={expenseData.amount}
+                onChange={handleInputChange}
+                account={account}
+                currency={chosenCurrency}
+                onCurrencyChange={(code) => setExpenseData((prev) => ({ ...prev, currency: code }))}
+              />
             </div>
             <div>
               <ExpenseCategoryList expenseItem={handleCategoryChange} value={expenseData.category} />
             </div>
+            <TransactionDateField className={styles.inputContainer} value={date} onChange={setDate} />
+
             <div className={styles.inputContainer}>
               <FormInput
                 label={i18n.t("createExpense.description")}

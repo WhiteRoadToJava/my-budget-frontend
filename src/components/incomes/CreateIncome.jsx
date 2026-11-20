@@ -34,7 +34,7 @@ const CreateIncomse = ({ isOpen, isClose, account, initialData, currency }) => {
       queryClient.invalidateQueries({ queryKey: ["accounts"] });
 
       isClose();
-      setDate(todayString())
+      setDate(todayString());
       setIncomseData({ category: "", amount: "", description: "" });
     },
     onError: () => {
@@ -81,6 +81,7 @@ const CreateIncomse = ({ isOpen, isClose, account, initialData, currency }) => {
     }
     if(isFutureDay(date)){
       setError({ hasError: true, message: i18n.t("transactionDate.future") });
+      return false;
     }
     return true;
   };

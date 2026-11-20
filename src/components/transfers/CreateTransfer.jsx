@@ -269,7 +269,7 @@ const TransferForm = ({
       amountReceived: Number(transferData.amountReceived),
       category: "transfer",
       image,
-      createdAt: createTransfer(date),
+      createdAt: createdAtFor(date),
       ...feesToRequest(fees, { sourceCurrency, destinationCurrency }),
     });
   };
