@@ -9,6 +9,7 @@ import {
 } from "../../utils/accounts/accountStatement";
 import sheet from "../../styles/components/forms/formSheet.module.scss";
 import styles from "../../styles/components/accounts/shareStatement.module.scss";
+import { useCategories } from "../../hooks/useCategories";
 import i18n from "../../configuration/i18n";
 import {
   pdfPeriod,
@@ -27,6 +28,7 @@ const ShareStatementForm = ({ onClose, account, transactions, currency }) => {
   const [pdfBusy, setPdfBusy] = useState(false);
   const [pdfError, setPdfError] = useState(null);
   const [allCurrencies, setAllCurrencies] = useState(false);
+  const { categories } = useCategories();
 
   const period = preset === "custom" ? range : periodPreset(preset);
   const customInvalid =
@@ -41,10 +43,11 @@ const ShareStatementForm = ({ onClose, account, transactions, currency }) => {
         period: preset === "custom" && !isValidPeriod(range) ? null : period,
         language: i18n.language,
         t: (key, values) => i18n.t(key, values),
+        categories,
       }),
     // period is rebuilt from preset and range on every render
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [account, transactions, currency, preset, range.from, range.to],
+    [account, transactions, currency, preset, range.from, range.to, categories],
   );
 
   const canShare =

@@ -1,10 +1,11 @@
-import React, { useMemo } from "react";
+import React from "react";
 import { format } from "date-fns";
 import styles from "../../styles/components/accounts/transactionRow.module.scss";
 import { formatNumber } from "../../utils/formating";
-import { findCategory } from "../../assiets/categories/assits";
 import transferIcon from "../../assiets/categories/icons/currency.svg";
 import { categoryName, typeLabelKey } from "../../utils/transactionTypes";
+import { useCategories } from "../../hooks/useCategories";
+import CategoryIcon from "../categories/CategoryIcon";
 import { isIncoming, isReversal, isTransferFee, otherAccountName, signedAmount } from "../../utils/transactions/transactionList";
 import { dateFnsLocale } from "../../utils/dates";
 import { onEnterOrSpace } from "../../utils/accessibility";
@@ -15,10 +16,8 @@ import i18n from "../../configuration/i18n";
 // and the amount with the sign of its effect on the account.
 // showAccount: also name the account (lists that mix several accounts).
 const Row = ({ transaction, onClick, showAccount = false }) => {
-  const category = useMemo(
-    () => findCategory(transaction.category, transaction.type),
-    [transaction.category, transaction.type],
-  );
+  const { find } = useCategories();
+  const category = find(transaction.category, transaction.type);
   const incoming = isIncoming(transaction);
   const other = otherAccountName(transaction);
   const isFee = isTransferFee(transaction);
@@ -57,7 +56,7 @@ const Row = ({ transaction, onClick, showAccount = false }) => {
       onKeyDown={onEnterOrSpace(onClick)}
     >
       <span className={styles.icon} aria-hidden="true">
-        <img src={isTransfer ? transferIcon : category?.icon || transferIcon} alt="" />
+        {isTransfer ? <img src={transferIcon} alt="" /> : <CategoryIcon category={category} fallback={transferIcon} />}
       </span>
 
       <span className={styles.main}>

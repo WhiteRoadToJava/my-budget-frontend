@@ -8,7 +8,8 @@ import DeleteConfimation from "../modals/DeleteConfirmation";
 import UpdateSchedule from "./UpdateSchedule";
 import { deleteSchedule, updateSchedule } from "../../api/scheduleService";
 import { getAccounts } from "../../api/accountService";
-import { findCategory } from "../../assiets/categories/assits";
+import { useCategories } from "../../hooks/useCategories";
+import CategoryIcon from "../categories/CategoryIcon";
 import transferIcon from "../../assiets/categories/icons/currency.svg";
 import { rollForwardExecutionDate } from "../../utils/scheduleDate.js";
 import { scheduleTypeKey } from "../../utils/debts/scheduleTypes";
@@ -19,11 +20,12 @@ import { dateFnsLocale, toCalendarDay } from "../../utils/dates";
 import i18n from "../../configuration/i18n";
 
 const TONE = { INCOMSE: "in", EXPENSE: "out", TRANSFER: "transfer", DEBT_PAYMENT: "debt" };
-// schedule types map to the transaction types findCategory knows
+// schedule types map to the transaction types the categories know
 const CATEGORY_TYPE = { INCOMSE: "incomse", EXPENSE: "expense", DEBT_PAYMENT: "debt-out" };
 
 const ScheduleInfo = ({ isOpen, onClose, accounts, schedule }) => {
   const queryClient = useQueryClient();
+  const { find } = useCategories();
   const navigate = useNavigate();
   const [editOpen, setEditOpen] = useState(false);
   const [confirmDelete, setConfirmDelete] = useState(false);
@@ -45,7 +47,7 @@ const ScheduleInfo = ({ isOpen, onClose, accounts, schedule }) => {
   const allAccounts = accountsData?.accounts ?? [];
   const currencyOf = (account) => allAccounts.find((a) => a.id === account?.id)?.currency ?? "";
   const currency = currencyOf(current?.sourceAccount);
-  const category = CATEGORY_TYPE[type] ? findCategory(current?.category, CATEGORY_TYPE[type]) : null;
+  const category = CATEGORY_TYPE[type] ? find(current?.category, CATEGORY_TYPE[type]) : null;
   const nextDate = toCalendarDay(current?.executionDate);
 
   const close = () => {
@@ -136,7 +138,7 @@ const ScheduleInfo = ({ isOpen, onClose, accounts, schedule }) => {
         isOpen={isOpen}
         onClose={close}
         tone={isActive ? TONE[type] : undefined}
-        icon={isTransfer ? transferIcon : category?.icon}
+        icon={isTransfer ? transferIcon : <CategoryIcon category={category} />}
         kicker={i18n.t(scheduleTypeKey(type))}
         title={current?.name}
         amount={`${formatNumber(Number(current?.amountSend ?? 0))} ${currency}`}

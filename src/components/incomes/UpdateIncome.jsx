@@ -11,7 +11,7 @@ import { firstCurrency } from "../../utils/accounts/pockets";
 import i18n from "../../configuration/i18n";
 import Datepicker from "../inputs/Datepicker";
 import { ImagePicker } from "../ImagePicker";
-import IncomeCategoryList from "../categories/IncomeCategoryList";
+import CategoryPicker from "../categories/CategoryPicker";
 
 const UpdateIncomse = ({ isOpen, isClose, incomse }) => {
   const [incomseData, setIncomseData] = useState({
@@ -114,11 +114,10 @@ const UpdateIncomse = ({ isOpen, isClose, incomse }) => {
               />
             </div>
             <div>
-              {/* the category list reads its value once: remount it when the income is loaded */}
-              <IncomeCategoryList
-                key={incomseData.id ?? "loading"}
-                incomseItem={(id) => setIncomseData((prev) => ({ ...prev, category: id }))}
+              <CategoryPicker
+                type="incomse"
                 value={incomseData.category}
+                onChange={(key) => setIncomseData((prev) => ({ ...prev, category: key }))}
               />
             </div>
             <div className={styles.inputContainer}>

@@ -11,7 +11,7 @@ import { firstCurrency } from "../../utils/accounts/pockets";
 import i18n from "../../configuration/i18n";
 import Datepicker from "../inputs/Datepicker";
 import { ImagePicker } from "../ImagePicker";
-import ExpenseCategoryList from "../categories/ExpenseCategoryList";
+import CategoryPicker from "../categories/CategoryPicker";
 
 const UpdateExpense = ({ isOpen, isClose, expense }) => {
   const [expwnseData, setExpenseData] = useState({
@@ -116,11 +116,10 @@ useEffect(() => {
               />
             </div>
             <div>
-              {/* the category list reads its value once: remount it when the expense is loaded */}
-              <ExpenseCategoryList
-                key={expwnseData.id ?? "loading"}
-                expenseItem={(id) => setExpenseData((prev) => ({ ...prev, category: id }))}
+              <CategoryPicker
+                type="expense"
                 value={expwnseData.category}
+                onChange={(key) => setExpenseData((prev) => ({ ...prev, category: key }))}
               />
             </div>
             <div className={styles.inputContainer}>

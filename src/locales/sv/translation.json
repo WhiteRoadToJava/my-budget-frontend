@@ -883,5 +883,38 @@
   "transactionDate": {
     "label": "Datum",
     "future": "Datumet kan inte vara i framtiden. Använd ett schema för kommande transaktioner."
+  },
+  "categories": {
+    "label": "Kategori",
+    "placeholder": "Välj en kategori",
+    "search": "Sök kategorier",
+    "defaults": {
+      "rent": "Hyra",
+      "food": "Mat",
+      "groceries": "Matvaror",
+      "car": "Bil",
+      "bus": "Kollektivtrafik",
+      "check": "Check",
+      "currency": "Valutaväxling",
+      "delivery": "Leverans",
+      "home": "Hem",
+      "gift": "Gåva",
+      "bills": "Räkningar",
+      "health": "Hälsa",
+      "education": "Utbildning",
+      "clothes": "Kläder",
+      "phone": "Telefon & internet",
+      "travel": "Resor",
+      "entertainment": "Nöje",
+      "other": "Övrigt",
+      "salary": "Lön",
+      "childAllowance": "Barnbidrag",
+      "housingAllowance": "Bostadsbidrag",
+      "wallet": "Plånbok",
+      "bank": "Bank",
+      "investment": "Investering",
+      "freelance": "Frilans",
+      "refund": "Återbetalning"
+    }
   }
 }

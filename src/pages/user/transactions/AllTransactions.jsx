@@ -5,14 +5,14 @@ import TransactionInfo from "../../../components/transactions/TransactionInfo";
 import TransactionList from "../../../components/transactions/TransactionList";
 import TransactionFilters from "../../../components/transactions/TransactionFilters";
 import { filterTransactions } from "../../../utils/transactions/transactionList";
-import { findCategory } from "../../../assiets/categories/assits";
 import { categoryName } from "../../../utils/transactionTypes";
+import { useCategories } from "../../../hooks/useCategories";
 import styles from "../../../styles/components/transactions/transactionsPage.module.scss";
 import i18n from "../../../configuration/i18n";
 
-const nameOfCategory = (t) => categoryName(findCategory(t.category, t.type));
 
 const AllTransactions = () => {
+  const { find } = useCategories();
   const [selected, setSelected] = useState(null);
   const [type, setType] = useState("all");
   const [hideCancelled, setHideCancelled] = useState(false);
@@ -25,8 +25,14 @@ const AllTransactions = () => {
   const { data: accountsData } = useQuery({ queryKey: ["accounts"], queryFn: getAccounts });
 
   const visible = useMemo(
-    () => filterTransactions(transactions, { type, query, categoryName: nameOfCategory, hideCancelled }),
-    [transactions, type, query, hideCancelled],
+    () =>
+      filterTransactions(transactions, {
+        type,
+        query,
+        categoryName: (t) => categoryName(find(t.category, t.type)),
+        hideCancelled,
+      }),
+    [transactions, type, query, hideCancelled, find],
   );
 
   if (isLoading) return <div className={styles.page}>{i18n.t("messages.loading")}</div>;

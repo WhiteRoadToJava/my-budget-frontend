@@ -14,7 +14,7 @@ import {
   startOfMonth,
 } from "date-fns";
 import { addToTotals, countedAmount, isCancelled, isReversal, signedAmount, isTransferFee } from "../transactions/transactionList";
-import { findCategory } from "../../assiets/categories/assits";
+import { findCategory } from "../categories/categories";
 import { categoryName, typeLabelKey } from "../transactionTypes";
 import { dateFnsLocale } from "../dates";
 import { firstCurrency, pocketOf, transactionCurrency } from "./pockets";
@@ -81,25 +81,25 @@ export const balanceAt = (currentBalance, transactions, lastDay) =>
 // ---------- lines ----------
 
 // what the transaction was; transfers never name the other account
-const labelOf = (transaction, t) => {
+const labelOf = (transaction, t, categories) => {
   if (transaction.type === "in-transfer") return t("share.transferIn");
   if (transaction.type === "out-transfer") return t("share.transferOut");
   if (isTransferFee(transaction)) return t("share.transferFee");
   const name = categoryName(
-    findCategory(transaction.category, transaction.type),
+    findCategory(categories, transaction.category, transaction.type),
   );
   if (name) return name;
   const key = typeLabelKey(transaction.type);
   return key ? t(key) : transaction.type;
 };
 
-const transactionLines = (transaction, language, t) => {
+const transactionLines = (transaction, language, t, categories) => {
   const amount = signedAmount(transaction);
   const date = format(new Date(transaction.createdAt), "d MMM", {
     locale: dateFnsLocale(language),
   });
   const sign = amount >= 0 ? "+" : "−";
-  const label = labelOf(transaction, t);
+  const label = labelOf(transaction, t, categories);
   const what = isReversal(transaction) ? t("cancel.reversalOf", { what: label }) : label;
   const text = `${what}  ${sign} ${formatMoney(amount, language)}`;
   // a cancelled one counts on its own day, marked; its reversal takes it back on the day it was cancelled
@@ -124,6 +124,8 @@ export const buildAccountStatement = ({
   t,
   today = new Date(),
   currency: wantedCurrency,
+  // the user's categories, to name incomes and expenses
+  categories = [],
 }) => {
   const locale = dateFnsLocale(language);
   // one currency of the account: its balance and only its transactions
@@ -178,7 +180,7 @@ export const buildAccountStatement = ({
       lines.push(t("share.noTransactions"));
     } else {
       for (const tr of inPeriod)
-        lines.push(...transactionLines(tr, language, t));
+        lines.push(...transactionLines(tr, language, t, categories));
     }
   }
 

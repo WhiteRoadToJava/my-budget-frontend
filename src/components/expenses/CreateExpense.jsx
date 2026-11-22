@@ -9,8 +9,7 @@ import { addExpense } from "../../api/expenseService";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import i18n from "../../configuration/i18n";
 import { ImagePicker } from "../ImagePicker";
-import { expenseCategoryList } from "../../assiets/categories/assits";
-import ExpenseCategoryList from "../categories/ExpenseCategoryList";
+import CategoryPicker from "../categories/CategoryPicker";
 import { createdAtFor, isFutureDay, todayString } from "../../utils/transactions/transactionDate.js";
 import TransactionDateField from "../inputs/TransactionDateField.jsx";
 
@@ -91,12 +90,9 @@ const CreateExpense = ({ isOpen, isClose, account, initialData, currency }) => {
   };
 
 
-  const handleCategoryChange = (id) => {
-    const category = expenseCategoryList.find((item) => item.id === id);
-    if (category) {
-      setExpenseData({ ...expenseData, category: category.id });
-    }
-  }
+  const handleCategoryChange = (key) => {
+    setExpenseData((prev) => ({ ...prev, category: key }));
+  };
 
   return (
     <div className={styles.createExpenseContainer}>
@@ -116,7 +112,7 @@ const CreateExpense = ({ isOpen, isClose, account, initialData, currency }) => {
               />
             </div>
             <div>
-              <ExpenseCategoryList expenseItem={handleCategoryChange} value={expenseData.category} />
+              <CategoryPicker type="expense" value={expenseData.category} onChange={handleCategoryChange} />
             </div>
             <TransactionDateField className={styles.inputContainer} value={date} onChange={setDate} />
 

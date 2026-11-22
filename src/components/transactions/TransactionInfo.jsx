@@ -19,7 +19,8 @@ import {
   incomeExpenseDraft,
   transferDraft,
 } from "../../utils/transactions/duplicate.js";
-import { findCategory } from "../../assiets/categories/assits";
+import { useCategories } from "../../hooks/useCategories";
+import CategoryIcon from "../categories/CategoryIcon";
 import transferIcon from "../../assiets/categories/icons/currency.svg";
 import {
   belongsToDebt,
@@ -107,6 +108,7 @@ const transferBreakdown = (t) => {
 
 const TransactionInfo = ({ isOpen, onClose, accounts, transaction }) => {
   const queryClient = useQueryClient();
+  const { find } = useCategories();
   const navigate = useNavigate();
   const [editOpen, setEditOpen] = useState(false);
   const [confirmDelete, setConfirmDelete] = useState(false);
@@ -130,7 +132,7 @@ const TransactionInfo = ({ isOpen, onClose, accounts, transaction }) => {
   });
   const isDebtRecord = belongsToDebt(transaction);
   const incoming = isIncoming(transaction);
-  const category = findCategory(transaction?.category, type);
+  const category = find(transaction?.category, type);
   const typeKey = typeLabelKey(type);
   const currency = transactionCurrency(transaction);
   const date = new Date(transaction?.createdAt);
@@ -354,7 +356,7 @@ const TransactionInfo = ({ isOpen, onClose, accounts, transaction }) => {
         isOpen={isOpen}
         onClose={close}
         tone={tone}
-        icon={isTransfer ? transferIcon : category?.icon}
+        icon={isTransfer ? transferIcon : <CategoryIcon category={category} />}
         kicker={typeKey ? i18n.t(typeKey) : ""}
         title={title}
         amount={`${incoming ? "+" : "−"}${formatNumber(Math.abs(Number(transaction?.amount ?? 0)))} ${currency}`}
