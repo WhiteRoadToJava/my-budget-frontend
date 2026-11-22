@@ -28,6 +28,7 @@ import ResetPassword from "./pages/auth/ResetPassword.jsx";
 import ReportPage from "./pages/user/ReportPage.jsx";
 import DebtsPage from "./pages/user/debts/DebtsPage.jsx";
 import DebtDetailsPage from "./pages/user/debts/DebtDetailsPage.jsx";
+import CategoriesPage from "./pages/user/categories/CategoriesPage.jsx";
 import ExchangeRatesPage from "./pages/user/exchangeRates/ExchangeRatesPage.jsx";
 
 function App() {
@@ -99,6 +100,7 @@ function App() {
                     element={<ReportPage />}
                   />
                   <Route path="/user/debts" element={<DebtsPage />} />
+                  <Route path="/user/categories" element={<CategoriesPage />} />
                   <Route
                     path="/user/debts/:debtId"
                     element={<DebtDetailsPage />}
