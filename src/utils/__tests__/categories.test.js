@@ -5,6 +5,7 @@ import {
   categoryOption,
   debtCategory,
   findCategory,
+  moveId,
 } from "../categories/categories";
 
 const categories = [
@@ -38,5 +39,18 @@ describe("categoryLabel", () => {
     expect(categoryLabel(categories[2])).toBe("Coffee");
     expect(categoryLabel({ ...categories[0], name: "Shop rent" })).toBe("Shop rent");
     expect(categoryOption(categories[1])).toBe("💼 Salary");
+  });
+});
+
+describe("moveId", () => {
+  it("swaps an item with its neighbour", () => {
+    expect(moveId(["a", "b", "c"], 1, -1)).toEqual(["b", "a", "c"]);
+    expect(moveId(["a", "b", "c"], 1, 1)).toEqual(["a", "c", "b"]);
+  });
+
+  it("leaves the list as it is at the ends", () => {
+    const ids = ["a", "b"];
+    expect(moveId(ids, 0, -1)).toBe(ids);
+    expect(moveId(ids, 1, 1)).toBe(ids);
   });
 });

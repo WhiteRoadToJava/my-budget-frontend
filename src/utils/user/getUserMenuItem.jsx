@@ -20,6 +20,11 @@ export const getUserMenuItems = () => [
   },
   { label: i18n.t("menu.debts"), icon: <Database />, link: "/user/debts" },
   {
+    label: i18n.t("menu.categories"),
+    icon: <FileCode />,
+    link: "/user/categories",
+  },
+  {
     label: i18n.t("menu.exchangeRates"),
     icon: <Database />,
     link: "/user/exchange-rates",

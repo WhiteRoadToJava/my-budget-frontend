@@ -31,3 +31,20 @@ export const categoryLabel = (category) => {
 
 // what the category picker shows for one category
 export const categoryOption = (category) => `${category.emoji} ${categoryLabel(category)}`;
+
+// emojis offered when choosing one; any other can be typed or pasted
+export const EMOJI_CHOICES = [
+  "🏠", "🛋️", "💡", "🔥", "💧", "📱", "🛒", "🍽️", "☕", "🍔",
+  "🚗", "⛽", "🚌", "✈️", "🏨", "🩺", "💊", "🎓", "📚", "👕",
+  "👶", "🐾", "🎁", "🎬", "🎮", "🏋️", "💇", "🧾", "💱", "🏦",
+  "💼", "💻", "📈", "👛", "↩️", "🤝", "🕌", "❤️", "🛠️", "🗂️",
+];
+
+// the ids of a list after moving one item up (-1) or down (+1); unchanged at the ends
+export const moveId = (ids, index, step) => {
+  const target = index + step;
+  if (index < 0 || target < 0 || target >= ids.length) return ids;
+  const moved = [...ids];
+  [moved[index], moved[target]] = [moved[target], moved[index]];
+  return moved;
+};
