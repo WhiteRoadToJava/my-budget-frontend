@@ -15,15 +15,16 @@ import TransactionList from "../transactions/TransactionList";
 import TransactionFilters from "../transactions/TransactionFilters";
 import ShareStatement from "./ShareStatement";
 import { filterTransactions } from "../../utils/transactions/transactionList";
-import { findCategory } from "../../assiets/categories/assits";
 import { categoryName } from "../../utils/transactionTypes";
+import { useCategories } from "../../hooks/useCategories";
 import { formatNumber } from "../../utils/formating";
 import styles from "../../styles/components/transactions/transactionsPage.module.scss";
 import i18n from "../../configuration/i18n";
 
-const nameOfCategory = (t) => categoryName(findCategory(t.category, t.type));
 
 const Account = ({ account }) => {
+  const { find } = useCategories();
+  const nameOfCategory = (t) => categoryName(find(t.category, t.type));
   const [isCreateIncomeOpen, setIsCreateIncomeOpen] = useState(false);
   const [isCreateExpenseOpen, setIsCreateExpenseOpen] = useState(false);
   const [isCreateTransfer, setIsCreateTransfer] = useState(false);

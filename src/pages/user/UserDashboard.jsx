@@ -14,16 +14,16 @@ import { summarizeDebts } from "../../utils/debts/summarizeDebts";
 import {
   accountCurrencies, monthTotals, monthlyFlows, topExpenseCategories, upcomingSchedules,
 } from "../../utils/overview/overview";
-import { findCategory } from "../../assiets/categories/assits";
 import { categoryName } from "../../utils/transactionTypes";
+import { useCategories } from "../../hooks/useCategories";
 import styles from "../../styles/components/overview/overview.module.scss";
 import i18n from "../../configuration/i18n";
 
-const nameOfCategory = (t) => categoryName(findCategory(t.category, t.type));
 
 // The query keys are the same as on the other pages, so every change
 // (they invalidate "accounts", "transactions", "schedules", "debts") updates this page too.
 const UserDashboard = () => {
+  const { find } = useCategories();
   const accountsQuery = useQuery({ queryKey: ["accounts"], queryFn: getAccounts });
   const transactionsQuery = useQuery({ queryKey: ["transactions"], queryFn: getUserAllTransactions });
   const { data: schedules = [] } = useQuery({ queryKey: ["schedules"], queryFn: getAllSchedule });
@@ -40,8 +40,8 @@ const UserDashboard = () => {
   const thisMonth = useMemo(() => monthTotals(transactions), [transactions]);
   const flows = useMemo(() => monthlyFlows(transactions, currency), [transactions, currency]);
   const top = useMemo(
-    () => topExpenseCategories(transactions, currency, nameOfCategory),
-    [transactions, currency],
+    () => topExpenseCategories(transactions, currency, (t) => categoryName(find(t.category, t.type))),
+    [transactions, currency, find],
   );
   const upcoming = useMemo(() => upcomingSchedules(schedules), [schedules]);
   const debtTotals = useMemo(() => summarizeDebts(debts), [debts]);

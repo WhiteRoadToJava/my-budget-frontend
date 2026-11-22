@@ -1,7 +1,7 @@
 // Transaction types sent by the backend and how they are shown.
 // debt-in / debt-out are debt movements that did not create an income or
 // expense (the debt's "count as income/expense" option was off).
-import { DEBT_CATEGORY, categoryLabel } from "../assiets/categories/assits";
+import { DEBT_CATEGORY, categoryLabel } from "./categories/categories";
 
 const TYPE_LABELS = {
   incomse: "transactionDetails.incomse",
@@ -13,7 +13,6 @@ const TYPE_LABELS = {
   "transfer-fee-in": "transactionDetails.transferFeeIn",
   "transfer-fee-out": "transactionDetails.transferFeeOut",
 };
-
 
 // the name to show for a category (translated for ready-made ones and Debt)
 export const categoryName = categoryLabel;

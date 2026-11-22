@@ -908,5 +908,38 @@
     "transactionDate": {
     "label": "التاريخ",
     "future": "لا يمكن أن يكون التاريخ في المستقبل. للمعاملات القادمة استخدم الجداول."
+  },
+  "categories": {
+    "label": "الفئة",
+    "placeholder": "اختر فئة",
+    "search": "ابحث في الفئات",
+    "defaults": {
+      "rent": "إيجار",
+      "food": "طعام",
+      "groceries": "بقالة",
+      "car": "سيارة",
+      "bus": "مواصلات",
+      "check": "شيك",
+      "currency": "صرف عملة",
+      "delivery": "توصيل",
+      "home": "المنزل",
+      "gift": "هدية",
+      "bills": "فواتير",
+      "health": "صحة",
+      "education": "تعليم",
+      "clothes": "ملابس",
+      "phone": "اتصالات وإنترنت",
+      "travel": "سفر",
+      "entertainment": "ترفيه",
+      "other": "أخرى",
+      "salary": "راتب",
+      "childAllowance": "تعويض أطفال",
+      "housingAllowance": "بدل سكن",
+      "wallet": "محفظة",
+      "bank": "بنك",
+      "investment": "استثمار",
+      "freelance": "عمل حر",
+      "refund": "استرداد"
+    }
   }
 }

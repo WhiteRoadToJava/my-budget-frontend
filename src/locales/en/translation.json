@@ -890,5 +890,38 @@
     "transactionDate": {
     "label": "Date",
     "future": "The date can't be in the future. For a coming transaction, use a schedule."
+  },
+  "categories": {
+    "label": "Category",
+    "placeholder": "Choose a category",
+    "search": "Search categories",
+    "defaults": {
+      "rent": "Rent",
+      "food": "Food",
+      "groceries": "Groceries",
+      "car": "Car",
+      "bus": "Transport",
+      "check": "Check",
+      "currency": "Currency exchange",
+      "delivery": "Delivery",
+      "home": "Home",
+      "gift": "Gift",
+      "bills": "Bills",
+      "health": "Health",
+      "education": "Education",
+      "clothes": "Clothes",
+      "phone": "Phone & internet",
+      "travel": "Travel",
+      "entertainment": "Entertainment",
+      "other": "Other",
+      "salary": "Salary",
+      "childAllowance": "Child allowance",
+      "housingAllowance": "Housing allowance",
+      "wallet": "Wallet",
+      "bank": "Bank",
+      "investment": "Investment",
+      "freelance": "Freelance",
+      "refund": "Refund"
+    }
   }
 }
