@@ -31,6 +31,8 @@ import {
   formatRate,
   sentFromReceived,
 } from "../../utils/transactions/exchangeRate.js";
+import { createdAtFor, isFutureDay, todayString } from "../../utils/transactions/transactionDate.js";
+import TransactionDateField from "../inputs/TransactionDateField.jsx";
 
 
 const emptyTransfer = (sourceId = "", sourceCurrency = "") => ({
@@ -82,6 +84,7 @@ const TransferForm = ({
   }));
   const [fees, setFees] = useState(() => initialFees ?? emptyFees());
   const [image, setImage] = useState(null);
+  const [date, setDate] = useState(todayString);
   const [error, setError] = useState(null);
   const [savedRate, setSavedRate] = useState(null);
 
@@ -256,6 +259,7 @@ const TransferForm = ({
     const feeError = validateFees(fees);
     if (feeError) return setError(i18n.t(feeError));
 
+    if(isFutureDay(date)) return setError(i18n.t("transactionDate.future"));
     mutation.mutate({
       ...transferData,
       sourceCurrency,
@@ -265,6 +269,7 @@ const TransferForm = ({
       amountReceived: Number(transferData.amountReceived),
       category: "transfer",
       image,
+      createdAt: createdAtFor(date),
       ...feesToRequest(fees, { sourceCurrency, destinationCurrency }),
     });
   };
@@ -456,6 +461,12 @@ const TransferForm = ({
           accounts={accountsList}
         />
 
+        <TransactionDateField
+          className={sheet.field}
+          labelClassName={sheet.label}
+          value={date}
+          onChange={setDate}
+        />
         <FormInput
           label={i18n.t("createTransfer.description")}
           name="description"

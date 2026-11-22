@@ -18,7 +18,7 @@ import { dateFnsLocale, toCalendarDay } from "../../utils/dates";
 import i18n from "../../configuration/i18n";
 
 // value and onChange use "yyyy-MM-dd"; values with a time part are accepted too
-export default function Datepicker({ onChange, value }) {
+export default function Datepicker({ onChange, value, max }) {
   const selected = toCalendarDay(value);
   const locale = dateFnsLocale(i18n.language);
   const weekStartsOn = locale.options?.weekStartsOn ?? 1;
@@ -39,7 +39,9 @@ export default function Datepicker({ onChange, value }) {
     return () => document.removeEventListener("mousedown", handleOutsideClick);
   }, []);
 
+  const isDisabled = (date) => Boolean(max) && format(date, "yyyy-MM-dd") > max;
   const handleDateClick = (date) => {
+    if (isDisabled(date)) return;
     onChange(format(date, "yyyy-MM-dd"));
     setShowCalendar(false);
   };
@@ -107,6 +109,8 @@ export default function Datepicker({ onChange, value }) {
                 className={styles.day}
                 data-selected={selected ? isSameDay(day, selected) : false}
                 data-today={isSameDay(day, today)}
+                data-disabled={isDisabled(day)}
+                aria-disabled={isDisabled(day)}
                 onClick={() => handleDateClick(day)}
                 role="button"
                 tabIndex={0}

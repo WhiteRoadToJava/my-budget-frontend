@@ -11,7 +11,8 @@ import i18n from "../../configuration/i18n";
 import { ImagePicker } from "../ImagePicker";
 import {incomseCategoryList} from "../../assiets/categories/assits"
 import IncomeCategoryList from "../categories/IncomeCategoryList.jsx";
-
+import { createdAtFor, isFutureDay, todayString } from "../../utils/transactions/transactionDate.js";
+import TransactionDateField from "../inputs/TransactionDateField.jsx";
 
 // currency: the currency of the account the money is in (empty = the account's first one)
 const CreateIncomse = ({ isOpen, isClose, account, initialData, currency }) => {
@@ -20,9 +21,10 @@ const CreateIncomse = ({ isOpen, isClose, account, initialData, currency }) => {
     category: initialData?.category ?? "",
     amount: initialData?.amount ?? "",
     description: initialData?.description ?? "",
-    inage: null,
+    image: null,
   });
   const [imageUrls, setImageUrls] = useState(null);
+  const [date, setDate] = useState(todayString);
   const [error, setError] = useState({ hasError: false, message: "" });
 
   const nutation = useMutation({
@@ -32,6 +34,7 @@ const CreateIncomse = ({ isOpen, isClose, account, initialData, currency }) => {
       queryClient.invalidateQueries({ queryKey: ["accounts"] });
 
       isClose();
+      setDate(todayString());
       setIncomseData({ category: "", amount: "", description: "" });
     },
     onError: () => {
@@ -52,6 +55,7 @@ const CreateIncomse = ({ isOpen, isClose, account, initialData, currency }) => {
       account: { id: account?.id || "" },
       currency: chosenCurrency,
       image: imageUrls || null,
+      createdAt: createdAtFor(date),
     });
   };
 
@@ -73,6 +77,10 @@ const CreateIncomse = ({ isOpen, isClose, account, initialData, currency }) => {
     }
     if (!incomseData.category) {
       setError({ hasError: true, message: i18n.t("messages.categoryRequired") });
+      return false;
+    }
+    if(isFutureDay(date)){
+      setError({ hasError: true, message: i18n.t("transactionDate.future") });
       return false;
     }
     return true;
@@ -104,6 +112,7 @@ const CreateIncomse = ({ isOpen, isClose, account, initialData, currency }) => {
           <div>
             <IncomeCategoryList incomseItem={handleCategoryChange} value={incomseData.category} />
           </div>
+                    <TransactionDateField className={styles.inputContainer} value={date} onChange={setDate} />
           <div className={styles.inputContainer}>
             <FormInput
               label={i18n.t("createIncomse.description")}
