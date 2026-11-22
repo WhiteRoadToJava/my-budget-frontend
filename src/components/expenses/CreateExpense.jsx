@@ -85,6 +85,7 @@ const CreateExpense = ({ isOpen, isClose, account, initialData, currency }) => {
     }
     if (isFutureDay(date)) {
       setError({ hasError: true, message: i18n.t("transactionDate.future")  })
+    return false;
     }
     return true;
   };

@@ -115,17 +115,22 @@ describe("buildAccountStatement", () => {
     expect(text).not.toContain("99.00");
   });
 
-  it("a cancelled transaction is struck through and counts in no total", () => {
+  it("a cancelled transaction counts on its day, marked, and its reversal takes it back", () => {
     const account = { name: "Cash", currency: "SEK", totalBalance: 100 };
+    const cancelled = { id: "x", type: "expense", category: "2", amount: 40, createdAt: "2026-10-06T10:00:00",
+      cancelled: true, cancelReason: "returned" };
     const rows = [
       { id: "k", type: "incomse", category: "1", amount: 100, createdAt: "2026-10-05T10:00:00" },
-      { id: "x", type: "expense", category: "2", amount: 40, createdAt: "2026-10-06T10:00:00",
-        cancelled: true, cancelReason: "returned" },
+      cancelled,
+      { ...cancelled, createdAt: "2026-10-20T10:00:00", reversal: true },
     ];
     const text = buildAccountStatement({ account, transactions: rows,
       period: { from: "2026-10-01", to: "2026-10-31" }, language: "en", t, today });
-    expect(text).toMatch(/~.*40\.00~ {2}\(cancel\.cancelled\)/);
+    expect(text).toMatch(/− 40\.00 {2}\(cancel\.cancelled\)/);
+    expect(text).toMatch(/cancel\.reversalOf\(.+\) {2}\+ 40\.00/);
     expect(text).toContain("cancel.reason: returned");
-    expect(text).toContain("share.moneyOut: − 0.00");
+    expect(text).not.toContain("~");
+    expect(text).toContain("share.moneyOut: − 40.00");
+    expect(text).toContain("share.moneyIn: + 140.00");   // the expense taken back came in
   });
 });

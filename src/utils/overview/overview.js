@@ -1,7 +1,7 @@
 // Numbers for the overview page. Everything is kept per currency:
 // amounts in different currencies are never added together.
 import { addDays, addMonths, format, startOfDay, startOfMonth } from "date-fns";
-import { signedAmount } from "../transactions/transactionList";
+import { addToTotals, isReversal } from "../transactions/transactionList";
 import { pocketsOf, transactionCurrency } from "../accounts/pockets";
 
 const round2 = (n) => Math.round(n * 100) / 100;
@@ -17,8 +17,8 @@ export const currencyOf = (t) => transactionCurrency(t);
 
 // Money that really came in or went out. A transfer between two of your
 // accounts moves nothing in or out, so it is left out; its fees are kept.
-// transfers between own accounts and cancelled transactions are no money in or out
-export const isRealFlow = (t) => t?.type !== "in-transfer" && t?.type !== "out-transfer" && t?.cancelled !== true;
+// a cancelled one counts on its own day and its reversal on the day it was cancelled
+export const isRealFlow = (t) => t?.type !== "in-transfer" && t?.type !== "out-transfer";
 
 // { [currency]: { in, out, net } } for the month of `month`
 export const monthTotals = (transactions = [], month = new Date()) => {
@@ -29,9 +29,7 @@ export const monthTotals = (transactions = [], month = new Date()) => {
     if (!date || !isRealFlow(t) || monthKeyOf(date) !== key) continue;
     const currency = currencyOf(t);
     const entry = (totals[currency] ??= { in: 0, out: 0, net: 0 });
-    const amount = signedAmount(t);
-    if (amount >= 0) entry.in = round2(entry.in + amount);
-    else entry.out = round2(entry.out - amount);
+    addToTotals(entry, t);
     entry.net = round2(entry.in - entry.out);
   }
   return totals;
@@ -48,9 +46,7 @@ export const monthlyFlows = (transactions = [], currency, count = 6, today = new
     if (!date || !isRealFlow(t) || currencyOf(t) !== currency) continue;
     const entry = byKey[monthKeyOf(date)];
     if (!entry) continue;
-    const amount = signedAmount(t);
-    if (amount >= 0) entry.in = round2(entry.in + amount);
-    else entry.out = round2(entry.out - amount);
+    addToTotals(entry, t);
   }
   return months.map((key) => byKey[key]);
 };
@@ -61,12 +57,15 @@ export const topExpenseCategories = (transactions = [], currency, nameOf, month 
   const sums = {};
   for (const t of transactions) {
     const date = dateOf(t);
-    if (!date || t.type !== "expense" || t.cancelled === true || currencyOf(t) !== currency || monthKeyOf(date) !== key) continue;
+    if (!date || t.type !== "expense" || currencyOf(t) !== currency || monthKeyOf(date) !== key) continue;
     const name = nameOf(t) || "—";
-    sums[name] = round2((sums[name] ?? 0) + Math.abs(Number(t.amount ?? 0)));
+    // a reversal takes the expense back in the month it was cancelled
+    const amount = (isReversal(t) ? -1 : 1) * Math.abs(Number(t.amount ?? 0));
+    sums[name] = round2((sums[name] ?? 0) + amount);
   }
   return Object.entries(sums)
     .map(([name, amount]) => ({ name, amount }))
+    .filter((c) => c.amount > 0)
     .sort((a, b) => b.amount - a.amount)
     .slice(0, limit);
 };

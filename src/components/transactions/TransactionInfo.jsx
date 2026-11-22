@@ -31,6 +31,7 @@ import {
   otherAccountName,
 } from "../../utils/transactions/transactionList";
 import { formatNumber } from "../../utils/formating";
+import { createdAtFor } from "../../utils/transactions/transactionDate";
 import { dateFnsLocale } from "../../utils/dates";
 import { firstCurrency, transactionCurrency } from "../../utils/accounts/pockets";
 import i18n from "../../configuration/i18n";
@@ -169,7 +170,7 @@ const TransactionInfo = ({ isOpen, onClose, accounts, transaction }) => {
   };
 
   const cancelMutation = useMutation({
-    mutationFn: (reason) => CANCEL_FN[type](transaction.id, reason),
+    mutationFn: ({ reason, day }) => CANCEL_FN[type](transaction.id, reason, createdAtFor(day)),
     onSuccess: () => {
       refresh();
       setCancelling(false);
@@ -434,9 +435,14 @@ const TransactionInfo = ({ isOpen, onClose, accounts, transaction }) => {
       {cancelling && (
         <CancelTransactionModal
           onClose={() => setCancelling(false)}
-          onConfirm={(reason) => cancelMutation.mutate(reason)}
+          onConfirm={(reason, day) => cancelMutation.mutate({ reason, day })}
           isTransfer={isTransfer}
           isPending={cancelMutation.isPending}
+          firstDay={
+            transaction?.createdAt && !Number.isNaN(new Date(transaction.createdAt).getTime())
+              ? format(new Date(transaction.createdAt), "yyyy-MM-dd")
+              : undefined
+          }
         />
       )}
       <DeleteConfimation

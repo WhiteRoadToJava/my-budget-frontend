@@ -5,7 +5,7 @@ import { formatNumber } from "../../utils/formating";
 import { findCategory } from "../../assiets/categories/assits";
 import transferIcon from "../../assiets/categories/icons/currency.svg";
 import { categoryName, typeLabelKey } from "../../utils/transactionTypes";
-import { isIncoming, isTransferFee, otherAccountName } from "../../utils/transactions/transactionList";
+import { isIncoming, isReversal, isTransferFee, otherAccountName, signedAmount } from "../../utils/transactions/transactionList";
 import { dateFnsLocale } from "../../utils/dates";
 import { onEnterOrSpace } from "../../utils/accessibility";
 import { transactionCurrency } from "../../utils/accounts/pockets";
@@ -24,8 +24,11 @@ const Row = ({ transaction, onClick, showAccount = false }) => {
   const isFee = isTransferFee(transaction);
   const isTransfer = transaction.type === "in-transfer" || transaction.type === "out-transfer" || isFee;
   const typeKey = typeLabelKey(transaction.type);
+  const reversal = isReversal(transaction);
+  // the sign of what the row does to the account: a reversal is the other way round
+  const moneyIn = signedAmount(transaction) >= 0;
 
-  const title = isFee
+  const what = isFee
     ? i18n.t("transactionsPage.transferFee", {
         from: transaction.sourceAccount?.name ?? i18n.t("account.accountdeleted"),
         to: transaction.destinationAccount?.name ?? i18n.t("account.accountdeleted"),
@@ -35,6 +38,7 @@ const Row = ({ transaction, onClick, showAccount = false }) => {
         name: other || i18n.t("account.accountdeleted"),
       })
     : categoryName(category) || (typeKey ? i18n.t(typeKey) : transaction.type);
+  const title = reversal ? i18n.t("cancel.reversalOf", { what }) : what;
 
   const accountName = showAccount ? transaction.sourceAccount?.name : null;
   const currency = transactionCurrency(transaction);
@@ -46,6 +50,7 @@ const Row = ({ transaction, onClick, showAccount = false }) => {
       className={styles.row}
       data-type={transaction.type}
       data-cancelled={transaction.cancelled ? "true" : undefined}
+      data-reversal={reversal ? "true" : undefined}
       onClick={onClick}
       role="button"
       tabIndex={0}
@@ -58,7 +63,9 @@ const Row = ({ transaction, onClick, showAccount = false }) => {
       <span className={styles.main}>
         <span className={styles.title}>
           {title}
-          {transaction.cancelled && <span className={styles.cancelledBadge}>{i18n.t("cancel.cancelled")}</span>}
+          {transaction.cancelled && !reversal && (
+            <span className={styles.cancelledBadge}>{i18n.t("cancel.cancelled")}</span>
+          )}
         </span>
         <span className={styles.meta}>
           {accountName && <span>{accountName}</span>}
@@ -70,8 +77,8 @@ const Row = ({ transaction, onClick, showAccount = false }) => {
       </span>
 
       <span className={styles.side}>
-        <span className={styles.amount} data-direction={incoming ? "in" : "out"}>
-          {incoming ? "+" : "−"}
+        <span className={styles.amount} data-direction={moneyIn ? "in" : "out"}>
+          {moneyIn ? "+" : "−"}
           {formatNumber(Math.abs(Number(transaction.amount ?? 0)))}
           {currency && <span className={styles.currency}>{currency}</span>}
         </span>

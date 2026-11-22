@@ -2,7 +2,7 @@ import React from "react";
 import { format, parseISO } from "date-fns";
 import Row from "../accounts/TransactionRow";
 import styles from "../../styles/components/transactions/transactionList.module.scss";
-import { groupByMonth } from "../../utils/transactions/transactionList";
+import { groupByMonth, originalOf, rowKey } from "../../utils/transactions/transactionList";
 import { formatNumber } from "../../utils/formating";
 import { dateFnsLocale } from "../../utils/dates";
 import i18n from "../../configuration/i18n";
@@ -31,8 +31,12 @@ const TransactionList = ({ transactions, onSelect, showAccount = false, emptyTex
           </header>
           <ul className={styles.items}>
             {group.items.map((t) => (
-              <li key={`${t.type}-${t.id}`}>
-                <Row transaction={t} onClick={() => onSelect(t)} showAccount={showAccount} />
+              <li key={rowKey(t)}>
+                <Row
+                  transaction={t}
+                  onClick={() => onSelect(originalOf(t, transactions))}
+                  showAccount={showAccount}
+                />
               </li>
             ))}
           </ul>

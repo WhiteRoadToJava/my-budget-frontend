@@ -126,11 +126,11 @@
 
 /* ---------- a cancelled transaction: still listed, counts in nothing ---------- */
 
-.row[data-cancelled="true"] {
-  opacity: 0.6;
-
-  .amount {
-    text-decoration: line-through;
+/* the row that takes a cancelled transaction back, on the day it was cancelled;
+   the cancelled one itself counts on its own day, so it only gets the badge */
+.row[data-reversal="true"] {
+  .title {
+    font-style: italic;
     color: variable.$color-text-muted;
   }
 }

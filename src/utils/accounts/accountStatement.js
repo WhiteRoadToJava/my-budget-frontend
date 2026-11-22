@@ -13,7 +13,7 @@ import {
   parseISO,
   startOfMonth,
 } from "date-fns";
-import { countedAmount, isCancelled, signedAmount, isTransferFee } from "../transactions/transactionList";
+import { addToTotals, countedAmount, isCancelled, isReversal, signedAmount, isTransferFee } from "../transactions/transactionList";
 import { findCategory } from "../../assiets/categories/assits";
 import { categoryName, typeLabelKey } from "../transactionTypes";
 import { dateFnsLocale } from "../dates";
@@ -99,16 +99,18 @@ const transactionLines = (transaction, language, t) => {
     locale: dateFnsLocale(language),
   });
   const sign = amount >= 0 ? "+" : "−";
-  const text = `${labelOf(transaction, t)}  ${sign} ${formatMoney(amount, language)}`;
-  // a cancelled one is struck through (~text~ in WhatsApp) and counts in no total
+  const label = labelOf(transaction, t);
+  const what = isReversal(transaction) ? t("cancel.reversalOf", { what: label }) : label;
+  const text = `${what}  ${sign} ${formatMoney(amount, language)}`;
+  // a cancelled one counts on its own day, marked; its reversal takes it back on the day it was cancelled
   const lines = [
-    isCancelled(transaction)
-      ? `• ${date}  ~${text}~  (${t("cancel.cancelled")})`
+    isCancelled(transaction) && !isReversal(transaction)
+      ? `• ${date}  ${text}  (${t("cancel.cancelled")})`
       : `• ${date}  ${text}`,
   ];
   const description = transaction.description?.trim();
   if (description) lines.push(`   ${description}`);
-  if (isCancelled(transaction) && transaction.cancelReason) lines.push(`   ${t("cancel.reason")}: ${transaction.cancelReason}`);
+  if (isReversal(transaction) && transaction.cancelReason) lines.push(`   ${t("cancel.reason")}: ${transaction.cancelReason}`);
   return lines;
 };
 
@@ -146,18 +148,9 @@ export const buildAccountStatement = ({
       })
       .sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
 
-    const totalIn = round2(
-      inPeriod
-        .map(countedAmount)
-        .filter((a) => a > 0)
-        .reduce((s, a) => s + a, 0),
-    );
-    const totalOut = round2(
-      inPeriod
-        .map(countedAmount)
-        .filter((a) => a < 0)
-        .reduce((s, a) => s - a, 0),
-    );
+    const totals = inPeriod.reduce(addToTotals, { in: 0, out: 0 });
+    const totalIn = round2(totals.in);
+    const totalOut = round2(totals.out);
     const from = format(parseISO(period.from), "d MMM yyyy", { locale });
     const to = format(parseISO(period.to), "d MMM yyyy", { locale });
     const endsToday = period.to >= day(today);
