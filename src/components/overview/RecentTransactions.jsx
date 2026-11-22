@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import styles from "../../styles/components/overview/overview.module.scss";
 import Row from "../accounts/TransactionRow";
 import TransactionInfo from "../transactions/TransactionInfo";
+import { originalOf, rowKey } from "../../utils/transactions/transactionList";
 import i18n from "../../configuration/i18n";
 
 // the latest transactions; a click opens the usual details
@@ -23,8 +24,8 @@ const RecentTransactions = ({ transactions, accounts, limit = 8 }) => {
       ) : (
         <ul className={styles.list}>
           {latest.map((t) => (
-            <li key={`${t.type}-${t.id}`}>
-              <Row transaction={t} onClick={() => setSelected(t)} showAccount />
+            <li key={rowKey(t)}>
+              <Row transaction={t} onClick={() => setSelected(originalOf(t, transactions))} showAccount />
             </li>
           ))}
         </ul>

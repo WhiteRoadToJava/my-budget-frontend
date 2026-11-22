@@ -4,14 +4,35 @@ const INCOMING = new Set(["incomse", "in-transfer", "debt-in", "transfer-fee-in"
 
 export const isIncoming = (t) => INCOMING.has(t?.type);
 
-// amount with the sign of its effect on the account
-export const signedAmount = (t) => (isIncoming(t) ? 1 : -1) * Math.abs(Number(t?.amount ?? 0));
-
-// a cancelled transaction stays in the lists but moves no balance
+// A cancelled transaction still counts on its own day; the server adds a second row,
+// the reversal, that takes it back on the day it was cancelled.
 export const isCancelled = (t) => t?.cancelled === true;
+export const isReversal = (t) => t?.reversal === true;
 
-// what the row adds to a total: nothing when it is cancelled
-export const countedAmount = (t) => (isCancelled(t) ? 0 : signedAmount(t));
+// amount with the sign of its effect on the account (a reversal has the opposite sign)
+export const signedAmount = (t) =>
+  (isIncoming(t) ? 1 : -1) * (isReversal(t) ? -1 : 1) * Math.abs(Number(t?.amount ?? 0));
+
+// what the row adds to the balance
+export const countedAmount = (t) => signedAmount(t);
+
+// a total of money in and out, by what the row did to the account:
+// a cancelled expense taken back is money that came in
+export const addToTotals = (totals, t) => {
+  const amount = countedAmount(t);
+  if (amount >= 0) totals.in = round2(totals.in + amount);
+  else totals.out = round2(totals.out - amount);
+  return totals;
+};
+
+// the original and its reversal share the id
+export const rowKey = (t) => `${t.type}-${t.id}${isReversal(t) ? "-reversal" : ""}`;
+
+// a click on a reversal opens the transaction it takes back
+export const originalOf = (t, transactions = []) =>
+  isReversal(t)
+    ? transactions.find((x) => x.id === t.id && x.type === t.type && !isReversal(x)) ?? t
+    : t;
 
 const round2 = (n) => Math.round(n * 100) / 100;
 
@@ -33,9 +54,9 @@ export const groupByMonth = (transactions = []) => {
     if (!groups.has(key)) groups.set(key, { key, items: [], totalIn: 0, totalOut: 0 });
     const g = groups.get(key);
     g.items.push(t);
-    const amount = countedAmount(t);
-    if (amount >= 0) g.totalIn = round2(g.totalIn + amount);
-    else g.totalOut = round2(g.totalOut - amount);
+    const totals = addToTotals({ in: g.totalIn, out: g.totalOut }, t);
+    g.totalIn = totals.in;
+    g.totalOut = totals.out;
   }
   return [...groups.values()];
 };
