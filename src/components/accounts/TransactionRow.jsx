@@ -2,7 +2,6 @@ import React, { useMemo } from "react";
 import { format } from "date-fns";
 import styles from "../../styles/components/accounts/transactionRow.module.scss";
 import { formatNumber } from "../../utils/formating";
-import { findCategory } from "../../assiets/categories/assits";
 import transferIcon from "../../assiets/categories/icons/currency.svg";
 import { categoryName, typeLabelKey } from "../../utils/transactionTypes";
 import { isIncoming, isReversal, isTransferFee, otherAccountName, signedAmount } from "../../utils/transactions/transactionList";
@@ -10,6 +9,11 @@ import { dateFnsLocale } from "../../utils/dates";
 import { onEnterOrSpace } from "../../utils/accessibility";
 import { transactionCurrency } from "../../utils/accounts/pockets";
 import i18n from "../../configuration/i18n";
+import { useCategories } from "../../hooks/useCategories";
+import CategoryIcon from "../categories/CategoryIcon";
+
+
+// كان: import React, { useMemo } from "react";
 
 // One transaction: what it was (category or other account), where and when,
 // and the amount with the sign of its effect on the account.
