@@ -942,5 +942,39 @@
       "freelance": "Frilans",
       "refund": "Återbetalning"
     }
+  },
+    "settings": {
+    "save": "Spara",
+    "saved": "Sparat.",
+    "saveError": "Det gick inte att spara. Försök igen.",
+    "loadError": "Kunde inte ladda dina uppgifter.",
+    "more": "Fler inställningar",
+    "profile": {
+      "title": "Profil",
+      "email": "E-post",
+      "firstName": "Förnamn",
+      "lastName": "Efternamn",
+      "phone": "Telefon",
+      "firstNameRequired": "Skriv ditt förnamn.",
+      "lastNameRequired": "Skriv ditt efternamn.",
+      "phoneInvalid": "Telefonnumret är inte giltigt."
+    },
+    "security": {
+      "title": "Säkerhet",
+      "current": "Nuvarande lösenord",
+      "new": "Nytt lösenord",
+      "confirm": "Bekräfta det nya lösenordet",
+      "submit": "Byt lösenord",
+      "changed": "Ditt lösenord har bytts.",
+      "currentRequired": "Skriv ditt nuvarande lösenord.",
+      "currentWrong": "Det nuvarande lösenordet är fel.",
+      "weak": "Det nya lösenordet uppfyller inte reglerna nedan.",
+      "same": "Det nya lösenordet är samma som det nuvarande.",
+      "mismatch": "De nya lösenorden stämmer inte överens."
+    },
+    "preferences": {
+      "title": "Inställningar",
+      "language": "Språk"
+    }
   }
 }

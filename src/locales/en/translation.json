@@ -949,5 +949,39 @@
       "freelance": "Freelance",
       "refund": "Refund"
     }
+  },
+    "settings": {
+    "save": "Save",
+    "saved": "Saved.",
+    "saveError": "Could not save. Try again.",
+    "loadError": "Could not load your details.",
+    "more": "More settings",
+    "profile": {
+      "title": "Profile",
+      "email": "Email",
+      "firstName": "First name",
+      "lastName": "Last name",
+      "phone": "Phone",
+      "firstNameRequired": "Write your first name.",
+      "lastNameRequired": "Write your last name.",
+      "phoneInvalid": "The phone number is not valid."
+    },
+    "security": {
+      "title": "Security",
+      "current": "Current password",
+      "new": "New password",
+      "confirm": "Confirm the new password",
+      "submit": "Change password",
+      "changed": "Your password was changed.",
+      "currentRequired": "Write your current password.",
+      "currentWrong": "The current password is wrong.",
+      "weak": "The new password does not meet the rules below.",
+      "same": "The new password is the same as the current one.",
+      "mismatch": "The new passwords do not match."
+    },
+    "preferences": {
+      "title": "Preferences",
+      "language": "Language"
+    }
   }
 }

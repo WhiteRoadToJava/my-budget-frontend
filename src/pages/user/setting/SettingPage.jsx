@@ -1,95 +1,73 @@
-import React, { useEffect, useState } from "react";
-import UpdatePassword from "../../auth/UpdatePassword";
-import UpdateUser from "../../../components/user/setting/UpdateUser";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import ProfileSection from "../../../components/user/setting/ProfileSection";
+import SecuritySection from "../../../components/user/setting/SecuritySection";
+import PreferencesSection from "../../../components/user/setting/PreferencesSection";
+import { useCurrentUser } from "../../../hooks/useCurrentUser";
 import styles from "../../../styles/pages/setting/settingPage.module.scss";
-import { getUser } from "../../../api/userService";
-import UserDetails from "../../../components/user/setting/UserDetails";
-import { onEnterOrSpace } from "../../../utils/accessibility";
+import i18n from "../../../configuration/i18n";
+
+const TABS = [
+  { id: "profile", label: "settings.profile.title" },
+  { id: "security", label: "settings.security.title" },
+  { id: "preferences", label: "settings.preferences.title" },
+];
+
+// pages kept elsewhere that belong to the user's own setup
+const LINKS = [
+  { to: "/user/categories", label: "menu.categories" },
+  { to: "/user/exchange-rates", label: "menu.exchangeRates" },
+  { to: "/user/subscription", label: "subscription.title" },
+];
 
 const SettingPage = () => {
-  const [upadatePassword, setUpadatePassword] = useState(false);
-  const [updateProfile, setUpdateProfile] = useState(false);
-  const [userDetails, setUserDetails] = useState(true);
-  const [user, setUser] = useState({});
-  const handleSwitchOnClick = async (seitchName) => {
-    switch (seitchName) {
-      case "updatePassword":
-        setUpadatePassword(true);
-        setUpdateProfile(false);
-        setUserDetails(false);
-        break;
-      case "updateProfile":
-        setUpadatePassword(false);
-        setUpdateProfile(true);
-        setUserDetails(false);
-        break;
-      case "userDetails":
-        setUpadatePassword(false);
-        setUpdateProfile(false);
-        setUserDetails(true);
-        break;
-    }
-  };
-  useEffect(() => {
-    const getUserDetails = async () => {
-      const response = await getUser();
-      const userDetials = await response.data;
-      setUser(userDetials);
-      return userDetials;
-    };
-    getUserDetails();
-  }, []);
+  const [tab, setTab] = useState("profile");
+  const { data: user, isLoading, isError } = useCurrentUser();
 
   return (
-    <div className={styles.settingContainer}>
-      <h1 className={styles.title}>Setting</h1>
-      <div className={styles.divider}></div>
-      <div className={styles.content}>
-        <div className={styles.switchContainer}>
-          <div
-            className={styles.switch}
-            onClick={() => handleSwitchOnClick("updatePassword")}
-            role="button"
-            tabIndex={0}
-            onKeyDown={onEnterOrSpace(() => handleSwitchOnClick("updatePassword"))}
-          >
-            <p>Update Password</p>
-          </div>
-          <div
-            className={styles.switch}
-            onClick={() => handleSwitchOnClick("updateProfile")}
-            role="button"
-            tabIndex={0}
-            onKeyDown={onEnterOrSpace(() => handleSwitchOnClick("updateProfile"))}
-          >
-            <p>Update Profile</p>
-          </div>
-        </div>
+    <div className={styles.page}>
+      <h1 className={styles.title}>{i18n.t("menu.settings")}</h1>
 
-        <UpdatePassword
-          display={upadatePassword}
-          setDisplay={() => {
-            setUpadatePassword(false);
-            setUserDetails(true);
-            setUpdateProfile(false);
-          }}
-        />
-        <UpdateUser
-          display={updateProfile}
-          setDisplay={() => {
-            setUpdateProfile(false);
-            setUserDetails(true);
-            setUpadatePassword(false);
-          }}
-          user={user}
-        />
-        <UserDetails
-          display={userDetails}
-          setDisplay={setUserDetails}
-          userDetails={user}
-          openUserUpdate={setUpdateProfile}
-        />
+      <div className={styles.tabs} role="tablist" aria-label={i18n.t("menu.settings")}>
+        {TABS.map((t) => (
+          <button
+            key={t.id}
+            type="button"
+            role="tab"
+            id={`settings-tab-${t.id}`}
+            aria-selected={tab === t.id}
+            aria-controls="settings-panel"
+            className={styles.tab}
+            onClick={() => setTab(t.id)}
+          >
+            {i18n.t(t.label)}
+          </button>
+        ))}
       </div>
+
+      <div id="settings-panel" role="tabpanel" aria-labelledby={`settings-tab-${tab}`} className={styles.panel}>
+        {tab === "profile" &&
+          (isLoading ? (
+            <p>{i18n.t("messages.loading")}</p>
+          ) : isError || !user ? (
+            <p className={styles.error}>{i18n.t("settings.loadError")}</p>
+          ) : (
+            <ProfileSection key={user.username} user={user} />
+          ))}
+        {tab === "security" && <SecuritySection />}
+        {tab === "preferences" && <PreferencesSection />}
+      </div>
+
+      <nav className={styles.links} aria-label={i18n.t("settings.more")}>
+        <h2 className={styles.sectionTitle}>{i18n.t("settings.more")}</h2>
+        <ul>
+          {LINKS.map((link) => (
+            <li key={link.to}>
+              <Link to={link.to}>{i18n.t(link.label)}</Link>
+            </li>
+          ))}
+        </ul>
+      </nav>
     </div>
   );
 };
