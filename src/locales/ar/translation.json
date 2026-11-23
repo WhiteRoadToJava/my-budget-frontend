@@ -1000,20 +1000,21 @@
     "preferences": {
       "title": "التفضيلات",
       "language": "اللغة",
-      "baseCurrency": "Base currency",
-      "firstDayOfWeek": "First day of the week",
-      "defaultAccount": "Default account",
-      "notChosen": "None",
-      "byLanguage": "By language",
+      
+      "baseCurrency": "العملة الأساسية",
+      "firstDayOfWeek": "أول يوم في الأسبوع",
+      "defaultAccount": "الحساب الافتراضي",
+      "notChosen": "بدون",
+      "byLanguage": "حسب اللغة",
       "days": {
-        "SATURDAY": "Saturday",
-        "SUNDAY": "Sunday",
-        "MONDAY": "Monday"
+        "SATURDAY": "السبت",
+        "SUNDAY": "الأحد",
+        "MONDAY": "الاثنين"
       },
-      "noAccounts": "You have no active accounts yet.",
-      "saved": "Saved.",
-      "saveError": "Could not save. Try again.",
-      "loadError": "Could not load your preferences. Try again later."
+      "noAccounts": "لا توجد لديك حسابات نشطة بعد.",
+      "saved": "تم الحفظ.",
+      "saveError": "تعذّر الحفظ. حاول مرة أخرى.",
+      "loadError": "تعذّر تحميل تفضيلاتك. حاول لاحقاً."
     }
   }
 }

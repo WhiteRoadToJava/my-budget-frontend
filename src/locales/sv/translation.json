@@ -975,20 +975,20 @@
     "preferences": {
       "title": "Inställningar",
       "language": "Språk",
-      "baseCurrency": "العملة الأساسية",
-      "firstDayOfWeek": "أول يوم في الأسبوع",
-      "defaultAccount": "الحساب الافتراضي",
-      "notChosen": "بدون",
-      "byLanguage": "حسب اللغة",
+      "baseCurrency": "Basvaluta",
+      "firstDayOfWeek": "Veckans första dag",
+      "defaultAccount": "Standardkonto",
+      "notChosen": "Ingen",
+      "byLanguage": "Enligt språk",
       "days": {
-        "SATURDAY": "السبت",
-        "SUNDAY": "الأحد",
-        "MONDAY": "الاثنين"
+        "SATURDAY": "Lördag",
+        "SUNDAY": "Söndag",
+        "MONDAY": "Måndag"
       },
-      "noAccounts": "لا توجد لديك حسابات نشطة بعد.",
-      "saved": "تم الحفظ.",
-      "saveError": "تعذّر الحفظ. حاول مرة أخرى.",
-      "loadError": "تعذّر تحميل تفضيلاتك. حاول لاحقاً."
+      "noAccounts": "Du har inga aktiva konton än.",
+      "saved": "Sparat.",
+      "saveError": "Kunde inte spara. Försök igen.",
+      "loadError": "Kunde inte hämta dina inställningar. Försök senare."
     }
   }
 }

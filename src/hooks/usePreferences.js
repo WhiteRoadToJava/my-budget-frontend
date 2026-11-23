@@ -10,13 +10,13 @@ export const usePreferences = () => {
         queryFn: getPreferences,
         staleTime: 5  * 60 * 1000,
     });
-    return{preferences: data ?? NONE, isLoading, isError, isLoading: Boolean(data)};
+    return { preferences: data ?? NONE, isLoading, isError, isLoaded: Boolean(data) };
 }
 
 export const useUpdatePreferences= () => {
     const queryClient = useQueryClient();
     return useMutation({
         mutationFn: updatePreferences,
-        onSuccess: (saved) => queryClient.setQueriesData(["preferences"], saved),
+        onSuccess: (saved) => queryClient.setQueryData(["preferences"], saved),
     });
 };

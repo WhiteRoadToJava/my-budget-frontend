@@ -991,20 +991,20 @@
     "preferences": {
       "title": "Preferences",
       "language": "Language",
-      "baseCurrency": "العملة الأساسية",
-      "firstDayOfWeek": "أول يوم في الأسبوع",
-      "defaultAccount": "الحساب الافتراضي",
-      "notChosen": "بدون",
-      "byLanguage": "حسب اللغة",
+      "baseCurrency": "Base currency",
+      "firstDayOfWeek": "First day of the week",
+      "defaultAccount": "Default account",
+      "notChosen": "None",
+      "byLanguage": "By language",
       "days": {
-        "SATURDAY": "السبت",
-        "SUNDAY": "الأحد",
-        "MONDAY": "الاثنين"
+        "SATURDAY": "Saturday",
+        "SUNDAY": "Sunday",
+        "MONDAY": "Monday"
       },
-      "noAccounts": "لا توجد لديك حسابات نشطة بعد.",
-      "saved": "تم الحفظ.",
-      "saveError": "تعذّر الحفظ. حاول مرة أخرى.",
-      "loadError": "تعذّر تحميل تفضيلاتك. حاول لاحقاً."
+      "noAccounts": "You have no active accounts yet.",
+      "saved": "Saved.",
+      "saveError": "Could not save. Try again.",
+      "loadError": "Could not load your preferences. Try again later."
     }
   }
 }
