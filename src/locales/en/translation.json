@@ -58,7 +58,7 @@
     "reports": "reports",
     "calendar": "Calendar",
     "settings": "Settings",
-    "exchangeRates":"Exchange rate"
+    "exchangeRates": "Exchange rate"
   },
   "sidebar": {
     "logout": "Logout",
@@ -862,12 +862,21 @@
     "reversalOf": "Cancellation: {{what}}",
     "beforeTransaction": "The cancellation date can't be before the transaction's date."
   },
-    "exchangeRates": {
+  "exchangeRates": {
     "title": "Exchange rates",
     "hint": "The last rate you used for each currency pair. A transfer between two currencies updates it automatically; you can also add a rate yourself.",
-    "from": "From", "to": "To", "rate": "Rate", "inverse": "Inverse", "pair": "Pair",
-    "updatedAt": "Updated", "source": "Source", "fromTransfer": "Transfer", "manual": "Manual",
-    "add": "Save rate", "empty": "No saved rates yet.", "loading": "Loading...",
+    "from": "From",
+    "to": "To",
+    "rate": "Rate",
+    "inverse": "Inverse",
+    "pair": "Pair",
+    "updatedAt": "Updated",
+    "source": "Source",
+    "fromTransfer": "Transfer",
+    "manual": "Manual",
+    "add": "Save rate",
+    "empty": "No saved rates yet.",
+    "loading": "Loading...",
     "loadError": "Could not load the exchange rates.",
     "saveError": "Could not save the rate. Please try again.",
     "deleteError": "Could not delete the rate. Please try again.",
@@ -877,7 +886,7 @@
     "computeSent": "Calculate the amount sent from the rate",
     "lastUsed": "Last saved rate"
   },
-    "deleteAccount": {
+  "deleteAccount": {
     "title": "Delete the account for good?",
     "warning": "The account is deleted with all its income, expenses and schedules. This can not be undone.",
     "archiveHint": "Only want to hide it?",
@@ -888,7 +897,7 @@
     "confirm": "Delete for good",
     "notConfirmed": "The account was not deleted: the confirmation text is wrong."
   },
-    "transactionDate": {
+  "transactionDate": {
     "label": "Date",
     "future": "The date can't be in the future. For a coming transaction, use a schedule."
   },
@@ -950,7 +959,7 @@
       "refund": "Refund"
     }
   },
-    "settings": {
+  "settings": {
     "save": "Save",
     "saved": "Saved.",
     "saveError": "Could not save. Try again.",
@@ -981,7 +990,21 @@
     },
     "preferences": {
       "title": "Preferences",
-      "language": "Language"
+      "language": "Language",
+      "baseCurrency": "Base currency",
+      "firstDayOfWeek": "First day of the week",
+      "defaultAccount": "Default account",
+      "notChosen": "None",
+      "byLanguage": "By language",
+      "days": {
+        "SATURDAY": "Saturday",
+        "SUNDAY": "Sunday",
+        "MONDAY": "Monday"
+      },
+      "noAccounts": "You have no active accounts yet.",
+      "saved": "Saved.",
+      "saveError": "Could not save. Try again.",
+      "loadError": "Could not load your preferences. Try again later."
     }
   }
 }

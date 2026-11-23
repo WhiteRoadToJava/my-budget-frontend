@@ -943,7 +943,7 @@
       "refund": "Återbetalning"
     }
   },
-    "settings": {
+  "settings": {
     "save": "Spara",
     "saved": "Sparat.",
     "saveError": "Det gick inte att spara. Försök igen.",
@@ -974,7 +974,21 @@
     },
     "preferences": {
       "title": "Inställningar",
-      "language": "Språk"
+      "language": "Språk",
+      "baseCurrency": "Basvaluta",
+      "firstDayOfWeek": "Veckans första dag",
+      "defaultAccount": "Standardkonto",
+      "notChosen": "Ingen",
+      "byLanguage": "Enligt språk",
+      "days": {
+        "SATURDAY": "Lördag",
+        "SUNDAY": "Söndag",
+        "MONDAY": "Måndag"
+      },
+      "noAccounts": "Du har inga aktiva konton än.",
+      "saved": "Sparat.",
+      "saveError": "Kunde inte spara. Försök igen.",
+      "loadError": "Kunde inte hämta dina inställningar. Försök senare."
     }
   }
 }

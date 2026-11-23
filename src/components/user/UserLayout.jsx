@@ -6,10 +6,12 @@ import i18n from "../../configuration/i18n.js";
 import NavBar from "../NavBar.jsx";
 import SubscriptionBanner from "./SubscriptionBanner.jsx";
 import styles from "../../styles/layout/layout.module.scss";
+import { useLanguageSync } from "../../hooks/useLanguageSync.js";
 
 const UserLayout = () => {
   const [menuItems, setMenuItems] = useState(getUserMenuItems());
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
+  useLanguageSync();
   const [profile, setProfile] = useState(() => {
     try {
       return JSON.parse(localStorage.getItem("profiles")) || null;

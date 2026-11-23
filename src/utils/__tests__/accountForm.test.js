@@ -15,6 +15,10 @@ describe("account form", () => {
     expect(mostUsedCurrency(accounts)).toBe("SEK");
     expect(mostUsedCurrency([])).toBe("");
     expect(emptyAccountForm(accounts)).toEqual({ name: "", type: "NORMAL", currency: "SEK", balance: "" });
+    // the base currency comes first, when it is one an account can have
+    expect(emptyAccountForm(accounts, "EUR").currency).toBe("EUR");
+    expect(emptyAccountForm(accounts, "XYZ").currency).toBe("SEK");
+    expect(emptyAccountForm(accounts, null).currency).toBe("SEK");
   });
 
   it("accepts a valid form", () => {

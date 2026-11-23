@@ -11,6 +11,7 @@ import {
 } from "../../utils/accounts/accountForm";
 import styles from "../../styles/components/forms/formSheet.module.scss";
 import i18n from "../../configuration/i18n";
+import { useBaseCurrency } from "../../hooks/usePreferences";
 
 // The form lives in its own component and is rendered only while open,
 // so every opening starts empty without resetting state by hand.
@@ -18,8 +19,9 @@ const CreateAccountForm = ({ onClose }) => {
   const queryClient = useQueryClient();
   const { data: accountsData } = useQuery({ queryKey: ["accounts"], queryFn: getAccounts });
   const existing = accountsData?.accounts ?? [];
+  const baseCurrency = useBaseCurrency();
 
-  const [form, setForm] = useState(() => emptyAccountForm(existing));
+  const [form, setForm] = useState(() => emptyAccountForm(existing, baseCurrency));
   const [error, setError] = useState(null);
 
   const mutation = useMutation({

@@ -14,10 +14,11 @@ export const mostUsedCurrency = (accounts = []) => {
   return Object.entries(counts).sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))[0]?.[0] ?? "";
 };
 
-export const emptyAccountForm = (accounts = []) => ({
+// the new account's currency: the user's base currency, else the one most used
+export const emptyAccountForm = (accounts = [], baseCurrency = null) => ({
   name: "",
   type: "NORMAL",
-  currency: mostUsedCurrency(accounts),
+  currency: ACCOUNT_CURRENCIES.includes(baseCurrency) ? baseCurrency : mostUsedCurrency(accounts),
   balance: "",
 });
 
