@@ -8,8 +8,7 @@ import { dateFnsLocale } from "../../utils/dates";
 import i18n from "../../configuration/i18n";
 
 // money in and out for the last six months, in one currency
-const CashFlowChart = ({ flows, currency, currencies, onCurrencyChange }) => {
-  const locale = dateFnsLocale(i18n.language);
+const CashFlowChart = ({ flows, currency, currencies, onCurrencyChange, title = i18n.t("overview.cashFlow") }) => {  const locale = dateFnsLocale(i18n.language);
   const data = flows.map((f) => ({
     name: format(parseISO(`${f.key}-01`), "MMM", { locale }),
     in: f.in,
@@ -21,7 +20,7 @@ const CashFlowChart = ({ flows, currency, currencies, onCurrencyChange }) => {
   return (
     <section className={styles.card} aria-labelledby="overview-flow">
       <div className={styles.cardHeader}>
-        <h2 id="overview-flow" className={styles.cardTitle}>{i18n.t("overview.cashFlow")}</h2>
+        <h2 id="overview-flow" className={styles.cardTitle}>{title}</h2>
         <CurrencyChips currencies={currencies} value={currency} onChange={onCurrencyChange} />
       </div>
       {!hasData ? (

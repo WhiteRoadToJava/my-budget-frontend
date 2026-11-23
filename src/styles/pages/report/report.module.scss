@@ -1,0 +1,73 @@
+@use "../../variables" as variable;
+
+/* Report page: the cards come from the overview styles; these are its own parts. */
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.period {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.periods {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.dates {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.date {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  min-width: 12rem;
+}
+
+.summary {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+
+  @media (max-width: 860px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @media (max-width: 420px) {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.change {
+  font-size: variable.$font-xs;
+  color: variable.$color-text-muted;
+
+  &[data-tone="good"] {
+    color: variable.$color-success;
+  }
+
+  &[data-tone="bad"] {
+    color: variable.$color-error;
+  }
+}
+
+.share {
+  color: variable.$color-text-muted;
+  font-size: variable.$font-xs;
+}
+
+/* income bars in green; expense bars keep the overview colour */
+.incomeFill {
+  background: variable.$color-success;
+}
