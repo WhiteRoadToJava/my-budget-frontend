@@ -548,10 +548,37 @@
     "label": "تغيير اللغة"
   },
   "report": {
-    "fromDate": "من تاريخ",
-    "toDate": "إلى تاريخ",
-    "search": "بحث",
-    "title": "التقرير"
+    "title": "التقارير",
+    "period": "الفترة",
+    "periods": {
+      "thisMonth": "هذا الشهر",
+      "lastMonth": "الشهر الماضي",
+      "last3": "آخر 3 أشهر",
+      "last6": "آخر 6 أشهر",
+      "last12": "آخر 12 شهراً",
+      "thisYear": "هذه السنة",
+      "custom": "اختيار التواريخ"
+    },
+    "fromDate": "من",
+    "toDate": "إلى",
+    "chooseDates": "اختر أول يوم وآخر يوم.",
+    "noTransactions": "لا توجد معاملات بعد.",
+    "error": "تعذّر تحميل التقرير.",
+    "summary": "الملخص",
+    "savingsRate": "نسبة الادخار",
+    "transactionsCount": "{{count}} معاملة",
+    "vsPrevious": "مقارنة بالفترة السابقة",
+    "noComparison": "لا توجد فترة سابقة للمقارنة",
+    "expensesByCategory": "أين ذهب المال",
+    "incomeByCategory": "من أين جاء المال",
+    "noExpenses": "لا مصاريف في هذه الفترة.",
+    "noIncome": "لا دخل في هذه الفترة.",
+    "fees": "عمولات التحويل",
+    "noCategory": "بلا فئة",
+    "byMonth": "الداخل والخارج شهراً بشهر",
+    "biggest": "أكبر المعاملات",
+    "nothingInPeriod": "لا شيء في هذه الفترة.",
+    "rules": "التحويلات بين حساباتك لا تُحسب، أما عمولاتها فتُحسب. المعاملة الملغاة تُحسب في تاريخها، وتُطرح في تاريخ إلغائها."
   },
   "dashboard": {
     "overview": "نظرة عامة"
@@ -1000,7 +1027,7 @@
     "preferences": {
       "title": "التفضيلات",
       "language": "اللغة",
-      
+
       "baseCurrency": "العملة الأساسية",
       "firstDayOfWeek": "أول يوم في الأسبوع",
       "defaultAccount": "الحساب الافتراضي",
