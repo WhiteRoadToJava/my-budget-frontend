@@ -906,7 +906,7 @@
     "confirm": "حذف نهائي",
     "notConfirmed": "لم يُحذف الحساب: نص التأكيد غير صحيح."
   },
-    "transactionDate": {
+  "transactionDate": {
     "label": "التاريخ",
     "future": "لا يمكن أن يكون التاريخ في المستقبل. للمعاملات القادمة استخدم الجداول."
   },
@@ -968,7 +968,7 @@
       "refund": "استرداد"
     }
   },
-    "settings": {
+  "settings": {
     "save": "حفظ",
     "saved": "تم الحفظ.",
     "saveError": "تعذّر الحفظ. حاول مرة أخرى.",
@@ -999,7 +999,21 @@
     },
     "preferences": {
       "title": "التفضيلات",
-      "language": "اللغة"
+      "language": "اللغة",
+      "baseCurrency": "Base currency",
+      "firstDayOfWeek": "First day of the week",
+      "defaultAccount": "Default account",
+      "notChosen": "None",
+      "byLanguage": "By language",
+      "days": {
+        "SATURDAY": "Saturday",
+        "SUNDAY": "Sunday",
+        "MONDAY": "Monday"
+      },
+      "noAccounts": "You have no active accounts yet.",
+      "saved": "Saved.",
+      "saveError": "Could not save. Try again.",
+      "loadError": "Could not load your preferences. Try again later."
     }
   }
 }

@@ -943,7 +943,7 @@
       "refund": "Återbetalning"
     }
   },
-    "settings": {
+  "settings": {
     "save": "Spara",
     "saved": "Sparat.",
     "saveError": "Det gick inte att spara. Försök igen.",
@@ -974,7 +974,21 @@
     },
     "preferences": {
       "title": "Inställningar",
-      "language": "Språk"
+      "language": "Språk",
+      "baseCurrency": "العملة الأساسية",
+      "firstDayOfWeek": "أول يوم في الأسبوع",
+      "defaultAccount": "الحساب الافتراضي",
+      "notChosen": "بدون",
+      "byLanguage": "حسب اللغة",
+      "days": {
+        "SATURDAY": "السبت",
+        "SUNDAY": "الأحد",
+        "MONDAY": "الاثنين"
+      },
+      "noAccounts": "لا توجد لديك حسابات نشطة بعد.",
+      "saved": "تم الحفظ.",
+      "saveError": "تعذّر الحفظ. حاول مرة أخرى.",
+      "loadError": "تعذّر تحميل تفضيلاتك. حاول لاحقاً."
     }
   }
 }
