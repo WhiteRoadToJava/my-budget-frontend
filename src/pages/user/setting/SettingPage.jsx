@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from "react";
-import UpdatePassword from "../../auth/UpdatePassword";
-import UpdateUser from "../../../components/user/setting/UpdateUser";
 import styles from "../../../styles/pages/setting/settingPage.module.scss";
 import { getUser } from "../../../api/userService";
-import UserDetails from "../../../components/user/setting/UserDetails";
 import { onEnterOrSpace } from "../../../utils/accessibility";
 
 const SettingPage = () => {
