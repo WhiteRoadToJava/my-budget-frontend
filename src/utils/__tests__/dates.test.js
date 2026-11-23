@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { toCalendarDay, dateFnsLocale } from "../dates";
+import { toCalendarDay, dateFnsLocale, weekStartsOnFor } from "../dates";
 
 describe("toCalendarDay", () => {
   it.each(["2026-03-10", "2026-03-10T00:00:00", "2026-03-10T00:00:00.000Z"])(
@@ -22,5 +22,19 @@ describe("dateFnsLocale", () => {
     expect(dateFnsLocale("sv").code).toBe("sv");
     expect(dateFnsLocale("ar").code).toBe("ar");
     expect(dateFnsLocale("xx").code).toBe("en-US");
+  });
+});
+
+describe("weekStartsOnFor", () => {
+  it("follows the user's choice", () => {
+    expect(weekStartsOnFor("SATURDAY", "en")).toBe(6);
+    expect(weekStartsOnFor("SUNDAY", "sv")).toBe(0);
+    expect(weekStartsOnFor("MONDAY", "ar")).toBe(1);
+  });
+
+  it("follows the language when nothing is chosen", () => {
+    expect(weekStartsOnFor(null, "sv")).toBe(1);
+    expect(weekStartsOnFor(null, "ar")).toBe(6);
+    expect(weekStartsOnFor(undefined, "en")).toBe(0);
   });
 });

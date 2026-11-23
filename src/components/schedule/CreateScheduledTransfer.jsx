@@ -12,6 +12,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { addSchedule } from "../../api/scheduleService";
 import Datepicker from "../inputs/Datepicker";
 import i18n from "../../configuration/i18n";
+import { useDefaultAccount } from "../../hooks/usePreferences";
 
 const interval = ["DAILY", "WEEKLY", "MONTHLY", "YEARLY"];
 
@@ -47,11 +48,14 @@ const CreateScheduledTransfer = ({ isOpen, isClose, accounts }) => {
   });
 
   const accountsList = accounts?.accounts || [];
+  // no account chosen yet: the user's default account
+  const defaultAccount = useDefaultAccount(accountsList);
+  const sourceAccountId = transferData.sourceAccountId || defaultAccount?.id || "";
 
   const getAccountNameById = (id) => accountsList.find((acc) => acc.id === id)?.name;
-  const selectedSourceName = getAccountNameById(transferData.sourceAccountId);
+  const selectedSourceName = getAccountNameById(sourceAccountId);
   const selectedDestinationName = getAccountNameById(transferData.destinationAccountId);
-  const sourceAccount = accountsList.find((a) => a.id === transferData.sourceAccountId);
+  const sourceAccount = accountsList.find((a) => a.id === sourceAccountId);
   const destinationAccount = accountsList.find((a) => a.id === transferData.destinationAccountId);
   const sourceCurrency = transferData.sourceCurrency || firstCurrency(sourceAccount);
   const destinationCurrency = transferData.destinationCurrency || firstCurrency(destinationAccount);
@@ -79,7 +83,7 @@ const CreateScheduledTransfer = ({ isOpen, isClose, accounts }) => {
       } else {
         // the sent currency when the account has it (and it is another account), else another one
         const codes = currenciesOf(selectedAccount);
-        const same = selectedAccount?.id === prev.sourceAccountId;
+        const same = selectedAccount?.id === sourceAccountId;
         next.destinationCurrency = !same && hasCurrency(selectedAccount, sourceCurrency)
           ? sourceCurrency
           : codes.find((c) => c !== sourceCurrency) ?? codes[0] ?? "";
@@ -94,7 +98,7 @@ const CreateScheduledTransfer = ({ isOpen, isClose, accounts }) => {
       setError({ hasError: true, message: i18n.t("messages.amountless") });
       return false;
     }
-    if (!transferData.sourceAccountId || !transferData.destinationAccountId) {
+    if (!sourceAccountId || !transferData.destinationAccountId) {
       setError({ hasError: true, message: i18n.t("messages.accountRequired") });
       return false;
     }
@@ -115,6 +119,7 @@ const CreateScheduledTransfer = ({ isOpen, isClose, accounts }) => {
     const rate = sameCurrency ? 1 : Number(transferData.exChangeRate);
     mutation.mutate({
       ...transferData,
+      sourceAccountId,
       sourceCurrency,
       destinationCurrency,
       exChangeRate: rate,

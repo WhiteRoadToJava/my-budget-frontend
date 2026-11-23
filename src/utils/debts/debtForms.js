@@ -1,3 +1,4 @@
+import { CURRENCIES } from "../currencies";
 import { hasCurrency } from "../accounts/pockets";
 // Pure helpers for the debt forms: options, conversion to/from the API
 // and validation. Validation returns an i18n key (or null) so it mirrors
@@ -24,11 +25,12 @@ export const todayString = (today = new Date()) => format(today, "yyyy-MM-dd");
 
 // ---------- debt ----------
 
-export const emptyDebtForm = (today = new Date()) => ({
+// baseCurrency: the user's base currency, the debt's currency until another is picked
+export const emptyDebtForm = (today = new Date(), baseCurrency = null) => ({
   name: "",
   counterparty: "",
   direction: "OWED_BY_ME",
-  currency: "",
+  currency: CURRENCIES.includes(baseCurrency) ? baseCurrency : "",
   annualRate: "0",
   compounding: "NONE",
   startDate: todayString(today),

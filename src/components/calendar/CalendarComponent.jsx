@@ -19,6 +19,7 @@ import ChevronLeft from "../icons/chevrons/DoubleChevronLeft.jsx";
 import ChevronRight from "../icons/chevrons/DoubleChevronRight.jsx";
 import { onEnterOrSpace } from "../../utils/accessibility";
 import i18n from "../../configuration/i18n";
+import { useWeekStart } from "../../hooks/usePreferences";
 
 const isIncome = (t) => t.type === "incomse";
 const isExpense = (t) => t.type === "expense";
@@ -29,6 +30,8 @@ CalendarComponent = ({ transactions = [], accounts = [] }) => {
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const [selectedDay, setSelectedDay] = useState(null);
   const [selectedTransaction, setSelectedTransaction] = useState(null);
+  // the user's first day of the week, else the language's
+  const weekStartsOn = useWeekStart();
 
   // بنجمّع المعاملات حسب اليوم (yyyy-MM-dd) مرة وحدة، بدل ما نفلترها من جديد
   // لكل خانة يوم بالتقويم.
@@ -49,21 +52,20 @@ CalendarComponent = ({ transactions = [], accounts = [] }) => {
     return map;
   }, [transactions]);
 
-  // الأسبوع بيبلش الاثنين (متعارف عليه بالسويد/أوروبا) بدل الأحد.
   const daysGrid = useMemo(() => {
-    const start = startOfWeek(startOfMonth(currentMonth), { weekStartsOn: 1 });
-    const end = endOfWeek(endOfMonth(currentMonth), { weekStartsOn: 1 });
+    const start = startOfWeek(startOfMonth(currentMonth), { weekStartsOn });
+    const end = endOfWeek(endOfMonth(currentMonth), { weekStartsOn });
     return eachDayOfInterval({ start, end });
-  }, [currentMonth]);
+  }, [currentMonth, weekStartsOn]);
 
   const weekDayLabels = useMemo(() => {
-    const start = startOfWeek(new Date(), { weekStartsOn: 1 });
+    const start = startOfWeek(new Date(), { weekStartsOn });
     return Array.from({ length: 7 }, (_, i) => {
       const d = new Date(start);
       d.setDate(start.getDate() + i);
       return format(d, "EEEEEE");
     });
-  }, []);
+  }, [weekStartsOn]);
 
   const selectedDayTransactions = selectedDay
     ? transactionsByDay.get(format(selectedDay, "yyyy-MM-dd")) || []

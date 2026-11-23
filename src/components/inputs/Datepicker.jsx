@@ -16,12 +16,14 @@ import Calendar from "../icons/calendar/Calendar";
 import { onEnterOrSpace } from "../../utils/accessibility";
 import { dateFnsLocale, toCalendarDay } from "../../utils/dates";
 import i18n from "../../configuration/i18n";
+import { useWeekStart } from "../../hooks/usePreferences";
 
 // value and onChange use "yyyy-MM-dd"; values with a time part are accepted too
 export default function Datepicker({ onChange, value, min, max }) {
   const selected = toCalendarDay(value);
   const locale = dateFnsLocale(i18n.language);
-  const weekStartsOn = locale.options?.weekStartsOn ?? 1;
+  // the user's first day of the week, else the language's
+  const weekStartsOn = useWeekStart();
 
   const [showCalendar, setShowCalendar] = useState(false);
   // open on the month of the chosen date, not always on this month

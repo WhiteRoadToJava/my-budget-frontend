@@ -10,6 +10,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { addSchedule } from "../../api/scheduleService";
 import Datepicker from "../inputs/Datepicker";
 import i18n from "../../configuration/i18n";
+import { useDefaultAccount } from "../../hooks/usePreferences";
 
 const interval = ["DAILY", "WEEKLY", "MONTHLY", "YEARLY"];
 
@@ -49,6 +50,9 @@ const CreateScheduledIncome = ({
 
   // Fix 1: accountsList declared BEFORE it is used
   const accountsList = accounts?.accounts || [];
+  // no account chosen yet: the user's default account
+  const defaultAccount = useDefaultAccount(accountsList);
+  const sourceAccountId = incomeData.sourceAccountId || defaultAccount?.id || "";
 
   // Fix 2: Now safe to use accountsList here
   const filteredSourceList = accountsList.map((acc) => acc.name);
@@ -58,8 +62,8 @@ const CreateScheduledIncome = ({
   };
 
   // Fix 3: Use correct state field 'sourceAccountId'
-  const selectedSourceName = getAccountNameById(incomeData.sourceAccountId);
-  const sourceAccount = accountsList.find((a) => a.id === incomeData.sourceAccountId);
+  const selectedSourceName = getAccountNameById(sourceAccountId);
+  const sourceAccount = accountsList.find((a) => a.id === sourceAccountId);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -100,7 +104,11 @@ const CreateScheduledIncome = ({
   const handleCreateIncome = (e) => {
     e.preventDefault();
     if (!handleValidation()) return;
-    mutation.mutate(incomeData);
+    mutation.mutate({
+      ...incomeData,
+      sourceAccountId,
+      sourceCurrency: incomeData.sourceCurrency || firstCurrency(sourceAccount),
+    });
   };
 
   // Fix 5: cleanData now correctly calls isClose()
