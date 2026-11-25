@@ -4,7 +4,8 @@ import FormInput from '../inputs/FormInput';
 import i18n from '../../configuration/i18n';
 import { onEnterOrSpace } from '../../utils/accessibility';
 
-const DropDown = ({ label, text, list, onChange, name, value, placeholder = "Select an option" }) => {
+// renderItem(item): how an item of the list is shown (the item itself by default)
+const DropDown = ({ label, text, list, onChange, name, value, placeholder = "Select an option", renderItem }) => {
   const [viewList, setViewList] = useState(false);
 
 const handleSelect = (item) => {
@@ -46,7 +47,7 @@ const handleSelect = (item) => {
                 tabIndex={0}
                 onKeyDown={onEnterOrSpace(() => handleSelect(item))}
               >
-                {item}
+                {renderItem ? renderItem(item) : item}
               </div>
             ))
           ) : (

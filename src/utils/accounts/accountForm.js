@@ -1,7 +1,5 @@
 // Pure helpers for the "new account" form. Validation returns an i18n key or null.
 
-export const ACCOUNT_CURRENCIES = ["SEK", "EUR", "USD", "GBP", "AED", "SAR", "TRY", "JPY"];
-
 export const ACCOUNT_TYPES = [
   { value: "NORMAL", label: "accountsPage.types.NORMAL", hint: "createAccount.typeNormalHint" },
   { value: "COMPANY", label: "accountsPage.types.COMPANY", hint: "createAccount.typeCompanyHint" },
@@ -14,11 +12,13 @@ export const mostUsedCurrency = (accounts = []) => {
   return Object.entries(counts).sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))[0]?.[0] ?? "";
 };
 
-// the new account's currency: the user's base currency, else the one most used
-export const emptyAccountForm = (accounts = [], baseCurrency = null) => ({
+// the new account's currency: the user's base currency, else the one most used.
+// codes: the currencies that can be chosen (empty while the list is loading)
+export const emptyAccountForm = (accounts = [], baseCurrency = null, codes = []) => ({
   name: "",
   type: "NORMAL",
-  currency: ACCOUNT_CURRENCIES.includes(baseCurrency) ? baseCurrency : mostUsedCurrency(accounts),
+  currency: baseCurrency && (codes.length === 0 || codes.includes(baseCurrency))
+    ? baseCurrency : mostUsedCurrency(accounts),
   balance: "",
 });
 

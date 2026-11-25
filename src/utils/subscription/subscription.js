@@ -7,7 +7,6 @@ export const PAYMENT_METHODS = [
   "CASH", "SHAM_CASH", "SYRIATEL_CASH", "MTN_CASH", "BANK_TRANSFER", "HAWALA", "FREE", "OTHER",
 ];
 
-export const PAYMENT_CURRENCIES = ["SYP", "USD", "EUR", "SEK"];
 
 // wa.me wants the number with country code and digits only: "+46 76-263 89 40" -> "46762638940"
 export const whatsappLink = (phone, text = "") => {

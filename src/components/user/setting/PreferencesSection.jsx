@@ -5,7 +5,8 @@ import styles from "../../../styles/pages/setting/settingPage.module.scss";
 import i18n from "../../../configuration/i18n";
 import { getAccounts } from "../../../api/accountService";
 import { isArchived } from "../../../utils/accounts/accountList";
-import { ACCOUNT_CURRENCIES } from "../../../utils/accounts/accountForm";
+import { useCurrencies } from "../../../hooks/useCurrencies";
+import CurrencyLabel from "../../currencies/CurrencyLabel";
 import { usePreferences, useUpdatePreferences } from "../../../hooks/usePreferences";
 import SearchableDropDown from "../../elements/SearchableDropDown";
 
@@ -38,6 +39,7 @@ const Choices = ({ id, title, options, value, onChoose, disabled }) => (
 // Every choice is saved on the server at once, so it follows the user to every device.
 const PreferencesSection = () => {
   const [language, setLanguage] = useState(i18n.language);
+  const { codes } = useCurrencies();
   const { preferences, isLoading, isError } = usePreferences();
   const { mutate, isPending, isSuccess, isError: saveFailed } = useUpdatePreferences();
 
@@ -93,7 +95,7 @@ const PreferencesSection = () => {
           <Choices
             id="settings-currency"
             title={i18n.t("settings.preferences.baseCurrency")}
-            options={[notChosen, ...ACCOUNT_CURRENCIES.map((code) => ({ value: code, label: code }))]}
+            options={[notChosen, ...codes.map((code) => ({ value: code, label: <CurrencyLabel code={code} /> }))]}
             value={preferences.baseCurrency}
             onChoose={save("baseCurrency")}
             disabled={busy}
