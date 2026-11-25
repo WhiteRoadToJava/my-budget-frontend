@@ -28,8 +28,9 @@ import ResetPassword from "./pages/auth/ResetPassword.jsx";
 import ReportPage from "./pages/user/ReportPage.jsx";
 import DebtsPage from "./pages/user/debts/DebtsPage.jsx";
 import DebtDetailsPage from "./pages/user/debts/DebtDetailsPage.jsx";
+import CategoriesPage from "./pages/user/categories/CategoriesPage.jsx";
 import ExchangeRatesPage from "./pages/user/exchangeRates/ExchangeRatesPage.jsx";
-
+import AdminCurrenciesPage from "./pages/admin/AdminCurrenciesPage.jsx";
 function App() {
   // re-renders the whole app when the language changes; most components call
   // i18n.t() directly and would otherwise keep showing the old language
@@ -67,6 +68,7 @@ function App() {
                     element={<AdminRequestsPage />}
                   />
                   <Route path="/admin/admins" element={<AdminAdminsPage />} />
+                                    <Route path="/admin/currencies" element={<AdminCurrenciesPage />} />
                   <Route path="/admin/*" element={<Dashboard />} />
                   <Route path="/admin/dashboard" element={<Dashboard />} />
                 </Route>
@@ -99,6 +101,7 @@ function App() {
                     element={<ReportPage />}
                   />
                   <Route path="/user/debts" element={<DebtsPage />} />
+                  <Route path="/user/categories" element={<CategoriesPage />} />
                   <Route
                     path="/user/debts/:debtId"
                     element={<DebtDetailsPage />}

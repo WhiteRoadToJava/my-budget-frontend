@@ -2,10 +2,10 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { format } from "date-fns";
 import styles from "../../styles/components/overview/overview.module.scss";
-import { formatMoney } from "../../utils/accounts/accountStatement";
 import { scheduleTypeKey } from "../../utils/debts/scheduleTypes";
 import { dateFnsLocale } from "../../utils/dates";
 import i18n from "../../configuration/i18n";
+import { formatAmount } from "../../utils/currencies/amountFormat";
 
 const INCOMING = new Set(["INCOMSE"]);
 
@@ -34,7 +34,7 @@ const UpcomingAndDebts = ({ upcoming, currencyOfAccount, debtTotals }) => {
                 </span>
                 <span className={incoming ? styles.in : styles.out}>
                   {incoming ? "+ " : "− "}
-                  {formatMoney(Number(s.amountSend ?? 0), i18n.language)} {currencyOfAccount(s.sourceAccount)}
+                  {formatAmount(s.amountSend, currencyOfAccount(s.sourceAccount))}
                 </span>
               </li>
             );
@@ -50,8 +50,8 @@ const UpcomingAndDebts = ({ upcoming, currencyOfAccount, debtTotals }) => {
           </div>
           {debtTotals.map((d) => (
             <div key={d.currency} className={styles.debts}>
-              <span>{i18n.t("debts.owedByMe")}: <strong>{formatMoney(d.owedByMe, i18n.language)}</strong> {d.currency}</span>
-              <span>{i18n.t("debts.owedToMe")}: <strong>{formatMoney(d.owedToMe, i18n.language)}</strong> {d.currency}</span>
+              <span>{i18n.t("debts.owedByMe")}: <strong>{formatAmount(d.owedByMe, d.currency)}</strong></span>
+              <span>{i18n.t("debts.owedToMe")}: <strong>{formatAmount(d.owedToMe, d.currency)}</strong></span>
             </div>
           ))}
         </>

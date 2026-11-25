@@ -19,7 +19,8 @@ import {
   incomeExpenseDraft,
   transferDraft,
 } from "../../utils/transactions/duplicate.js";
-import { findCategory } from "../../assiets/categories/assits";
+import { useCategories } from "../../hooks/useCategories";
+import CategoryIcon from "../categories/CategoryIcon";
 import transferIcon from "../../assiets/categories/icons/currency.svg";
 import {
   belongsToDebt,
@@ -30,10 +31,11 @@ import {
   isIncoming,
   otherAccountName,
 } from "../../utils/transactions/transactionList";
-import { formatNumber } from "../../utils/formating";
+import { createdAtFor } from "../../utils/transactions/transactionDate";
 import { dateFnsLocale } from "../../utils/dates";
 import { firstCurrency, transactionCurrency } from "../../utils/accounts/pockets";
 import i18n from "../../configuration/i18n";
+import { formatAmount } from "../../utils/currencies/amountFormat";
 import CreateExpense from "../expenses/CreateExpense";
 import CreateIncomse from "../incomes/CreateIncome";
 import CreateTransfer from "../transfers/CreateTransfer";
@@ -79,7 +81,7 @@ const DELETE_FN = {
 // amounts, rate and fees of a transfer, each in the currency of its side
 // (a transfer from before the currencies: the account's first currency)
 const money = (amount, currency, account) =>
-  `${formatNumber(Number(amount ?? 0))} ${currency ?? firstCurrency(account) ?? ""}`.trim();
+  formatAmount(amount, currency ?? firstCurrency(account));
 
 const feeText = (fee, direction, currency, account) =>
   `${money(fee, currency, account)} · ${i18n.t(direction === "CREDIT" ? "transferFees.credit" : "transferFees.charge")}` +
@@ -106,6 +108,7 @@ const transferBreakdown = (t) => {
 
 const TransactionInfo = ({ isOpen, onClose, accounts, transaction }) => {
   const queryClient = useQueryClient();
+  const { find } = useCategories();
   const navigate = useNavigate();
   const [editOpen, setEditOpen] = useState(false);
   const [confirmDelete, setConfirmDelete] = useState(false);
@@ -129,7 +132,7 @@ const TransactionInfo = ({ isOpen, onClose, accounts, transaction }) => {
   });
   const isDebtRecord = belongsToDebt(transaction);
   const incoming = isIncoming(transaction);
-  const category = findCategory(transaction?.category, type);
+  const category = find(transaction?.category, type);
   const typeKey = typeLabelKey(type);
   const currency = transactionCurrency(transaction);
   const date = new Date(transaction?.createdAt);
@@ -169,7 +172,7 @@ const TransactionInfo = ({ isOpen, onClose, accounts, transaction }) => {
   };
 
   const cancelMutation = useMutation({
-    mutationFn: (reason) => CANCEL_FN[type](transaction.id, reason),
+    mutationFn: ({ reason, day }) => CANCEL_FN[type](transaction.id, reason, createdAtFor(day)),
     onSuccess: () => {
       refresh();
       setCancelling(false);
@@ -353,10 +356,10 @@ const TransactionInfo = ({ isOpen, onClose, accounts, transaction }) => {
         isOpen={isOpen}
         onClose={close}
         tone={tone}
-        icon={isTransfer ? transferIcon : category?.icon}
+        icon={isTransfer ? transferIcon : <CategoryIcon category={category} />}
         kicker={typeKey ? i18n.t(typeKey) : ""}
         title={title}
-        amount={`${incoming ? "+" : "−"}${formatNumber(Math.abs(Number(transaction?.amount ?? 0)))} ${currency}`}
+        amount={`${incoming ? "+" : "−"}${formatAmount(Math.abs(Number(transaction?.amount ?? 0)), currency)}`}
         note={isDebtRecord ? i18n.t("debts.errorDebtRecord") : cancelled ? i18n.t("cancel.note") : null}
         fields={fields}
         error={error}
@@ -434,9 +437,14 @@ const TransactionInfo = ({ isOpen, onClose, accounts, transaction }) => {
       {cancelling && (
         <CancelTransactionModal
           onClose={() => setCancelling(false)}
-          onConfirm={(reason) => cancelMutation.mutate(reason)}
+          onConfirm={(reason, day) => cancelMutation.mutate({ reason, day })}
           isTransfer={isTransfer}
           isPending={cancelMutation.isPending}
+          firstDay={
+            transaction?.createdAt && !Number.isNaN(new Date(transaction.createdAt).getTime())
+              ? format(new Date(transaction.createdAt), "yyyy-MM-dd")
+              : undefined
+          }
         />
       )}
       <DeleteConfimation

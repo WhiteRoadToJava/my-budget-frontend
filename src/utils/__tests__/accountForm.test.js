@@ -1,7 +1,6 @@
 import { describe, it, expect } from "vitest";
 import {
   mostUsedCurrency, emptyAccountForm, validateAccountForm, formToAccountRequest, accountErrorKey,
-  ACCOUNT_CURRENCIES,
 } from "../accounts/accountForm";
 
 const accounts = [
@@ -15,6 +14,10 @@ describe("account form", () => {
     expect(mostUsedCurrency(accounts)).toBe("SEK");
     expect(mostUsedCurrency([])).toBe("");
     expect(emptyAccountForm(accounts)).toEqual({ name: "", type: "NORMAL", currency: "SEK", balance: "" });
+    // the base currency comes first, when it is one an account can have
+    expect(emptyAccountForm(accounts, "EUR").currency).toBe("EUR");
+    expect(emptyAccountForm(accounts, "XYZ", ["SEK", "EUR"]).currency).toBe("SEK");
+    expect(emptyAccountForm(accounts, null).currency).toBe("SEK");
   });
 
   it("accepts a valid form", () => {
@@ -43,7 +46,10 @@ describe("account form", () => {
     expect(accountErrorKey({})).toBe("messages.errorCreateAccount");
   });
 
-  it("has no duplicate currencies", () => {
-    expect(new Set(ACCOUNT_CURRENCIES).size).toBe(ACCOUNT_CURRENCIES.length);
+  it("starts with the base currency only when it can be chosen", () => {
+    expect(emptyAccountForm([], "NOK", ["SEK", "NOK"]).currency).toBe("NOK");
+    expect(emptyAccountForm([], "NOK", ["SEK"]).currency).toBe("");
+    // the list is not loaded yet: the server checks the currency anyway
+    expect(emptyAccountForm([], "NOK", []).currency).toBe("NOK");
   });
 });

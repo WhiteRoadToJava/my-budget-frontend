@@ -1,4 +1,3 @@
-import React from "react";
 import AmountWithCurrency from "../inputs/AmountWithCurrency";
 import styles from "../../styles/components/transfers/transferFees.module.scss";
 import { FEE_DIRECTIONS } from "../../utils/transactions/transferFees";
@@ -49,15 +48,20 @@ const FeeFieldset = ({ prefix, legend, fees, onChange, sideAccount, sideCurrency
     </fieldset>
   );
 };
+// One side's fee alone, for forms that show each fee under its own side.
+// side: "send" (paid from the sending account) or "receive" (from the receiving one)
+export const TransferFeeField = ({ side, fees, onChange, account, currency, accounts = [] }) => (
+  <FeeFieldset prefix={side} legend={i18n.t(`transferFees.${side}Fee`)} fees={fees} onChange={onChange}
+    sideAccount={account} sideCurrency={currency} accounts={accounts} />
+);
 
-// fees: see utils/transactions/transferFees.js; the send fee is paid from the sending
-// account, the receive fee from the receiving one
+// fees: see utils/transactions/transferFees.js; both fees together (the update form)
 const TransferFeesFields = ({ fees, onChange, sourceAccount, sourceCurrency, destinationAccount, destinationCurrency, accounts = [] }) => (
   <div className={styles.fees}>
-    <FeeFieldset prefix="send" legend={i18n.t("transferFees.sendFee")} fees={fees} onChange={onChange}
-      sideAccount={sourceAccount} sideCurrency={sourceCurrency} accounts={accounts} />
-    <FeeFieldset prefix="receive" legend={i18n.t("transferFees.receiveFee")} fees={fees} onChange={onChange}
-      sideAccount={destinationAccount} sideCurrency={destinationCurrency} accounts={accounts} />
+    <TransferFeeField side="send" fees={fees} onChange={onChange}
+      account={sourceAccount} currency={sourceCurrency} accounts={accounts} />
+    <TransferFeeField side="receive" fees={fees} onChange={onChange}
+      account={destinationAccount} currency={destinationCurrency} accounts={accounts} />
   </div>
 );
 

@@ -25,7 +25,7 @@ const DetailsSheet = ({
       <header className={styles.header}>
         {icon && (
           <span className={styles.icon} aria-hidden="true">
-            <img src={icon} alt="" />
+            {typeof icon === "string" ? <img src={icon} alt="" /> : icon}
           </span>
         )}
         <div className={styles.heading}>

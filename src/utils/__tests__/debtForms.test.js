@@ -11,6 +11,10 @@ const validDebt = { ...emptyDebtForm(today), name: "Car", currency: "SEK" };
 describe("debt form", () => {
   it("starts with today's date and no interest", () => {
     expect(emptyDebtForm(today)).toMatchObject({ startDate: "2026-11-02", annualRate: "0", compounding: "NONE" });
+    expect(emptyDebtForm(today).currency).toBe("");
+    expect(emptyDebtForm(today, "EUR").currency).toBe("EUR");
+    expect(emptyDebtForm(today, "EUR", ["SEK", "EUR"]).currency).toBe("EUR");
+    expect(emptyDebtForm(today, "EUR", ["SEK"]).currency).toBe("");
   });
 
   it("accepts a valid debt", () => {

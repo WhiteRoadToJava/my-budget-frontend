@@ -41,9 +41,9 @@ export const deleteTransfer= async(transferId) => {
 
 
 
-// cancelled: kept in the history, its money taken back; reason is optional
-export const cancelTransfer = async (id, reason) => {
-  const response = await api.patch(`/user/transfer/cancel/${id}`, { reason: reason || null });
+// cancelled: kept on its own day and taken back on cancelledAt (empty = now); reason is optional
+export const cancelTransfer = async (id, reason, cancelledAt) => {
+  const response = await api.patch(`/user/transfer/cancel/${id}`, { reason: reason || null, cancelledAt });
   return response.data;
 };
 

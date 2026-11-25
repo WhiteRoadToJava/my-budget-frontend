@@ -95,3 +95,16 @@
     background: variable.$color-border;
   }
 }
+
+
+
+
+
+
+/* phone: one side of the transfer (account, amount, fee), one under the other */
+.side {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  min-width: 0;
+}

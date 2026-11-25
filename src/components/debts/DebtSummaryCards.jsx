@@ -1,8 +1,8 @@
 import React from "react";
 import { parseISO } from "date-fns";
 import styles from "../../styles/components/debts/debtDetails.module.scss";
-import { formatNumber } from "../../utils/formating";
 import i18n from "../../configuration/i18n";
+import { formatAmount } from "../../utils/currencies/amountFormat";
 
 // the numbers DebtCalculator returns, as of today (summary.asOf)
 const ITEMS = [
@@ -24,7 +24,7 @@ const DebtSummaryCards = ({ summary, currency }) => {
           <div key={item.key} className={styles.summaryItem} data-main={!!item.main}>
             <span className={styles.label}>{i18n.t(item.label)}</span>
             <span className={styles.value}>
-              {formatNumber(summary[item.key] ?? 0)} {currency}
+              {formatAmount(summary[item.key], currency)}
             </span>
           </div>
         ))}

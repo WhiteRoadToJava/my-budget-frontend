@@ -1,9 +1,9 @@
 import React from "react";
 import CurrencySelect from "./CurrencySelect";
 import { pocketOf, pocketsOf } from "../../utils/accounts/pockets";
-import { formatNumber } from "../../utils/formating";
 import styles from "../../styles/inputs/amountWithCurrency.module.scss";
 import i18n from "../../configuration/i18n";
+import { formatAmount } from "../../utils/currencies/amountFormat";
 
 // An amount with its currency (the account's currencies) and, under it, what is available
 // in that currency. Looks like FormInput. onChange gets the input event, like FormInput.
@@ -26,7 +26,7 @@ const AmountWithCurrency = ({
       {hint && <p className={styles.hint}>{hint}</p>}
       {showAvailable && available !== undefined && (
         <p className={styles.hint}>
-          {i18n.t("currencies.available")}: {formatNumber(Number(available))} {currency}
+          {i18n.t("currencies.available")}: {formatAmount(available, currency)}
         </p>
       )}
     </div>

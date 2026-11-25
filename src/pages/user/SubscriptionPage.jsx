@@ -6,15 +6,17 @@ import StatusBadge from "../../components/admin/StatusBadge";
 import FormInput from "../../components/inputs/FormInput";
 import Button from "../../components/btns/Button";
 import {
-  PAYMENT_CURRENCIES, SUPPORT_WHATSAPP, USER_PAYMENT_METHODS, toPaymentRequest, validatePaymentRequest, whatsappLink,
+  SUPPORT_WHATSAPP, USER_PAYMENT_METHODS, toPaymentRequest, validatePaymentRequest, whatsappLink,
 } from "../../utils/subscription/subscription";
-import { formatMoney } from "../../utils/accounts/accountStatement";
 import { dateFnsLocale, toCalendarDay } from "../../utils/dates";
 import styles from "../../styles/components/admin/admin.module.scss";
 import sheet from "../../styles/components/forms/formSheet.module.scss";
 import i18n from "../../configuration/i18n";
+import { formatAmount } from "../../utils/currencies/amountFormat";
+import { useCurrencies } from "../../hooks/useCurrencies";
+import { currencyLabel } from "../../utils/currencies/currencyNames";
 
-const emptyForm = () => ({ months: 1, method: "", amount: "", currency: "SYP", reference: "", note: "" });
+const emptyForm = () => ({ months: 1, method: "", amount: "", currency: "", reference: "", note: "" });
 
 // The user's subscription: state, how to pay, and "I have paid" for the admin to approve.
 const SubscriptionPage = () => {
@@ -23,6 +25,9 @@ const SubscriptionPage = () => {
   const [error, setError] = useState(null);
   const [sent, setSent] = useState(false);
   const set = (changes) => { setForm((f) => ({ ...f, ...changes })); setError(null); setSent(false); };
+  // the currency chosen, else the first one a subscription can be paid in
+  const { paymentCodes } = useCurrencies();
+  const paid = { ...form, currency: paymentCodes.includes(form.currency) ? form.currency : (paymentCodes[0] ?? "") };
 
   const { data: info } = useQuery({ queryKey: ["subscription"], queryFn: getMySubscription });
   const { data: requests = [] } = useQuery({ queryKey: ["subscription", "requests"], queryFn: getMyPaymentRequests });
@@ -42,9 +47,9 @@ const SubscriptionPage = () => {
 
   const submit = (e) => {
     e.preventDefault();
-    const key = validatePaymentRequest(form);
+    const key = validatePaymentRequest(paid);
     if (key) return setError(i18n.t(key));
-    mutation.mutate(toPaymentRequest(form));
+    mutation.mutate(toPaymentRequest(paid));
   };
 
   const locale = dateFnsLocale(i18n.language);
@@ -111,9 +116,9 @@ const SubscriptionPage = () => {
                 value={form.amount} onChange={(e) => set({ amount: e.target.value })} />
               <div className={sheet.field}>
                 <label className={sheet.label} htmlFor="pay-currency">{i18n.t("share.currency")}</label>
-                <select id="pay-currency" className={styles.select} value={form.currency}
+                <select id="pay-currency" className={styles.select} value={paid.currency}
                   onChange={(e) => set({ currency: e.target.value })}>
-                  {PAYMENT_CURRENCIES.map((c) => <option key={c} value={c}>{c}</option>)}
+                  {paymentCodes.map((c) => <option key={c} value={c}>{currencyLabel(c, i18n.language)}</option>)}
                 </select>
               </div>
             </div>
@@ -138,7 +143,7 @@ const SubscriptionPage = () => {
                 <div className={styles.cardHeader}>
                   <span>
                     {format(new Date(r.createdAt), "d MMM yyyy", { locale })} · {i18n.t("admin.months", { count: r.months })}
-                    {r.amount != null && ` · ${formatMoney(r.amount, i18n.language)} ${r.currency ?? ""}`}
+                    {r.amount != null && ` · ${formatAmount(r.amount, r.currency)}`}
                   </span>
                   <span className={styles.badge} data-status={r.status === "APPROVED" ? "ACTIVE" : r.status === "REJECTED" ? "EXPIRED" : "TRIAL"}>
                     {i18n.t(`subscription.requestStatus.${r.status}`)}

@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "../../styles/components/overview/overview.module.scss";
+import CurrencyLabel from "../currencies/CurrencyLabel";
 import i18n from "../../configuration/i18n";
 
 // shown only when there is more than one currency to choose from
@@ -8,7 +9,7 @@ const CurrencyChips = ({ currencies, value, onChange }) =>
     <div className={styles.chips} role="group" aria-label={i18n.t("share.currency")}>
       {currencies.map((c) => (
         <button key={c} type="button" className={styles.chip} aria-pressed={value === c} onClick={() => onChange(c)}>
-          {c}
+          <CurrencyLabel code={c} />
         </button>
       ))}
     </div>

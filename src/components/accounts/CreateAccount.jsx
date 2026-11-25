@@ -6,11 +6,14 @@ import DropDown from "../elements/DropDown";
 import Button from "../btns/Button";
 import { addAccount, getAccounts } from "../../api/accountService";
 import {
-  ACCOUNT_CURRENCIES, ACCOUNT_TYPES, accountErrorKey, emptyAccountForm,
+  ACCOUNT_TYPES, accountErrorKey, emptyAccountForm,
   formToAccountRequest, validateAccountForm,
 } from "../../utils/accounts/accountForm";
 import styles from "../../styles/components/forms/formSheet.module.scss";
 import i18n from "../../configuration/i18n";
+import { useBaseCurrency } from "../../hooks/usePreferences";
+import CurrencyLabel from "../currencies/CurrencyLabel";
+import { useCurrencies } from "../../hooks/useCurrencies";
 
 // The form lives in its own component and is rendered only while open,
 // so every opening starts empty without resetting state by hand.
@@ -18,8 +21,10 @@ const CreateAccountForm = ({ onClose }) => {
   const queryClient = useQueryClient();
   const { data: accountsData } = useQuery({ queryKey: ["accounts"], queryFn: getAccounts });
   const existing = accountsData?.accounts ?? [];
+  const baseCurrency = useBaseCurrency();
+  const { codes } = useCurrencies();
 
-  const [form, setForm] = useState(() => emptyAccountForm(existing));
+  const [form, setForm] = useState(() => emptyAccountForm(existing, baseCurrency, codes));
   const [error, setError] = useState(null);
 
   const mutation = useMutation({
@@ -86,7 +91,8 @@ const CreateAccountForm = ({ onClose }) => {
           name="currency"
           value={form.currency}
           onChange={(e) => set("currency", e.target.value)}
-          list={ACCOUNT_CURRENCIES}
+          list={codes}
+          renderItem={(code) => <CurrencyLabel code={code} withName />}
         />
 
         <div className={styles.field}>

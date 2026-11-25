@@ -5,7 +5,7 @@ import FormInput from "../inputs/FormInput";
 import SearchableDropDown from "../elements/SearchableDropDown.jsx";
 import Button from "../btns/Button";
 import { ImagePicker } from "../ImagePicker.jsx";
-import TransferFeesFields from "./TransferFeesFields";
+import TransferFeesFields, { TransferFeeField } from "./TransferFeesFields";
 import TransferSummary from "./TransferSummary";
 import { createTransfer } from "../../api/transferServce.js";
 import {
@@ -21,15 +21,19 @@ import {
   pocketOf,
   pocketsOf,
 } from "../../utils/accounts/pockets";
-import { formatNumber } from "../../utils/formating";
+import { useIsPhone } from '../../hooks/useIsPhone.js'
 import sheet from "../../styles/components/forms/formSheet.module.scss";
 import styles from "../../styles/components/transfers/transferForm.module.scss";
 import i18n from "../../configuration/i18n.js";
+import { formatAmount } from "../../utils/currencies/amountFormat";
 import { getLatestRate } from "../../api/exchangeRateService.js";
 import {
   formatRate,
   sentFromReceived,
 } from "../../utils/transactions/exchangeRate.js";
+import { createdAtFor, isFutureDay, todayString } from "../../utils/transactions/transactionDate.js";
+import TransactionDateField from "../inputs/TransactionDateField.jsx";
+
 
 const emptyTransfer = (sourceId = "", sourceCurrency = "") => ({
   sourceAccount: { id: sourceId },
@@ -66,6 +70,7 @@ const TransferForm = ({
   initialData,
 }) => {
   const queryClient = useQueryClient();
+  const isPhone = useIsPhone();
   const accountsList = accounts?.accounts || [];
 
   // a duplicate brings its fees separately from the transfer fields
@@ -79,6 +84,7 @@ const TransferForm = ({
   }));
   const [fees, setFees] = useState(() => initialFees ?? emptyFees());
   const [image, setImage] = useState(null);
+  const [date, setDate] = useState(todayString);
   const [error, setError] = useState(null);
   const [savedRate, setSavedRate] = useState(null);
 
@@ -253,6 +259,7 @@ const TransferForm = ({
     const feeError = validateFees(fees);
     if (feeError) return setError(i18n.t(feeError));
 
+    if(isFutureDay(date)) return setError(i18n.t("transactionDate.future"));
     mutation.mutate({
       ...transferData,
       sourceCurrency,
@@ -262,12 +269,89 @@ const TransferForm = ({
       amountReceived: Number(transferData.amountReceived),
       category: "transfer",
       image,
+      createdAt: createdAtFor(date),
       ...feesToRequest(fees, { sourceCurrency, destinationCurrency }),
     });
   };
 
   // every account once; the same account on both sides is an exchange between its currencies
   const names = () => accountsList.map((a) => a.name);
+
+  // the parts of the form; a phone shows each side under the other (account, amount, fee),
+  // a computer keeps the accounts on one row and the fees together
+  const sourceField = (
+    <SearchableDropDown
+      label={i18n.t("createTransfer.sourceAccount")}
+      placeholder={i18n.t("placeholder.sourceAccount")}
+      list={names()}
+      name="sourceAccount"
+      value={source?.name ?? ""}
+      onChange={(e) => chooseAccount("sourceAccount", e.target.value)}
+      searchPlaceholder={i18n.t("dropDown.searchAccount")}
+    />
+  );
+
+  const destinationField = (
+    <SearchableDropDown
+      label={i18n.t("createTransfer.destinationAccount")}
+      placeholder={i18n.t("placeholder.destinationAccount")}
+      list={names()}
+      name="destinationAccount"
+      value={destination?.name ?? ""}
+      onChange={(e) => chooseAccount("destinationAccount", e.target.value)}
+      searchPlaceholder={i18n.t("dropDown.searchAccount")}
+    />
+  );
+
+  const sentField = (
+    <div className={sheet.field}>
+      <label className={sheet.label} htmlFor="transfer-sent">
+        {i18n.t("createTransfer.amountSent")}
+      </label>
+      <div className={sheet.money}>
+        <input
+          id="transfer-sent"
+          type="number"
+          inputMode="decimal"
+          min="0"
+          step="0.01"
+          placeholder="0"
+          value={transferData.amountSent}
+          onChange={(e) => changeSent(e.target.value)}
+        />
+        <CurrencySelect
+          currencies={currenciesOf(source)}
+          value={sourceCurrency}
+          label={i18n.t("createTransfer.amountSent")}
+          onChange={(code) => chooseCurrency("source", code)}
+        />
+      </div>
+      {available !== undefined && (
+        <p className={sheet.available}>
+          {i18n.t("currencies.available")}: {formatAmount(available, sourceCurrency)}
+        </p>
+      )}
+    </div>
+  );
+
+  // what arrives, in a currency of the receiving account
+  const receivedField = destination && (
+    <AmountWithCurrency
+      label={i18n.t("createTransfer.amountReceived")}
+      name="amountReceived"
+      value={
+        sameCurrency ? transferData.amountSent : transferData.amountReceived
+      }
+      onChange={(e) => changeReceived(e.target.value)}
+      readOnly={sameCurrency}
+      account={destination}
+      currency={destinationCurrency}
+      onCurrencyChange={(code) => chooseCurrency("destination", code)}
+      showAvailable={false}
+    />
+  );
+
+  const feeProps = { fees, onChange: setFees, accounts: accountsList };
 
   return (
     <Modal isOpen onClose={onClose} className={sheet.sheet}>
@@ -279,80 +363,46 @@ const TransferForm = ({
             )}
           </h2>
         </header>
+        {isPhone ? (
+          <>
+            <section className={styles.side}>
+              {sourceField}
+              {sentField}
+              {source && (
+                <TransferFeeField
+                  side="send"
+                  account={source}
+                  currency={sourceCurrency}
+                  {...feeProps}
+                />
+              )}
+            </section>
 
-        <div className={styles.route}>
-          <SearchableDropDown
-            label={i18n.t("createTransfer.sourceAccount")}
-            placeholder={i18n.t("placeholder.sourceAccount")}
-            list={names()}
-            name="sourceAccount"
-            value={source?.name ?? ""}
-            onChange={(e) => chooseAccount("sourceAccount", e.target.value)}
-            searchPlaceholder={i18n.t("dropDown.searchAccount")}
-          />
-          <span className={styles.arrow} aria-hidden="true">
-            →
-          </span>
-          <SearchableDropDown
-            label={i18n.t("createTransfer.destinationAccount")}
-            placeholder={i18n.t("placeholder.destinationAccount")}
-            list={names()}
-            name="destinationAccount"
-            value={destination?.name ?? ""}
-            onChange={(e) =>
-              chooseAccount("destinationAccount", e.target.value)
-            }
-            searchPlaceholder={i18n.t("dropDown.searchAccount")}
-          />
-        </div>
-
-        <div className={sheet.field}>
-          <label className={sheet.label} htmlFor="transfer-sent">
-            {i18n.t("createTransfer.amountSent")}
-          </label>
-          <div className={sheet.money}>
-            <input
-              id="transfer-sent"
-              type="number"
-              inputMode="decimal"
-              min="0"
-              step="0.01"
-              placeholder="0"
-              value={transferData.amountSent}
-              onChange={(e) => changeSent(e.target.value)}
-            />
-            <CurrencySelect
-              currencies={currenciesOf(source)}
-              value={sourceCurrency}
-              label={i18n.t("createTransfer.amountSent")}
-              onChange={(code) => chooseCurrency("source", code)}
-            />
-          </div>
-          {available !== undefined && (
-            <p className={sheet.available}>
-              {i18n.t("currencies.available")}:{" "}
-              {formatNumber(Number(available))} {sourceCurrency}
-            </p>
-          )}
-        </div>
-
-        {/* what arrives, in a currency of the receiving account; the rate only between two currencies */}
-        {destination && (
-          <AmountWithCurrency
-            label={i18n.t("createTransfer.amountReceived")}
-            name="amountReceived"
-            value={
-              sameCurrency
-                ? transferData.amountSent
-                : transferData.amountReceived
-            }
-            onChange={(e) => changeReceived(e.target.value)}
-            readOnly={sameCurrency}
-            account={destination}
-            currency={destinationCurrency}
-            onCurrencyChange={(code) => chooseCurrency("destination", code)}
-            showAvailable={false}
-          />
+            <section className={styles.side}>
+              {destinationField}
+              {receivedField}
+              {destination && (
+                <TransferFeeField
+                  side="receive"
+                  account={destination}
+                  currency={destinationCurrency}
+                  {...feeProps}
+                />
+              )}
+            </section>
+          </>
+        ) : (
+          <>
+            <div className={styles.route}>
+              {sourceField}
+              <span className={styles.arrow} aria-hidden="true">
+                →
+              </span>
+              {destinationField}
+            </div>
+            {sentField}
+            {receivedField}
+          </>
         )}
         {canComputeSent && (
           <button
@@ -382,21 +432,22 @@ const TransferForm = ({
             {String(savedRate.updatedAt ?? "").slice(0, 10)}
           </p>
         )}
-
-        <details className={styles.fees} open={hasAnyFee(fees)}>
-          <summary>{i18n.t("transferFees.title")}</summary>
-          <div>
-            <TransferFeesFields
-              fees={fees}
-              onChange={setFees}
-              accounts={accountsList}
-              sourceAccount={source}
-              sourceCurrency={sourceCurrency}
-              destinationAccount={destination}
-              destinationCurrency={destinationCurrency}
-            />
-          </div>
-        </details>
+        {!isPhone && (
+          <details className={styles.fees} open={hasAnyFee(fees)}>
+            <summary>{i18n.t("transferFees.title")}</summary>
+            <div>
+              <TransferFeesFields
+                fees={fees}
+                onChange={setFees}
+                accounts={accountsList}
+                sourceAccount={source}
+                sourceCurrency={sourceCurrency}
+                destinationAccount={destination}
+                destinationCurrency={destinationCurrency}
+              />
+            </div>
+          </details>
+        )}
 
         <TransferSummary
           sourceId={transferData.sourceAccount.id}
@@ -409,6 +460,12 @@ const TransferForm = ({
           accounts={accountsList}
         />
 
+        <TransactionDateField
+          className={sheet.field}
+          labelClassName={sheet.label}
+          value={date}
+          onChange={setDate}
+        />
         <FormInput
           label={i18n.t("createTransfer.description")}
           name="description"

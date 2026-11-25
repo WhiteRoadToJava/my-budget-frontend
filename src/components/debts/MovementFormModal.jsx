@@ -9,12 +9,12 @@ import LabeledDropDown from "./LabeledDropDown";
 import styles from "../../styles/components/debts/debtForm.module.scss";
 import { addDebtMovement } from "../../api/debtService";
 import { getAccounts } from "../../api/accountService";
-import { formatNumber } from "../../utils/formating";
 import {
   MOVEMENT_TYPES, debtErrorKey, emptyMovementForm, formToMovementRequest,
   usableAccounts, validateMovementForm,
 } from "../../utils/debts/debtForms";
 import i18n from "../../configuration/i18n";
+import { formatAmount } from "../../utils/currencies/amountFormat";
 
 // Rendered by the parent only while open, so every opening starts fresh.
 const MovementFormModal = ({ onClose, debt }) => {
@@ -71,7 +71,7 @@ const MovementFormModal = ({ onClose, debt }) => {
           </div>
           {form.movementType === "REPAYMENT" && (
             <p className={styles.hint}>
-              {i18n.t("debts.remainingHint", { amount: formatNumber(remaining), currency: debt.currency })}
+              {i18n.t("debts.remainingHint", { amount: formatAmount(remaining, debt.currency) })}
             </p>
           )}
 

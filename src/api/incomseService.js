@@ -39,9 +39,9 @@ export const getIncomseById = async (incomseId) => {
   }
 };
 
-// cancelled: kept in the history, its money taken back; reason is optional
-export const cancelIncomse = async (id, reason) => {
-  const response = await api.patch(`/user/incomse/cancel/${id}`, { reason: reason || null });
+// cancelled: kept on its own day and taken back on cancelledAt (empty = now); reason is optional
+export const cancelIncomse = async (id, reason, cancelledAt) => {
+  const response = await api.patch(`/user/incomse/cancel/${id}`, { reason: reason || null, cancelledAt });
   return response.data;
 };
 

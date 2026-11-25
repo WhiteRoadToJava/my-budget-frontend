@@ -3,13 +3,12 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContaine
 import { format, parseISO } from "date-fns";
 import styles from "../../styles/components/overview/overview.module.scss";
 import CurrencyChips from "./CurrencyChips";
-import { formatMoney } from "../../utils/accounts/accountStatement";
 import { dateFnsLocale } from "../../utils/dates";
 import i18n from "../../configuration/i18n";
+import { formatAmount } from "../../utils/currencies/amountFormat";
 
 // money in and out for the last six months, in one currency
-const CashFlowChart = ({ flows, currency, currencies, onCurrencyChange }) => {
-  const locale = dateFnsLocale(i18n.language);
+const CashFlowChart = ({ flows, currency, currencies, onCurrencyChange, title = i18n.t("overview.cashFlow") }) => {  const locale = dateFnsLocale(i18n.language);
   const data = flows.map((f) => ({
     name: format(parseISO(`${f.key}-01`), "MMM", { locale }),
     in: f.in,
@@ -21,7 +20,7 @@ const CashFlowChart = ({ flows, currency, currencies, onCurrencyChange }) => {
   return (
     <section className={styles.card} aria-labelledby="overview-flow">
       <div className={styles.cardHeader}>
-        <h2 id="overview-flow" className={styles.cardTitle}>{i18n.t("overview.cashFlow")}</h2>
+        <h2 id="overview-flow" className={styles.cardTitle}>{title}</h2>
         <CurrencyChips currencies={currencies} value={currency} onChange={onCurrencyChange} />
       </div>
       {!hasData ? (
@@ -36,7 +35,7 @@ const CashFlowChart = ({ flows, currency, currencies, onCurrencyChange }) => {
             <Tooltip
               cursor={{ fill: "rgba(174, 184, 203, 0.08)" }}
               contentStyle={{ background: "#172139", border: "1px solid rgba(174, 184, 203, 0.14)", borderRadius: "12px", color: "#f8fafc" }}
-              formatter={(value, name) => [`${formatMoney(value, i18n.language)} ${currency}`, name]}
+              formatter={(value, name) => [formatAmount(value, currency), name]}
             />
             <Legend wrapperStyle={{ fontSize: "12px", color: "#aeb8cb" }} />
             <Bar dataKey="in" name={i18n.t("share.moneyIn")} fill="#8be28b" radius={[4, 4, 0, 0]} />

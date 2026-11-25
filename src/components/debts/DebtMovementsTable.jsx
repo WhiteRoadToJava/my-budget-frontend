@@ -3,6 +3,7 @@ import { parseISO } from "date-fns";
 import styles from "../../styles/components/debts/debtDetails.module.scss";
 import { formatNumber } from "../../utils/formating";
 import i18n from "../../configuration/i18n";
+import { formatAmount } from "../../utils/currencies/amountFormat";
 
 // movements come from the backend oldest first; the newest is shown on top
 const DebtMovementsTable = ({ movements, currency, onDelete, deletingId }) => {
@@ -42,7 +43,7 @@ const DebtMovementsTable = ({ movements, currency, onDelete, deletingId }) => {
                 </td>
                 <td className={`${styles.number} ${isIn ? styles.in : styles.out}`}>
                   {isIn ? "+" : "−"}
-                  {formatNumber(m.amount)} {currency}
+                  {formatAmount(m.amount, currency)}
                 </td>
                 <td>{m.accountName || i18n.t("account.accountdeleted")}</td>
                 <td className={styles.number}>

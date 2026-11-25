@@ -50,14 +50,15 @@
   },
   "menu": {
     "debts": "Skulder",
+    "categories": "Kategorier",
     "overview": "Översikt",
     "accounts": "Konton",
     "transactions": "Transaktioner",
     "schedule": "Planering",
     "reports": "reporter",
     "calendar": "Kalender",
-    "settings": "Inställningar"
-    ,"exchangeRates":"Växelkurser"
+    "settings": "Inställningar",
+    "exchangeRates": "Växelkurser"
   },
   "sidebar": {
     "logout": "Logga ut",
@@ -366,7 +367,7 @@
     "errorSchedule": "Det gick inte att skapa den återkommande betalningen.",
     "openDebt": "Öppna skuld",
     "lockedHint": "Riktning och valuta kan inte ändras efter att transaktioner lagts till.",
-    "remainingHint": "Kvar i dag: {{amount}} {{currency}}",
+    "remainingHint": "Kvar i dag: {{amount}}",
     "noAccountInCurrency": "Du har inget aktivt konto i {{currency}}.",
     "validation": {
       "intervalRequired": "Välj hur ofta.",
@@ -539,10 +540,37 @@
     "label": "Byt språk"
   },
   "report": {
-    "fromDate": "Från datum",
-    "toDate": "Till datum",
-    "search": "Sök",
-    "title": "Rapport"
+    "title": "Rapporter",
+    "period": "Period",
+    "periods": {
+      "thisMonth": "Denna månad",
+      "lastMonth": "Förra månaden",
+      "last3": "Senaste 3 månaderna",
+      "last6": "Senaste 6 månaderna",
+      "last12": "Senaste 12 månaderna",
+      "thisYear": "I år",
+      "custom": "Välj datum"
+    },
+    "fromDate": "Från",
+    "toDate": "Till",
+    "chooseDates": "Välj första och sista dagen.",
+    "noTransactions": "Det finns inga transaktioner än.",
+    "error": "Kunde inte hämta rapporten.",
+    "summary": "Sammanfattning",
+    "savingsRate": "Sparkvot",
+    "transactionsCount": "{{count}} transaktioner",
+    "vsPrevious": "mot perioden innan",
+    "noComparison": "Inget att jämföra med",
+    "expensesByCategory": "Vart pengarna gick",
+    "incomeByCategory": "Var pengarna kom ifrån",
+    "noExpenses": "Inga utgifter under perioden.",
+    "noIncome": "Inga inkomster under perioden.",
+    "fees": "Överföringsavgifter",
+    "noCategory": "Ingen kategori",
+    "byMonth": "In och ut per månad",
+    "biggest": "Största transaktionerna",
+    "nothingInPeriod": "Inget under perioden.",
+    "rules": "Överföringar mellan dina egna konton räknas inte, men deras avgifter gör det. En makulerad transaktion räknas på sitt eget datum och tas tillbaka det datum den makulerades."
   },
   "dashboard": {
     "overview": "Översikt"
@@ -631,7 +659,7 @@
     "pdfShare": "Dela PDF",
     "pdfPreparing": "Förbereder...",
     "pdfError": "Det gick inte att skapa PDF:en. Försök igen.",
-    "pdfAllCurrencies": "Alla valutor"  
+    "pdfAllCurrencies": "Alla valutor"
   },
   "overview": {
     "balances": "Saldon",
@@ -782,6 +810,20 @@
       "resend": "Skicka inbjudan igen",
       "resent": "En ny inbjudan har skickats."
     },
+        "currencies": {
+      "title": "Valutor",
+      "hint": "Valutorna som användarna kan välja. En valuta tas aldrig bort: stäng av den så fungerar kontona som använder den som vanligt.",
+      "list": "Appens valutor",
+      "forAccounts": "För konton",
+      "forPayments": "För betalningar",
+      "moveUp": "Flytta {{code}} upp",
+      "moveDown": "Flytta {{code}} ner",
+      "add": "Lägg till en valuta",
+      "searchPlaceholder": "Sök på kod eller namn, t.ex. NOK eller krona",
+      "noResults": "Ingen valuta hittades, eller så finns den redan i listan.",
+      "addButton": "Lägg till",
+      "added": "{{code}} lades till."
+    },
     "delete": {
       "zone": "Ta bort användare",
       "explain": "Tar bort kontot och all dess data: konton, transaktioner, överföringar, scheman, skulder, betalningsförfrågningar och kvittobilder. Historiken över abonnemangsbetalningar sparas. Det går inte att ångra.",
@@ -830,25 +872,36 @@
     "cancelled": "annullerad",
     "action": "Annullera transaktionen",
     "title": "Annullera transaktionen?",
-    "explain": "Den finns kvar i historiken, överstruken, och pengarna går tillbaka. Du kan återställa den senare.",
-    "explainTransfer": "Den finns kvar i historiken, överstruken. Beloppen och avgifterna går tillbaka. Du kan återställa den senare.",
+    "explain": "Den ligger kvar på sitt datum, och en annulleringsrad på datumet du väljer tar tillbaka pengarna. Du kan återställa den senare.",
+    "explainTransfer": "Den ligger kvar på sitt datum, och en annulleringsrad på datumet du väljer tar tillbaka beloppen och avgifterna. Du kan återställa den senare.",
     "reason": "Orsak",
     "optional": "valfritt",
     "reasonPlaceholder": "t.ex. överföringen kom tillbaka",
     "confirm": "Annullera",
     "restore": "Återställ",
-    "note": "Annullerad: räknas inte i något saldo eller total. Återställ den för att ändra den.",
+    "note": "Annullerad: räknas på sitt datum och annulleringsraden tar tillbaka den på annulleringsdatumet. Återställ den för att ändra den.",
     "cancelledOn": "Annullerad",
     "hide": "Dölj annullerade",
     "error": "Det gick inte att annullera. Försök igen.",
-    "restoreError": "Det gick inte att återställa. Försök igen."
+    "restoreError": "Det gick inte att återställa. Försök igen.",
+    "reversalOf": "Annullering: {{what}}",
+    "beforeTransaction": "Annulleringsdatumet kan inte vara före transaktionens datum."
   },
-    "exchangeRates": {
+  "exchangeRates": {
     "title": "Växelkurser",
     "hint": "Den senaste kursen du använde för varje valutapar. En överföring mellan två valutor uppdaterar den automatiskt; du kan också lägga till en kurs själv.",
-    "from": "Från", "to": "Till", "rate": "Kurs", "inverse": "Omvänd", "pair": "Par",
-    "updatedAt": "Uppdaterad", "source": "Källa", "fromTransfer": "Överföring", "manual": "Manuell",
-    "add": "Spara kurs", "empty": "Inga sparade kurser än.", "loading": "Laddar...",
+    "from": "Från",
+    "to": "Till",
+    "rate": "Kurs",
+    "inverse": "Omvänd",
+    "pair": "Par",
+    "updatedAt": "Uppdaterad",
+    "source": "Källa",
+    "fromTransfer": "Överföring",
+    "manual": "Manuell",
+    "add": "Spara kurs",
+    "empty": "Inga sparade kurser än.",
+    "loading": "Laddar...",
     "loadError": "Det gick inte att ladda växelkurserna.",
     "saveError": "Det gick inte att spara kursen. Försök igen.",
     "deleteError": "Det gick inte att ta bort kursen. Försök igen.",
@@ -858,7 +911,7 @@
     "computeSent": "Räkna ut skickat belopp från kursen",
     "lastUsed": "Senast sparade kurs"
   },
- "deleteAccount": {
+  "deleteAccount": {
     "title": "Radera kontot för gott?",
     "warning": "Kontot raderas med alla inkomster, utgifter och scheman. Det går inte att ångra.",
     "archiveHint": "Vill du bara dölja det?",
@@ -868,5 +921,117 @@
     "noPaste": "Skriv själv; det går inte att klistra in.",
     "confirm": "Radera för gott",
     "notConfirmed": "Kontot raderades inte: bekräftelsetexten är fel."
+  },
+  "transactionDate": {
+    "label": "Datum",
+    "future": "Datumet kan inte vara i framtiden. Använd ett schema för kommande transaktioner."
+  },
+  "categories": {
+    "label": "Kategori",
+    "placeholder": "Välj en kategori",
+    "search": "Sök kategorier",
+    "page": {
+      "title": "Kategorier",
+      "expenses": "Utgifter",
+      "incomes": "Inkomster",
+      "add": "Lägg till kategori",
+      "edit": "Ändra",
+      "name": "Namn",
+      "namePlaceholder": "t.ex. Kaffe",
+      "readyMadeHint": "Färdig kategori: lämna namnet tomt för att få tillbaka dess eget namn på appens språk.",
+      "emoji": "Emoji",
+      "emojiHint": "Välj en nedan, eller skriv valfri emoji.",
+      "save": "Spara",
+      "delete": "Radera",
+      "confirmDelete": "Bekräfta radering",
+      "deleteExplain": "Om transaktioner eller scheman använder kategorin döljs den i stället för att raderas, och den visas kvar på sina gamla transaktioner.",
+      "hiddenInstead": "Transaktioner använder kategorin, så den doldes i stället för att raderas. Du kan visa den igen när du vill.",
+      "hidden": "Dold",
+      "hide": "Dölj",
+      "show": "Visa",
+      "moveUp": "Flytta upp",
+      "moveDown": "Flytta ned",
+      "nameRequired": "Skriv ett namn på kategorin.",
+      "error": "Det gick inte att spara. Försök igen.",
+      "loadError": "Kunde inte ladda kategorierna."
+    },
+    "defaults": {
+      "rent": "Hyra",
+      "food": "Mat",
+      "groceries": "Matvaror",
+      "car": "Bil",
+      "bus": "Kollektivtrafik",
+      "check": "Check",
+      "currency": "Valutaväxling",
+      "delivery": "Leverans",
+      "home": "Hem",
+      "gift": "Gåva",
+      "bills": "Räkningar",
+      "health": "Hälsa",
+      "education": "Utbildning",
+      "clothes": "Kläder",
+      "phone": "Telefon & internet",
+      "travel": "Resor",
+      "entertainment": "Nöje",
+      "other": "Övrigt",
+      "salary": "Lön",
+      "childAllowance": "Barnbidrag",
+      "housingAllowance": "Bostadsbidrag",
+      "wallet": "Plånbok",
+      "bank": "Bank",
+      "investment": "Investering",
+      "freelance": "Frilans",
+      "refund": "Återbetalning"
+    }
+  },
+  "settings": {
+    "save": "Spara",
+    "saved": "Sparat.",
+    "saveError": "Det gick inte att spara. Försök igen.",
+    "loadError": "Kunde inte ladda dina uppgifter.",
+    "more": "Fler inställningar",
+    "profile": {
+      "title": "Profil",
+      "email": "E-post",
+      "firstName": "Förnamn",
+      "lastName": "Efternamn",
+      "phone": "Telefon",
+      "firstNameRequired": "Skriv ditt förnamn.",
+      "lastNameRequired": "Skriv ditt efternamn.",
+      "phoneInvalid": "Telefonnumret är inte giltigt."
+    },
+    "security": {
+      "title": "Säkerhet",
+      "current": "Nuvarande lösenord",
+      "new": "Nytt lösenord",
+      "confirm": "Bekräfta det nya lösenordet",
+      "submit": "Byt lösenord",
+      "changed": "Ditt lösenord har bytts.",
+      "currentRequired": "Skriv ditt nuvarande lösenord.",
+      "currentWrong": "Det nuvarande lösenordet är fel.",
+      "weak": "Det nya lösenordet uppfyller inte reglerna nedan.",
+      "same": "Det nya lösenordet är samma som det nuvarande.",
+      "mismatch": "De nya lösenorden stämmer inte överens."
+    },
+    "preferences": {
+      "title": "Inställningar",
+      "language": "Språk",
+      "baseCurrency": "Basvaluta",
+      "firstDayOfWeek": "Veckans första dag",
+      "defaultAccount": "Standardkonto",
+      "amountDisplay": "Visa belopp med",
+      "amountDisplayHint": "Två valutor med samma symbol (som SEK och NOK, båda kr) visas alltid med koden.",
+      "notChosen": "Ingen",
+      "byLanguage": "Enligt språk",
+      "days": {
+        "SATURDAY": "Lördag",
+        "SUNDAY": "Söndag",
+        "MONDAY": "Måndag"
+      },
+      "noAccounts": "Du har inga aktiva konton än.",
+      "saved": "Sparat.",
+      "saveError": "Kunde inte spara. Försök igen.",
+      "loadError": "Kunde inte hämta dina inställningar. Försök senare."
+    }
   }
 }

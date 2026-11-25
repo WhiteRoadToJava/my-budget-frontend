@@ -8,10 +8,10 @@ import ExtendSubscriptionModal from "../../components/admin/ExtendSubscriptionMo
 import DeleteUserModal from "../../components/admin/DeleteUserModal";
 import Button from "../../components/btns/Button";
 import { whatsappLink } from "../../utils/subscription/subscription";
-import { formatMoney } from "../../utils/accounts/accountStatement";
 import { dateFnsLocale, toCalendarDay } from "../../utils/dates";
 import styles from "../../styles/components/admin/admin.module.scss";
 import i18n from "../../configuration/i18n";
+import { formatAmount } from "../../utils/currencies/amountFormat";
 
 const AdminUserPage = () => {
   const { userId } = useParams();
@@ -119,7 +119,7 @@ const AdminUserPage = () => {
                   <tr key={p.id}>
                     <td>{p.createdAt ? format(new Date(p.createdAt), "d MMM yyyy", { locale }) : "—"}</td>
                     <td>{day(p.newEndsAt)}</td>
-                    <td>{p.amount != null ? `${formatMoney(p.amount, i18n.language)} ${p.currency ?? ""}` : "—"}</td>
+                    <td>{p.amount != null ? formatAmount(p.amount, p.currency) : "—"}</td>
                     <td>{p.method ? i18n.t(`admin.methods.${p.method}`) : "—"}</td>
                     <td>{[p.reference, p.note].filter(Boolean).join(" · ") || "—"}</td>
                     <td>{p.recordedBy ?? "—"}</td>

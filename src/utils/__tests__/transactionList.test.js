@@ -1,5 +1,7 @@
 import { describe, it, expect } from "vitest";
 import {
+  originalOf,
+  rowKey,
   isIncoming, signedAmount, countedAmount, groupByMonth, filterTransactions, otherAccountName,
 } from "../transactions/transactionList";
 
@@ -67,13 +69,30 @@ describe("cancelled transactions", () => {
     { id: "c", type: "expense", amount: 10, createdAt: "2026-11-04T10:00:00" },
   ];
 
-  it("stay in the month but count in no total", () => {
+  it("count on their own day", () => {
     const [month] = groupByMonth(rows);
     expect(month.items).toHaveLength(3);
     expect(month.totalIn).toBe(100);
-    expect(month.totalOut).toBe(10);
-    expect(countedAmount(rows[1])).toBe(0);
-    expect(signedAmount(rows[1])).toBe(-40);
+    expect(month.totalOut).toBe(50);
+    expect(countedAmount(rows[1])).toBe(-40);
+  });
+
+  it("are taken back by their reversal, as money in", () => {
+    // cancelled on 20 Dec: November keeps the expense, December takes it back
+    const reversal = { ...rows[1], createdAt: "2026-12-20T09:00:00", reversal: true };
+    const [december, november] = groupByMonth([...rows, reversal]);
+    expect(november.totalOut).toBe(50);
+    expect(december.items).toEqual([reversal]);
+    expect(december.totalOut).toBe(0);
+    expect(december.totalIn).toBe(40);
+    expect(signedAmount(reversal)).toBe(40);
+  });
+
+  it("open the original from the reversal, with a key of its own", () => {
+    const reversal = { ...rows[1], createdAt: "2026-12-20T09:00:00", reversal: true };
+    expect(originalOf(reversal, [...rows, reversal])).toBe(rows[1]);
+    expect(originalOf(rows[0], rows)).toBe(rows[0]);
+    expect(rowKey(reversal)).not.toBe(rowKey(rows[1]));
   });
 
   it("can be hidden", () => {

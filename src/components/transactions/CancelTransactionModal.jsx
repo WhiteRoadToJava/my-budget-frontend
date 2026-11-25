@@ -1,14 +1,19 @@
 import React, { useState } from "react";
 import Modal from "../modals/Modal";
 import Button from "../btns/Button";
+import TransactionDateField from "../inputs/TransactionDateField";
+import { isFutureDay, todayString } from "../../utils/transactions/transactionDate";
 import sheet from "../../styles/components/forms/formSheet.module.scss";
 import i18n from "../../configuration/i18n";
 
-// Asks before cancelling: the transaction stays in the history, struck through, and its
-// money goes back (for a transfer, the fees too). The reason is optional.
-// Rendered only while open. onConfirm(reason).
-const CancelTransactionModal = ({ onClose, onConfirm, isTransfer, isPending }) => {
+// Asks before cancelling: the transaction stays on its own day, and a cancellation row on the
+// chosen day takes its money back (for a transfer, the fees too). The reason is optional.
+// firstDay ("yyyy-MM-dd"): the transaction's own day, the earliest it can be cancelled.
+// Rendered only while open. onConfirm(reason, day).
+const CancelTransactionModal = ({ onClose, onConfirm, isTransfer, isPending, firstDay }) => {
   const [reason, setReason] = useState("");
+  const [day, setDay] = useState(todayString);
+  const [error, setError] = useState("");
 
   return (
     <Modal isOpen onClose={onClose} className={sheet.sheet}>
@@ -17,7 +22,9 @@ const CancelTransactionModal = ({ onClose, onConfirm, isTransfer, isPending }) =
         noValidate
         onSubmit={(e) => {
           e.preventDefault();
-          onConfirm(reason.trim());
+          if (isFutureDay(day)) return setError(i18n.t("transactionDate.future"));
+          if (firstDay && day < firstDay) return setError(i18n.t("cancel.beforeTransaction"));
+          onConfirm(reason.trim(), day);
         }}
       >
         <header className={sheet.header}>
@@ -26,6 +33,17 @@ const CancelTransactionModal = ({ onClose, onConfirm, isTransfer, isPending }) =
             {i18n.t(isTransfer ? "cancel.explainTransfer" : "cancel.explain")}
           </p>
         </header>
+
+        <TransactionDateField
+          className={sheet.field}
+          labelClassName={sheet.label}
+          value={day}
+          onChange={(value) => {
+            setDay(value);
+            setError("");
+          }}
+          min={firstDay}
+        />
 
         <div className={sheet.field}>
           <label className={sheet.label} htmlFor="cancel-reason">
@@ -41,6 +59,8 @@ const CancelTransactionModal = ({ onClose, onConfirm, isTransfer, isPending }) =
             onChange={(e) => setReason(e.target.value)}
           />
         </div>
+
+        {error && <p className={sheet.error}>{error}</p>}
 
         <div className={sheet.actions}>
           <Button variant="cancel" type="button" text={i18n.t("buttons.cancel")} onClick={onClose} />

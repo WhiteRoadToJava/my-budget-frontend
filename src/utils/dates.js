@@ -12,3 +12,9 @@ export const toCalendarDay = (value) => {
 
 // date-fns locale for month and weekday names
 export const dateFnsLocale = (language) => ({ ar, sv }[language] ?? enUS);
+
+// date-fns weekStartsOn (0 = Sunday, 1 = Monday, 6 = Saturday): the user's choice,
+// else what the language uses
+const WEEK_STARTS = { SUNDAY: 0, MONDAY: 1, SATURDAY: 6 };
+export const weekStartsOnFor = (firstDayOfWeek, language) =>
+  WEEK_STARTS[firstDayOfWeek] ?? dateFnsLocale(language).options?.weekStartsOn ?? 1;

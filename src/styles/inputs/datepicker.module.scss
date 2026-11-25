@@ -101,6 +101,15 @@
         color: variable.$color-black;
         font-weight: bold;
       }
+      &[data-disabled="true"] {
+        opacity: 0.35;
+        cursor: not-allowed;
+
+        &:hover {
+          background-color: variable.$color-stroke;
+          color: variable.$color-text;
+        }
+      }
     }
 
     .weekDay {

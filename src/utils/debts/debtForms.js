@@ -24,11 +24,13 @@ export const todayString = (today = new Date()) => format(today, "yyyy-MM-dd");
 
 // ---------- debt ----------
 
-export const emptyDebtForm = (today = new Date()) => ({
+// baseCurrency: the user's base currency, the debt's currency until another is picked.
+// codes: the currencies that can be chosen (empty while the list is loading)
+export const emptyDebtForm = (today = new Date(), baseCurrency = null, codes = []) => ({
   name: "",
   counterparty: "",
   direction: "OWED_BY_ME",
-  currency: "",
+  currency: baseCurrency && (codes.length === 0 || codes.includes(baseCurrency)) ? baseCurrency : "",
   annualRate: "0",
   compounding: "NONE",
   startDate: todayString(today),

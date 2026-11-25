@@ -50,6 +50,7 @@
   },
   "menu": {
     "debts": "Debts",
+    "categories": "Categories",
     "overview": "Overview",
     "accounts": "Accounts",
     "transactions": "Transactions",
@@ -57,7 +58,7 @@
     "reports": "reports",
     "calendar": "Calendar",
     "settings": "Settings",
-    "exchangeRates":"Exchange rate"
+    "exchangeRates": "Exchange rate"
   },
   "sidebar": {
     "logout": "Logout",
@@ -392,7 +393,7 @@
     "errorSchedule": "Could not create the recurring payment.",
     "openDebt": "Open debt",
     "lockedHint": "Direction and currency can not change after movements were added.",
-    "remainingHint": "Remaining today: {{amount}} {{currency}}",
+    "remainingHint": "Remaining today: {{amount}}",
     "noAccountInCurrency": "You have no active account in {{currency}}.",
     "validation": {
       "intervalRequired": "Choose how often.",
@@ -564,10 +565,37 @@
     "label": "Change language"
   },
   "report": {
-    "fromDate": "From Date",
-    "toDate": "To Date",
-    "search": "Search",
-    "title": "Report"
+    "title": "Reports",
+    "period": "Period",
+    "periods": {
+      "thisMonth": "This month",
+      "lastMonth": "Last month",
+      "last3": "Last 3 months",
+      "last6": "Last 6 months",
+      "last12": "Last 12 months",
+      "thisYear": "This year",
+      "custom": "Choose dates"
+    },
+    "fromDate": "From",
+    "toDate": "To",
+    "chooseDates": "Choose the first and the last day.",
+    "noTransactions": "There are no transactions yet.",
+    "error": "Could not load the report.",
+    "summary": "Summary",
+    "savingsRate": "Savings rate",
+    "transactionsCount": "{{count}} transactions",
+    "vsPrevious": "vs. the period before",
+    "noComparison": "Nothing to compare with",
+    "expensesByCategory": "Where the money went",
+    "incomeByCategory": "Where the money came from",
+    "noExpenses": "No money out in this period.",
+    "noIncome": "No money in during this period.",
+    "fees": "Transfer fees",
+    "noCategory": "No category",
+    "byMonth": "Money in and out by month",
+    "biggest": "Biggest transactions",
+    "nothingInPeriod": "Nothing in this period.",
+    "rules": "Transfers between your own accounts are not counted, their fees are. A cancelled transaction counts on its own date and is taken back on the date it was cancelled."
   },
   "dashboard": {
     "overview": "Overview"
@@ -798,6 +826,20 @@
       "resend": "Send the invitation again",
       "resent": "A new invitation was sent."
     },
+        "currencies": {
+      "title": "Currencies",
+      "hint": "The currencies users can choose. A currency is never deleted: switch it off and the accounts that use it keep working.",
+      "list": "The app's currencies",
+      "forAccounts": "For accounts",
+      "forPayments": "For payments",
+      "moveUp": "Move {{code}} up",
+      "moveDown": "Move {{code}} down",
+      "add": "Add a currency",
+      "searchPlaceholder": "Search by code or name, e.g. NOK or krone",
+      "noResults": "No currency found, or it is already in the list.",
+      "addButton": "Add",
+      "added": "{{code}} was added."
+    },
     "delete": {
       "zone": "Delete user",
       "explain": "Deletes the account and all its data: accounts, transactions, transfers, schedules, debts, payment requests and receipt images. The subscription payment history is kept. This can not be undone.",
@@ -846,25 +888,36 @@
     "cancelled": "cancelled",
     "action": "Cancel transaction",
     "title": "Cancel this transaction?",
-    "explain": "It stays in the history, struck through, and its money goes back. You can restore it later.",
-    "explainTransfer": "It stays in the history, struck through. The amounts and the fees go back. You can restore it later.",
+    "explain": "It stays on its own date, and a cancellation row on the date you choose takes its money back. You can restore it later.",
+    "explainTransfer": "It stays on its own date, and a cancellation row on the date you choose takes the amounts and the fees back. You can restore it later.",
     "reason": "Reason",
     "optional": "optional",
     "reasonPlaceholder": "e.g. the transfer came back",
     "confirm": "Cancel it",
     "restore": "Restore",
-    "note": "Cancelled: it counts in no balance or total. Restore it to edit it.",
+    "note": "Cancelled: it counts on its own date and the cancellation row takes it back on the date it was cancelled. Restore it to edit it.",
     "cancelledOn": "Cancelled on",
     "hide": "Hide cancelled",
     "error": "Could not cancel. Try again.",
-    "restoreError": "Could not restore. Try again."
+    "restoreError": "Could not restore. Try again.",
+    "reversalOf": "Cancellation: {{what}}",
+    "beforeTransaction": "The cancellation date can't be before the transaction's date."
   },
-    "exchangeRates": {
+  "exchangeRates": {
     "title": "Exchange rates",
     "hint": "The last rate you used for each currency pair. A transfer between two currencies updates it automatically; you can also add a rate yourself.",
-    "from": "From", "to": "To", "rate": "Rate", "inverse": "Inverse", "pair": "Pair",
-    "updatedAt": "Updated", "source": "Source", "fromTransfer": "Transfer", "manual": "Manual",
-    "add": "Save rate", "empty": "No saved rates yet.", "loading": "Loading...",
+    "from": "From",
+    "to": "To",
+    "rate": "Rate",
+    "inverse": "Inverse",
+    "pair": "Pair",
+    "updatedAt": "Updated",
+    "source": "Source",
+    "fromTransfer": "Transfer",
+    "manual": "Manual",
+    "add": "Save rate",
+    "empty": "No saved rates yet.",
+    "loading": "Loading...",
     "loadError": "Could not load the exchange rates.",
     "saveError": "Could not save the rate. Please try again.",
     "deleteError": "Could not delete the rate. Please try again.",
@@ -874,7 +927,7 @@
     "computeSent": "Calculate the amount sent from the rate",
     "lastUsed": "Last saved rate"
   },
-    "deleteAccount": {
+  "deleteAccount": {
     "title": "Delete the account for good?",
     "warning": "The account is deleted with all its income, expenses and schedules. This can not be undone.",
     "archiveHint": "Only want to hide it?",
@@ -884,5 +937,117 @@
     "noPaste": "Type it yourself; pasting is not allowed.",
     "confirm": "Delete for good",
     "notConfirmed": "The account was not deleted: the confirmation text is wrong."
+  },
+  "transactionDate": {
+    "label": "Date",
+    "future": "The date can't be in the future. For a coming transaction, use a schedule."
+  },
+  "categories": {
+    "label": "Category",
+    "placeholder": "Choose a category",
+    "search": "Search categories",
+    "page": {
+      "title": "Categories",
+      "expenses": "Expenses",
+      "incomes": "Income",
+      "add": "Add category",
+      "edit": "Edit",
+      "name": "Name",
+      "namePlaceholder": "e.g. Coffee",
+      "readyMadeHint": "Ready-made category: leave the name empty to get its own name back in the app's language.",
+      "emoji": "Emoji",
+      "emojiHint": "Pick one below, or type any emoji.",
+      "save": "Save",
+      "delete": "Delete",
+      "confirmDelete": "Confirm delete",
+      "deleteExplain": "If transactions or schedules use the category, it is hidden instead of deleted and still shows on its old transactions.",
+      "hiddenInstead": "Transactions use this category, so it was hidden instead of deleted. You can show it again any time.",
+      "hidden": "Hidden",
+      "hide": "Hide",
+      "show": "Show",
+      "moveUp": "Move up",
+      "moveDown": "Move down",
+      "nameRequired": "Write a name for the category.",
+      "error": "Could not save. Try again.",
+      "loadError": "Could not load the categories."
+    },
+    "defaults": {
+      "rent": "Rent",
+      "food": "Food",
+      "groceries": "Groceries",
+      "car": "Car",
+      "bus": "Transport",
+      "check": "Check",
+      "currency": "Currency exchange",
+      "delivery": "Delivery",
+      "home": "Home",
+      "gift": "Gift",
+      "bills": "Bills",
+      "health": "Health",
+      "education": "Education",
+      "clothes": "Clothes",
+      "phone": "Phone & internet",
+      "travel": "Travel",
+      "entertainment": "Entertainment",
+      "other": "Other",
+      "salary": "Salary",
+      "childAllowance": "Child allowance",
+      "housingAllowance": "Housing allowance",
+      "wallet": "Wallet",
+      "bank": "Bank",
+      "investment": "Investment",
+      "freelance": "Freelance",
+      "refund": "Refund"
+    }
+  },
+  "settings": {
+    "save": "Save",
+    "saved": "Saved.",
+    "saveError": "Could not save. Try again.",
+    "loadError": "Could not load your details.",
+    "more": "More settings",
+    "profile": {
+      "title": "Profile",
+      "email": "Email",
+      "firstName": "First name",
+      "lastName": "Last name",
+      "phone": "Phone",
+      "firstNameRequired": "Write your first name.",
+      "lastNameRequired": "Write your last name.",
+      "phoneInvalid": "The phone number is not valid."
+    },
+    "security": {
+      "title": "Security",
+      "current": "Current password",
+      "new": "New password",
+      "confirm": "Confirm the new password",
+      "submit": "Change password",
+      "changed": "Your password was changed.",
+      "currentRequired": "Write your current password.",
+      "currentWrong": "The current password is wrong.",
+      "weak": "The new password does not meet the rules below.",
+      "same": "The new password is the same as the current one.",
+      "mismatch": "The new passwords do not match."
+    },
+    "preferences": {
+      "title": "Preferences",
+      "language": "Language",
+      "baseCurrency": "Base currency",
+      "firstDayOfWeek": "First day of the week",
+      "defaultAccount": "Default account",
+      "amountDisplay": "Show amounts with",
+      "amountDisplayHint": "Two currencies with the same symbol (such as SEK and NOK, both kr) always keep their code.",
+      "notChosen": "None",
+      "byLanguage": "By language",
+      "days": {
+        "SATURDAY": "Saturday",
+        "SUNDAY": "Sunday",
+        "MONDAY": "Monday"
+      },
+      "noAccounts": "You have no active accounts yet.",
+      "saved": "Saved.",
+      "saveError": "Could not save. Try again.",
+      "loadError": "Could not load your preferences. Try again later."
+    }
   }
 }

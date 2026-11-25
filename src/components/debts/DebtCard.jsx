@@ -1,9 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styles from "../../styles/components/debts/debts.module.scss";
-import { formatNumber } from "../../utils/formating";
 import { isSettled, remainingOf } from "../../utils/debts/summarizeDebts";
 import i18n from "../../configuration/i18n";
+import { formatAmount } from "../../utils/currencies/amountFormat";
 
 const DebtCard = ({ debt }) => {
   const settled = isSettled(debt);
@@ -23,7 +23,7 @@ const DebtCard = ({ debt }) => {
       </div>
 
       <p className={styles.cardAmount}>
-        {formatNumber(remainingOf(debt))} {debt.currency}
+        {formatAmount(remainingOf(debt), debt.currency)}
       </p>
 
       <div className={styles.cardMeta}>

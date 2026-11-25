@@ -5,7 +5,8 @@ import {
   deleteExchangeRate,
   getExchangeRates,
 } from "../../../api/exchangeRateService";
-import { ACCOUNT_CURRENCIES } from "../../../utils/accounts/accountForm";
+import { useCurrencies } from "../../../hooks/useCurrencies";
+import { currencyName } from "../../../utils/currencies/currencyNames";
 import { formatRate } from "../../../utils/transactions/exchangeRate";
 import Button from "../../../components/btns/Button";
 import i18n from "../../../configuration/i18n";
@@ -19,6 +20,7 @@ const emptyForm = { from: "", to: "", rate: "" };
 const ExchangeRatesPage = () => {
   const queryClient = useQueryClient();
   const [form, setForm] = useState(emptyForm);
+  const { codes } = useCurrencies();
   const [error, setError] = useState(null);
   const {
     data: rates = [],
@@ -128,8 +130,8 @@ const ExchangeRatesPage = () => {
           disabled={addMutation.isPending}
         />
         <datalist id="rate-currencies">
-          {ACCOUNT_CURRENCIES.map((c) => (
-            <option key={c} value={c} />
+          {codes.map((c) => (
+            <option key={c} value={c}>{currencyName(c, i18n.language)}</option>
           ))}
         </datalist>
       </form>
