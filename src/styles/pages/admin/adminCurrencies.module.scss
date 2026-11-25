@@ -1,0 +1,64 @@
+@use "../../variables" as variable;
+
+/* The admin's currencies page; cards and texts come from admin.module.scss. */
+
+.row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto auto;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.6rem 0.9rem;
+
+  /* a currency that is used for nothing */
+  &[data-off="true"] {
+    opacity: 0.6;
+  }
+
+  @media (max-width: 640px) {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+}
+
+.switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: variable.$font-sm;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.move {
+  display: inline-flex;
+  gap: 0.25rem;
+}
+
+.moveButton {
+  width: 2rem;
+  height: 2rem;
+  color: variable.$color-text;
+  background: variable.$surface-2;
+  border: 1px solid variable.$color-border;
+  border-radius: variable.$radius-md;
+  font: inherit;
+  cursor: pointer;
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: default;
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: variable.$shadow-glow;
+  }
+}
+
+.result {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.6rem 0.9rem;
+}

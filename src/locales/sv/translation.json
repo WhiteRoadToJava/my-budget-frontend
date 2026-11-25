@@ -810,6 +810,20 @@
       "resend": "Skicka inbjudan igen",
       "resent": "En ny inbjudan har skickats."
     },
+        "currencies": {
+      "title": "Valutor",
+      "hint": "Valutorna som användarna kan välja. En valuta tas aldrig bort: stäng av den så fungerar kontona som använder den som vanligt.",
+      "list": "Appens valutor",
+      "forAccounts": "För konton",
+      "forPayments": "För betalningar",
+      "moveUp": "Flytta {{code}} upp",
+      "moveDown": "Flytta {{code}} ner",
+      "add": "Lägg till en valuta",
+      "searchPlaceholder": "Sök på kod eller namn, t.ex. NOK eller krona",
+      "noResults": "Ingen valuta hittades, eller så finns den redan i listan.",
+      "addButton": "Lägg till",
+      "added": "{{code}} lades till."
+    },
     "delete": {
       "zone": "Ta bort användare",
       "explain": "Tar bort kontot och all dess data: konton, transaktioner, överföringar, scheman, skulder, betalningsförfrågningar och kvittobilder. Historiken över abonnemangsbetalningar sparas. Det går inte att ångra.",
