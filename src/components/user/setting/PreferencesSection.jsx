@@ -7,10 +7,12 @@ import { getAccounts } from "../../../api/accountService";
 import { isArchived } from "../../../utils/accounts/accountList";
 import { useCurrencies } from "../../../hooks/useCurrencies";
 import CurrencyLabel from "../../currencies/CurrencyLabel";
+import { formatAmount } from "../../../utils/currencies/amountFormat";
 import { usePreferences, useUpdatePreferences } from "../../../hooks/usePreferences";
 import SearchableDropDown from "../../elements/SearchableDropDown";
 
 const WEEK_DAYS = ["SATURDAY", "SUNDAY", "MONDAY"];
+const AMOUNT_DISPLAYS = ["CODE", "SYMBOL"];
 const accountLabel = (account) => `${account.name} (${account.currency})`;
 
 // One group of pill buttons. "" is the "not chosen" pill, which clears the value.
@@ -39,7 +41,7 @@ const Choices = ({ id, title, options, value, onChoose, disabled }) => (
 // Every choice is saved on the server at once, so it follows the user to every device.
 const PreferencesSection = () => {
   const [language, setLanguage] = useState(i18n.language);
-  const { codes } = useCurrencies();
+  const { codes, allCodes } = useCurrencies();
   const { preferences, isLoading, isError } = usePreferences();
   const { mutate, isPending, isSuccess, isError: saveFailed } = useUpdatePreferences();
 
@@ -65,6 +67,8 @@ const PreferencesSection = () => {
 
   const notChosen = { value: "", label: i18n.t("settings.preferences.notChosen") };
     const busy = isLoading || isPending;
+    // the example amount of the "show amounts" choice: the base currency, else the first one
+    const sample = preferences.baseCurrency || codes[0] || "SEK";
 
   // the search list holds texts, so each account is found again by its text
   const accountLabels = activeAccounts.map(accountLabel);
@@ -112,6 +116,21 @@ const PreferencesSection = () => {
             onChoose={save("firstDayOfWeek")}
             disabled={busy}
           />
+
+          <div>
+            <Choices
+              id="settings-amount-display"
+              title={i18n.t("settings.preferences.amountDisplay")}
+              options={AMOUNT_DISPLAYS.map((display) => ({
+                value: display,
+                label: formatAmount(1250, sample, { display, codes: allCodes }),
+              }))}
+              value={preferences.amountDisplay ?? "CODE"}
+              onChoose={save("amountDisplay")}
+              disabled={busy}
+            />
+            <p className={styles.label}>{i18n.t("settings.preferences.amountDisplayHint")}</p>
+          </div>
 
                     <div className={styles.accountPicker}>
             <SearchableDropDown

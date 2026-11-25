@@ -15,9 +15,9 @@ import { rollForwardExecutionDate } from "../../utils/scheduleDate.js";
 import { scheduleTypeKey } from "../../utils/debts/scheduleTypes";
 import { intervalLabelKey } from "../../utils/debts/debtSchedules";
 import { categoryName } from "../../utils/transactionTypes";
-import { formatNumber } from "../../utils/formating";
 import { dateFnsLocale, toCalendarDay } from "../../utils/dates";
 import i18n from "../../configuration/i18n";
+import { formatAmount } from "../../utils/currencies/amountFormat";
 
 const TONE = { INCOMSE: "in", EXPENSE: "out", TRANSFER: "transfer", DEBT_PAYMENT: "debt" };
 // schedule types map to the transaction types the categories know
@@ -113,7 +113,7 @@ const ScheduleInfo = ({ isOpen, onClose, accounts, schedule }) => {
     isTransfer && { label: i18n.t("transactionDetails.sourceAccount"), value: current?.sourceAccount?.name },
     isTransfer && { label: i18n.t("transactionDetails.destinationAccount"), value: current?.destinationAccount?.name },
     receivedDiffers && { label: i18n.t("scheduleInfo.amountReceived"),
-      value: `${formatNumber(current.amountReceived)} ${currencyOf(current.destinationAccount)}` },
+      value: formatAmount(current.amountReceived, currencyOf(current.destinationAccount)) },
     category && !isDebtPayment && { label: i18n.t("scheduleInfo.category"), value: categoryName(category) },
     { label: i18n.t("scheduleInfo.description"), value: current?.description },
   ].filter(Boolean);
@@ -141,7 +141,7 @@ const ScheduleInfo = ({ isOpen, onClose, accounts, schedule }) => {
         icon={isTransfer ? transferIcon : <CategoryIcon category={category} />}
         kicker={i18n.t(scheduleTypeKey(type))}
         title={current?.name}
-        amount={`${formatNumber(Number(current?.amountSend ?? 0))} ${currency}`}
+        amount={formatAmount(current?.amountSend, currency)}
         note={isActive ? null : i18n.t("scheduleInfo.pausedNote")}
         fields={fields}
         error={error}

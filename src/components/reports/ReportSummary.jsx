@@ -1,8 +1,8 @@
 import React from "react";
-import { formatMoney } from "../../utils/accounts/accountStatement";
 import overview from "../../styles/components/overview/overview.module.scss";
 import styles from "../../styles/pages/report/report.module.scss";
 import i18n from "../../configuration/i18n";
+import { formatAmount } from "../../utils/currencies/amountFormat";
 
 // "+12 %" against the period before; good is the direction that is good news
 const Change = ({ percent, good }) => {
@@ -18,7 +18,7 @@ const Change = ({ percent, good }) => {
 // money in, out, net and savings rate of the period
 const ReportSummary = ({ report, currency }) => {
   const { totals, changes } = report;
-  const money = (amount) => `${formatMoney(Math.abs(amount), i18n.language)} ${currency}`;
+  const money = (amount) => formatAmount(Math.abs(amount), currency);
 
   return (
     <section className={`${overview.card} ${styles.summary}`} aria-label={i18n.t("report.summary")}>

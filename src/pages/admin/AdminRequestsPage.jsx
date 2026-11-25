@@ -6,11 +6,11 @@ import {
   approvePaymentRequest, getPendingPaymentRequests, rejectPaymentRequest,
 } from "../../api/subscriptionService";
 import Button from "../../components/btns/Button";
-import { formatMoney } from "../../utils/accounts/accountStatement";
 import { dateFnsLocale } from "../../utils/dates";
 import styles from "../../styles/components/admin/admin.module.scss";
 import sheet from "../../styles/components/forms/formSheet.module.scss";
 import i18n from "../../configuration/i18n";
+import { formatAmount } from "../../utils/currencies/amountFormat";
 
 // "I have paid" requests, oldest first. Check the transfer app, then approve or reject.
 const RequestCard = ({ request }) => {
@@ -34,7 +34,7 @@ const RequestCard = ({ request }) => {
       </div>
       <strong>
         {i18n.t("admin.months", { count: request.months })}
-        {request.amount != null && ` · ${formatMoney(request.amount, i18n.language)} ${request.currency ?? ""}`}
+        {request.amount != null && ` · ${formatAmount(request.amount, request.currency)}`}
       </strong>
       <span>{i18n.t(`admin.methods.${request.method}`)} · {request.reference}</span>
       {request.note && <span className={styles.muted}>{request.note}</span>}

@@ -393,7 +393,7 @@
     "errorSchedule": "Could not create the recurring payment.",
     "openDebt": "Open debt",
     "lockedHint": "Direction and currency can not change after movements were added.",
-    "remainingHint": "Remaining today: {{amount}} {{currency}}",
+    "remainingHint": "Remaining today: {{amount}}",
     "noAccountInCurrency": "You have no active account in {{currency}}.",
     "validation": {
       "intervalRequired": "Choose how often.",
@@ -1035,6 +1035,8 @@
       "baseCurrency": "Base currency",
       "firstDayOfWeek": "First day of the week",
       "defaultAccount": "Default account",
+      "amountDisplay": "Show amounts with",
+      "amountDisplayHint": "Two currencies with the same symbol (such as SEK and NOK, both kr) always keep their code.",
       "notChosen": "None",
       "byLanguage": "By language",
       "days": {
