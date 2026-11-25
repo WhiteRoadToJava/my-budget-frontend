@@ -826,6 +826,20 @@
       "resend": "Send the invitation again",
       "resent": "A new invitation was sent."
     },
+        "currencies": {
+      "title": "Currencies",
+      "hint": "The currencies users can choose. A currency is never deleted: switch it off and the accounts that use it keep working.",
+      "list": "The app's currencies",
+      "forAccounts": "For accounts",
+      "forPayments": "For payments",
+      "moveUp": "Move {{code}} up",
+      "moveDown": "Move {{code}} down",
+      "add": "Add a currency",
+      "searchPlaceholder": "Search by code or name, e.g. NOK or krone",
+      "noResults": "No currency found, or it is already in the list.",
+      "addButton": "Add",
+      "added": "{{code}} was added."
+    },
     "delete": {
       "zone": "Delete user",
       "explain": "Deletes the account and all its data: accounts, transactions, transfers, schedules, debts, payment requests and receipt images. The subscription payment history is kept. This can not be undone.",
