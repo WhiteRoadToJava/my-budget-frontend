@@ -35,6 +35,9 @@ export const useWeekStart = () => weekStartsOnFor(useSavedPreferences().firstDay
 // the base currency, or null
 export const useBaseCurrency = () => useSavedPreferences().baseCurrency;
 
+// how amounts are shown: "CODE" (also when nothing is chosen) or "SYMBOL"
+export const useAmountDisplay = () => useSavedPreferences().amountDisplay ?? "CODE";
+
 // the default account among the given ones, when it is still active
 export const useDefaultAccount = (accounts = []) => {
     const id = useSavedPreferences().defaultAccountId;

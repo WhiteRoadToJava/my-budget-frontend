@@ -8,11 +8,11 @@ import Button from "../../components/btns/Button";
 import {
   SUPPORT_WHATSAPP, USER_PAYMENT_METHODS, toPaymentRequest, validatePaymentRequest, whatsappLink,
 } from "../../utils/subscription/subscription";
-import { formatMoney } from "../../utils/accounts/accountStatement";
 import { dateFnsLocale, toCalendarDay } from "../../utils/dates";
 import styles from "../../styles/components/admin/admin.module.scss";
 import sheet from "../../styles/components/forms/formSheet.module.scss";
 import i18n from "../../configuration/i18n";
+import { formatAmount } from "../../utils/currencies/amountFormat";
 import { useCurrencies } from "../../hooks/useCurrencies";
 import { currencyLabel } from "../../utils/currencies/currencyNames";
 
@@ -143,7 +143,7 @@ const SubscriptionPage = () => {
                 <div className={styles.cardHeader}>
                   <span>
                     {format(new Date(r.createdAt), "d MMM yyyy", { locale })} · {i18n.t("admin.months", { count: r.months })}
-                    {r.amount != null && ` · ${formatMoney(r.amount, i18n.language)} ${r.currency ?? ""}`}
+                    {r.amount != null && ` · ${formatAmount(r.amount, r.currency)}`}
                   </span>
                   <span className={styles.badge} data-status={r.status === "APPROVED" ? "ACTIVE" : r.status === "REJECTED" ? "EXPIRED" : "TRIAL"}>
                     {i18n.t(`subscription.requestStatus.${r.status}`)}

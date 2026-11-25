@@ -376,7 +376,7 @@
     "errorSchedule": "تعذّر إنشاء الدفعة المتكررة.",
     "openDebt": "فتح الدين",
     "lockedHint": "لا يمكن تغيير الاتجاه والعملة بعد إضافة حركات.",
-    "remainingHint": "المتبقي اليوم: {{amount}} {{currency}}",
+    "remainingHint": "المتبقي اليوم: {{amount}}",
     "noAccountInCurrency": "لا يوجد لديك حساب نشط بعملة {{currency}}.",
     "validation": {
       "intervalRequired": "اختر التكرار.",
@@ -1045,6 +1045,8 @@
       "baseCurrency": "العملة الأساسية",
       "firstDayOfWeek": "أول يوم في الأسبوع",
       "defaultAccount": "الحساب الافتراضي",
+      "amountDisplay": "عرض المبالغ مع",
+      "amountDisplayHint": "العملتان اللتان لهما نفس الشارة (مثل SEK وNOK، كلتاهما kr) تبقيان دائماً بالرمز.",
       "notChosen": "بدون",
       "byLanguage": "حسب اللغة",
       "days": {

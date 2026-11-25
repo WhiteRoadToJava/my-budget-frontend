@@ -1,10 +1,10 @@
 import React from "react";
 import { useCategories } from "../../hooks/useCategories";
 import { categoryLabel, debtCategory, DEBT_CATEGORY } from "../../utils/categories/categories";
-import { formatMoney } from "../../utils/accounts/accountStatement";
 import overview from "../../styles/components/overview/overview.module.scss";
 import styles from "../../styles/pages/report/report.module.scss";
 import i18n from "../../configuration/i18n";
+import { formatAmount } from "../../utils/currencies/amountFormat";
 
 // the name shown for a group: the category with its emoji, debts, or transfer fees
 const useGroupName = () => {
@@ -46,7 +46,7 @@ const CategoryBreakdown = ({ title, groups, currency, incoming = false }) => {
                 />
               </span>
               <span className={overview.barAmount}>
-                {formatMoney(g.amount, i18n.language)} {currency}
+                {formatAmount(g.amount, currency)}
                 <span className={styles.share}> · {shareOf(g.amount, total)}</span>
               </span>
             </li>

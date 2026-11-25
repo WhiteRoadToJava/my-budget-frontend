@@ -21,11 +21,11 @@ import {
   pocketOf,
   pocketsOf,
 } from "../../utils/accounts/pockets";
-import { formatNumber } from "../../utils/formating";
 import { useIsPhone } from '../../hooks/useIsPhone.js'
 import sheet from "../../styles/components/forms/formSheet.module.scss";
 import styles from "../../styles/components/transfers/transferForm.module.scss";
 import i18n from "../../configuration/i18n.js";
+import { formatAmount } from "../../utils/currencies/amountFormat";
 import { getLatestRate } from "../../api/exchangeRateService.js";
 import {
   formatRate,
@@ -328,8 +328,7 @@ const TransferForm = ({
       </div>
       {available !== undefined && (
         <p className={sheet.available}>
-          {i18n.t("currencies.available")}: {formatNumber(Number(available))}{" "}
-          {sourceCurrency}
+          {i18n.t("currencies.available")}: {formatAmount(available, sourceCurrency)}
         </p>
       )}
     </div>

@@ -31,11 +31,11 @@ import {
   isIncoming,
   otherAccountName,
 } from "../../utils/transactions/transactionList";
-import { formatNumber } from "../../utils/formating";
 import { createdAtFor } from "../../utils/transactions/transactionDate";
 import { dateFnsLocale } from "../../utils/dates";
 import { firstCurrency, transactionCurrency } from "../../utils/accounts/pockets";
 import i18n from "../../configuration/i18n";
+import { formatAmount } from "../../utils/currencies/amountFormat";
 import CreateExpense from "../expenses/CreateExpense";
 import CreateIncomse from "../incomes/CreateIncome";
 import CreateTransfer from "../transfers/CreateTransfer";
@@ -81,7 +81,7 @@ const DELETE_FN = {
 // amounts, rate and fees of a transfer, each in the currency of its side
 // (a transfer from before the currencies: the account's first currency)
 const money = (amount, currency, account) =>
-  `${formatNumber(Number(amount ?? 0))} ${currency ?? firstCurrency(account) ?? ""}`.trim();
+  formatAmount(amount, currency ?? firstCurrency(account));
 
 const feeText = (fee, direction, currency, account) =>
   `${money(fee, currency, account)} · ${i18n.t(direction === "CREDIT" ? "transferFees.credit" : "transferFees.charge")}` +
@@ -359,7 +359,7 @@ const TransactionInfo = ({ isOpen, onClose, accounts, transaction }) => {
         icon={isTransfer ? transferIcon : <CategoryIcon category={category} />}
         kicker={typeKey ? i18n.t(typeKey) : ""}
         title={title}
-        amount={`${incoming ? "+" : "−"}${formatNumber(Math.abs(Number(transaction?.amount ?? 0)))} ${currency}`}
+        amount={`${incoming ? "+" : "−"}${formatAmount(Math.abs(Number(transaction?.amount ?? 0)), currency)}`}
         note={isDebtRecord ? i18n.t("debts.errorDebtRecord") : cancelled ? i18n.t("cancel.note") : null}
         fields={fields}
         error={error}

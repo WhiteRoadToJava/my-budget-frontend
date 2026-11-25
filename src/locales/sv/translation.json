@@ -367,7 +367,7 @@
     "errorSchedule": "Det gick inte att skapa den återkommande betalningen.",
     "openDebt": "Öppna skuld",
     "lockedHint": "Riktning och valuta kan inte ändras efter att transaktioner lagts till.",
-    "remainingHint": "Kvar i dag: {{amount}} {{currency}}",
+    "remainingHint": "Kvar i dag: {{amount}}",
     "noAccountInCurrency": "Du har inget aktivt konto i {{currency}}.",
     "validation": {
       "intervalRequired": "Välj hur ofta.",
@@ -1019,6 +1019,8 @@
       "baseCurrency": "Basvaluta",
       "firstDayOfWeek": "Veckans första dag",
       "defaultAccount": "Standardkonto",
+      "amountDisplay": "Visa belopp med",
+      "amountDisplayHint": "Två valutor med samma symbol (som SEK och NOK, båda kr) visas alltid med koden.",
       "notChosen": "Ingen",
       "byLanguage": "Enligt språk",
       "days": {

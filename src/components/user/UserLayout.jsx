@@ -8,13 +8,17 @@ import SubscriptionBanner from "./SubscriptionBanner.jsx";
 import styles from "../../styles/layout/layout.module.scss";
 import { useLanguageSync } from "../../hooks/useLanguageSync.js";
 import { useCurrencies } from "../../hooks/useCurrencies.js";
+import { useAmountDisplay } from "../../hooks/usePreferences.js";
+import { configureAmounts } from "../../utils/currencies/amountFormat.js";
 
 const UserLayout = () => {
   const [menuItems, setMenuItems] = useState(getUserMenuItems());
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
   useLanguageSync();
   // loads the currency list early, so the forms have it when they open
-  useCurrencies();
+  const { allCodes } = useCurrencies();
+  // every amount of the pages below follows the user's choice (code or symbol)
+  configureAmounts(useAmountDisplay(), allCodes);
   const [profile, setProfile] = useState(() => {
     try {
       return JSON.parse(localStorage.getItem("profiles")) || null;
