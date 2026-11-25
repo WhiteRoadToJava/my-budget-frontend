@@ -1,0 +1,14 @@
+@use "../../variables" as variable;
+
+/* 3:2 flag, the height of the text around it */
+.flag {
+  display: inline-block;
+  width: 1.35em;
+  height: 0.9em;
+  margin-inline-end: 0.35em;
+  vertical-align: -0.1em;
+  object-fit: cover;
+  border-radius: 2px;
+  box-shadow: 0 0 0 1px variable.$color-border;
+  flex-shrink: 0;
+}
