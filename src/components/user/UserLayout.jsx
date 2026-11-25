@@ -13,7 +13,7 @@ const UserLayout = () => {
   const [menuItems, setMenuItems] = useState(getUserMenuItems());
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
   useLanguageSync();
-    // loads the currency list early, so the forms have it when they open
+  // loads the currency list early, so the forms have it when they open
   useCurrencies();
   const [profile, setProfile] = useState(() => {
     try {

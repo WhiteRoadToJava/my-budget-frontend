@@ -5,12 +5,13 @@ import styles from "../../../styles/pages/setting/settingPage.module.scss";
 import i18n from "../../../configuration/i18n";
 import { getAccounts } from "../../../api/accountService";
 import { isArchived } from "../../../utils/accounts/accountList";
-import { usePreferences, useUpdatePreferences } from "../../../hooks/usePreferences";
-import SearchableDropDown from "../../elements/SearchableDropDown";
-const WEEK_DAYS = ["SATURDAY", "SUNDAY", "MONDAY"];
-const accountLabel = (account) => `${account.name} (${account.currency})`;
 import { useCurrencies } from "../../../hooks/useCurrencies";
 import CurrencyLabel from "../../currencies/CurrencyLabel";
+import { usePreferences, useUpdatePreferences } from "../../../hooks/usePreferences";
+import SearchableDropDown from "../../elements/SearchableDropDown";
+
+const WEEK_DAYS = ["SATURDAY", "SUNDAY", "MONDAY"];
+const accountLabel = (account) => `${account.name} (${account.currency})`;
 
 // One group of pill buttons. "" is the "not chosen" pill, which clears the value.
 const Choices = ({ id, title, options, value, onChoose, disabled }) => (
@@ -38,8 +39,8 @@ const Choices = ({ id, title, options, value, onChoose, disabled }) => (
 // Every choice is saved on the server at once, so it follows the user to every device.
 const PreferencesSection = () => {
   const [language, setLanguage] = useState(i18n.language);
-  const { preferences, isLoading, isError } = usePreferences();
   const { codes } = useCurrencies();
+  const { preferences, isLoading, isError } = usePreferences();
   const { mutate, isPending, isSuccess, isError: saveFailed } = useUpdatePreferences();
 
   const { data: accountsData } = useQuery({ queryKey: ["accounts"], queryFn: getAccounts });
@@ -63,7 +64,7 @@ const PreferencesSection = () => {
   };
 
   const notChosen = { value: "", label: i18n.t("settings.preferences.notChosen") };
-  const busy = isLoading || isPending;
+    const busy = isLoading || isPending;
 
   // the search list holds texts, so each account is found again by its text
   const accountLabels = activeAccounts.map(accountLabel);
@@ -94,7 +95,8 @@ const PreferencesSection = () => {
           <Choices
             id="settings-currency"
             title={i18n.t("settings.preferences.baseCurrency")}
-            options={[notChosen, ...codes.map((code) => ({ value: code, label: <CurrencyLabel code={code} /> }))]}            value={preferences.baseCurrency}
+            options={[notChosen, ...codes.map((code) => ({ value: code, label: <CurrencyLabel code={code} /> }))]}
+            value={preferences.baseCurrency}
             onChoose={save("baseCurrency")}
             disabled={busy}
           />
@@ -111,7 +113,7 @@ const PreferencesSection = () => {
             disabled={busy}
           />
 
-          <div className={styles.accountPicker}>
+                    <div className={styles.accountPicker}>
             <SearchableDropDown
               label={i18n.t("settings.preferences.defaultAccount")}
               placeholder={i18n.t("settings.preferences.notChosen")}

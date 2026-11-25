@@ -1,6 +1,5 @@
 // Pure helpers for the "new account" form. Validation returns an i18n key or null.
 
-
 export const ACCOUNT_TYPES = [
   { value: "NORMAL", label: "accountsPage.types.NORMAL", hint: "createAccount.typeNormalHint" },
   { value: "COMPANY", label: "accountsPage.types.COMPANY", hint: "createAccount.typeCompanyHint" },
@@ -48,5 +47,3 @@ export const accountErrorKey = (error) => {
   const text = typeof error?.response?.data === "string" ? error.response.data : "";
   return text.includes("already exists") ? "createAccount.errorExists" : "messages.errorCreateAccount";
 };
-
-

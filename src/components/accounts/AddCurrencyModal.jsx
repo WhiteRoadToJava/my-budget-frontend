@@ -4,24 +4,21 @@ import Modal from "../modals/Modal";
 import DropDown from "../elements/DropDown";
 import Button from "../btns/Button";
 import { addAccountCurrency } from "../../api/accountService";
+import CurrencyLabel from "../currencies/CurrencyLabel";
+import { useCurrencies } from "../../hooks/useCurrencies";
 import { currenciesToAdd } from "../../utils/accounts/pockets";
 import sheet from "../../styles/components/forms/formSheet.module.scss";
 import i18n from "../../configuration/i18n";
-
-
-const { codes } = useCurrencies();
-const options = currenciesToAdd(codes, account);
-// the first one until another is chosen (the list may still be loading when this opens)
-const [chosen, setCurrency] = useState("");
-const currency = chosen || options[0] || "";
-
 
 // A new currency in the account, with its opening balance. Rendered only while open.
 // onAdded(currency): the page switches to the new currency.
 const AddCurrencyModal = ({ onClose, account, onAdded }) => {
   const queryClient = useQueryClient();
-  const options = currenciesToAdd(ACCOUNT_CURRENCIES, account);
-  const [currency, setCurrency] = useState(options[0] ?? "");
+  const { codes } = useCurrencies();
+  const options = currenciesToAdd(codes, account);
+  // the first one until another is chosen (the list may still be loading when this opens)
+  const [chosen, setCurrency] = useState("");
+  const currency = chosen || options[0] || "";
   const [opening, setOpening] = useState("");
   const [error, setError] = useState(null);
 
@@ -56,13 +53,9 @@ const AddCurrencyModal = ({ onClose, account, onAdded }) => {
           <p className={sheet.hint}>{i18n.t("currencies.allAdded")}</p>
         ) : (
           <>
-            <DropDown label={i18n.t("createAccount.currency")}
-              name="currency" list={options}
-              value={currency}
-              onChange={(e) => { setCurrency(e.target.value); setError(null); }}
-              renderItem={(code) => <CurrencyLabel
-                code={code}
-                withName />} />
+            <DropDown label={i18n.t("createAccount.currency")} name="currency" list={options}
+              renderItem={(code) => <CurrencyLabel code={code} withName />}
+              value={currency} onChange={(e) => { setCurrency(e.target.value); setError(null); }} />
             <div className={sheet.field}>
               <label className={sheet.label} htmlFor="currency-opening">{i18n.t("createAccount.balance")}</label>
               <div className={sheet.money}>

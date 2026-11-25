@@ -8,6 +8,8 @@ import Button from "../btns/Button";
 import LabeledDropDown from "./LabeledDropDown";
 import styles from "../../styles/components/debts/debtForm.module.scss";
 import { addDebt, updateDebt } from "../../api/debtService";
+import CurrencyLabel from "../currencies/CurrencyLabel";
+import { useCurrencies } from "../../hooks/useCurrencies";
 import {
   COMPOUNDINGS, DIRECTIONS, debtErrorKey, debtToForm, emptyDebtForm,
   formToDebtRequest, validateDebtForm,
@@ -89,10 +91,10 @@ const DebtFormModal = ({ onClose, debt, hasMovements = false, onSaved }) => {
                 <DropDown
                   label={i18n.t("debts.currency")}
                   name="currency"
-                  value={form.currency}
-                  onChange={onInput}
                   list={codes}
                   renderItem={(code) => <CurrencyLabel code={code} withName />}
+                  value={form.currency}
+                  onChange={onInput}
                 />
               )}
             </div>

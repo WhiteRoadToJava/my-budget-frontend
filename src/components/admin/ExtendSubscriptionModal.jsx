@@ -7,11 +7,13 @@ import Datepicker from "../inputs/Datepicker";
 import Button from "../btns/Button";
 import { extendSubscription } from "../../api/subscriptionService";
 import {
-  PAYMENT_CURRENCIES, PAYMENT_METHODS, toExtendRequest, validateExtension,
+  PAYMENT_METHODS, toExtendRequest, validateExtension,
 } from "../../utils/subscription/subscription";
 import sheet from "../../styles/components/forms/formSheet.module.scss";
 import styles from "../../styles/components/admin/admin.module.scss";
 import i18n from "../../configuration/i18n";
+import { useCurrencies } from "../../hooks/useCurrencies";
+import { currencyLabel } from "../../utils/currencies/currencyNames";
 
 // Record a payment and extend: by months (from the current end, or today if it
 // has ended) or until an exact date. Rendered only while open.
@@ -22,12 +24,15 @@ const ExtendSubscriptionModal = ({ onClose, userId, months: initialMonths }) => 
     until: "",
     method: "",
     amount: "",
-    currency: "SYP",
+    currency: "",
     reference: "",
     note: "",
   });
   const [error, setError] = useState(null);
   const set = (changes) => { setForm((f) => ({ ...f, ...changes })); setError(null); };
+  // the currency chosen, else the first one a subscription can be paid in
+  const { paymentCodes } = useCurrencies();
+  const paid = { ...form, currency: paymentCodes.includes(form.currency) ? form.currency : (paymentCodes[0] ?? "") };
 
   const mutation = useMutation({
     mutationFn: (request) => extendSubscription(userId, request),
@@ -42,9 +47,9 @@ const ExtendSubscriptionModal = ({ onClose, userId, months: initialMonths }) => 
 
   const submit = (e) => {
     e.preventDefault();
-    const key = validateExtension(form, format(new Date(), "yyyy-MM-dd"));
+    const key = validateExtension(paid, format(new Date(), "yyyy-MM-dd"));
     if (key) return setError(i18n.t(key));
-    mutation.mutate(toExtendRequest(form));
+    mutation.mutate(toExtendRequest(paid));
   };
 
   return (
@@ -86,9 +91,9 @@ const ExtendSubscriptionModal = ({ onClose, userId, months: initialMonths }) => 
               value={form.amount} onChange={(e) => set({ amount: e.target.value })} />
             <div className={sheet.field}>
               <label className={sheet.label} htmlFor="extend-currency">{i18n.t("share.currency")}</label>
-              <select id="extend-currency" className={styles.select} value={form.currency}
+              <select id="extend-currency" className={styles.select} value={paid.currency}
                 onChange={(e) => set({ currency: e.target.value })}>
-                {PAYMENT_CURRENCIES.map((c) => <option key={c} value={c}>{c}</option>)}
+                {paymentCodes.map((c) => <option key={c} value={c}>{currencyLabel(c, i18n.language)}</option>)}
               </select>
             </div>
           </div>

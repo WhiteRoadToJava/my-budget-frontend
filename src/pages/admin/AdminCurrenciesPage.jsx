@@ -3,6 +3,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { addCurrency, getAdminCurrencies, orderCurrencies, updateCurrency } from "../../api/admin/adminService";
 import SearchInput from "../../components/inputs/SearchInput";
 import Button from "../../components/btns/Button";
+import CurrencyFlag from "../../components/currencies/CurrencyFlag";
 import { currencyName, moveCode, searchCurrencies } from "../../utils/currencies/currencyNames";
 import styles from "../../styles/components/admin/admin.module.scss";
 import page from "../../styles/pages/admin/adminCurrencies.module.scss";
@@ -17,7 +18,7 @@ const backendMessage = (err) =>
 const CurrencyRow = ({ currency, isFirst, isLast, onChange, onMove, busy }) => (
   <li className={`${styles.card} ${page.row}`} data-off={!currency.enabled && !currency.payment}>
     <span className={styles.userName}>
-      <strong>{currency.code}</strong>
+      <strong><CurrencyFlag code={currency.code} />{currency.code}</strong>
       <span className={styles.muted}>{currencyName(currency.code, i18n.language)}</span>
     </span>
     <label className={page.switch}>
@@ -127,7 +128,7 @@ const AdminCurrenciesPage = () => {
             {results.map((code) => (
               <li key={code} className={`${styles.card} ${page.result}`}>
                 <span className={styles.userName}>
-                  <strong>{code}</strong>
+                  <strong><CurrencyFlag code={code} />{code}</strong>
                   <span className={styles.muted}>{currencyName(code, i18n.language)}</span>
                 </span>
                 <Button variant="secondary" text={i18n.t("admin.currencies.addButton")} disabled={busy}

@@ -13,7 +13,8 @@ describe("debt form", () => {
     expect(emptyDebtForm(today)).toMatchObject({ startDate: "2026-11-02", annualRate: "0", compounding: "NONE" });
     expect(emptyDebtForm(today).currency).toBe("");
     expect(emptyDebtForm(today, "EUR").currency).toBe("EUR");
-    expect(emptyDebtForm(today, "XYZ").currency).toBe("");
+    expect(emptyDebtForm(today, "EUR", ["SEK", "EUR"]).currency).toBe("EUR");
+    expect(emptyDebtForm(today, "EUR", ["SEK"]).currency).toBe("");
   });
 
   it("accepts a valid debt", () => {

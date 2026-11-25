@@ -8,8 +8,6 @@ import Button from "../../components/btns/Button";
 import { addIncomse } from "../../api/incomseService";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import i18n from "../../configuration/i18n";
-import { useCurrencies } from "../../hooks/useCurrencies";
-import { currencyLabel } from "../../utils/currencies/currencyNames";
 import { ImagePicker } from "../ImagePicker";
 import CategoryPicker from "../categories/CategoryPicker";
 import { createdAtFor, isFutureDay, todayString } from "../../utils/transactions/transactionDate.js";

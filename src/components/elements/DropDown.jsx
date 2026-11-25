@@ -8,16 +8,16 @@ import { onEnterOrSpace } from '../../utils/accessibility';
 const DropDown = ({ label, text, list, onChange, name, value, placeholder = "Select an option", renderItem }) => {
   const [viewList, setViewList] = useState(false);
 
-  const handleSelect = (item) => {
-    setViewList(false);
-    // تأكد أن 'item' هنا هو الاسم (String) كما ترسله من الأب
-    onChange({
-      target: {
-        name: name,
-        value: item
-      }
-    });
-  };
+const handleSelect = (item) => {
+  setViewList(false);
+  // تأكد أن 'item' هنا هو الاسم (String) كما ترسله من الأب
+  onChange({
+    target: {
+      name: name,
+      value: item
+    }
+  });
+};
 
   return (
     <div className={styles.dropDownContainer}>
@@ -36,11 +36,11 @@ const DropDown = ({ label, text, list, onChange, name, value, placeholder = "Sel
       </div>
 
       {viewList && (
-        <div className={styles.dropDownList}>
+        <div className={styles.dropDownList}>      
           {list.length > 0 ? (
             list.map((item, index) => (
-              <div
-                key={index}
+              <div 
+                key={index} 
                 className={styles.dropDownItem}
                 onClick={() => handleSelect(item)}
                 role="button"

@@ -14,6 +14,7 @@ import i18n from "../../configuration/i18n";
 import { useBaseCurrency } from "../../hooks/usePreferences";
 import CurrencyLabel from "../currencies/CurrencyLabel";
 import { useCurrencies } from "../../hooks/useCurrencies";
+
 // The form lives in its own component and is rendered only while open,
 // so every opening starts empty without resetting state by hand.
 const CreateAccountForm = ({ onClose }) => {
@@ -22,7 +23,9 @@ const CreateAccountForm = ({ onClose }) => {
   const existing = accountsData?.accounts ?? [];
   const baseCurrency = useBaseCurrency();
   const { codes } = useCurrencies();
-  const [form, setForm] = useState(() => emptyAccountForm(existing, baseCurrency, codes)); const [error, setError] = useState(null);
+
+  const [form, setForm] = useState(() => emptyAccountForm(existing, baseCurrency, codes));
+  const [error, setError] = useState(null);
 
   const mutation = useMutation({
     mutationFn: addAccount,
